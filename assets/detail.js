@@ -13,7 +13,7 @@ menu?.querySelectorAll('a').forEach(a=>a.addEventListener('click',close));
 document.addEventListener('keydown',e=>{if(e.key==='Escape'&&menu?.classList.contains('open')){close();menuBtn?.focus()}});
 document.addEventListener('click',e=>{if(menu?.classList.contains('open')&&!menu.contains(e.target)&&!menuBtn?.contains(e.target))close()});
 document.querySelectorAll('[data-set-theme]').forEach(b=>b.addEventListener('click',()=>{const theme=b.dataset.setTheme;if(themes.includes(theme)){document.body.dataset.theme=theme;write('majalis-theme',theme)}}));
-const saved=read('majalis-theme');if(themes.includes(saved))document.body.dataset.theme=saved;
+document.body.dataset.theme='heritage'; // Public site uses one approved visual theme.
 const businessDropdown=menu?.querySelector('.nav-dropdown');
 document.addEventListener('click',event=>{if(businessDropdown?.open&&!businessDropdown.contains(event.target))businessDropdown.open=false});
 document.addEventListener('keydown',event=>{if(event.key==='Escape'&&businessDropdown?.open){businessDropdown.open=false;businessDropdown.querySelector('summary')?.focus()}});
