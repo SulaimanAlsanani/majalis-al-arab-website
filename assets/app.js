@@ -22,5 +22,9 @@ const getEnquiry=()=>{const ids=['name','contactMethod','type','message'];return
 const valid=()=>{if(!form)return false;return form.reportValidity()};
 form?.addEventListener('submit',async event=>{event.preventDefault();if(!valid())return;try{await navigator.clipboard.writeText(getEnquiry());if(enquiryStatus)enquiryStatus.textContent=language==='ar'?'تم نسخ الاستفسار إلى الحافظة، ولم تُرسل بياناتك إلى أي خادم.':'Enquiry copied to the clipboard. No data has been sent to a server.'}catch(_){if(enquiryStatus)enquiryStatus.textContent=language==='ar'?'تعذر النسخ تلقائيًا. يمكنك تنزيله كملف نصي.':'Automatic copy is unavailable. You can download a text file instead.'}});
 document.getElementById('downloadEnquiry')?.addEventListener('click',()=>{if(!valid())return;const blob=new Blob(['\uFEFF'+getEnquiry()],{type:'text/plain;charset=utf-8'});const url=URL.createObjectURL(blob);const anchor=document.createElement('a');anchor.href=url;anchor.download='majalis-al-arab-enquiry.txt';document.body.appendChild(anchor);anchor.click();anchor.remove();URL.revokeObjectURL(url);if(enquiryStatus)enquiryStatus.textContent=language==='ar'?'تم إنشاء ملف الاستفسار على جهازك. لم تُرسل البيانات إلى خادم.':'Your enquiry file was created on this device. Nothing was sent to a server.'});
+const businessDropdown=menu?.querySelector('.nav-dropdown');
+document.addEventListener('click',event=>{if(businessDropdown?.open&&!businessDropdown.contains(event.target))businessDropdown.open=false});
+document.addEventListener('keydown',event=>{if(event.key==='Escape'&&businessDropdown?.open){businessDropdown.open=false;businessDropdown.querySelector('summary')?.focus()}});
+menu?.querySelectorAll('.nav-sub a').forEach(a=>a.addEventListener('click',()=>{if(businessDropdown)businessDropdown.open=false}));
 setLanguage(read('majalis-language')==='en'?'en':'ar');
 })();
