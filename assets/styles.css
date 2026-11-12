@@ -21,3 +21,6 @@
 .preview-note{padding:9px 20px;text-align:center;background:var(--cream);border-bottom:1px solid var(--border);color:var(--muted);font-size:12px;line-height:1.6}
 
 .privacy-footer{padding:0 27px 22px;text-align:center;color:#d0d5cf;font-size:13px}.privacy-footer a{text-decoration:underline;text-underline-offset:4px}
+
+/* Enquiry tools: both actions remain client-side and do not transmit form data. */
+.enquiry-actions{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin-top:5px}.enquiry-actions .btn{margin:0}.enquiry-download{background:transparent;color:var(--dark)}.enquiry-download:hover{background:var(--cream)}@media(max-width:500px){.enquiry-actions{display:grid}.enquiry-actions .btn{width:100%}}
