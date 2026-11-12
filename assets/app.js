@@ -15,7 +15,7 @@ menu?.querySelectorAll('a').forEach(link=>link.addEventListener('click',closeMen
 document.addEventListener('keydown',event=>{if(event.key==='Escape'&&menu?.classList.contains('open')){closeMenu();menuButton?.focus()}});
 document.addEventListener('click',event=>{if(menu?.classList.contains('open')&&!menu.contains(event.target)&&!menuButton?.contains(event.target))closeMenu()});
 document.querySelectorAll('[data-set-theme]').forEach(button=>button.addEventListener('click',()=>{const theme=button.dataset.setTheme;if(themes.includes(theme)){document.body.dataset.theme=theme;save('majalis-theme',theme)}}));
-const savedTheme=read('majalis-theme');if(themes.includes(savedTheme))document.body.dataset.theme=savedTheme;
+document.body.dataset.theme='heritage'; // Public site uses one approved visual theme.
 const form=document.getElementById('contactForm');
 const enquiryStatus=document.getElementById('status');
 const getEnquiry=()=>{const ids=['name','contactMethod','type','message'];return ids.map(id=>{const field=document.getElementById(id);return id==='type'?(field?.selectedOptions[0]?.text||''):(field?.value||'').trim()}).join('\n')};
