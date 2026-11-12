@@ -28,6 +28,7 @@ jobs:
           node --check assets/app.js
           node --check assets/detail.js
           node --check assets/catalog.js
+          node --check assets/faq.js
       - name: Configure Pages
         uses: actions/configure-pages@v5
       - name: Upload static artifact
