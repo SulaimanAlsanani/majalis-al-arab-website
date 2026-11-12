@@ -126,3 +126,19 @@ h2{font-size:clamp(30px,3.45vw,46px);line-height:1.27}
  .card-image{height:250px}
 }
 @media(prefers-reduced-motion:reduce){.card,.spotlight-card{transition:none}}
+
+/* Production identity: one official visual treatment, with other palettes retained as design tokens only. */
+.themes{display:none}
+.footer-grid>div:last-child{display:none}
+.footer-grid{grid-template-columns:minmax(0,2fr) minmax(0,1fr)}
+.editorial-about .image-coffee,.editorial-businesses .image-roastery{
+  background:radial-gradient(circle at 50% 45%,#b99a6244,transparent 47%),linear-gradient(145deg,#203b31,#11251f 75%);
+  position:relative;overflow:hidden;isolation:isolate
+}
+.editorial-about .image-coffee:before,.editorial-businesses .image-roastery:before{
+  content:"";position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:62%;aspect-ratio:1;border:1px solid #c9ac7155;border-radius:50%
+}
+.editorial-about .image-coffee:after,.editorial-businesses .image-roastery:after{
+  content:"✧";position:absolute;top:50%;left:50%;transform:translate(-50%,-53%);font-size:clamp(95px,14vw,180px);color:#b99a62;line-height:1
+}
+@media(max-width:700px){.footer-grid{grid-template-columns:1fr}.editorial-about .image-coffee:after{font-size:120px}}
