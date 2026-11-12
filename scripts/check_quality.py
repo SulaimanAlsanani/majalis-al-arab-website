@@ -124,6 +124,39 @@ if faq_html.count('class="faq-item"') != 10:
 if 'MutationObserver' not in faq_script or 'aria-pressed' not in faq_script:
     errors.append("FAQ translation/accessible-filter behavior missing")
 
+# Navigation must be consistent and mark the current public page.
+expected_nav = [
+    "index.html", "about.html", "restaurant.html", "diwaniya.html",
+    "roasteries.html", "catalog.html", "locations.html", "faq.html",
+    "index.html#contact",
+]
+class NavParser(HTMLParser):
+    def __init__(self):
+        super().__init__()
+        self.in_nav = False
+        self.links = []
+        self.current = []
+    def handle_starttag(self, tag, attrs):
+        props = dict(attrs)
+        if tag == "nav" and props.get("id") == "navlinks":
+            self.in_nav = True
+        elif self.in_nav and tag == "a":
+            self.links.append(props.get("href"))
+            if props.get("aria-current") == "page":
+                self.current.append(props.get("href"))
+    def handle_endtag(self, tag):
+        if tag == "nav" and self.in_nav:
+            self.in_nav = False
+
+for page in PAGES + ["404.html"]:
+    parser = NavParser()
+    parser.feed((ROOT / page).read_text(encoding="utf-8"))
+    if parser.links != expected_nav:
+        errors.append(f"{page}: navigation links differ from approved navigation")
+    expected_current = [page] if page in expected_nav else []
+    if parser.current != expected_current:
+        errors.append(f"{page}: incorrect active-page marker {parser.current}")
+
 if errors:
     print("\n".join(errors), file=sys.stderr)
     sys.exit(1)
