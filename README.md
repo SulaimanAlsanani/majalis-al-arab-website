@@ -32,3 +32,17 @@ assets/
 .github/workflows/pages.yml
 .nojekyll
 ```
+
+
+## Current build progress
+- Dedicated bilingual pages: `about.html`, `restaurant.html`, `diwaniya.html`, `roasteries.html`.
+- Shared interior styles and language/theme scripts under `assets/detail.*`.
+- `python3 scripts/check_site.py` checks local links, anchor targets, and bilingual markup before deployment.
+- The CI validation step passed on 2026-11-12.
+- GitHub Pages **has not yet been enabled** in the repository, so the deployment workflow fails at `actions/configure-pages@v5` with `Get Pages site failed / Not Found`.
+- To unblock deployment, select **Settings → Pages → Build and deployment → Source: GitHub Actions**. Then re-run the workflow under Actions.
+
+## Known launch constraints
+- Sample photography is illustrative, not documentary imagery of Majalis Al Arab.
+- The contact form is client-side copy-only; there is no server or email connection.
+- Prices, menu items, exact branch map, hours, and service availability require confirmation.
