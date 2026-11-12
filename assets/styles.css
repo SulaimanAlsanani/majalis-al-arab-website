@@ -35,3 +35,94 @@
  #menuBtn{display:block}
 }
 @media(min-width:1181px){.navlinks{gap:13px}.navlinks a{font-size:12px}}
+
+
+/* Premium Editorial System v2 — applied to all pages */
+:root{--gold:#b99a62;--cream:#f5f1e8;--border:#e5e1d7;--muted:#68766e}
+body{font-optical-sizing:auto;-webkit-font-smoothing:antialiased}
+.wrap{max-width:1190px}
+h1,h2,h3{letter-spacing:0}
+h1{font-size:clamp(42px,6vw,76px);line-height:1.16}
+h2{font-size:clamp(30px,3.45vw,46px);line-height:1.27}
+.hero h1{font-size:clamp(44px,6vw,78px);line-height:1.16}
+.section{padding-block:clamp(64px,7.5vw,100px)}
+.kicker{letter-spacing:1.4px}
+.btn{border-radius:3px;min-height:48px;display:inline-flex;align-items:center;justify-content:center}
+.card{border-radius:3px;box-shadow:none;transition:transform .22s ease,box-shadow .22s ease}
+.card:hover{transform:translateY(-4px);box-shadow:0 18px 35px #16282013}
+.card-image{height:275px}
+.card-body{padding:28px}
+.card-body h3{font-size:clamp(22px,2vw,27px)}
+.card-body p{min-height:auto}
+.nav{min-height:76px;gap:18px}
+.brand{white-space:nowrap}
+.brand b{font-size:21px}
+.navlinks{gap:20px!important}
+.navlinks a,.nav-dropdown summary{font-size:14px!important;font-weight:700}
+.navlinks a[aria-current=page]{text-decoration:none;border-bottom:2px solid var(--gold);padding-bottom:6px}
+.nav-dropdown{position:relative;flex:0 0 auto}
+.nav-dropdown summary{list-style:none;cursor:pointer;display:flex;align-items:center;gap:8px;white-space:nowrap}
+.nav-dropdown summary::-webkit-details-marker{display:none}
+.nav-dropdown .nav-chevron{font-size:22px;color:var(--gold);line-height:1}
+.nav-dropdown[open] .nav-chevron{transform:rotate(180deg)}
+.nav-sub{position:absolute;inset-inline-start:0;top:calc(100% + 20px);z-index:50;display:flex;flex-direction:column;min-width:225px;padding:12px;background:var(--bg);box-shadow:0 18px 45px #10231f22;border:1px solid var(--border);border-top:3px solid var(--gold)}
+.nav-sub a{padding:12px 10px!important;border-bottom:1px solid var(--border)!important;white-space:nowrap}
+.nav-sub a:last-child{border-bottom:0!important}
+.nav-sub a[aria-current=page]{background:var(--cream);color:var(--dark)}
+.nav-dropdown summary:focus-visible,.nav-sub a:focus-visible{outline:3px solid var(--gold);outline-offset:3px}
+.premium-hero{min-height:590px}
+.premium-hero:before{background:linear-gradient(90deg,#12251ff0 2%,#12251f9e 58%,#12251f4d),url("https://images.unsplash.com/photo-1442512595331-e89e73853f31?auto=format&fit=crop&w=1600&q=75") center/cover}
+.premium-hero .hero-inner{padding-block:100px}
+.premium-hero h1{max-width:780px;margin-block:25px}
+.premium-hero p{font-size:clamp(16px,1.75vw,19px);max-width:540px;line-height:1.85}
+.hero-intro-notice{background:var(--cream);color:var(--muted);padding:7px 18px;text-align:center;font-size:12px;line-height:1.5}
+.editorial-about .copy p{max-width:590px}
+.editorial-about .editorial-image{min-height:420px;box-shadow:12px 12px 0 #b99a6226}
+.editorial-businesses .cards{margin-top:35px;gap:20px}
+.editorial-businesses .card .underlink{margin-top:10px}
+.editorial-businesses .card-image{background-position:center}
+.section-intro{display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:end;margin-bottom:32px}
+.section-intro .intro{font-size:17px;line-height:1.85}
+.spotlight-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px}
+.spotlight-card{position:relative;overflow:hidden;min-height:235px;background:var(--cream);border:1px solid var(--border);display:flex;flex-direction:column;justify-content:flex-end;padding:28px;transition:transform .2s ease,border-color .2s}
+.spotlight-card:hover{transform:translateY(-4px);border-color:var(--gold)}
+.spotlight-card:nth-child(2){background:#ece6db}
+.spotlight-card:nth-child(3){background:#e4e9df}
+.spotlight-card .spotlight-glyph{position:absolute;top:21px;inset-inline-start:28px;font-size:65px;color:var(--gold);line-height:1}
+.spotlight-index{font-size:12px;color:var(--muted);letter-spacing:2px}
+.spotlight-card h3{margin:9px 0 0;font-size:26px}
+.spotlight-arrow{position:absolute;inset-inline-end:27px;bottom:28px;font-size:22px;color:var(--gold)}
+.section-tail{display:flex;gap:30px;align-items:center;margin-top:28px;flex-wrap:wrap}
+.muted-link{color:var(--muted);text-decoration:underline;text-underline-offset:5px;font-size:14px}
+.location-feature{background:var(--dark);color:#fff;min-height:380px;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:45px 30px;position:relative;isolation:isolate;overflow:hidden}
+.location-feature:after{content:"";position:absolute;border:1px solid #b99a6245;width:350px;height:350px;border-radius:50%;inset:50% auto auto 50%;transform:translate(-50%,-50%);z-index:-1}
+.location-ornament{font-size:70px;color:var(--gold);line-height:1}
+.location-feature h3{font-size:35px;margin:20px 0 0;color:#fff}
+.location-feature p{color:#e3e7e1}
+.location-feature .small-note{color:#d6d1c7}
+.editorial-contact .copy p{max-width:520px}
+.anchor-target{display:block;position:relative;top:-85px;height:0;overflow:hidden}
+:where(.premium-hero,.editorial-about,.editorial-businesses,.editorial-products,.editorial-locations,.editorial-contact){scroll-margin-top:80px}
+@media(min-width:1181px){.navlinks{gap:18px!important}.navlinks a,.nav-dropdown summary{font-size:14px!important}}
+@media(max-width:1180px){
+ .navlinks{gap:3px!important}
+ .nav-dropdown{width:100%}
+ .nav-dropdown summary{padding:11px 8px;font-size:16px!important;justify-content:space-between;border-bottom:1px solid var(--border)}
+ .nav-sub{position:static;min-width:0;box-shadow:none;padding:4px 8px 8px 20px;border:0;border-inline-start:2px solid var(--gold)}
+ .nav-sub a{font-size:15px!important;padding:10px!important}
+ .navlinks a[aria-current=page]{border-bottom:1px solid var(--border);color:var(--gold)}
+}
+@media(max-width:760px){
+ .premium-hero{min-height:535px}
+ .premium-hero .hero-inner{padding-block:75px}
+ .premium-hero:before{background:linear-gradient(90deg,#12251feb,#12251fa8),url("https://images.unsplash.com/photo-1442512595331-e89e73853f31?auto=format&fit=crop&w=900&q=70") center/cover}
+ .premium-hero h1{font-size:clamp(40px,10vw,54px)}
+ .section-intro{display:block}
+ .spotlight-grid{grid-template-columns:1fr}
+ .spotlight-card{min-height:170px}
+ .spotlight-card .spotlight-glyph{font-size:47px}
+ .editorial-about .editorial-image{min-height:285px}
+ .location-feature{min-height:285px}
+ .card-image{height:250px}
+}
+@media(prefers-reduced-motion:reduce){.card,.spotlight-card{transition:none}}
