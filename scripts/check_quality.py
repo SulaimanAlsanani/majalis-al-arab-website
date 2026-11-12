@@ -127,8 +127,7 @@ if 'MutationObserver' not in faq_script or 'aria-pressed' not in faq_script:
 # Navigation must be consistent and mark the current public page.
 expected_nav = [
     "index.html", "about.html", "restaurant.html", "diwaniya.html",
-    "roasteries.html", "catalog.html", "locations.html", "faq.html",
-    "index.html#contact",
+    "roasteries.html", "catalog.html", "locations.html", "index.html#contact",
 ]
 class NavParser(HTMLParser):
     def __init__(self):
@@ -156,6 +155,28 @@ for page in PAGES + ["404.html"]:
     expected_current = [page] if page in expected_nav else []
     if parser.current != expected_current:
         errors.append(f"{page}: incorrect active-page marker {parser.current}")
+
+
+# Premium redesign regression checks.
+home_markup = (ROOT / "index.html").read_text(encoding="utf-8")
+catalog_markup = (ROOT / "catalog.html").read_text(encoding="utf-8")
+base_styles = (ROOT / "assets" / "styles.css").read_text(encoding="utf-8")
+if "premium-hero" not in home_markup or "editorial-businesses" not in home_markup:
+    errors.append("Premium landing page structure missing")
+for section in ["home", "about", "businesses", "products", "locations", "contact"]:
+    if f'id="{section}"' not in home_markup:
+        errors.append(f"Main section missing: {section}")
+for legacy_anchor in ["restaurant", "diwaniya", "values", "culture", "services"]:
+    if f'id="{legacy_anchor}"' not in home_markup:
+        errors.append(f"Required backward-compatible anchor missing: {legacy_anchor}")
+if catalog_markup.count('class="catalog-visual"') != 6:
+    errors.append("Expected six catalog illustration panels")
+if "nav-dropdown" not in base_styles:
+    errors.append("Business dropdown styling missing")
+for page in PAGES + ["404.html"]:
+    markup = (ROOT / page).read_text(encoding="utf-8")
+    if 'class="nav-dropdown"' not in markup:
+        errors.append(f"{page}: primary business dropdown missing")
 
 if errors:
     print("\n".join(errors), file=sys.stderr)
