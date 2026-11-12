@@ -6,7 +6,7 @@ from urllib.parse import urlsplit
 import sys
 
 ROOT = Path(__file__).resolve().parents[1]
-PAGES = ["index.html", "about.html", "restaurant.html", "diwaniya.html", "roasteries.html", "catalog.html", "faq.html", "gallery.html", "locations.html", "gifts.html", "hospitality.html", "business.html"]
+PAGES = ["index.html", "about.html", "restaurant.html", "diwaniya.html", "roasteries.html", "catalog.html", "faq.html", "gallery.html", "locations.html", "gifts.html", "hospitality.html", "business.html", "404.html"]
 
 class LinkParser(HTMLParser):
     def __init__(self):
@@ -35,8 +35,14 @@ for page in PAGES:
     if not path.is_file():
         errors.append(f"Missing page: {page}")
         continue
+    raw_html = path.read_text(encoding="utf-8")
+    if page != "404.html":
+        if 'rel="canonical"' not in raw_html or 'property="og:title"' not in raw_html:
+            errors.append(f"Missing search/social metadata: {page}")
+    elif 'name="robots" content="noindex"' not in raw_html:
+        errors.append("Missing 404 noindex directive")
     p = LinkParser()
-    p.feed(path.read_text(encoding="utf-8"))
+    p.feed(raw_html)
     if p.lang != "ar" or p.direction != "rtl":
         errors.append(f"Incorrect default language/direction: {page}")
     if p.lang_pairs < 8:
@@ -67,3 +73,8 @@ if errors:
     print("\n".join(errors), file=sys.stderr)
     raise SystemExit(1)
 print("All static pages and local references validated.")
+
+for required in ["robots.txt", "sitemap.xml"]:
+    if not (ROOT / required).is_file():
+        print(f"Missing SEO file: {required}", file=sys.stderr)
+        raise SystemExit(1)
