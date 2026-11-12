@@ -108,6 +108,22 @@ if 'id="downloadEnquiry"' not in index or "URL.createObjectURL" not in script:
     errors.append("Enquiry download feature is missing")
 if 'action="http' in index or 'action="https' in index:
     errors.append("Demo contact form must not post to a remote server")
+faq_html = (ROOT / "faq.html").read_text(encoding="utf-8")
+faq_script = (ROOT / "assets" / "faq.js").read_text(encoding="utf-8")
+faq_filters = ["all", "locations", "services", "products", "contact"]
+if 'id="faqSearch"' not in faq_html or 'id="faqEmpty"' not in faq_html:
+    errors.append("FAQ search or empty-results interface missing")
+for filter_name in faq_filters:
+    if f'data-faq-filter="{filter_name}"' not in faq_html:
+        errors.append(f"FAQ filter missing: {filter_name}")
+for cat in faq_filters[1:]:
+    if f'data-faq-category="{cat}"' not in faq_html:
+        errors.append(f"FAQ answer category missing: {cat}")
+if faq_html.count('class="faq-item"') != 10:
+    errors.append("FAQ entries count unexpected")
+if 'MutationObserver' not in faq_script or 'aria-pressed' not in faq_script:
+    errors.append("FAQ translation/accessible-filter behavior missing")
+
 if errors:
     print("\n".join(errors), file=sys.stderr)
     sys.exit(1)
