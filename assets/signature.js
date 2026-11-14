@@ -1,0 +1,25 @@
+(()=>{'use strict';
+const button=document.createElement('button');
+button.type='button';
+button.className='back-to-top';
+button.setAttribute('aria-label','العودة إلى أعلى الصفحة');
+button.setAttribute('title','العودة إلى أعلى الصفحة');
+button.setAttribute('data-visible','false');
+button.textContent='↑';
+document.body.appendChild(button);
+const update=()=>{
+const en=document.documentElement.lang==='en';
+const label=en?'Back to top':'العودة إلى أعلى الصفحة';
+button.setAttribute('aria-label',label);button.title=label;
+button.dataset.visible=String(window.scrollY>650);
+const langButton=document.getElementById('langBtn');
+if(langButton)langButton.setAttribute('aria-label',en?'Switch to Arabic':'Switch to English');
+const menuButton=document.getElementById('menuBtn');
+if(menuButton)menuButton.setAttribute('aria-label',en?'Toggle navigation menu':'فتح أو إغلاق القائمة الرئيسية');
+};
+button.addEventListener('click',()=>window.scrollTo({top:0,behavior:window.matchMedia('(prefers-reduced-motion: reduce)').matches?'instant':'smooth'}));
+window.addEventListener('scroll',update,{passive:true});
+const observer=new MutationObserver(update);
+observer.observe(document.documentElement,{attributes:true,attributeFilter:['lang']});
+update();
+})();
