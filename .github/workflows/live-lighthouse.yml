@@ -1,0 +1,37 @@
+name: Live Website Lighthouse
+on:
+  workflow_dispatch:
+  workflow_run:
+    workflows: ["Deploy static website to GitHub Pages"]
+    types: [completed]
+permissions:
+  contents: read
+concurrency:
+  group: lighthouse-live
+  cancel-in-progress: true
+jobs:
+  audit-live:
+    if: github.event_name == 'workflow_dispatch' || github.event.workflow_run.conclusion == 'success'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Install Lighthouse and Chromium
+        run: |
+          npm install --no-save lighthouse@12.8.2 chrome-launcher@1.2.0 playwright@1.56.1
+          npx playwright install --with-deps chromium
+      - name: Audit the published GitHub Pages site
+        env:
+          SITE_BASE_URL: https://sulaimanalsanani.github.io/majalis-al-arab-website
+          LIGHTHOUSE_ENFORCE_BUDGETS: '0'
+        run: node scripts/lighthouse.mjs
+      - name: Upload live-site Lighthouse reports
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: majalis-live-lighthouse
+          path: performance-reports/
+          if-no-files-found: warn
