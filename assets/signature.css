@@ -135,3 +135,16 @@ img{max-width:100%;height:auto}
 .section .copy p,.section .intro,.section .small-note,.editorial-contact .copy p{
  color:var(--signature-readable-muted);
 }
+
+/* Lighthouse a11y audit: restore readable text inside dark signature surfaces. */
+.section.editorial-contact .copy .kicker,
+.section.editorial-contact .copy h2 i,
+.section.editorial-contact .copy .underlink,
+.section.editorial-locations .location-feature .small-title{
+ color:#e0c58e;
+}
+.section.editorial-contact .copy p,
+.section.editorial-contact .copy .small-note,
+.section.editorial-locations .location-feature .small-note{
+ color:#e8e6dd;
+}
