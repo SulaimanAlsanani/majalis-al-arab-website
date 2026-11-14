@@ -85,3 +85,34 @@ nav,header,footer,.brand,.navlinks,.kicker,
 .en body,.en input,.en textarea,.en select{
   font-family:var(--brand-font)!important;
 }
+
+/* Accessibility and perceived performance refinements. */
+.skip:focus-visible{
+  position:fixed;top:12px;inset-inline-start:12px;z-index:999;
+  padding:14px 18px;background:#fff;color:#172d27;
+  border:3px solid var(--signature-gold);border-radius:3px;
+  box-shadow:0 8px 28px #0002;
+}
+#main:focus{outline:none}
+:where(a,button,input,textarea,select,summary):focus-visible{
+  outline:3px solid var(--signature-gold);
+  outline-offset:3px;
+}
+:where(button,summary,.navlinks>a){touch-action:manipulation}
+:where(button,.btn,.navlinks>a){min-height:44px}
+:where(input,textarea,select){font-size:16px}
+:where(.catalog-card,.faq-item)[hidden]{display:none!important}
+img{max-width:100%;height:auto}
+@media(prefers-reduced-motion:reduce){
+  *,*::before,*::after{
+    scroll-behavior:auto!important;
+    animation-duration:.01ms!important;
+    animation-iteration-count:1!important;
+    transition-duration:.01ms!important;
+  }
+}
+@media(prefers-contrast:more){
+  :root{--signature-gold:#9a6b28}
+  a{text-underline-offset:3px}
+  button,.btn{border-width:2px}
+}
