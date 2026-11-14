@@ -131,3 +131,7 @@ img{max-width:100%;height:auto}
 .inner-hero .kicker,.inner-cta .kicker,.inner-cta h2 i,.premium-hero .kicker,
 .premium-hero h1 i{color:#d4b57c}
 @media(max-width:1180px){.navlinks a[aria-current=page]{color:var(--signature-readable-gold)}}
+
+.section .copy p,.section .intro,.section .small-note,.editorial-contact .copy p{
+ color:var(--signature-readable-muted);
+}
