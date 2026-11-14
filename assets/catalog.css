@@ -21,3 +21,11 @@
 .catalog-controls input{border-radius:3px}
 @media(max-width:600px){.catalog-grid{gap:16px}.catalog-card .catalog-visual{min-height:185px}}
 @media(prefers-reduced-motion:reduce){.catalog-card{transition:none}}
+
+.catalog-result-tools{display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap;margin:0 0 22px}
+.catalog-result-count{margin:0;color:var(--muted);font-size:14px;font-weight:700}
+.catalog-reset{border:1px solid var(--border);background:var(--bg);color:var(--text);font-size:13px;padding:10px 15px;font-weight:700}
+.catalog-reset:hover:not(:disabled){border-color:var(--gold);background:var(--cream)}
+.catalog-reset:disabled{opacity:.45;cursor:default}
+.catalog-reset:focus-visible{outline:3px solid var(--gold);outline-offset:3px}
+.catalog-card[hidden]{display:none!important}
