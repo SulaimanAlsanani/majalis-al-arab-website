@@ -15,7 +15,7 @@ if(skip)skip.textContent=en?'Skip to main content':'تجاوز إلى المحت
 button.setAttribute('aria-label',label);button.title=label;
 button.dataset.visible=String(window.scrollY>650);
 const langButton=document.getElementById('langBtn');
-if(langButton)langButton.setAttribute('aria-label',en?'Switch to Arabic':'Switch to English');
+if(langButton){const visible=langButton.textContent.trim();langButton.setAttribute('aria-label',en?`${visible} — Switch to Arabic`:`${visible} — Switch to English`)}
 const menuButton=document.getElementById('menuBtn');
 if(menuButton)menuButton.setAttribute('aria-label',en?'Toggle navigation menu':'فتح أو إغلاق القائمة الرئيسية');
 };
