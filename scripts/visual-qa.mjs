@@ -96,6 +96,17 @@ try{
   await page.locator('#faqSearch').fill('coffee');
   if(await page.locator('.faq-item:visible').count()===0)
    errors.push(`${size.name}: English FAQ search returned no coffee results`);
+  // Contact enquiry export must have human-readable field labels and stay local.
+  await page.goto(`${origin}/index.html`,{waitUntil:'domcontentloaded'});
+  await page.locator('#name').fill('Sample Visitor');
+  await page.locator('#contactMethod').fill('example@example.com');
+  await page.locator('#message').fill('Sample enquiry for a product');
+  const [enquiryDownload]=await Promise.all([page.waitForEvent('download'),page.locator('#downloadEnquiry').click()]);
+  const enquiryText=await fs.readFile(await enquiryDownload.path(),'utf8');
+  if(!enquiryText.includes('Name: Sample Visitor')||!enquiryText.includes('Contact: example@example.com')||!enquiryText.includes('Message: Sample enquiry'))
+   errors.push(`${size.name}: downloaded enquiry is missing readable English field labels`);
+  if(!await page.locator('#status').textContent().then(text=>text.includes('Nothing was sent to a server.')))
+   errors.push(`${size.name}: client-side contact download disclosure is missing`);
 
 
   await context.close();
