@@ -11,7 +11,9 @@
 - Secondary ink: `#68766E`
 
 ## Typography
-- Arabic: Tajawal (currently served from Google Fonts). A licensed official DIN Next Arabic can replace it **only after the authorized font assets are supplied**.
+- Brand font: **DIN Next Arabic / DIN Next LT Arabic** is now first in the global font stack on every page via `assets/signature.css`.
+- Licensing status: the repository has **no licensed DIN webfont files or an Adobe Fonts web project embed**. Therefore browsers without DIN installed currently fall back to Tajawal; configuring the CSS stack is **not proof of universal DIN rendering**.
+- Production requirement: provide a licensed web-use font package or the official Adobe Fonts web project embed for this domain, then verify actual `document.fonts` rendering in desktop/mobile browsers. Adobe Fonts may not be self-hosted without a separate license.
 - English: DM Sans.
 - Desktop hero: responsive `clamp(44px, 6vw, 78px)`.
 - Section titles: responsive `clamp(30px, 3.45vw, 46px)`.
