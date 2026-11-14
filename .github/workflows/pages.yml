@@ -27,6 +27,7 @@ jobs:
         run: |
           node --check assets/app.js
           node --check assets/detail.js
+          node --check assets/signature.js
           node --check assets/catalog.js
           node --check assets/faq.js
       - name: Configure Pages
