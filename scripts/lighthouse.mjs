@@ -1,5 +1,5 @@
 import lighthouse from 'lighthouse';
-import chromeLauncher from 'chrome-launcher';
+import { launch as launchChrome } from 'chrome-launcher';
 import { chromium } from 'playwright';
 import { mkdir, writeFile } from 'node:fs/promises';
 
@@ -13,7 +13,7 @@ await mkdir('performance-reports',{recursive:true});
 const results=[];
 for(const scenario of scenarios){
  const desktop=scenario.formFactor==='desktop';
- const chrome=await chromeLauncher.launch({
+ const chrome=await launchChrome({
   chromePath:chromium.executablePath(),
   chromeFlags:['--headless','--no-sandbox','--disable-dev-shm-usage'],
   port:0
