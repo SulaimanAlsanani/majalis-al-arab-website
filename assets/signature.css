@@ -11,7 +11,7 @@ html{scroll-padding-top:94px}
 body[data-theme=heritage]{background:var(--bg)}
 ::selection{background:#b99a62;color:#142820}
 .header{backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px)}
-.header,.header .wrap{position:relative;z-index:60}
+.header{position:sticky;top:0;z-index:60}.header .wrap{position:relative;z-index:1}
 .header{border-bottom:1px solid var(--signature-line)}
 .brand .mark{border-radius:50%;width:44px;height:44px;font-family:serif;position:relative}
 .brand .mark:before{content:"";inset:5px;position:absolute;border:1px solid #b99a6259;border-radius:50%}
