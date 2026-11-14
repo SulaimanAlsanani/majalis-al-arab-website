@@ -29,3 +29,7 @@
 .catalog-reset:disabled{opacity:.45;cursor:default}
 .catalog-reset:focus-visible{outline:3px solid var(--gold);outline-offset:3px}
 .catalog-card[hidden]{display:none!important}
+
+.faq-result-tools{display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap;margin:0 0 10px}
+.faq-result-tools .faq-result-count{margin:0}
+.faq-item[hidden]{display:none!important}
