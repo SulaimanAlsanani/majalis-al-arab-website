@@ -21,7 +21,7 @@ function update(sync=false){
  const q=normalise(search.value),isEn=document.documentElement.lang==='en';
  let visible=0;
  for(const card of cards){
-  const text=normalise((card.dataset.nameAr||'')+' '+(card.dataset.nameEn||'')+' '+[...card.querySelectorAll('[data-ar][data-en]')].map(e=>e.dataset.ar+' '+e.dataset.en).join(' '));
+  const text=normalise((card.dataset.nameAr||'')+' '+(card.dataset.nameEn||''));
   const match=(filter==='all'||card.dataset.category===filter)&&(!q||text.includes(q));
   card.hidden=!match;
   if(match)visible++;
