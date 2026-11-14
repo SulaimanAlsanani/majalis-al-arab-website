@@ -27,6 +27,14 @@ try{
    }));
    if(result.scrollWidth>result.viewport+2)errors.push(`${size.name}: horizontal overflow on ${pathname}: ${result.scrollWidth} > ${result.viewport}`);
    if(result.h1!==1||!result.nav||!result.footer||!result.signature||!result.backButton)errors.push(`${size.name}: missing page landmarks in ${pathname}`);
+   const access=await page.evaluate(()=>({
+    skip:!!document.querySelector('a.skip[href="#main"]'),
+    mainFocus:document.querySelector('#main')?.getAttribute('tabindex'),
+    fontRequest:[...document.querySelectorAll('link[href*="fonts.googleapis.com/css2"]')].map(el=>el.href)
+   }));
+   if(!access.skip||access.mainFocus!=='-1')errors.push(`${size.name}: skip/main keyboard access is missing on ${pathname}`);
+   if(access.fontRequest.some(url=>url.includes('DM+Sans')))errors.push(`${size.name}: duplicate external web font on ${pathname}`);
+
    if(['index.html','catalog.html','restaurant.html'].includes(pathname)){
     await page.screenshot({path:`visual-artifacts/${pathname.replace('.html','')}-${size.name}.png`,fullPage:true,animations:'disabled'});
    }
