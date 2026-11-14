@@ -40,3 +40,24 @@ Deployment: https://github.com/SulaimanAlsanani/majalis-al-arab-website/actions/
 - Verify real-world Core Web Vitals and business contact functionality after commercial launch approvals.
 
 All scores are observations from the listed workflow runs, not guarantees of site-wide or visitor-level performance.
+
+
+## Published-site Lighthouse audit — 14 November 2026
+
+**Source:** GitHub Actions [Live Website Lighthouse](https://github.com/SulaimanAlsanani/majalis-al-arab-website/actions/runs/43596350028), measuring the **published GitHub Pages URL** rather than the local Python server.
+
+| Published URL scenario | Performance | Accessibility | Best Practices | SEO | FCP | LCP | CLS |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
+| Home mobile | **93** | **100** | **100** | **100** | 2.61s | 2.61s | 0.008 |
+| Home desktop | **85** | **100** | **100** | **100** | 1.53s | 1.98s | 0.002 |
+| Catalog mobile | **93** | **100** | **100** | **100** | 2.59s | 2.59s | 0.018 |
+
+This is a single Lighthouse lab run from a GitHub-hosted runner against the live site; it is not visitor field data. Outcomes may vary with external imagery, fonts, geographic connection and runner conditions.
+
+### Optimization experiment
+
+A lower-resolution externally hosted hero image encoded as WebP was tried, then **reverted** after Lighthouse recorded lower performance (desktop 75 vs previous local 77; mobile 95 vs previous local 99). This result is a reminder not to assume reduced image dimensions alone guarantee improved LCP when external hosting and caching vary.
+
+### New monitoring process
+
+The automated workflow `.github/workflows/live-lighthouse.yml` now measures the published URL after successful Pages deployments and also supports manual runs. It uploads detailed Lighthouse JSON reports. The local Lighthouse budget workflow remains independent. Acknowledged bottlenecks: desktop performance still under the 90-point goal; current font fallback and external stock photographs still require brand/licensing finalization.
