@@ -39,8 +39,9 @@ assets/
 - Shared interior styles and language/theme scripts under `assets/detail.*`.
 - `python3 scripts/check_site.py` checks local links, anchor targets, and bilingual markup before deployment.
 - The CI validation step passed on 2026-11-12.
-- GitHub Pages **has not yet been enabled** in the repository, so the deployment workflow fails at `actions/configure-pages@v5` with `Get Pages site failed / Not Found`.
-- To unblock deployment, select **Settings → Pages → Build and deployment → Source: GitHub Actions**. Then re-run the workflow under Actions.
+- GitHub Pages has now been enabled. An actual deployment succeeded for commit `ac8f64c` on 2026-11-14: https://github.com/SulaimanAlsanani/majalis-al-arab-website/actions/runs/43595067862
+- New commits trigger the Pages workflow automatically. Each release should be confirmed by a successful **Deploy static website to GitHub Pages** run and a live-URL smoke test; transient GitHub artifact-metadata failures should not be mistaken for content validation failures.
+- The published preview URL remains https://sulaimanalsanani.github.io/majalis-al-arab-website/ until an official domain is approved.
 
 ## Known launch constraints
 - Sample photography is illustrative, not documentary imagery of Majalis Al Arab.
