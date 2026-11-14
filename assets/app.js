@@ -18,7 +18,15 @@ document.querySelectorAll('[data-set-theme]').forEach(button=>button.addEventLis
 document.body.dataset.theme='heritage'; // Public site uses one approved visual theme.
 const form=document.getElementById('contactForm');
 const enquiryStatus=document.getElementById('status');
-const getEnquiry=()=>{const ids=['name','contactMethod','type','message'];return ids.map(id=>{const field=document.getElementById(id);return id==='type'?(field?.selectedOptions[0]?.text||''):(field?.value||'').trim()}).join('\n')};
+const getEnquiry=()=>{
+ const ids=['name','contactMethod','type','message'];
+ const labels=language==='ar'?['الاسم','وسيلة التواصل','نوع الاستفسار','الرسالة']:['Name','Contact','Enquiry type','Message'];
+ return ids.map((id,index)=>{
+  const field=document.getElementById(id);
+  const value=id==='type'?(field?.selectedOptions[0]?.text||''):(field?.value||'').trim();
+  return `${labels[index]}: ${value}`;
+ }).join('\n');
+};
 const valid=()=>{if(!form)return false;return form.reportValidity()};
 form?.addEventListener('submit',async event=>{event.preventDefault();if(!valid())return;try{await navigator.clipboard.writeText(getEnquiry());if(enquiryStatus)enquiryStatus.textContent=language==='ar'?'تم نسخ الاستفسار إلى الحافظة، ولم تُرسل بياناتك إلى أي خادم.':'Enquiry copied to the clipboard. No data has been sent to a server.'}catch(_){if(enquiryStatus)enquiryStatus.textContent=language==='ar'?'تعذر النسخ تلقائيًا. يمكنك تنزيله كملف نصي.':'Automatic copy is unavailable. You can download a text file instead.'}});
 document.getElementById('downloadEnquiry')?.addEventListener('click',()=>{if(!valid())return;const blob=new Blob(['\uFEFF'+getEnquiry()],{type:'text/plain;charset=utf-8'});const url=URL.createObjectURL(blob);const anchor=document.createElement('a');anchor.href=url;anchor.download='majalis-al-arab-enquiry.txt';document.body.appendChild(anchor);anchor.click();anchor.remove();URL.revokeObjectURL(url);if(enquiryStatus)enquiryStatus.textContent=language==='ar'?'تم إنشاء ملف الاستفسار على جهازك. لم تُرسل البيانات إلى خادم.':'Your enquiry file was created on this device. Nothing was sent to a server.'});
