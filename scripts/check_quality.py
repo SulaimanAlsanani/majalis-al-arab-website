@@ -178,6 +178,20 @@ for page in PAGES + ["404.html"]:
     if 'class="nav-dropdown"' not in markup:
         errors.append(f"{page}: primary business dropdown missing")
 
+# Signature design must be consistently loaded and stay free of duplicate includes.
+for page in PAGES + ["404.html"]:
+    markup = (ROOT / page).read_text(encoding="utf-8")
+    if markup.count('href="assets/signature.css"') != 1:
+        errors.append(f"{page}: signature CSS must be included exactly once")
+    if markup.count('src="assets/signature.js"') != 1:
+        errors.append(f"{page}: signature interaction script must be included exactly once")
+signature_css = (ROOT / "assets" / "signature.css").read_text(encoding="utf-8")
+signature_js = (ROOT / "assets" / "signature.js").read_text(encoding="utf-8")
+if ".back-to-top" not in signature_css or "prefers-reduced-motion" not in signature_css:
+    errors.append("Missing responsive and accessible Signature style rules")
+if "aria-label" not in signature_js or "MutationObserver" not in signature_js:
+    errors.append("Missing bilingual back-to-top accessibility handling")
+
 if errors:
     print("\n".join(errors), file=sys.stderr)
     sys.exit(1)
