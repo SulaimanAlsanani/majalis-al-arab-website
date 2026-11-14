@@ -8,6 +8,9 @@ on:
       - 'assets/**'
       - 'scripts/lighthouse.mjs'
       - '.github/workflows/lighthouse.yml'
+concurrency:
+  group: lighthouse-main
+  cancel-in-progress: true
 permissions:
   contents: read
 jobs:
