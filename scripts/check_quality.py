@@ -223,6 +223,20 @@ for module_name, module in [("catalog", catalog_js), ("FAQ", faq_js)]:
 if homepage.count('class="spotlight-card" href="catalog.html?q=') != 3:
     errors.append("Homepage product quick links are not configured")
 
+# Performance and keyboard-accessibility invariants for every static page.
+for page in PAGES + ["404.html"]:
+    markup = (ROOT / page).read_text(encoding="utf-8")
+    if 'family=DM+Sans' in markup:
+        errors.append(f"{page}: unused external font family still requested")
+    if '<a class="skip" href="#main">' not in markup:
+        errors.append(f"{page}: missing keyboard skip-to-main link")
+    if '<main id="main" tabindex="-1">' not in markup:
+        errors.append(f"{page}: main landmark is not programmatically focusable")
+signature_css = (ROOT / "assets" / "signature.css").read_text(encoding="utf-8")
+for rule in [".skip:focus-visible", "prefers-reduced-motion", "prefers-contrast:more"]:
+    if rule not in signature_css:
+        errors.append(f"Shared accessible typography/style rule missing: {rule}")
+
 if errors:
     print("\n".join(errors), file=sys.stderr)
     sys.exit(1)
