@@ -40,6 +40,9 @@ try{
    }
   }
   await page.goto(`${origin}/index.html`,{waitUntil:'domcontentloaded'});
+  const initiallyHidden=await page.locator('.back-to-top').evaluate(el=>({tabIndex:el.tabIndex,ariaHidden:el.getAttribute('aria-hidden')}));
+  if(initiallyHidden.tabIndex!==-1||initiallyHidden.ariaHidden!=='true')errors.push(`${size.name}: hidden back-to-top is reachable by keyboard or accessibility tree`);
+  if(await page.locator('#menuBtn').getAttribute('aria-controls')!=='navlinks')errors.push(`${size.name}: menu toggle missing aria-controls reference`);
   if(size.width<=1180){
    await page.locator('#menuBtn').click();
    if(!await page.locator('#navlinks').evaluate(el=>el.classList.contains('open')))errors.push('Mobile menu did not open');
@@ -56,7 +59,10 @@ try{
   await page.waitForTimeout(120);
   const backVisible=await page.locator('.back-to-top').getAttribute('data-visible');
   if(backVisible!=='true')errors.push(`${size.name}: back-to-top is not visible when scrolling`);
+  const visibleState=await page.locator('.back-to-top').evaluate(el=>({tabIndex:el.tabIndex,ariaHidden:el.getAttribute('aria-hidden')}));
+  if(visibleState.tabIndex!==0||visibleState.ariaHidden!=='false')errors.push(`${size.name}: visible back-to-top cannot be reached by keyboard`);
   await page.locator('.back-to-top').click();
+  if(await page.evaluate(()=>document.activeElement?.id)!=='main')errors.push(`${size.name}: back-to-top did not return focus to main content`);
   await page.waitForTimeout(600);
   if(await page.evaluate(()=>window.scrollY)>800)errors.push(`${size.name}: back-to-top did not scroll upwards`);
   await page.locator('#langBtn').click();
