@@ -3,7 +3,8 @@ import { launch as launchChrome } from 'chrome-launcher';
 import { chromium } from 'playwright';
 import { mkdir, writeFile } from 'node:fs/promises';
 
-const origin='http://127.0.0.1:4173';
+const origin=(process.env.SITE_BASE_URL||'http://127.0.0.1:4173').replace(/\/$/,'');
+const enforceBudgets=process.env.LIGHTHOUSE_ENFORCE_BUDGETS!=='0';
 const scenarios=[
   {name:'home-mobile',path:'/index.html',formFactor:'mobile'},
   {name:'home-desktop',path:'/index.html',formFactor:'desktop'},
@@ -55,7 +56,7 @@ for(const result of results){
   if(measured<min)failures.push(`${result.name}: ${metric}=${measured} (minimum ${min})`);
  }
 }
-if(failures.length){
+if(enforceBudgets&&failures.length){
  console.error('Lighthouse performance budget regressions:\n'+failures.join('\n'));
  process.exitCode=1;
-}else console.log('Lighthouse regression budgets passed for all three scenarios.');
+}else console.log(enforceBudgets?'Lighthouse regression budgets passed for all three scenarios.':'Live website audit complete (informational; no lab score thresholds applied).');
