@@ -1,0 +1,70 @@
+/* Majalis Signature v1 — design layer applied after base styles.
+   Royal Heritage master palette, calm interior pages, responsive editorial typography. */
+:root{
+ --signature-ink:#172d27;
+ --signature-gold:#b99a62;
+ --signature-ivory:#f7f5f0;
+ --signature-stone:#e8e1d4;
+ --signature-line:rgba(23,45,39,.13);
+}
+html{scroll-padding-top:94px}
+body[data-theme=heritage]{background:var(--bg)}
+::selection{background:#b99a62;color:#142820}
+.header{backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px)}
+.header,.header .wrap{position:relative;z-index:60}
+.header{border-bottom:1px solid var(--signature-line)}
+.brand .mark{border-radius:50%;width:44px;height:44px;font-family:serif;position:relative}
+.brand .mark:before{content:"";inset:5px;position:absolute;border:1px solid #b99a6259;border-radius:50%}
+.brand b{letter-spacing:-.2px}
+.hero.premium-hero{isolation:isolate;min-height:clamp(550px,72vh,760px)}
+.hero.premium-hero:before{filter:saturate(.72) contrast(1.05)}
+.hero.premium-hero .hero-inner{position:relative;z-index:1}
+.hero.premium-hero h1{font-size:clamp(46px,6.5vw,87px);line-height:1.14;letter-spacing:-.02em;max-width:850px}
+.hero.premium-hero .kicker{display:inline-flex;align-items:center;gap:14px;letter-spacing:2.4px}
+.hero.premium-hero .kicker:before{content:"";display:block;width:34px;height:1px;background:var(--signature-gold)}
+.hero.premium-hero .hero-caption{letter-spacing:1px}
+.editorial-businesses .cards{gap:22px}
+.editorial-businesses .card{border:1px solid var(--signature-line);background:var(--bg);box-shadow:none}
+.editorial-businesses .card .card-image{height:clamp(230px,23vw,310px);background-blend-mode:multiply}
+.editorial-businesses .card .card-body{padding:30px 28px 35px}
+.editorial-businesses .card h3{font-size:26px;line-height:1.32}
+.editorial-products .spotlight-card{min-height:260px}
+.editorial-products .spotlight-card:nth-child(2){transform:none}
+.editorial-products .spotlight-card:hover{border-color:var(--signature-gold)}
+.editorial-locations .location-feature{outline:1px solid #b99a626e;outline-offset:-18px}
+.editorial-locations .location-ornament{font-size:90px}
+.editorial-contact .contact-form{background:var(--signature-ivory);border:1px solid var(--signature-line);padding:clamp(22px,3vw,39px)}
+.editorial-contact .contact-form input,.editorial-contact .contact-form textarea,.editorial-contact .contact-form select{background:white;border:1px solid #d6d7ce;min-height:46px}
+.editorial-contact .contact-form :focus-visible{outline:2px solid var(--signature-gold);outline-offset:2px}
+.inner-hero{isolation:isolate}
+.inner-hero:after{content:"";pointer-events:none;position:absolute;inset-inline-end:4vw;bottom:-40px;width:min(24vw,320px);aspect-ratio:1;border:1px solid #b99a6230;border-radius:50%;z-index:0}
+.inner-hero>.wrap{position:relative;z-index:1}
+.inner-hero h1{max-width:900px}
+.inner-tile,.service-panel,.catalog-card{border-radius:2px}
+.inner-note{border-inline-start:3px solid var(--signature-gold)}
+.inner-footer{border-top:3px solid var(--signature-gold)}
+.nav-dropdown[open] .nav-sub{z-index:100}
+.nav-sub{background:var(--bg)}
+.nav-sub a:focus-visible{outline:2px solid var(--signature-gold)}
+.back-to-top{position:fixed;z-index:80;inset-inline-end:22px;bottom:24px;width:48px;height:48px;border:1px solid var(--signature-gold);border-radius:50%;background:var(--signature-ink);color:#fff;display:grid;place-items:center;box-shadow:0 12px 27px #10251e28;cursor:pointer;font-size:24px;transition:opacity .2s,transform .2s;opacity:0;transform:translateY(10px);pointer-events:none}
+.back-to-top[data-visible=true]{opacity:1;transform:none;pointer-events:auto}
+.back-to-top:focus-visible{outline:3px solid var(--signature-gold);outline-offset:4px}
+.en body,.en input,.en textarea,.en select{font-family:'DM Sans',Arial,sans-serif}
+body.en h1,body.en h2,body.en h3{letter-spacing:-.025em}
+@media(max-width:1180px){
+ .navlinks{z-index:90;max-height:min(76dvh,620px)}
+ .nav-dropdown summary{min-height:44px}
+ .nav-sub{background:var(--cream)}
+}
+@media(max-width:760px){
+ .hero.premium-hero{min-height:570px}
+ .hero.premium-hero h1{font-size:clamp(42px,9vw,58px)}
+ .hero.premium-hero .hero-caption{font-size:11px;bottom:13px}
+ .editorial-businesses .cards{gap:18px}
+ .editorial-businesses .card .card-image{height:220px}
+ .editorial-businesses .card .card-body{padding:24px}
+ .editorial-products .spotlight-card{min-height:185px}
+ .inner-hero:after{width:120px;bottom:-10px}
+ .back-to-top{width:44px;height:44px;inset-inline-end:14px;bottom:16px}
+}
+@media(prefers-reduced-motion:reduce){.back-to-top{transition:none}html{scroll-behavior:auto}}
