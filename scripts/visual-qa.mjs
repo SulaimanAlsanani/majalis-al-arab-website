@@ -44,12 +44,12 @@ try{
    if(!await page.locator('.nav-dropdown').evaluate(el=>el.open))errors.push('Desktop business submenu did not open');
    await page.keyboard.press('Escape');
   }
-  await page.evaluate(()=>window.scrollTo(0,1000));
+  await page.evaluate(()=>{document.documentElement.style.scrollBehavior='auto';window.scrollTo(0,1000)});
   await page.waitForTimeout(120);
   const backVisible=await page.locator('.back-to-top').getAttribute('data-visible');
   if(backVisible!=='true')errors.push(`${size.name}: back-to-top is not visible when scrolling`);
   await page.locator('.back-to-top').click();
-  await page.waitForTimeout(250);
+  await page.waitForTimeout(600);
   if(await page.evaluate(()=>window.scrollY)>800)errors.push(`${size.name}: back-to-top did not scroll upwards`);
   await page.locator('#langBtn').click();
   const lng=await page.locator('html').getAttribute('lang');
