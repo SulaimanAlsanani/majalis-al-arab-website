@@ -207,6 +207,22 @@ if '--brand-font:' not in font_css or '"DIN Next Arabic"' not in font_css or '"D
 if "font-family:var(--brand-font)!important" not in font_css:
     errors.append("DIN Next Arabic global font application is missing")
 
+# Catalog and FAQ provide functional reset tools and shareable URL state.
+catalog_html = (ROOT / "catalog.html").read_text(encoding="utf-8")
+catalog_js = (ROOT / "assets" / "catalog.js").read_text(encoding="utf-8")
+faq_html = (ROOT / "faq.html").read_text(encoding="utf-8")
+faq_js = (ROOT / "assets" / "faq.js").read_text(encoding="utf-8")
+homepage = (ROOT / "index.html").read_text(encoding="utf-8")
+if 'id="catalogReset"' not in catalog_html or 'id="catalogResultCount"' not in catalog_html:
+    errors.append("Catalog reset/result count is absent")
+if 'id="faqReset"' not in faq_html:
+    errors.append("FAQ reset is absent")
+for module_name, module in [("catalog", catalog_js), ("FAQ", faq_js)]:
+    if "searchParams" not in module or "replaceState" not in module or "popstate" not in module:
+        errors.append(f"{module_name} deep-link state synchronization is incomplete")
+if homepage.count('class="spotlight-card" href="catalog.html?q=') != 3:
+    errors.append("Homepage product quick links are not configured")
+
 if errors:
     print("\n".join(errors), file=sys.stderr)
     sys.exit(1)
