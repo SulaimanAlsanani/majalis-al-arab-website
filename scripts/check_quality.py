@@ -192,6 +192,14 @@ if ".back-to-top" not in signature_css or "prefers-reduced-motion" not in signat
 if "aria-label" not in signature_js or "MutationObserver" not in signature_js:
     errors.append("Missing bilingual back-to-top accessibility handling")
 
+# All routes share the provisional visual mark; verified official logo is still required.
+for page in PAGES + ["404.html"]:
+    markup = (ROOT / page).read_text(encoding="utf-8")
+    if markup.count('href="assets/favicon.svg"') != 1:
+        errors.append(f"{page}: browser favicon missing or duplicated")
+if not (ROOT / "assets" / "favicon.svg").is_file():
+    errors.append("Provisional favicon SVG is missing")
+
 if errors:
     print("\n".join(errors), file=sys.stderr)
     sys.exit(1)
