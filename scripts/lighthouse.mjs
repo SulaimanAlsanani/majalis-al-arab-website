@@ -41,4 +41,21 @@ for(const scenario of scenarios){
  }finally{await chrome.kill()}
 }
 await writeFile('performance-reports/summary.json',JSON.stringify({measuredAt:new Date().toISOString(),results},null,2));
-// Informational baseline only; new thresholds should be set from observed results after first run.
+// Conservative guardrails catch meaningful regressions without expecting stable 100s.
+const minimums={
+ 'home-mobile':{performance:82,accessibility:92,'best-practices':95,seo:95},
+ 'home-desktop':{performance:60,accessibility:92,'best-practices':95,seo:95},
+ 'catalog-mobile':{performance:85,accessibility:95,'best-practices':95,seo:95}
+};
+const failures=[];
+for(const result of results){
+ const limits=minimums[result.name];
+ for(const [metric,min] of Object.entries(limits)){
+  const measured=result.categories[metric];
+  if(measured<min)failures.push(`${result.name}: ${metric}=${measured} (minimum ${min})`);
+ }
+}
+if(failures.length){
+ console.error('Lighthouse performance budget regressions:\n'+failures.join('\n'));
+ process.exitCode=1;
+}else console.log('Lighthouse regression budgets passed for all three scenarios.');
