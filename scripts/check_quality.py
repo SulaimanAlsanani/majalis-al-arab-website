@@ -200,6 +200,13 @@ for page in PAGES + ["404.html"]:
 if not (ROOT / "assets" / "favicon.svg").is_file():
     errors.append("Provisional favicon SVG is missing")
 
+# Every page loads the global DIN Next Arabic brand-font declaration.
+font_css = (ROOT / "assets" / "signature.css").read_text(encoding="utf-8")
+if '--brand-font:' not in font_css or '"DIN Next Arabic"' not in font_css or '"DIN Next LT Arabic"' not in font_css:
+    errors.append("DIN Next Arabic global brand font stack is missing")
+if "font-family:var(--brand-font)!important" not in font_css:
+    errors.append("DIN Next Arabic global font application is missing")
+
 if errors:
     print("\n".join(errors), file=sys.stderr)
     sys.exit(1)
