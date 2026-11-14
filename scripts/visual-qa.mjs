@@ -54,8 +54,26 @@ try{
   await page.locator('#langBtn').click();
   const lng=await page.locator('html').getAttribute('lang');
   if(lng!=='en')errors.push(`${size.name}: language switching failed`);
+  // Homepage category shortcuts must deep-link to one matching catalog result.
+  await page.goto(`${origin}/index.html`,{waitUntil:'domcontentloaded'});
+  await page.locator('.spotlight-card').first().click();
+  await page.waitForTimeout(200);
+  const coffeeRoute=await page.evaluate(()=>({
+   path:location.pathname,query:new URLSearchParams(location.search).get('q'),
+   visible:[...document.querySelectorAll('.catalog-card')].filter(el=>!el.hidden).length
+  }));
+  if(!coffeeRoute.path.endsWith('/catalog.html')||coffeeRoute.query!=='القهوة'||coffeeRoute.visible!==1)
+   errors.push(`${size.name}: homepage coffee shortcut did not filter catalog correctly: ${JSON.stringify(coffeeRoute)}`);
+  await page.locator('#catalogReset').click();
+  if(await page.locator('.catalog-card:visible').count()!==6)
+   errors.push(`${size.name}: catalog reset did not reveal all categories`);
+  await page.locator('[data-filter="food"]').click();
+  const foodRoute=await page.evaluate(()=>new URLSearchParams(location.search).get('category'));
+  if(foodRoute!=='food'||await page.locator('.catalog-card:visible').count()!==2)
+   errors.push(`${size.name}: catalog category filter or URL sync failed`);
+
   await context.close();
  }
 }finally{await browser.close()}
 await fs.writeFile('visual-artifacts/qa-results.json',JSON.stringify({pages:pages.length,viewports:sizes,errors},null,2));
-if(errors.length){console.error(errors.join('\n'));process.exitCode=1}else console.log('Visual QA passed: 14 pages, mobile + tablet + desktop, no overflow, navigation, back-to-top and language checked.');
+if(errors.length){console.error(errors.join('\n'));process.exitCode=1}else console.log('Visual QA passed: 14 pages, mobile + tablet + desktop, no overflow, navigation, catalog deep links, back-to-top and language checked.');
