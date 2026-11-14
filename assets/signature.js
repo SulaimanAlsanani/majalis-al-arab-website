@@ -10,6 +10,8 @@ document.body.appendChild(button);
 const update=()=>{
 const en=document.documentElement.lang==='en';
 const label=en?'Back to top':'العودة إلى أعلى الصفحة';
+const skip=document.querySelector('a.skip[href="#main"]');
+if(skip)skip.textContent=en?'Skip to main content':'تجاوز إلى المحتوى';
 button.setAttribute('aria-label',label);button.title=label;
 button.dataset.visible=String(window.scrollY>650);
 const langButton=document.getElementById('langBtn');
