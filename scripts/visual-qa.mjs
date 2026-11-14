@@ -71,6 +71,18 @@ try{
   const foodRoute=await page.evaluate(()=>new URLSearchParams(location.search).get('category'));
   if(foodRoute!=='food'||await page.locator('.catalog-card:visible').count()!==2)
    errors.push(`${size.name}: catalog category filter or URL sync failed`);
+  // FAQ filters must support direct links and a reversible reset.
+  await page.goto(`${origin}/faq.html?category=locations`,{waitUntil:'domcontentloaded'});
+  await page.waitForTimeout(100);
+  const faqLocationCount=await page.locator('.faq-item:visible').count();
+  if(faqLocationCount!==2)errors.push(`${size.name}: FAQ direct filter expected two location questions, got ${faqLocationCount}`);
+  await page.locator('#faqReset').click();
+  if(await page.locator('.faq-item:visible').count()!==10)
+   errors.push(`${size.name}: FAQ reset did not restore ten questions`);
+  await page.locator('#faqSearch').fill('coffee');
+  if(await page.locator('.faq-item:visible').count()===0)
+   errors.push(`${size.name}: English FAQ search returned no coffee results`);
+
 
   await context.close();
  }
