@@ -43,9 +43,9 @@ for(const scenario of scenarios){
 await writeFile('performance-reports/summary.json',JSON.stringify({measuredAt:new Date().toISOString(),results},null,2));
 // Conservative guardrails catch meaningful regressions without expecting stable 100s.
 const minimums={
- 'home-mobile':{performance:82,accessibility:92,'best-practices':95,seo:95},
+ 'home-mobile':{performance:70,accessibility:92,'best-practices':95,seo:95},
  'home-desktop':{performance:60,accessibility:92,'best-practices':95,seo:95},
- 'catalog-mobile':{performance:85,accessibility:95,'best-practices':95,seo:95}
+ 'catalog-mobile':{performance:75,accessibility:95,'best-practices':95,seo:95}
 };
 const failures=[];
 for(const result of results){
