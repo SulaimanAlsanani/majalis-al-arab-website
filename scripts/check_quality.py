@@ -307,6 +307,24 @@ if homepage.count('class="editorial-card-photo"') != 2:
 if homepage.count('loading="lazy" decoding="async" fetchpriority="low"') != 2:
     errors.append("Editorial photographs must be lazily loaded with low priority")
 
+# SEO: every indexable bilingual route must advertise matching language alternates.
+for page in PAGES:
+    markup = (ROOT / page).read_text(encoding="utf-8")
+    canonical = BASE if page == "index.html" else BASE + page
+    expected = {
+        'ar-SA': canonical,
+        'en': canonical + '?lang=en',
+        'x-default': canonical,
+    }
+    for language, href in expected.items():
+        link = f'<link rel="alternate" hreflang="{language}" href="{href}">'
+        if markup.count(link) != 1:
+            errors.append(f"{page}: expected exactly one hreflang {language} alternate")
+    if markup.count('rel="canonical"') != 1:
+        errors.append(f"{page}: canonical URL must appear exactly once")
+if 'hreflang=' in (ROOT / "404.html").read_text(encoding="utf-8"):
+    errors.append("404 page must not be indexed as a language alternate")
+
 if errors:
     print("\n".join(errors), file=sys.stderr)
     sys.exit(1)
