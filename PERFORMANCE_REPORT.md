@@ -61,3 +61,11 @@ A lower-resolution externally hosted hero image encoded as WebP was tried, then 
 ### New monitoring process
 
 The automated workflow `.github/workflows/live-lighthouse.yml` now measures the published URL after successful Pages deployments and also supports manual runs. It uploads detailed Lighthouse JSON reports. The local Lighthouse budget workflow remains independent. Acknowledged bottlenecks: desktop performance still under the 90-point goal; current font fallback and external stock photographs still require brand/licensing finalization.
+
+
+## Follow-up experiment — 15 November 2026
+
+- Tried replacing the CSS hero-background image with a responsive, explicitly prioritized HTML `<picture>`.
+- Browser-based responsive checks passed for the experimental candidate, but the published-site Lighthouse lab run reported **99 mobile / 69 desktop**; the earlier published-site CSS hero baseline reported **93 mobile / 85 desktop**. These are separate, potentially noisy runs and should not be treated as controlled paired trials.
+- Because improving desktop performance was the goal, the experimental `<picture>` and matching CSS were **reverted**.
+- The real-site audit workflow remains enabled after successful deployments. The next performance optimization should focus on a fully controlled, licensed image asset or another measurable bottleneck rather than assuming a different tag automatically improves LCP.
