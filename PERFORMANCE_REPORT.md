@@ -117,3 +117,20 @@ The homepage's illustrative desktop background now uses a 1280px, quality-70 Uns
 - The updated desktop hero transfer was approximately **45.9 KB** in the live lab report. Unsplash is still an external dependency, and these editorial photographs require replacement with verified official photography before commercial launch.
 
 **Decision:** Retain the smaller CSS hero variant given successful layout tests and improved observed desktop lab performance. The 90+ desktop target remains an open objective. Avoid trading away visual fidelity without side-by-side visual review and repeated measurements.
+
+
+## Asset-level diagnostics — 15 November 2026
+
+The enhanced Lighthouse runner now includes the largest transferred network resources, request counts, and available LCP-element metadata in `performance-reports/summary.json`. Full raw audits remain available as GitHub Actions artifacts.
+
+Verified measurements from the [published-site Lighthouse run](https://github.com/SulaimanAlsanani/majalis-al-arab-website/actions/runs/43709660063) after the responsive desktop hero image-width experiment:
+
+| Scenario | Performance | Accessibility | SEO | LCP | Requests | Total measured transfer |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: |
+| Homepage mobile | 99 | 100 | 100 | 1.97 s | 15 | 139,240 B |
+| Homepage desktop | 85 | 100 | 100 | 2.56 s | 16 | 196,945 B |
+| Catalog mobile | 100 | 100 | 100 | 0.99 s | 16 | 80,167 B |
+
+The desktop hero image was about **45.9 KB** transferred, rather than the earlier larger candidate. The desktop run also loaded two illustrative card images (about **42.3 KB** and **30.2 KB**) and six distinct Tajawal `.woff2` font requests (each about 9–10.5 KB); external media and font resources are significant contributors to bytes transferred. These counts are from a single simulated Lighthouse run, not real-user transfer statistics. The LCP-element node was unavailable in this Lighthouse audit format, so no specific element can be asserted as LCP.
+
+**Next priorities:** (1) obtain licensed DIN Next Arabic webfont assets or an authorized provider embed, (2) consider reducing unnecessary font weights/subsets only after checking visual fidelity and licensing, (3) replace the externally hosted illustrative imagery with officially approved optimized files, (4) confirm improvements by repeated measurements on the **published site**. Do not infer production compression problems from the local Python test server, and do not claim the 90+ desktop target is achieved: it remains **85** in this single published audit.
