@@ -116,6 +116,24 @@ try{
    errors.push(`${size.name}: downloaded enquiry is missing readable English field labels`);
   if(!await page.locator('#status').textContent().then(text=>text.includes('Nothing was sent to a server.')))
    errors.push(`${size.name}: client-side contact download disclosure is missing`);
+  // Theme selection must remain active and accessible after navigating between pages.
+  await page.locator('[data-set-theme="sand"]').click();
+  const selectedSand=await page.locator('[data-set-theme="sand"]').getAttribute('aria-pressed');
+  if(selectedSand!=='true'||await page.locator('body').getAttribute('data-theme')!=='sand')
+   errors.push(`${size.name}: Warm Sand theme selection did not activate`);
+  if(!String(await page.locator('[data-set-theme="sand"]').getAttribute('aria-label')).includes('Warm Sand'))
+   errors.push(`${size.name}: theme accessible label does not match the current English language`);
+  await page.goto(`${origin}/about.html`,{waitUntil:'domcontentloaded'});
+  if(await page.locator('body').getAttribute('data-theme')!=='sand'||await page.locator('[data-set-theme="sand"]').getAttribute('aria-pressed')!=='true')
+   errors.push(`${size.name}: selected theme did not persist to About page`);
+  await page.locator('[data-set-theme="noir"]').click();
+  await page.goto(`${origin}/catalog.html`,{waitUntil:'domcontentloaded'});
+  if(await page.locator('body').getAttribute('data-theme')!=='noir')
+   errors.push(`${size.name}: Modern Noir theme did not persist to Catalog page`);
+  await page.locator('[data-set-theme="heritage"]').click();
+  if(await page.locator('[data-set-theme="heritage"]').getAttribute('aria-pressed')!=='true')
+   errors.push(`${size.name}: returning to Royal Heritage did not update aria-pressed`);
+
 
 
   await context.close();

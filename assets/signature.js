@@ -9,8 +9,30 @@ button.tabIndex=-1;
 button.setAttribute('aria-hidden','true');
 button.textContent='↑';
 document.body.appendChild(button);
+// One site-wide, accessible theme preference shared by every route.
+const themeButtons=[...document.querySelectorAll('[data-set-theme]')];
+const allowedThemes=new Set(['heritage','sand','noir']);
+const themeNames={
+  heritage:{ar:'الطابع التراثي الملكي',en:'Royal Heritage'},
+  sand:{ar:'الطابع الرملي الدافئ',en:'Warm Sand'},
+  noir:{ar:'الطابع الفحمي البرونزي',en:'Modern Noir'}
+};
+const readTheme=()=>{try{return localStorage.getItem('majalis-theme')}catch(_){return null}};
+const applyTheme=(name,persist=false)=>{
+  if(!allowedThemes.has(name))return;
+  document.body.dataset.theme=name;
+  themeButtons.forEach(item=>item.setAttribute('aria-pressed',String(item.dataset.setTheme===name)));
+  if(persist){try{localStorage.setItem('majalis-theme',name)}catch(_){}}
+};
+const savedTheme=readTheme();
+applyTheme(allowedThemes.has(savedTheme)?savedTheme:'heritage');
+themeButtons.forEach(item=>item.addEventListener('click',()=>applyTheme(item.dataset.setTheme,true)));
 const update=()=>{
 const en=document.documentElement.lang==='en';
+themeButtons.forEach(item=>{
+  const label=themeNames[item.dataset.setTheme]?.[en?'en':'ar'];
+  if(label){item.setAttribute('aria-label',label);item.title=label;}
+});
 const label=en?'Back to top':'العودة إلى أعلى الصفحة';
 const skip=document.querySelector('a.skip[href="#main"]');
 if(skip)skip.textContent=en?'Skip to main content':'تجاوز إلى المحتوى';

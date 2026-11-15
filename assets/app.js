@@ -3,7 +3,6 @@ const translations=[...document.querySelectorAll('[data-ar][data-en]')];
 const languageButton=document.getElementById('langBtn');
 const menuButton=document.getElementById('menuBtn');
 const menu=document.getElementById('navlinks');
-const themes=['heritage','sand','noir'];
 const read=(key)=>{try{return localStorage.getItem(key)}catch(_){return null}};
 const save=(key,value)=>{try{localStorage.setItem(key,value)}catch(_){}};
 let language='ar';
@@ -14,8 +13,6 @@ menuButton?.addEventListener('click',()=>{const active=menu?.classList.toggle('o
 menu?.querySelectorAll('a').forEach(link=>link.addEventListener('click',closeMenu));
 document.addEventListener('keydown',event=>{if(event.key==='Escape'&&menu?.classList.contains('open')){closeMenu();menuButton?.focus()}});
 document.addEventListener('click',event=>{if(menu?.classList.contains('open')&&!menu.contains(event.target)&&!menuButton?.contains(event.target))closeMenu()});
-document.querySelectorAll('[data-set-theme]').forEach(button=>button.addEventListener('click',()=>{const theme=button.dataset.setTheme;if(themes.includes(theme)){document.body.dataset.theme=theme;save('majalis-theme',theme)}}));
-document.body.dataset.theme='heritage'; // Public site uses one approved visual theme.
 const form=document.getElementById('contactForm');
 const enquiryStatus=document.getElementById('status');
 const getEnquiry=()=>{
