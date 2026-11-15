@@ -132,3 +132,137 @@ body{background:var(--bg);font-kerning:normal}
  .editorial-businesses .card,.editorial-businesses .card .card-image img,.editorial-products .spotlight-card{transition:none}
  .editorial-businesses .card:hover,.editorial-products .spotlight-card:hover{transform:none}
 }
+
+
+/* Majalis Atelier 2 — hospitality-first, quiet luxury design refinement.
+   Inspired by premium editorial restaurant and coffee branding, not copied assets.
+   Works with existing Heritage / Sand / Noir theme switching and bilingual RTL/LTR. */
+:root{
+  --atelier-radius:12px;
+  --atelier-ease:cubic-bezier(.22,1,.36,1);
+}
+body[data-theme=heritage]{--atelier-accent:#97723e;--atelier-fine:#e9e1d0}
+body[data-theme=sand]{--atelier-accent:#9c6848;--atelier-fine:#e6d6c4}
+body[data-theme=noir]{--atelier-accent:#7d7159;--atelier-fine:#d9dcd5}
+.announcement{
+  font-size:12px;
+  letter-spacing:.01em;
+}
+.header{border-bottom:1px solid color-mix(in srgb,var(--border) 74%,transparent)}
+.header .navlinks>a,.header .nav-dropdown>summary{
+  font-size:14px;font-weight:700;
+  text-underline-offset:11px;
+}
+.header .navlinks>a:hover,.header .nav-dropdown>summary:hover{color:var(--atelier-accent)}
+.brand .mark{box-shadow:inset 0 0 0 1px #c9ac7350}
+.hero.premium-hero::before{
+  filter:saturate(.78) contrast(1.06) brightness(.89);
+  background-size:cover;
+}
+.hero.premium-hero::after{
+  background:linear-gradient(270deg,rgba(9,24,20,.86) 0%,rgba(9,24,20,.57) 40%,rgba(9,24,20,.12) 100%),
+    linear-gradient(0deg,rgba(9,24,20,.4),transparent 35%);
+}
+body.en .hero.premium-hero::after{
+  background:linear-gradient(90deg,rgba(9,24,20,.86),rgba(9,24,20,.5) 45%,rgba(9,24,20,.12)),
+    linear-gradient(0deg,rgba(9,24,20,.4),transparent 35%);
+}
+.hero.premium-hero .hero-inner{max-width:1320px}
+.hero.premium-hero h1{
+  max-width:850px;
+  font-weight:800;
+  letter-spacing:-.045em;
+  line-height:1.22;
+}
+.hero.premium-hero .kicker{
+  font-weight:800;
+  background:rgba(13,29,24,.28);
+  width:fit-content;
+  border-inline-start:2px solid #d6b67e;
+  padding:8px 14px;
+  backdrop-filter:blur(4px);
+}
+.hero.premium-hero .btn.gold,
+.editorial-contact .btn.gold{
+  border-radius:5px;
+  box-shadow:0 12px 28px rgba(15,27,21,.14);
+  transition:transform .25s var(--atelier-ease),box-shadow .25s var(--atelier-ease);
+}
+.hero.premium-hero .btn.gold:hover,
+.editorial-contact .btn.gold:hover{
+  transform:translateY(-2px);
+  box-shadow:0 17px 34px rgba(15,27,21,.23);
+}
+.section h2,.inner-section h2{max-width:980px}
+.section .kicker,.inner-section .kicker{
+  font-weight:800;color:var(--atelier-accent);
+}
+.editorial-about .editorial-image{
+  border-radius:190px 190px 6px 6px;
+}
+.editorial-about .editorial-image:before{
+  border-radius:190px 190px 6px 6px;
+}
+.editorial-businesses .card{
+  border-radius:var(--atelier-radius);
+  overflow:hidden;
+  box-shadow:0 4px 22px rgba(24,37,29,.035);
+}
+.editorial-businesses .card .card-image{
+  height:clamp(250px,26vw,360px);
+  overflow:hidden;
+}
+.editorial-businesses .card .card-body{
+  display:flex;flex-direction:column;align-items:flex-start;
+  min-height:242px;
+}
+.editorial-businesses .card .card-body p{margin-bottom:22px}
+.editorial-businesses .card .underlink{margin-top:auto}
+.editorial-products .spotlight-card{
+  border-radius:var(--atelier-radius);
+  padding:clamp(25px,3vw,42px);
+  background:linear-gradient(145deg,var(--bg),var(--cream));
+}
+.editorial-products .spotlight-card:focus-visible,
+.editorial-businesses .card:focus-within{
+  outline:3px solid var(--atelier-accent);outline-offset:4px;
+}
+.editorial-products .spotlight-glyph{font-size:clamp(33px,4vw,52px);opacity:.7}
+.editorial-locations .location-feature{
+  border-radius:var(--atelier-radius);
+}
+.editorial-contact .contact-form{
+  border-radius:var(--atelier-radius);
+}
+.editorial-contact .contact-form :where(input,select,textarea){
+  border-radius:5px;
+}
+.inner-hero{
+  background:radial-gradient(circle at 80% 85%,#ae915528,transparent 40%),var(--dark);
+}
+.inner-tile,.service-panel,.catalog-card{border-radius:var(--atelier-radius)}
+.inner-footer{border-top-width:1px}
+@media(min-width:1024px){
+  .editorial-businesses .cards{align-items:stretch}
+  .editorial-businesses .card{display:flex;flex-direction:column}
+  .editorial-businesses .card .card-body{flex:1}
+}
+@media(max-width:760px){
+  .hero.premium-hero::after{
+    background:linear-gradient(0deg,rgba(8,24,19,.82),rgba(8,24,19,.42) 64%,rgba(8,24,19,.12));
+  }
+  body.en .hero.premium-hero::after{
+    background:linear-gradient(0deg,rgba(8,24,19,.82),rgba(8,24,19,.42) 64%,rgba(8,24,19,.12));
+  }
+  .hero.premium-hero h1{font-size:clamp(40px,9vw,61px)}
+  .hero.premium-hero .kicker{font-size:11px}
+  .editorial-about .editorial-image,
+  .editorial-about .editorial-image:before{border-radius:95px 95px 5px 5px}
+  .editorial-businesses .card .card-image{height:240px}
+  .editorial-businesses .card .card-body{min-height:0}
+  .editorial-products .spotlight-card{padding:24px}
+}
+@media(prefers-reduced-motion:reduce){
+  .hero.premium-hero .btn.gold,.editorial-contact .btn.gold{transition:none}
+  .hero.premium-hero .btn.gold:hover,.editorial-contact .btn.gold:hover{transform:none}
+}
