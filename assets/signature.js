@@ -93,6 +93,8 @@ button.addEventListener('click',()=>{
   window.scrollTo({top:0,behavior:window.matchMedia('(prefers-reduced-motion: reduce)').matches?'instant':'smooth'});
   document.getElementById('main')?.focus({preventScroll:true});
 });
+// Update language-dependent links synchronously after the page language toggle handler.
+document.getElementById('langBtn')?.addEventListener('click',update);
 window.addEventListener('scroll',update,{passive:true});
 const observer=new MutationObserver(update);
 observer.observe(document.documentElement,{attributes:true,attributeFilter:['lang']});
