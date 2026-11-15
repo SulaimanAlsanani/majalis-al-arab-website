@@ -1,10 +1,20 @@
 (()=>{'use strict';
 const translated=[...document.querySelectorAll('[data-ar][data-en]')];
 const btn=document.querySelector('#langBtn'),menuBtn=document.querySelector('#menuBtn'),menu=document.querySelector('#navlinks');
+const originalCanonical=document.querySelector('link[rel="canonical"]')?.href||location.origin+location.pathname;
+const updateSeoLanguage=value=>{
+ const canonical=document.querySelector('link[rel="canonical"]');
+ const target=value==='en'?originalCanonical+(originalCanonical.includes('?')?'&':'?')+'lang=en':originalCanonical;
+ if(canonical)canonical.href=target;
+ const socialUrl=document.querySelector('meta[property="og:url"]');
+ if(socialUrl)socialUrl.content=target;
+ const socialLocale=document.querySelector('meta[property="og:locale"]');
+ if(socialLocale)socialLocale.content=value==='en'?'en_US':'ar_SA';
+};
 const read=(k)=>{try{return localStorage.getItem(k)}catch(_){return null}};
 const write=(k,v)=>{try{localStorage.setItem(k,v)}catch(_){}};
 let lang='ar';
-function setLang(v){if(!['ar','en'].includes(v))return;lang=v;document.documentElement.lang=v;document.documentElement.dir=v==='ar'?'rtl':'ltr';document.body.classList.toggle('en',v==='en');translated.forEach(el=>{el.textContent=el.dataset[v]});if(btn)btn.textContent=v==='ar'?'EN':'عربي';const heading=document.querySelector('h1');if(heading)document.title=heading.textContent+' | '+(v==='ar'?'مجالس العرب':'Majalis Al Arab');write('majalis-language',v)}
+function setLang(v){if(!['ar','en'].includes(v))return;lang=v;document.documentElement.lang=v;document.documentElement.dir=v==='ar'?'rtl':'ltr';document.body.classList.toggle('en',v==='en');translated.forEach(el=>{el.textContent=el.dataset[v]});if(btn)btn.textContent=v==='ar'?'EN':'عربي';const heading=document.querySelector('h1');if(heading)document.title=heading.textContent+' | '+(v==='ar'?'مجالس العرب':'Majalis Al Arab');updateSeoLanguage(v);write('majalis-language',v)}
 function close(){menu?.classList.remove('open');menuBtn?.setAttribute('aria-expanded','false')}
 function updateLanguageUrl(){
  const url=new URL(location.href);
