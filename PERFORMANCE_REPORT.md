@@ -69,3 +69,16 @@ The automated workflow `.github/workflows/live-lighthouse.yml` now measures the 
 - Browser-based responsive checks passed for the experimental candidate, but the published-site Lighthouse lab run reported **99 mobile / 69 desktop**; the earlier published-site CSS hero baseline reported **93 mobile / 85 desktop**. These are separate, potentially noisy runs and should not be treated as controlled paired trials.
 - Because improving desktop performance was the goal, the experimental `<picture>` and matching CSS were **reverted**.
 - The real-site audit workflow remains enabled after successful deployments. The next performance optimization should focus on a fully controlled, licensed image asset or another measurable bottleneck rather than assuming a different tag automatically improves LCP.
+
+
+## Current published-site recheck — 15 November 2026
+
+Workflow: [Live Website Lighthouse run 43692169306](https://github.com/SulaimanAlsanani/majalis-al-arab-website/actions/runs/43692169306), run on published GitHub Pages.
+
+| Scenario | Performance | Accessibility | Best Practices | SEO | FCP | LCP |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: |
+| Homepage mobile | 96 | 100 | 100 | 100 | 1.65 s | 2.57 s |
+| Homepage desktop | 82 | 100 | 100 | 100 | 0.85 s | 3.02 s |
+| Catalog mobile | 99 | 100 | 100 | 100 | 1.62 s | 1.62 s |
+
+The CSS-background hero was retained after the native HTML-picture experiment underperformed on desktop. Scores vary from earlier results (85 desktop, 93 mobile); repeatable Web Vitals field measurements are still needed before claiming a sustained improvement. Desktop 90+ remains an open target. The publicly selectable color-theme controls and their keyboard interactions were restored across homepage and interior-page footers; responsive Visual QA passed for commit `853ba982ff8789ed0cb2e40ac6078efcdd5683f0`.
