@@ -247,6 +247,13 @@ for page in PAGES + ["404.html"]:
 if not (ROOT / "assets" / "favicon.svg").is_file():
     errors.append("Provisional favicon SVG is missing")
 
+# GitHub Pages serves the branded 404 document for unknown nested URLs.
+# Its relative stylesheet and navigation links must resolve from site root.
+error_markup = (ROOT / "404.html").read_text(encoding="utf-8")
+error_base = '<base href="https://sulaimanalsanani.github.io/majalis-al-arab-website/">'
+if error_markup.count(error_base) != 1:
+    errors.append("404.html: stable base URL is required for nested error paths")
+
 # Every page loads the global DIN Next Arabic brand-font declaration.
 font_css = (ROOT / "assets" / "signature.css").read_text(encoding="utf-8")
 if '--brand-font:' not in font_css or '"DIN Next Arabic"' not in font_css or '"DIN Next LT Arabic"' not in font_css:
