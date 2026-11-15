@@ -165,6 +165,18 @@ try{
   await page.locator('[data-set-theme="heritage"]').click();
   if(await page.locator('[data-set-theme="heritage"]').getAttribute('aria-pressed')!=='true')
    errors.push(`${size.name}: returning to Royal Heritage did not update aria-pressed`);
+  // URL language overrides stored preference and preserves search/filter parameters.
+  await page.goto(`${origin}/about.html?lang=ar`,{waitUntil:'domcontentloaded'});
+  if(await page.locator('html').getAttribute('lang')!=='ar'||await page.locator('html').getAttribute('dir')!=='rtl')
+   errors.push(`${size.name}: explicit Arabic language deep link did not override saved English`);
+  await page.goto(`${origin}/faq.html?category=products&lang=en`,{waitUntil:'domcontentloaded'});
+  if(await page.locator('html').getAttribute('lang')!=='en'||await page.locator('html').getAttribute('dir')!=='ltr')
+   errors.push(`${size.name}: English language deep link did not switch layout direction`);
+  await page.locator('#langBtn').click();
+  const localeUrl=new URL(page.url());
+  if(localeUrl.searchParams.has('lang')||localeUrl.searchParams.get('category')!=='products'||await page.locator('html').getAttribute('lang')!=='ar')
+   errors.push(`${size.name}: language toggle did not preserve FAQ filter URL and return to Arabic`);
+
 
 
 

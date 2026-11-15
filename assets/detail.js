@@ -6,7 +6,12 @@ const write=(k,v)=>{try{localStorage.setItem(k,v)}catch(_){}};
 let lang='ar';
 function setLang(v){if(!['ar','en'].includes(v))return;lang=v;document.documentElement.lang=v;document.documentElement.dir=v==='ar'?'rtl':'ltr';document.body.classList.toggle('en',v==='en');translated.forEach(el=>{el.textContent=el.dataset[v]});if(btn)btn.textContent=v==='ar'?'EN':'عربي';const heading=document.querySelector('h1');if(heading)document.title=heading.textContent+' | '+(v==='ar'?'مجالس العرب':'Majalis Al Arab');write('majalis-language',v)}
 function close(){menu?.classList.remove('open');menuBtn?.setAttribute('aria-expanded','false')}
-btn?.addEventListener('click',()=>setLang(lang==='ar'?'en':'ar'));
+function updateLanguageUrl(){
+ const url=new URL(location.href);
+ if(lang==='en')url.searchParams.set('lang','en');else url.searchParams.delete('lang');
+ history.replaceState(null,'',url.pathname+url.search+url.hash);
+}
+btn?.addEventListener('click',()=>{setLang(lang==='ar'?'en':'ar');updateLanguageUrl()});
 menuBtn?.addEventListener('click',()=>{const open=menu?.classList.toggle('open')||false;menuBtn.setAttribute('aria-expanded',String(open))});
 menu?.querySelectorAll('a').forEach(a=>a.addEventListener('click',close));
 document.addEventListener('keydown',e=>{if(e.key==='Escape'&&menu?.classList.contains('open')){close();menuBtn?.focus()}});
@@ -15,5 +20,6 @@ const businessDropdown=menu?.querySelector('.nav-dropdown');
 document.addEventListener('click',event=>{if(businessDropdown?.open&&!businessDropdown.contains(event.target))businessDropdown.open=false});
 document.addEventListener('keydown',event=>{if(event.key==='Escape'&&businessDropdown?.open){businessDropdown.open=false;businessDropdown.querySelector('summary')?.focus()}});
 menu?.querySelectorAll('.nav-sub a').forEach(a=>a.addEventListener('click',()=>{if(businessDropdown)businessDropdown.open=false}));
-setLang(read('majalis-language')==='en'?'en':'ar')
+const requestedLanguage=new URL(location.href).searchParams.get('lang');
+setLang(['ar','en'].includes(requestedLanguage)?requestedLanguage:(read('majalis-language')==='en'?'en':'ar'))
 })();
