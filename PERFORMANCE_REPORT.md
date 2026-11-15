@@ -105,3 +105,15 @@ Measured release output: **66,335 source bytes vs 60,794 production bytes** (5,5
 - [Lighthouse live-site results](https://github.com/SulaimanAlsanani/majalis-al-arab-website/actions/runs/43708191449): home mobile **96**, home desktop **77**, catalog mobile **93**; all tested routes accessibility/best-practices/SEO **100**.
 
 The desktop Lighthouse 90+ performance objective remains open. Production minification reduced asset size but has **not demonstrated** a desktop Lighthouse score improvement in this single run. External hero media, font licensing, and approved local imagery remain important dependencies.
+
+
+## Desktop hero sizing experiment — 15 November 2026
+
+The homepage's illustrative desktop background now uses a 1280px, quality-70 Unsplash image instead of a 1600px, quality-75 variant; the desktop preload and both CSS hero references are kept identical. The mobile 900px image remains unchanged. Structural checks and Playwright tests verify the active CSS background and responsive preload agree, preventing accidental duplicate hero transfers.
+
+- [Deployment, optimized-bundle browser QA](https://github.com/SulaimanAlsanani/majalis-al-arab-website/actions/runs/43709552482): **passed**.
+- [Live Lighthouse for the updated desktop image](https://github.com/SulaimanAlsanani/majalis-al-arab-website/actions/runs/43709660063): homepage mobile **99** (LCP **1.97 s**), homepage desktop **85** (LCP **2.56 s**), catalog mobile **100** (LCP **0.99 s**); all three scored **100** for accessibility, best practices and SEO.
+- [Prior live Lighthouse](https://github.com/SulaimanAlsanani/majalis-al-arab-website/actions/runs/43708526450): homepage mobile **93** (LCP **2.61 s**), homepage desktop **78** (LCP **2.88 s**), catalog mobile **100** (LCP **1.54 s**). These are individual lab runs with network variability; the observed desktop improvement is not a measured field-data guarantee.
+- The updated desktop hero transfer was approximately **45.9 KB** in the live lab report. Unsplash is still an external dependency, and these editorial photographs require replacement with verified official photography before commercial launch.
+
+**Decision:** Retain the smaller CSS hero variant given successful layout tests and improved observed desktop lab performance. The 90+ desktop target remains an open objective. Avoid trading away visual fidelity without side-by-side visual review and repeated measurements.
