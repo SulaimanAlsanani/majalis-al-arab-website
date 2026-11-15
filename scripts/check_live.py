@@ -64,9 +64,29 @@ def check_routes():
             print(f"{path}: HTTP {status}, {len(body)} bytes")
         except (HTTPError, URLError, TimeoutError) as exc:
             errors.append(f"{path}: {exc}")
+    # A deeply nested invalid URL must serve the branded 404, not an unrelated page.
+    missing = f"{BASE}/missing/test/nested/no-such-page.html?release={EXPECTED or 'health'}"
+    try:
+        req = Request(missing, headers={"User-Agent": "MajalisReleaseSmoke/1.0"})
+        with urlopen(req, timeout=20) as response:
+            errors.append(f"Unknown route unexpectedly returned HTTP {response.status}")
+    except HTTPError as exc:
+        if exc.code != 404:
+            errors.append(f"Unknown route returned HTTP {exc.code}, expected 404")
+        else:
+            try:
+                body = exc.read().decode("utf-8")
+                if 'class="inner-footer"' not in body or '<base href="https://sulaimanalsanani.github.io/majalis-al-arab-website/">' not in body:
+                    errors.append("Nested 404 lacks branded page or stable base URL")
+                else:
+                    print("Nested invalid route: branded HTTP 404 verified")
+            except UnicodeDecodeError:
+                errors.append("Nested 404 has invalid UTF-8")
+    except (URLError, TimeoutError) as exc:
+        errors.append(f"Unable to check nested error URL: {exc}")
     if errors:
         raise RuntimeError("\n".join(errors))
-    print(f"Published-site smoke checks passed: {len(PAGES)} HTML pages and {len(FILES)} static assets.")
+    print(f"Published-site smoke checks passed: {len(PAGES)} HTML pages, {len(FILES)} static assets, branded nested 404.")
 
 
 if __name__ == "__main__":
