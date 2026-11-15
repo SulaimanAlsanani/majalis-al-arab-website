@@ -7,7 +7,7 @@ const count=document.getElementById('faqResultCount');
 const reset=document.getElementById('faqReset');
 if(!search||!entries.length)return;
 const allowed=new Set(['all','locations','services','products','contact']);
-const normalize=text=>String(text||'').normalize('NFKC').toLocaleLowerCase().replace(/[\u064b-\u065f\u0670]/g,'').replace(/[أإآ]/g,'ا').replace(/ى/g,'ي').trim();
+const normalize=text=>String(text||'').normalize('NFKC').toLocaleLowerCase().replace(/[\u064b-\u065f\u0670\u0640]/g,'').replace(/[أإآٱ]/g,'ا').replace(/ى/g,'ي').replace(/ة/g,'ه').trim();
 const params=new URL(location.href).searchParams;
 let category=allowed.has(params.get('category'))?params.get('category'):'all';
 search.value=(params.get('q')||'').slice(0,120);
