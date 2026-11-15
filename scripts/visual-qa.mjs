@@ -36,10 +36,16 @@ try{
 
    const access=await page.evaluate(()=>({
     skip:!!document.querySelector('a.skip[href="#main"]'),
+    navLabel:document.querySelector('#navlinks')?.getAttribute('aria-label'),
+    catalogFilterLabel:document.querySelector('#filters')?.getAttribute('aria-label'),
+    faqFilterLabel:document.querySelector('#faqFilters')?.getAttribute('aria-label'),
     mainFocus:document.querySelector('#main')?.getAttribute('tabindex'),
     fontRequest:[...document.querySelectorAll('link[href*="fonts.googleapis.com/css2"]')].map(el=>el.href)
    }));
    if(!access.skip||access.mainFocus!=='-1')errors.push(`${size.name}: skip/main keyboard access is missing on ${pathname}`);
+   if(access.navLabel!=='القائمة الرئيسية')errors.push(`${size.name}: Arabic navigation landmark label is incorrect on ${pathname}`);
+   if(pathname==='catalog.html'&&access.catalogFilterLabel!=='تصنيفات المنتجات')errors.push(`${size.name}: catalog filters lack Arabic accessible group label`);
+   if(pathname==='faq.html'&&access.faqFilterLabel!=='تصنيفات الأسئلة الشائعة')errors.push(`${size.name}: FAQ filters lack Arabic accessible group label`);
    if(access.fontRequest.some(url=>url.includes('DM+Sans')))errors.push(`${size.name}: duplicate external web font on ${pathname}`);
 
    if(['index.html','catalog.html','restaurant.html'].includes(pathname)){
@@ -75,6 +81,7 @@ try{
   await page.locator('#langBtn').click();
   const lng=await page.locator('html').getAttribute('lang');
   if(lng!=='en')errors.push(`${size.name}: language switching failed`);
+  if(await page.locator('#navlinks').getAttribute('aria-label')!=='Main navigation')errors.push(`${size.name}: navigation landmark did not change to English`);
   // Homepage category shortcuts must deep-link to one matching catalog result.
   await page.goto(`${origin}/index.html`,{waitUntil:'domcontentloaded'});
   await page.locator('.spotlight-card').first().click();
@@ -85,6 +92,7 @@ try{
   }));
   if(!coffeeRoute.path.endsWith('/catalog.html')||coffeeRoute.query!=='القهوة'||coffeeRoute.visible!==1)
    errors.push(`${size.name}: homepage coffee shortcut did not filter catalog correctly: ${JSON.stringify(coffeeRoute)}`);
+  if(await page.locator('#filters').getAttribute('aria-label')!=='Product category filters')errors.push(`${size.name}: Catalog filter label did not change to English`);
   await page.locator('#catalogReset').click();
   if(await page.locator('.catalog-card:visible').count()!==6)
    errors.push(`${size.name}: catalog reset did not reveal all categories`);
@@ -106,6 +114,7 @@ try{
   // FAQ filters must support direct links and a reversible reset.
   await page.goto(`${origin}/faq.html?category=locations`,{waitUntil:'domcontentloaded'});
   await page.waitForTimeout(100);
+  if(await page.locator('#faqFilters').getAttribute('aria-label')!=='FAQ categories')errors.push(`${size.name}: FAQ filter label did not change to English`);
   const faqLocationCount=await page.locator('.faq-item:visible').count();
   if(faqLocationCount!==2)errors.push(`${size.name}: FAQ direct filter expected two location questions, got ${faqLocationCount}`);
   await page.locator('#faqReset').click();
