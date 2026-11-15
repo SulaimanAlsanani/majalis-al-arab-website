@@ -156,12 +156,30 @@ try{
   }));
   if(enquiryFields.nameMax!==100||enquiryFields.contactMax!==160||enquiryFields.messageMax!==2000||!enquiryFields.naturalDirection||enquiryFields.nameAutocomplete!=='name')
    errors.push(`${size.name}: enquiry field length and bilingual typing settings are invalid`);
+  await page.locator('#contactMethod').fill('invalid contact');
+  await page.locator('#downloadEnquiry').click();
+  if(await page.locator('#contactMethod').getAttribute('aria-invalid')!=='true')
+   errors.push(`${size.name}: invalid email/phone was not rejected`);
+  await page.locator('#contactMethod').fill('example@example.com');
+  if(await page.locator('#contactMethod').getAttribute('aria-invalid')!==null)
+   errors.push(`${size.name}: correcting contact details did not clear error state`);
   const [enquiryDownload]=await Promise.all([page.waitForEvent('download'),page.locator('#downloadEnquiry').click()]);
   const enquiryText=await fs.readFile(await enquiryDownload.path(),'utf8');
   if(!enquiryText.includes('Name: Sample Visitor')||!enquiryText.includes('Contact: example@example.com')||!enquiryText.includes('Message: Sample enquiry'))
    errors.push(`${size.name}: downloaded enquiry is missing readable English field labels`);
   if(!await page.locator('#status').textContent().then(text=>text.includes('Nothing was sent to a server.')))
    errors.push(`${size.name}: client-side contact download disclosure is missing`);
+  await page.locator('#clearEnquiry').click();
+  const cleared=await page.evaluate(()=>({
+    name:document.getElementById('name').value,
+    contact:document.getElementById('contactMethod').value,
+    message:document.getElementById('message').value,
+    active:document.activeElement?.id
+  }));
+  if(cleared.name||cleared.contact||cleared.message||cleared.active!=='name')
+   errors.push(`${size.name}: clear form did not reset all fields and focus the name input`);
+  if(!String(await page.locator('#status').textContent()).includes('Form fields cleared'))
+   errors.push(`${size.name}: clear form confirmation is missing`);
   // Theme selection must remain active and accessible after navigating between pages.
   await page.locator('[data-set-theme="sand"]').click();
   const selectedSand=await page.locator('[data-set-theme="sand"]').getAttribute('aria-pressed');

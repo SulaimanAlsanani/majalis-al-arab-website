@@ -175,3 +175,10 @@ img{max-width:100%;height:auto}
 .editorial-businesses .card-image:has(.editorial-card-photo)::after{
  content:"";position:absolute;inset:0;pointer-events:none;background:linear-gradient(180deg,transparent 70%,#14261e20)
 }
+
+/* Helpful, low-visual-weight enquiry guidance and a reversible client-side clear action. */
+.enquiry-help{margin:0 0 5px;color:#575e50;font-size:13px;line-height:1.65}
+.enquiry-clear{border:0;background:transparent;color:var(--dark);font-weight:700;padding:10px 6px;text-decoration:underline;text-underline-offset:4px}
+.enquiry-clear:hover{color:var(--signature-readable-gold,#765321)}
+.contact-form [aria-invalid="true"]{border-color:#a62b31;outline:2px solid #a62b31;outline-offset:1px}
+@media(max-width:500px){.enquiry-clear{justify-self:center}}

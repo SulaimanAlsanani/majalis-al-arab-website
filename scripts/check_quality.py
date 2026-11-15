@@ -155,6 +155,12 @@ if 'id="downloadEnquiry"' not in index or "URL.createObjectURL" not in script:
     errors.append("Enquiry download feature is missing")
 if 'action="http' in index or 'action="https' in index:
     errors.append("Demo contact form must not post to a remote server")
+if 'id="contactHint"' not in index or 'aria-describedby="contactHint"' not in index:
+    errors.append("Enquiry contact format help is missing")
+if 'id="clearEnquiry"' not in index or "form?.reset()" not in script:
+    errors.append("Client-side enquiry clearing is missing")
+if "contactField?.setCustomValidity" not in script:
+    errors.append("Contact detail validation is missing")
 faq_html = (ROOT / "faq.html").read_text(encoding="utf-8")
 faq_script = (ROOT / "assets" / "faq.js").read_text(encoding="utf-8")
 faq_filters = ["all", "locations", "services", "products", "contact"]

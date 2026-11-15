@@ -39,7 +39,43 @@ const getEnquiry=()=>{
   return `${labels[index]}: ${value}`;
  }).join('\n');
 };
-const valid=()=>{if(!form)return false;return form.reportValidity()};
+const nameField=document.getElementById('name');
+const contactField=document.getElementById('contactMethod');
+const messageField=document.getElementById('message');
+const requiredFields=[nameField,contactField,messageField].filter(Boolean);
+requiredFields.forEach(field=>field.addEventListener('input',()=>{
+ field.setCustomValidity('');
+ field.removeAttribute('aria-invalid');
+ if(enquiryStatus)enquiryStatus.textContent='';
+}));
+const valid=()=>{
+ if(!form)return false;
+ requiredFields.forEach(field=>{field.setCustomValidity('');field.removeAttribute('aria-invalid')});
+ const ar=language==='ar';
+ if(!nameField?.value.trim())
+  nameField?.setCustomValidity(ar?'أدخل الاسم.':'Enter your name.');
+ const contact=contactField?.value.trim()||'';
+ if(contact){
+  const email=/^[^\\s@]+@[^\\s@]+\\.[^\\s@]{2,}$/u.test(contact);
+  const digits=(contact.match(/[0-9\\u0660-\\u0669\\u06f0-\\u06f9]/gu)||[]).length;
+  const phone=/^\\+?[0-9\\u0660-\\u0669\\u06f0-\\u06f9\\s().-]+$/u.test(contact)&&digits>=7&&digits<=15;
+  if(!email&&!phone)contactField?.setCustomValidity(ar?'أدخل بريدًا إلكترونيًا صالحًا أو رقم هاتف من 7 إلى 15 رقمًا.':'Enter a valid email address or a phone number with 7–15 digits.');
+ }else contactField?.setCustomValidity(ar?'أدخل البريد الإلكتروني أو رقم الهاتف.':'Enter an email address or phone number.');
+ if(!messageField?.value.trim())
+  messageField?.setCustomValidity(ar?'اكتب نص الاستفسار.':'Enter your enquiry message.');
+ const result=form.reportValidity();
+ if(!result){
+  requiredFields.forEach(field=>{if(!field.validity.valid)field.setAttribute('aria-invalid','true')});
+  if(enquiryStatus)enquiryStatus.textContent=ar?'تحقق من الحقول المطلوبة وصحة وسيلة التواصل. لم تُرسل أي بيانات.':'Check the required fields and contact details. No data has been sent.';
+ }
+ return result;
+};
+document.getElementById('clearEnquiry')?.addEventListener('click',()=>{
+ form?.reset();
+ requiredFields.forEach(field=>{field.setCustomValidity('');field.removeAttribute('aria-invalid')});
+ if(enquiryStatus)enquiryStatus.textContent=language==='ar'?'تم مسح حقول النموذج من هذه الصفحة.':'Form fields cleared from this page.';
+ nameField?.focus();
+});
 form?.addEventListener('submit',async event=>{event.preventDefault();if(!valid())return;try{await navigator.clipboard.writeText(getEnquiry());if(enquiryStatus)enquiryStatus.textContent=language==='ar'?'تم نسخ الاستفسار إلى الحافظة، ولم تُرسل بياناتك إلى أي خادم.':'Enquiry copied to the clipboard. No data has been sent to a server.'}catch(_){if(enquiryStatus)enquiryStatus.textContent=language==='ar'?'تعذر النسخ تلقائيًا. يمكنك تنزيله كملف نصي.':'Automatic copy is unavailable. You can download a text file instead.'}});
 document.getElementById('downloadEnquiry')?.addEventListener('click',()=>{if(!valid())return;const blob=new Blob(['\uFEFF'+getEnquiry()],{type:'text/plain;charset=utf-8'});const url=URL.createObjectURL(blob);const anchor=document.createElement('a');anchor.href=url;anchor.download='majalis-al-arab-enquiry.txt';document.body.appendChild(anchor);anchor.click();anchor.remove();URL.revokeObjectURL(url);if(enquiryStatus)enquiryStatus.textContent=language==='ar'?'تم إنشاء ملف الاستفسار على جهازك. لم تُرسل البيانات إلى خادم.':'Your enquiry file was created on this device. Nothing was sent to a server.'});
 const businessDropdown=menu?.querySelector('.nav-dropdown');
