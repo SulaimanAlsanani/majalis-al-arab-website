@@ -100,9 +100,18 @@ try{
   await page.locator('#langBtn').click();
   const lng=await page.locator('html').getAttribute('lang');
   if(lng!=='en')errors.push(`${size.name}: language switching failed`);
-  const englishSeo=await page.evaluate(()=>({canonical:document.querySelector('link[rel="canonical"]')?.href,locale:document.querySelector('meta[property="og:locale"]')?.content}));
-  if(!englishSeo.canonical?.endsWith('?lang=en')||englishSeo.locale!=='en_US')
-    errors.push(`${size.name}: English selection did not update canonical or social metadata`);
+  const englishSeo=await page.evaluate(()=>({
+    canonical:document.querySelector('link[rel="canonical"]')?.href,
+    locale:document.querySelector('meta[property="og:locale"]')?.content,
+    title:document.querySelector('meta[property="og:title"]')?.content,
+    summary:document.querySelector('meta[name="description"]')?.content,
+    socialSummary:document.querySelector('meta[property="og:description"]')?.content
+  }));
+  if(!englishSeo.canonical?.endsWith('?lang=en')||englishSeo.locale!=='en_US'||
+     !englishSeo.title?.includes('Majalis Al Arab')||
+     !englishSeo.summary?.includes('Saudi')||
+     englishSeo.summary!==englishSeo.socialSummary)
+    errors.push(`${size.name}: English canonical, title or social description is inconsistent`);
 
   if(await page.locator('#navlinks').getAttribute('aria-label')!=='Main navigation')errors.push(`${size.name}: navigation landmark did not change to English`);
   // Homepage category shortcuts must deep-link to one matching catalog result.
