@@ -25,6 +25,9 @@ jobs:
         run: python3 scripts/check_site.py
       - name: Audit accessibility and sitemap quality
         run: python3 scripts/check_quality.py
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
       - name: Validate JavaScript syntax
         run: |
           node --check assets/app.js
@@ -32,6 +35,23 @@ jobs:
           node --check assets/signature.js
           node --check assets/catalog.js
           node --check assets/faq.js
+      # Block production release when responsive functionality or navigation regresses.
+      - name: Install Playwright for pre-deploy visual regression gate
+        run: |
+          npm install --no-save playwright@1.56.1
+          npx playwright install --with-deps chromium
+      - name: Gate deployment on mobile, tablet and desktop visual QA
+        run: |
+          python3 -m http.server 4173 --bind 127.0.0.1 >/tmp/majalis-http.log 2>&1 &
+          sleep 2
+          node scripts/visual-qa.mjs
+      - name: Upload pre-deploy visual QA evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: majalis-predeploy-qa
+          path: visual-artifacts/
+          if-no-files-found: warn
       - name: Configure Pages
         uses: actions/configure-pages@v5
       - name: Package public website only
