@@ -48,3 +48,22 @@ GitHub Actions `Visual QA - desktop and mobile` captures browser screenshots at 
 - Approved menu, product prices, packaging, stock statuses and service availability
 - Final privacy/legal notices
 - Human visual acceptance review on desktop and mobile
+
+
+## Current redesign — Majalis Atelier (15 November 2026)
+
+The latest visual layer is `assets/atelier.css`, applied on top of the existing `assets/signature.css` across all 14 pages. It retains the three user-selectable palettes, bilingual language behavior and navigation. This update is a genuine code-level redesign (hero, layout rhythm, navigation, photography presentation, cards and detail-page patterns), not a flattened image.
+
+Visual directions available through the existing theme switcher:
+- **Royal Heritage / المجلس المعاصر** — deep green `#19352e`, warm ivory `#faf8f2`, quiet brass `#b69a6b`.
+- **Warm Sand / رملي دافئ** — sandstone `#4a382b` with natural paper `#fbf5ec`.
+- **Modern Noir / فحمي معاصر** — charcoal `#252c2b` with pale stone `#f6f6f3`.
+
+Reference websites and transferable principles (without copying text, logos or artwork):
+- [Aesop](https://www.aesop.com/) — editorial negative space and restrained palette.
+- [Di Milano](https://dimilano-cafe.com/) — Saudi-context café storytelling.
+- [Element8 hospitality](https://www.element8.sa/industries/hospitality-fb) — bilingual hospitality information architecture.
+
+Deployment: [GitHub Pages success](https://github.com/SulaimanAlsanani/majalis-al-arab-website/actions/runs/43739267518). [Live Lighthouse](https://github.com/SulaimanAlsanani/majalis-al-arab-website/actions/runs/43739394550): mobile home **99**, desktop home **89**, catalog mobile **100**; all three accessibility, SEO and best practices **100**. Desktop performance was **90** in a previous measurement; Lighthouse variability means no sustained performance improvement should be assumed.
+
+Imagery is still illustrative. Final commercial readiness requires the approved brand logo, official media, validated contact and location data and a licensed DIN Next Arabic webfont.
