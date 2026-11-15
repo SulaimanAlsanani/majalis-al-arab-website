@@ -2,6 +2,8 @@
 const translated=[...document.querySelectorAll('[data-ar][data-en]')];
 const btn=document.querySelector('#langBtn'),menuBtn=document.querySelector('#menuBtn'),menu=document.querySelector('#navlinks');
 const originalCanonical=document.querySelector('link[rel="canonical"]')?.href||location.origin+location.pathname;
+const arabicMetaDescription=document.querySelector('meta[name="description"]')?.content||'';
+const arabicSocialDescription=document.querySelector('meta[property="og:description"]')?.content||'';
 const updateSeoLanguage=value=>{
  const canonical=document.querySelector('link[rel="canonical"]');
  const target=value==='en'?originalCanonical+(originalCanonical.includes('?')?'&':'?')+'lang=en':originalCanonical;
@@ -10,6 +12,14 @@ const updateSeoLanguage=value=>{
  if(socialUrl)socialUrl.content=target;
  const socialLocale=document.querySelector('meta[property="og:locale"]');
  if(socialLocale)socialLocale.content=value==='en'?'en_US':'ar_SA';
+ const socialTitle=document.querySelector('meta[property="og:title"]');
+ if(socialTitle)socialTitle.content=document.title;
+ const description=document.querySelector('meta[name="description"]');
+ const socialDescription=document.querySelector('meta[property="og:description"]');
+ const englishText=document.querySelector('main p[data-en]')?.dataset.en?.replace(/<[^>]*>/g,' ').replace(/\s+/g,' ').trim().slice(0,160);
+ if(description)description.content=value==='en'?(englishText||arabicMetaDescription):arabicMetaDescription;
+ if(socialDescription)socialDescription.content=value==='en'?(englishText||arabicSocialDescription):arabicSocialDescription;
+
 };
 const read=(k)=>{try{return localStorage.getItem(k)}catch(_){return null}};
 const write=(k,v)=>{try{localStorage.setItem(k,v)}catch(_){}};
