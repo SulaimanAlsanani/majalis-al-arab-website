@@ -142,6 +142,15 @@ try{
   await page.locator('#name').fill('Sample Visitor');
   await page.locator('#contactMethod').fill('example@example.com');
   await page.locator('#message').fill('Sample enquiry for a product');
+  const enquiryFields=await page.evaluate(()=>({
+    nameMax:document.querySelector('#name')?.maxLength,
+    contactMax:document.querySelector('#contactMethod')?.maxLength,
+    messageMax:document.querySelector('#message')?.maxLength,
+    naturalDirection:['name','contactMethod','message'].every(id=>document.getElementById(id)?.getAttribute('dir')==='auto'),
+    nameAutocomplete:document.querySelector('#name')?.getAttribute('autocomplete')
+  }));
+  if(enquiryFields.nameMax!==100||enquiryFields.contactMax!==160||enquiryFields.messageMax!==2000||!enquiryFields.naturalDirection||enquiryFields.nameAutocomplete!=='name')
+   errors.push(`${size.name}: enquiry field length and bilingual typing settings are invalid`);
   const [enquiryDownload]=await Promise.all([page.waitForEvent('download'),page.locator('#downloadEnquiry').click()]);
   const enquiryText=await fs.readFile(await enquiryDownload.path(),'utf8');
   if(!enquiryText.includes('Name: Sample Visitor')||!enquiryText.includes('Contact: example@example.com')||!enquiryText.includes('Message: Sample enquiry'))
