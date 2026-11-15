@@ -341,6 +341,14 @@ for page in PAGES:
 if 'hreflang=' in (ROOT / "404.html").read_text(encoding="utf-8"):
     errors.append("404 page must not be indexed as a language alternate")
 
+# Only request the fallback font weights actually needed by the site.
+for page in PAGES + ["404.html"]:
+    html = (ROOT / page).read_text(encoding="utf-8")
+    if html.count("Tajawal:wght@400;700;800") != 2:
+        errors.append(f"{page}: expected consistent fallback font preload and noscript URL")
+    if "Tajawal:wght@400;500;700;800" in html:
+        errors.append(f"{page}: unused 500 weight increases external font requests")
+
 if errors:
     print("\n".join(errors), file=sys.stderr)
     sys.exit(1)
