@@ -364,6 +364,24 @@ atelier_stylesheet = ROOT / "assets" / "atelier.css"
 if not atelier_stylesheet.is_file() or atelier_stylesheet.stat().st_size == 0:
     errors.append("Majalis Atelier design stylesheet is missing")
 
+
+# Original hospitality redesign must remain active across the complete site.
+atelier_css = (ROOT / "assets" / "atelier.css").read_text(encoding="utf-8")
+for page in PAGES + ["404.html"]:
+    markup = (ROOT / page).read_text(encoding="utf-8")
+    if markup.count('href="assets/atelier.css"') != 1:
+        errors.append(f"{page}: hospitality design CSS missing or duplicated")
+for required in [
+    "The Gathering", "body[data-theme=\"heritage\"]",
+    "body[data-theme=\"sand\"]", "body[data-theme=\"noir\"]",
+    ".hero.premium-hero", ".editorial-businesses .card",
+    ".inner-hero", "@media(max-width:760px)", "prefers-reduced-motion",
+]:
+    if required not in atelier_css:
+        errors.append(f"Hospitality redesign missing required style: {required}")
+if "w=1280&q=70" not in atelier_css or "w=900&q=70" not in atelier_css:
+    errors.append("Cinematic hero background does not match responsive image preloads")
+
 if errors:
     print("\n".join(errors), file=sys.stderr)
     sys.exit(1)
