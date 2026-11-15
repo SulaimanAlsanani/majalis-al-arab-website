@@ -38,7 +38,7 @@ jobs:
       # Block production release when responsive functionality or navigation regresses.
       - name: Install Playwright for pre-deploy visual regression gate
         run: |
-          npm install --no-save playwright@1.56.1
+          npm install --no-save playwright@1.56.1 esbuild@0.25.12
           npx playwright install --with-deps chromium
       - name: Gate deployment on mobile, tablet and desktop visual QA
         run: |
@@ -68,7 +68,6 @@ jobs:
           test -s dist/build-info.json
       - name: Minify production CSS and JavaScript
         run: |
-          npm install --no-save esbuild@0.25.12
           for css in dist/assets/*.css; do
             npx --no-install esbuild "$css" --minify --outfile="$css.min"
             mv "$css.min" "$css"
