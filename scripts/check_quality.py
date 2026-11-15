@@ -106,6 +106,24 @@ for page in PAGES:
             or not image.get("sizes")
         ):
             errors.append(f"{page}: editorial card photo lacks responsive image selection")
+    for image in doc.images:
+        srcset = image.get("srcset", "")
+        if not srcset:
+            continue
+        candidates = [candidate.strip().rsplit(" ", 1) for candidate in srcset.split(",")]
+        if any(len(parts) != 2 or not parts[1].endswith("w") or not parts[1][:-1].isdigit() for parts in candidates):
+            errors.append(f"{page}: invalid width descriptors in image srcset")
+            continue
+        widths = [int(parts[1][:-1]) for parts in candidates]
+        if len(widths) != len(set(widths)) or widths != sorted(widths):
+            errors.append(f"{page}: srcset width descriptors must be unique and ascending")
+        for url, descriptor in candidates:
+            parsed_image = urlparse(url.replace("&amp;", "&"))
+            requested_width = dict(part.split("=", 1) for part in parsed_image.query.split("&") if "=" in part).get("w")
+            if requested_width and requested_width != descriptor[:-1]:
+                errors.append(f"{page}: srcset URL width {requested_width} does not match {descriptor}")
+        if not image.get("sizes"):
+            errors.append(f"{page}: width-descriptor srcset requires a sizes attribute")
     if doc.headings != 1:
         errors.append(f"{page}: expected one h1, got {doc.headings}")
     if doc.canonicals != [expected]:
