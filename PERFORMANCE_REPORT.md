@@ -93,3 +93,15 @@ Changes:
 - [Published-site Lighthouse](https://github.com/SulaimanAlsanani/majalis-al-arab-website/actions/runs/43695265387) completed with home mobile **92**, home desktop **68**, catalog mobile **93** (all three achieved accessibility, best-practices, and SEO **100**). This single run does **not** establish an improvement from lazy loading: even the unchanged catalog scored lower than earlier runs, indicating measurement variability or changing network conditions. The desktop 90+ target is not complete.
 
 The remaining `Properly size images` issue is associated with externally hosted illustration assets. Official, approved source images and licensed web fonts are prerequisites for more deterministic asset control and repeatable production measurements.
+
+
+## Optimized production asset pipeline — 15 November 2026
+
+The GitHub Pages release process now minifies **only its published CSS/JavaScript copies** with esbuild, leaving the repository sources readable and editable. For any tiny file whose output is not smaller, the original copy is retained. A byte-size audit and complete Playwright responsive QA run against the `dist/` package before deployment.
+
+Measured release output: **66,335 source bytes vs 60,794 production bytes** (5,541 bytes / **8.4%** reduction across CSS and JS files). These are uncompressed asset sizes, not network-transfer or Lighthouse savings.
+
+- [Production pipeline and deployment success](https://github.com/SulaimanAlsanani/majalis-al-arab-website/actions/runs/43708054474)
+- [Lighthouse live-site results](https://github.com/SulaimanAlsanani/majalis-al-arab-website/actions/runs/43708191449): home mobile **96**, home desktop **77**, catalog mobile **93**; all tested routes accessibility/best-practices/SEO **100**.
+
+The desktop Lighthouse 90+ performance objective remains open. Production minification reduced asset size but has **not demonstrated** a desktop Lighthouse score improvement in this single run. External hero media, font licensing, and approved local imagery remain important dependencies.
