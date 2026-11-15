@@ -32,6 +32,20 @@ try{
    }
    if(result.scrollWidth>result.viewport+2)errors.push(`${size.name}: horizontal overflow on ${pathname}: ${result.scrollWidth} > ${result.viewport}`);
    if(result.h1!==1||!result.nav||!result.footer||!result.signature||!result.backButton)errors.push(`${size.name}: missing page landmarks in ${pathname}`);
+   if(pathname!=='404.html'){
+     const seo=await page.evaluate(()=>({
+       canonical:document.querySelector('link[rel="canonical"]')?.href,
+       alternates:[...document.querySelectorAll('link[rel="alternate"][hreflang]')].map(el=>({lang:el.hreflang,href:el.href}))
+     }));
+     const canonical='https://sulaimanalsanani.github.io/majalis-al-arab-website/'+(pathname==='index.html'?'':pathname);
+     if(seo.canonical!==canonical||seo.alternates.length!==3||
+       !seo.alternates.some(el=>el.lang==='ar-SA'&&el.href===canonical)||
+       !seo.alternates.some(el=>el.lang==='en'&&el.href===canonical+'?lang=en')||
+       !seo.alternates.some(el=>el.lang==='x-default'&&el.href===canonical)){
+       errors.push(`${size.name}: bilingual SEO alternate tags are inconsistent on ${pathname}`);
+     }
+   }
+
    if(pathname==='index.html'){
      const cards=await page.locator('.editorial-businesses .editorial-card-photo').evaluateAll(images=>images.map(img=>({loading:img.loading,decoding:img.decoding,width:img.width,height:img.height,alt:img.alt,sizes:img.sizes,srcset:img.srcset})));
      if(cards.length!==2||cards.some(img=>img.loading!=='lazy'||img.decoding!=='async'||img.width===0||img.height===0||img.alt!==''||!img.sizes.includes('370px')||!img.srcset.includes('480w')||!img.srcset.includes('800w')||!img.srcset.includes('1200w')))
@@ -86,6 +100,10 @@ try{
   await page.locator('#langBtn').click();
   const lng=await page.locator('html').getAttribute('lang');
   if(lng!=='en')errors.push(`${size.name}: language switching failed`);
+  const englishSeo=await page.evaluate(()=>({canonical:document.querySelector('link[rel="canonical"]')?.href,locale:document.querySelector('meta[property="og:locale"]')?.content}));
+  if(!englishSeo.canonical?.endsWith('?lang=en')||englishSeo.locale!=='en_US')
+    errors.push(`${size.name}: English selection did not update canonical or social metadata`);
+
   if(await page.locator('#navlinks').getAttribute('aria-label')!=='Main navigation')errors.push(`${size.name}: navigation landmark did not change to English`);
   // Homepage category shortcuts must deep-link to one matching catalog result.
   await page.goto(`${origin}/index.html`,{waitUntil:'domcontentloaded'});
