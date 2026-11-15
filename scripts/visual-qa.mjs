@@ -92,6 +92,10 @@ try{
   await page.goForward({waitUntil:'domcontentloaded'});
   if(new URL(page.url()).searchParams.get('category')!=='food'||await page.locator('.catalog-card:visible').count()!==2)
    errors.push(`${size.name}: browser Forward failed to restore Catalog food category`);
+  await page.locator('#catalogReset').click();
+  await page.locator('#search').fill('قهوه');
+  if(await page.locator('.catalog-card:visible').count()!==1)
+   errors.push(`${size.name}: Arabic Catalog search should match قهوه with القهوة`);
 
   // FAQ filters must support direct links and a reversible reset.
   await page.goto(`${origin}/faq.html?category=locations`,{waitUntil:'domcontentloaded'});
@@ -113,6 +117,10 @@ try{
   await page.goForward({waitUntil:'domcontentloaded'});
   if(new URL(page.url()).searchParams.get('category')!=='products')
    errors.push(`${size.name}: browser Forward did not restore FAQ product category`);
+  await page.locator('#faqReset').click();
+  await page.locator('#faqSearch').fill('قهوه');
+  if(await page.locator('.faq-item:visible').count()===0)
+   errors.push(`${size.name}: Arabic FAQ search should match قهوه with القهوة`);
 
   // Contact enquiry export must have human-readable field labels and stay local.
   await page.goto(`${origin}/index.html`,{waitUntil:'domcontentloaded'});
