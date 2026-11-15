@@ -32,10 +32,20 @@ jobs:
           node --check assets/faq.js
       - name: Configure Pages
         uses: actions/configure-pages@v5
+      - name: Package public website only
+        run: |
+          mkdir -p dist/assets
+          cp -- ./*.html robots.txt sitemap.xml .nojekyll dist/
+          cp -R assets/. dist/assets/
+          test -s dist/index.html
+          test -s dist/assets/styles.css
+          test -s dist/assets/signature.js
+          test -f dist/404.html
+          test -f dist/.nojekyll
       - name: Upload static artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: .
+          path: dist
       - name: Deploy
         id: deployment
         uses: actions/deploy-pages@v4
