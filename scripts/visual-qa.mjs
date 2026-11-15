@@ -198,6 +198,25 @@ try{
    errors.push(`${size.name}: clear form did not reset all fields and focus the name input`);
   if(!String(await page.locator('#status').textContent()).includes('Form fields cleared'))
    errors.push(`${size.name}: clear form confirmation is missing`);
+  // Required fields must reject whitespace-only entries instead of exporting blanks.
+  await page.locator('#name').fill('   ');
+  await page.locator('#contactMethod').fill('support@example.com');
+  await page.locator('#message').fill('   ');
+  await page.locator('#downloadEnquiry').click();
+  if(await page.locator('#name').getAttribute('aria-invalid')!=='true'||await page.locator('#message').getAttribute('aria-invalid')!=='true')
+   errors.push(`${size.name}: whitespace-only enquiry fields were accepted`);
+  // Arabic-Indic digits, RTL text, and the Arabic export must work together.
+  await page.goto(`${origin}/index.html?lang=ar`,{waitUntil:'domcontentloaded'});
+  await page.locator('#name').fill('أحمد');
+  await page.locator('#contactMethod').fill('٠٥٠١٢٣٤٥٦٧');
+  await page.locator('#message').fill('استفسار عن القهوة');
+  const [arabicDownload]=await Promise.all([page.waitForEvent('download'),page.locator('#downloadEnquiry').click()]);
+  const arabicEnquiry=await fs.readFile(await arabicDownload.path(),'utf8');
+  if(!arabicEnquiry.includes('الاسم: أحمد')||!arabicEnquiry.includes('وسيلة التواصل: ٠٥٠١٢٣٤٥٦٧')||!arabicEnquiry.includes('الرسالة: استفسار عن القهوة'))
+   errors.push(`${size.name}: Arabic phone enquiry download is missing expected data`);
+  if(await page.locator('#contactMethod').getAttribute('aria-invalid')!==null)
+   errors.push(`${size.name}: valid Arabic-Indic phone number was marked invalid`);
+
   // Theme selection must remain active and accessible after navigating between pages.
   await page.locator('[data-set-theme="sand"]').click();
   const selectedSand=await page.locator('[data-set-theme="sand"]').getAttribute('aria-pressed');
