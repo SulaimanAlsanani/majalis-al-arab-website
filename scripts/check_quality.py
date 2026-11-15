@@ -22,6 +22,9 @@ class Document(HTMLParser):
         self.duplicates = []
         self.labels = set()
         self.form_controls = []
+        self.images = []
+        self.unsafe_links = []
+        self.blank_links_without_noopener = []
         self.headings = 0
         self.canonicals = []
         self.jsonld = []
@@ -35,6 +38,16 @@ class Document(HTMLParser):
             if identifier in self.ids:
                 self.duplicates.append(identifier)
             self.ids.add(identifier)
+        if tag == "img":
+            self.images.append(props)
+        if tag == "a":
+            href = props.get("href", "").strip().lower()
+            if href.startswith(("javascript:", "data:")):
+                self.unsafe_links.append(href[:100])
+            if props.get("target", "").lower() == "_blank":
+                rel = set(props.get("rel", "").lower().split())
+                if "noopener" not in rel:
+                    self.blank_links_without_noopener.append(href[:100])
         if tag == "label" and props.get("for"):
             self.labels.add(props["for"])
         if tag in ("input", "select", "textarea") and props.get("id"):
@@ -77,6 +90,15 @@ for page in PAGES:
     expected = BASE + ("" if page == "index.html" else page)
     if doc.duplicates:
         errors.append(f"{page}: duplicate IDs {doc.duplicates}")
+    if doc.unsafe_links:
+        errors.append(f"{page}: disallowed script or data links: {doc.unsafe_links}")
+    if doc.blank_links_without_noopener:
+        errors.append(f"{page}: external tabs missing rel=noopener: {doc.blank_links_without_noopener}")
+    for image in doc.images:
+        if "alt" not in image:
+            errors.append(f"{page}: image missing required alt attribute")
+        if image.get("loading") == "lazy" and not all(image.get(k, "").isdigit() for k in ("width", "height")):
+            errors.append(f"{page}: lazy image lacks fixed numeric width and height; layout shift is possible")
     if doc.headings != 1:
         errors.append(f"{page}: expected one h1, got {doc.headings}")
     if doc.canonicals != [expected]:
