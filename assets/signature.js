@@ -29,6 +29,13 @@ applyTheme(allowedThemes.has(savedTheme)?savedTheme:'heritage');
 themeButtons.forEach(item=>item.addEventListener('click',()=>applyTheme(item.dataset.setTheme,true)));
 const update=()=>{
 const en=document.documentElement.lang==='en';
+// Dynamic ARIA names follow the actual language of the visible interface.
+const nav=document.getElementById('navlinks');
+if(nav)nav.setAttribute('aria-label',en?'Main navigation':'القائمة الرئيسية');
+const catalogFilters=document.getElementById('filters');
+if(catalogFilters)catalogFilters.setAttribute('aria-label',en?'Product category filters':'تصنيفات المنتجات');
+const faqFilters=document.getElementById('faqFilters');
+if(faqFilters)faqFilters.setAttribute('aria-label',en?'FAQ categories':'تصنيفات الأسئلة الشائعة');
 themeButtons.forEach(item=>{
   const label=themeNames[item.dataset.setTheme]?.[en?'en':'ar'];
   if(label){item.setAttribute('aria-label',label);item.title=label;}
