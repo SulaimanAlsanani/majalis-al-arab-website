@@ -25,6 +25,11 @@ try{
     signature:!!document.querySelector('link[href="assets/signature.css"]'),
     backButton:!!document.querySelector('.back-to-top')
    }));
+   if(pathname==='404.html'){
+    const base=await page.evaluate(()=>document.baseURI);
+    if(base!=='https://sulaimanalsanani.github.io/majalis-al-arab-website/')
+     errors.push(`${size.name}: 404 base URL does not support unknown nested routes`);
+   }
    if(result.scrollWidth>result.viewport+2)errors.push(`${size.name}: horizontal overflow on ${pathname}: ${result.scrollWidth} > ${result.viewport}`);
    if(result.h1!==1||!result.nav||!result.footer||!result.signature||!result.backButton)errors.push(`${size.name}: missing page landmarks in ${pathname}`);
    if(pathname==='index.html'){
