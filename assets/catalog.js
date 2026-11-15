@@ -7,7 +7,7 @@ const count=document.querySelector('#catalogResultCount');
 const reset=document.querySelector('#catalogReset');
 if(!search||!cards.length)return;
 const allowed=new Set(['all','beverages','food','herbs']);
-const normalise=value=>String(value||'').normalize('NFKC').toLocaleLowerCase().replace(/[\u064b-\u065f\u0670]/g,'').replace(/[أإآ]/g,'ا').replace(/ى/g,'ي').trim();
+const normalise=value=>String(value||'').normalize('NFKC').toLocaleLowerCase().replace(/[\u064b-\u065f\u0670\u0640]/g,'').replace(/[أإآٱ]/g,'ا').replace(/ى/g,'ي').replace(/ة/g,'ه').trim();
 const url=new URL(location.href);
 let filter=allowed.has(url.searchParams.get('category'))?url.searchParams.get('category'):'all';
 search.value=(url.searchParams.get('q')||'').slice(0,120);
