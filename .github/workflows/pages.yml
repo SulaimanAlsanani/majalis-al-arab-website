@@ -35,23 +35,11 @@ jobs:
           node --check assets/signature.js
           node --check assets/catalog.js
           node --check assets/faq.js
-      # Block production release when responsive functionality or navigation regresses.
-      - name: Install Playwright for pre-deploy visual regression gate
+      # Test the actual optimized release bundle before granting deployment.
+      - name: Install dependencies for production bundle validation
         run: |
           npm install --no-save playwright@1.56.1 esbuild@0.25.12
           npx playwright install --with-deps chromium
-      - name: Gate deployment on mobile, tablet and desktop visual QA
-        run: |
-          python3 -m http.server 4173 --bind 127.0.0.1 >/tmp/majalis-http.log 2>&1 &
-          sleep 2
-          node scripts/visual-qa.mjs
-      - name: Upload pre-deploy visual QA evidence
-        if: always()
-        uses: actions/upload-artifact@v4
-        with:
-          name: majalis-predeploy-qa
-          path: visual-artifacts/
-          if-no-files-found: warn
       - name: Configure Pages
         uses: actions/configure-pages@v5
       - name: Package public website only
@@ -91,6 +79,13 @@ jobs:
           python3 -m http.server 4174 --directory dist --bind 127.0.0.1 >/tmp/majalis-production-http.log 2>&1 &
           sleep 2
           SITE_ORIGIN=http://127.0.0.1:4174 node scripts/visual-qa.mjs
+      - name: Upload published-bundle visual QA evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: majalis-release-qa
+          path: visual-artifacts/
+          if-no-files-found: warn
       - name: Upload static artifact
         uses: actions/upload-pages-artifact@v3
         with:
