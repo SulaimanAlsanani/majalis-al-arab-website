@@ -2,6 +2,18 @@ name: Deploy static website to GitHub Pages
 on:
   push:
     branches: [main]
+    paths:
+      - '*.html'
+      - 'assets/**'
+      - 'scripts/check_site.py'
+      - 'scripts/check_quality.py'
+      - 'scripts/check_live.py'
+      - 'scripts/check_build_sizes.py'
+      - 'scripts/visual-qa.mjs'
+      - 'robots.txt'
+      - 'sitemap.xml'
+      - '.nojekyll'
+      - '.github/workflows/pages.yml'
   workflow_dispatch:
 permissions:
   contents: read
