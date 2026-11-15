@@ -265,6 +265,7 @@ try{
   const pageHref=await page.locator('#navlinks a[href^="about.html"]').getAttribute('href');
   if(!pageHref?.includes('lang=en'))
    errors.push(`${size.name}: internal menu navigation did not retain English language`);
+  await page.locator('#langBtn').click();
   const arabicNavHref=await page.locator('#navlinks a[href^="about.html"]').getAttribute('href');
   if(arabicNavHref?.includes('lang=en'))
    errors.push(`${size.name}: switching back to Arabic did not remove English-only menu parameter`);
