@@ -353,6 +353,17 @@ for page in PAGES + ["404.html"]:
     if "Tajawal:wght@400;500;700;800" in html:
         errors.append(f"{page}: unused 500 weight increases external font requests")
 
+# The modern editorial layer must follow the shared signature layer on every route.
+for page in PAGES + ["404.html"]:
+    html = (ROOT / page).read_text(encoding="utf-8")
+    previous = '<link rel="stylesheet" href="assets/signature.css">'
+    atelier = '<link rel="stylesheet" href="assets/atelier.css">'
+    if html.count(atelier) != 1 or html.find(atelier) < html.find(previous):
+        errors.append(f"{page}: Majalis Atelier stylesheet missing or incorrectly ordered")
+atelier_stylesheet = ROOT / "assets" / "atelier.css"
+if not atelier_stylesheet.is_file() or atelier_stylesheet.stat().st_size == 0:
+    errors.append("Majalis Atelier design stylesheet is missing")
+
 if errors:
     print("\n".join(errors), file=sys.stderr)
     sys.exit(1)
