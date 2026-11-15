@@ -27,6 +27,22 @@ const applyTheme=(name,persist=false)=>{
   themeButtons.forEach(item=>item.setAttribute('aria-pressed',String(item.dataset.setTheme===name)));
   if(persist){try{localStorage.setItem('majalis-theme',name)}catch(_){}}
 };
+const clearPrefs=document.getElementById('clearPreferences');
+clearPrefs?.addEventListener('click',()=>{
+  try{
+    localStorage.removeItem('majalis-language');
+    localStorage.removeItem('majalis-theme');
+    const status=document.getElementById('clearPreferencesStatus');
+    if(status)status.textContent=document.documentElement.lang==='en'
+      ?'Saved preferences were cleared. New pages will use the default Arabic language and Royal Heritage theme unless a language is specified in the link.'
+      :'تم حذف التفضيلات المحفوظة. ستُفتح الصفحات الجديدة باللغة العربية وثيم التراث الملكي الافتراضي، ما لم يحدد الرابط لغة أخرى.';
+  }catch(_){
+    const status=document.getElementById('clearPreferencesStatus');
+    if(status)status.textContent=document.documentElement.lang==='en'
+      ?'The browser prevented clearing these preferences. Remove site data from your browser settings.'
+      :'منع المتصفح حذف التفضيلات. يمكنك حذف بيانات الموقع من إعدادات المتصفح.';
+  }
+});
 const savedTheme=readTheme();
 applyTheme(allowedThemes.has(savedTheme)?savedTheme:'heritage');
 themeButtons.forEach(item=>item.addEventListener('click',()=>applyTheme(item.dataset.setTheme,true)));

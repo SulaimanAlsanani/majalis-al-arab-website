@@ -194,6 +194,22 @@ try{
 
 
 
+  // Preferences can be removed without sending data to any server.
+  await page.goto(`${origin}/privacy.html?lang=en`,{waitUntil:'domcontentloaded'});
+  await page.locator('[data-set-theme="sand"]').click();
+  await page.locator('#clearPreferences').click();
+  const preferences=await page.evaluate(()=>({
+    locale:localStorage.getItem('majalis-language'),
+    theme:localStorage.getItem('majalis-theme')
+  }));
+  if(preferences.locale!==null||preferences.theme!==null)
+   errors.push(`${size.name}: clearing stored preferences did not remove language/theme keys`);
+  if(!String(await page.locator('#clearPreferencesStatus').textContent()).includes('Saved preferences were cleared'))
+   errors.push(`${size.name}: preference reset confirmation was not announced`);
+  await page.goto(`${origin}/about.html`,{waitUntil:'domcontentloaded'});
+  if(await page.locator('html').getAttribute('lang')!=='ar'||await page.locator('body').getAttribute('data-theme')!=='heritage')
+   errors.push(`${size.name}: defaults were not restored after clearing site preferences`);
+
   await context.close();
  }
 }finally{await browser.close()}

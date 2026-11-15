@@ -254,6 +254,15 @@ error_base = '<base href="https://sulaimanalsanani.github.io/majalis-al-arab-web
 if error_markup.count(error_base) != 1:
     errors.append("404.html: stable base URL is required for nested error paths")
 
+# Only the site language and theme keys can be cleared from the privacy page.
+privacy_html = (ROOT / "privacy.html").read_text(encoding="utf-8")
+signature_js = (ROOT / "assets" / "signature.js").read_text(encoding="utf-8")
+if 'id="clearPreferences"' not in privacy_html or 'id="clearPreferencesStatus"' not in privacy_html:
+    errors.append("Privacy page preference controls missing")
+for pref in ("majalis-language", "majalis-theme"):
+    if f"localStorage.removeItem('{pref}')" not in signature_js:
+        errors.append(f"Preference reset missing targeted removal for {pref}")
+
 # Every page loads the global DIN Next Arabic brand-font declaration.
 font_css = (ROOT / "assets" / "signature.css").read_text(encoding="utf-8")
 if '--brand-font:' not in font_css or '"DIN Next Arabic"' not in font_css or '"DIN Next LT Arabic"' not in font_css:
