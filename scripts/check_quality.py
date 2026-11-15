@@ -237,6 +237,13 @@ for rule in [".skip:focus-visible", "prefers-reduced-motion", "prefers-contrast:
     if rule not in signature_css:
         errors.append(f"Shared accessible typography/style rule missing: {rule}")
 
+# Editorial photos remain illustrative and load lazily below the fold.
+homepage = (ROOT / "index.html").read_text(encoding="utf-8")
+if homepage.count('class="editorial-card-photo"') != 2:
+    errors.append("Expected two editorial photo elements in the business cards")
+if homepage.count('loading="lazy" decoding="async" fetchpriority="low"') != 2:
+    errors.append("Editorial photographs must be lazily loaded with low priority")
+
 if errors:
     print("\n".join(errors), file=sys.stderr)
     sys.exit(1)
