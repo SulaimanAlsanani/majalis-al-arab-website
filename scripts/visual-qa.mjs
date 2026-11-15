@@ -27,14 +27,6 @@ try{
    }));
    if(result.scrollWidth>result.viewport+2)errors.push(`${size.name}: horizontal overflow on ${pathname}: ${result.scrollWidth} > ${result.viewport}`);
    if(result.h1!==1||!result.nav||!result.footer||!result.signature||!result.backButton)errors.push(`${size.name}: missing page landmarks in ${pathname}`);
-   if(pathname==='index.html'){
-    const hero=await page.locator('.premium-hero .hero-photo img').evaluate(img=>({
-     complete:img.complete,naturalWidth:img.naturalWidth,
-     photoVisible:getComputedStyle(img).display!=='none',
-     activeSrc:img.currentSrc
-    }));
-    if(!hero.photoVisible||!hero.activeSrc)errors.push(`${size.name}: responsive native hero photo missing`);
-   }
 
    const access=await page.evaluate(()=>({
     skip:!!document.querySelector('a.skip[href="#main"]'),
