@@ -70,11 +70,19 @@ jobs:
         run: |
           for css in dist/assets/*.css; do
             npx --no-install esbuild "$css" --minify --outfile="$css.min"
-            mv "$css.min" "$css"
+            if [ "$(wc -c < "$css.min")" -lt "$(wc -c < "$css")" ]; then
+              mv "$css.min" "$css"
+            else
+              rm "$css.min"
+            fi
           done
           for js in dist/assets/*.js; do
             npx --no-install esbuild "$js" --minify --outfile="$js.min"
-            mv "$js.min" "$js"
+            if [ "$(wc -c < "$js.min")" -lt "$(wc -c < "$js")" ]; then
+              mv "$js.min" "$js"
+            else
+              rm "$js.min"
+            fi
             node --check "$js"
           done
           python3 scripts/check_build_sizes.py
