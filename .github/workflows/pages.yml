@@ -42,6 +42,8 @@ jobs:
           test -s dist/assets/signature.js
           test -f dist/404.html
           test -f dist/.nojekyll
+          printf '{"commit":"%s"}\n' "$GITHUB_SHA" > dist/build-info.json
+          test -s dist/build-info.json
       - name: Upload static artifact
         uses: actions/upload-pages-artifact@v3
         with:

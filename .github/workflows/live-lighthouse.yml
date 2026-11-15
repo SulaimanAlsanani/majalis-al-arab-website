@@ -23,6 +23,11 @@ jobs:
         run: |
           npm install --no-save lighthouse@12.8.2 chrome-launcher@1.2.0 playwright@1.56.1
           npx playwright install --with-deps chromium
+      - name: Verify deployed commit and published site routes
+        env:
+          SITE_BASE_URL: https://sulaimanalsanani.github.io/majalis-al-arab-website
+          EXPECTED_DEPLOY_SHA: ${{ github.event.workflow_run.head_sha || '' }}
+        run: python3 scripts/check_live.py
       - name: Audit the published GitHub Pages site
         env:
           SITE_BASE_URL: https://sulaimanalsanani.github.io/majalis-al-arab-website
