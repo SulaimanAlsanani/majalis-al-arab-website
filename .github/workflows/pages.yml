@@ -9,6 +9,7 @@ on:
       - 'scripts/check_quality.py'
       - 'scripts/check_live.py'
       - 'scripts/check_build_sizes.py'
+      - 'scripts/bundle_fallback_fonts.py'
       - 'scripts/visual-qa.mjs'
       - 'robots.txt'
       - 'sitemap.xml'
@@ -32,7 +33,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
       - name: Check Python script syntax
-        run: python3 -m py_compile scripts/check_site.py scripts/check_quality.py scripts/check_live.py
+        run: python3 -m py_compile scripts/check_site.py scripts/check_quality.py scripts/check_live.py scripts/bundle_fallback_fonts.py
       - name: Validate static website
         run: python3 scripts/check_site.py
       - name: Audit accessibility and sitemap quality
@@ -50,7 +51,7 @@ jobs:
       # Test the actual optimized release bundle before granting deployment.
       - name: Install dependencies for production bundle validation
         run: |
-          npm install --no-save playwright@1.56.1 esbuild@0.25.12
+          npm install --no-save playwright@1.56.1 esbuild@0.25.12 @fontsource/tajawal@5.3.0
           npx playwright install --with-deps chromium
       - name: Configure Pages
         uses: actions/configure-pages@v5
@@ -66,6 +67,8 @@ jobs:
           test -f dist/.nojekyll
           printf '{"commit":"%s"}\n' "$GITHUB_SHA" > dist/build-info.json
           test -s dist/build-info.json
+      - name: Package licensed Tajawal font fallback locally
+        run: python3 scripts/bundle_fallback_fonts.py
       - name: Minify production CSS and JavaScript
         run: |
           for css in dist/assets/*.css; do

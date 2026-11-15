@@ -5,6 +5,7 @@ const origin=(process.env.SITE_ORIGIN||'http://127.0.0.1:4173').replace(/\/$/,''
 const pages=['index.html','about.html','restaurant.html','diwaniya.html','roasteries.html','catalog.html','faq.html','gallery.html','locations.html','gifts.html','hospitality.html','business.html','privacy.html','404.html'];
 const sizes=[{name:'mobile',width:390,height:844},{name:'tablet',width:820,height:1180},{name:'desktop',width:1440,height:900}];
 const errors=[];
+const packagedBuild=origin.includes(':4174');
 await fs.mkdir('visual-artifacts',{recursive:true});
 const browser=await chromium.launch({headless:true});
 try{
@@ -12,6 +13,10 @@ try{
   const context=await browser.newContext({viewport:{width:size.width,height:size.height},deviceScaleFactor:1});
   const page=await context.newPage();
   page.on('pageerror',error=>errors.push(`${size.name}: JS: ${error.message}`));
+  page.on('request',request=>{
+   if(packagedBuild&&/^https:\/\/fonts\.(googleapis|gstatic)\.com\//.test(request.url()))
+    errors.push(`${size.name}: packaged website requested external Google Fonts`);
+  });
   for (const pathname of pages){
    const response=await page.goto(`${origin}/${pathname}`,{waitUntil:'domcontentloaded',timeout:20000});
    if (!response?.ok()) errors.push(`${size.name}: HTTP ${response?.status()} on ${pathname}`);
@@ -75,6 +80,18 @@ try{
    if(pathname==='catalog.html'&&access.catalogFilterLabel!=='تصنيفات المنتجات')errors.push(`${size.name}: catalog filters lack Arabic accessible group label`);
    if(pathname==='faq.html'&&access.faqFilterLabel!=='تصنيفات الأسئلة الشائعة')errors.push(`${size.name}: FAQ filters lack Arabic accessible group label`);
    if(access.fontRequest.some(url=>url.includes('DM+Sans')))errors.push(`${size.name}: duplicate external web font on ${pathname}`);
+   if(packagedBuild){
+    const localFontCss=await page.locator('link[href="assets/font-fallback.css"]').count();
+    if(localFontCss!==1||access.fontRequest.length)
+     errors.push(`${size.name}: production fallback font CSS is missing or Google Fonts remains on ${pathname}`);
+    if(pathname==='index.html'){
+     const localFonts=await page.evaluate(async()=>{
+       await document.fonts.load('700 18px Tajawal','مجالس');
+       return [...document.fonts].some(face=>face.family==='Tajawal'&&face.status==='loaded');
+     });
+     if(!localFonts)errors.push(`${size.name}: licensed Tajawal fallback failed to load locally`);
+    }
+   }
 
    if(pathname==='index.html'){
      const imageCards=page.locator('.editorial-businesses .editorial-card-photo');
