@@ -251,6 +251,10 @@ try{
   if(await page.locator('html').getAttribute('lang')!=='en'||await page.locator('html').getAttribute('dir')!=='ltr')
    errors.push(`${size.name}: English language deep link did not switch layout direction`);
 
+  await page.locator('#langBtn').click();
+  const localeUrl=new URL(page.url());
+  if(localeUrl.searchParams.has('lang')||localeUrl.searchParams.get('category')!=='products'||await page.locator('html').getAttribute('lang')!=='ar')
+   errors.push(`${size.name}: language toggle did not preserve FAQ filter URL and return to Arabic`);
   await page.goto(`${origin}/index.html?lang=en`,{waitUntil:'domcontentloaded'});
   const translatedSpotlight=await page.locator('.spotlight-card').first().getAttribute('href');
   if(!translatedSpotlight.includes('lang=en')||!translatedSpotlight.includes('q='))
@@ -261,10 +265,6 @@ try{
   const pageHref=await page.locator('#navlinks a[href^="about.html"]').getAttribute('href');
   if(!pageHref?.includes('lang=en'))
    errors.push(`${size.name}: internal menu navigation did not retain English language`);
-  await page.locator('#langBtn').click();
-  const localeUrl=new URL(page.url());
-  if(localeUrl.searchParams.has('lang')||localeUrl.searchParams.get('category')!=='products'||await page.locator('html').getAttribute('lang')!=='ar')
-   errors.push(`${size.name}: language toggle did not preserve FAQ filter URL and return to Arabic`);
   const arabicNavHref=await page.locator('#navlinks a[href^="about.html"]').getAttribute('href');
   if(arabicNavHref?.includes('lang=en'))
    errors.push(`${size.name}: switching back to Arabic did not remove English-only menu parameter`);
