@@ -13,6 +13,8 @@ on:
       - 'scripts/visual-qa.mjs'
       - 'robots.txt'
       - 'sitemap.xml'
+      - 'README.md'
+      - 'PERFORMANCE_REPORT.md'
       - '.nojekyll'
       - '.github/workflows/pages.yml'
   workflow_dispatch:
