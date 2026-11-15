@@ -56,9 +56,9 @@ const valid=()=>{
   nameField?.setCustomValidity(ar?'أدخل الاسم.':'Enter your name.');
  const contact=contactField?.value.trim()||'';
  if(contact){
-  const email=/^[^\\s@]+@[^\\s@]+\\.[^\\s@]{2,}$/u.test(contact);
-  const digits=(contact.match(/[0-9\\u0660-\\u0669\\u06f0-\\u06f9]/gu)||[]).length;
-  const phone=/^\\+?[0-9\\u0660-\\u0669\\u06f0-\\u06f9\\s().-]+$/u.test(contact)&&digits>=7&&digits<=15;
+  const email=/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/u.test(contact);
+  const digits=(contact.match(/[0-9\u0660-\u0669\u06f0-\u06f9]/gu)||[]).length;
+  const phone=/^\+?[0-9\u0660-\u0669\u06f0-\u06f9\s().-]+$/u.test(contact)&&digits>=7&&digits<=15;
   if(!email&&!phone)contactField?.setCustomValidity(ar?'أدخل بريدًا إلكترونيًا صالحًا أو رقم هاتف من 7 إلى 15 رقمًا.':'Enter a valid email address or a phone number with 7–15 digits.');
  }else contactField?.setCustomValidity(ar?'أدخل البريد الإلكتروني أو رقم الهاتف.':'Enter an email address or phone number.');
  if(!messageField?.value.trim())
