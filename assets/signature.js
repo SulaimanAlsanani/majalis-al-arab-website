@@ -21,6 +21,9 @@ const readTheme=()=>{try{return localStorage.getItem('majalis-theme')}catch(_){r
 const applyTheme=(name,persist=false)=>{
   if(!allowedThemes.has(name))return;
   document.body.dataset.theme=name;
+  const colors={heritage:'#172d27',sand:'#4a382b',noir:'#252725'};
+  const browserChrome=document.querySelector('meta[name="theme-color"]');
+  if(browserChrome)browserChrome.setAttribute('content',colors[name]);
   themeButtons.forEach(item=>item.setAttribute('aria-pressed',String(item.dataset.setTheme===name)));
   if(persist){try{localStorage.setItem('majalis-theme',name)}catch(_){}}
 };
