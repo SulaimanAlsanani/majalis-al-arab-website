@@ -88,6 +88,24 @@ document.getElementById('clearEnquiry')?.addEventListener('click',()=>{
 });
 form?.addEventListener('submit',async event=>{event.preventDefault();if(!valid())return;try{await navigator.clipboard.writeText(getEnquiry());if(enquiryStatus)enquiryStatus.textContent=language==='ar'?'تم نسخ الاستفسار إلى الحافظة، ولم تُرسل بياناتك إلى أي خادم.':'Enquiry copied to the clipboard. No data has been sent to a server.'}catch(_){if(enquiryStatus)enquiryStatus.textContent=language==='ar'?'تعذر النسخ تلقائيًا. يمكنك تنزيله كملف نصي.':'Automatic copy is unavailable. You can download a text file instead.'}});
 document.getElementById('downloadEnquiry')?.addEventListener('click',()=>{if(!valid())return;const blob=new Blob(['\uFEFF'+getEnquiry()],{type:'text/plain;charset=utf-8'});const url=URL.createObjectURL(blob);const anchor=document.createElement('a');anchor.href=url;anchor.download='majalis-al-arab-enquiry.txt';document.body.appendChild(anchor);anchor.click();anchor.remove();URL.revokeObjectURL(url);if(enquiryStatus)enquiryStatus.textContent=language==='ar'?'تم إنشاء ملف الاستفسار على جهازك. لم تُرسل البيانات إلى خادم.':'Your enquiry file was created on this device. Nothing was sent to a server.'});
+// Defer decorative business photos until their cards approach the viewport.
+// This avoids competing with the priority hero background and Arabic font loads.
+const decorativePhotos=[...document.querySelectorAll('.editorial-card-photo[data-src]')];
+const showEditorialPhoto=img=>{
+ if(img.dataset.srcset)img.srcset=img.dataset.srcset;
+ img.src=img.dataset.src;
+ img.dataset.loaded='true';
+};
+if('IntersectionObserver' in window){
+ const editorialObserver=new IntersectionObserver(entries=>{
+  for(const entry of entries){
+   if(!entry.isIntersecting)continue;
+   showEditorialPhoto(entry.target);
+   editorialObserver.unobserve(entry.target);
+  }
+ },{rootMargin:'64px 0px',threshold:0});
+ decorativePhotos.forEach(img=>editorialObserver.observe(img));
+}else decorativePhotos.forEach(showEditorialPhoto);
 const businessDropdown=menu?.querySelector('.nav-dropdown');
 document.addEventListener('click',event=>{if(businessDropdown?.open&&!businessDropdown.contains(event.target))businessDropdown.open=false});
 document.addEventListener('keydown',event=>{if(event.key==='Escape'&&businessDropdown?.open){businessDropdown.open=false;businessDropdown.querySelector('summary')?.focus()}});

@@ -100,14 +100,16 @@ for page in PAGES:
         if image.get("loading") == "lazy" and not all(image.get(k, "").isdigit() for k in ("width", "height")):
             errors.append(f"{page}: lazy image lacks fixed numeric width and height; layout shift is possible")
         if image.get("class") == "editorial-card-photo" and (
-            "480w" not in image.get("srcset", "")
-            or "800w" not in image.get("srcset", "")
-            or "1200w" not in image.get("srcset", "")
+            "480w" not in image.get("data-srcset", "")
+            or "800w" not in image.get("data-srcset", "")
+            or "1200w" not in image.get("data-srcset", "")
             or not image.get("sizes")
+            or not image.get("data-src", "").startswith("https://images.unsplash.com/")
+            or not image.get("src", "").startswith("data:image/gif;base64,")
         ):
             errors.append(f"{page}: editorial card photo lacks responsive image selection")
     for image in doc.images:
-        srcset = image.get("srcset", "")
+        srcset = image.get("srcset") or image.get("data-srcset", "")
         if not srcset:
             continue
         candidates = [candidate.strip().rsplit(" ", 1) for candidate in srcset.split(",")]
@@ -322,6 +324,8 @@ if homepage.count('class="editorial-card-photo"') != 2:
     errors.append("Expected two editorial photo elements in the business cards")
 if homepage.count('loading="lazy" decoding="async" fetchpriority="low"') != 2:
     errors.append("Editorial photographs must be lazily loaded with low priority")
+if homepage.count('class="editorial-card-fallback"') != 2 or 'IntersectionObserver' not in (ROOT / "assets" / "app.js").read_text(encoding="utf-8"):
+    errors.append("Decorative lazy images must retain noscript fallback and viewport observer")
 
 # SEO: every indexable bilingual route must advertise matching language alternates.
 for page in PAGES:

@@ -56,9 +56,9 @@ try{
        errors.push(`${size.name}: desktop/mobile hero preload differs from the active image background`);
    }
    if(pathname==='index.html'){
-     const cards=await page.locator('.editorial-businesses .editorial-card-photo').evaluateAll(images=>images.map(img=>({loading:img.loading,decoding:img.decoding,width:img.width,height:img.height,alt:img.alt,sizes:img.sizes,srcset:img.srcset})));
-     if(cards.length!==2||cards.some(img=>img.loading!=='lazy'||img.decoding!=='async'||img.width===0||img.height===0||img.alt!==''||!img.sizes.includes('370px')||!img.srcset.includes('480w')||!img.srcset.includes('800w')||!img.srcset.includes('1200w')))
-       errors.push(`${size.name}: editorial photo lazy loading or reserved image geometry is missing`);
+     const cards=await page.locator('.editorial-businesses .editorial-card-photo').evaluateAll(images=>images.map(img=>({loading:img.loading,decoding:img.decoding,width:img.width,height:img.height,alt:img.alt,sizes:img.sizes,srcset:img.dataset.srcset,source:img.dataset.src})));
+     if(cards.length!==2||cards.some(img=>img.loading!=='lazy'||img.decoding!=='async'||img.width===0||img.height===0||img.alt!==''||!img.sizes.includes('370px')||!img.srcset?.includes('480w')||!img.srcset?.includes('800w')||!img.srcset?.includes('1200w')||!img.source?.startsWith('https://images.unsplash.com/')))
+       errors.push(`${size.name}: deferred editorial photo candidates or reserved image geometry are missing`);
    }
 
 
@@ -76,6 +76,16 @@ try{
    if(pathname==='faq.html'&&access.faqFilterLabel!=='تصنيفات الأسئلة الشائعة')errors.push(`${size.name}: FAQ filters lack Arabic accessible group label`);
    if(access.fontRequest.some(url=>url.includes('DM+Sans')))errors.push(`${size.name}: duplicate external web font on ${pathname}`);
 
+   if(pathname==='index.html'){
+     const imageCards=page.locator('.editorial-businesses .editorial-card-photo');
+     for(const img of await imageCards.all()){
+       await img.scrollIntoViewIfNeeded();
+       await page.waitForFunction(el=>el.dataset.loaded==='true',await img.elementHandle(),{timeout:5000});
+       if(!await img.evaluate(el=>el.src.includes('images.unsplash.com')))
+         errors.push(`${size.name}: image was not activated on scroll into view`);
+     }
+     await page.evaluate(()=>window.scrollTo(0,0));
+   }
    if(['index.html','catalog.html','restaurant.html'].includes(pathname)){
     await page.screenshot({path:`visual-artifacts/${pathname.replace('.html','')}-${size.name}.png`,fullPage:true,animations:'disabled'});
    }
