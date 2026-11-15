@@ -28,8 +28,8 @@ try{
    if(result.scrollWidth>result.viewport+2)errors.push(`${size.name}: horizontal overflow on ${pathname}: ${result.scrollWidth} > ${result.viewport}`);
    if(result.h1!==1||!result.nav||!result.footer||!result.signature||!result.backButton)errors.push(`${size.name}: missing page landmarks in ${pathname}`);
    if(pathname==='index.html'){
-     const cards=await page.locator('.editorial-businesses .editorial-card-photo').evaluateAll(images=>images.map(img=>({loading:img.loading,decoding:img.decoding,width:img.width,height:img.height,alt:img.alt})));
-     if(cards.length!==2||cards.some(img=>img.loading!=='lazy'||img.decoding!=='async'||img.width===0||img.height===0||img.alt!==''))
+     const cards=await page.locator('.editorial-businesses .editorial-card-photo').evaluateAll(images=>images.map(img=>({loading:img.loading,decoding:img.decoding,width:img.width,height:img.height,alt:img.alt,sizes:img.sizes,srcset:img.srcset})));
+     if(cards.length!==2||cards.some(img=>img.loading!=='lazy'||img.decoding!=='async'||img.width===0||img.height===0||img.alt!==''||!img.sizes.includes('370px')||!img.srcset.includes('480w')||!img.srcset.includes('800w')||!img.srcset.includes('1200w')))
        errors.push(`${size.name}: editorial photo lazy loading or reserved image geometry is missing`);
    }
 

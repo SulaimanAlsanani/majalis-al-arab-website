@@ -99,6 +99,13 @@ for page in PAGES:
             errors.append(f"{page}: image missing required alt attribute")
         if image.get("loading") == "lazy" and not all(image.get(k, "").isdigit() for k in ("width", "height")):
             errors.append(f"{page}: lazy image lacks fixed numeric width and height; layout shift is possible")
+        if image.get("class") == "editorial-card-photo" and (
+            "480w" not in image.get("srcset", "")
+            or "800w" not in image.get("srcset", "")
+            or "1200w" not in image.get("srcset", "")
+            or not image.get("sizes")
+        ):
+            errors.append(f"{page}: editorial card photo lacks responsive image selection")
     if doc.headings != 1:
         errors.append(f"{page}: expected one h1, got {doc.headings}")
     if doc.canonicals != [expected]:
