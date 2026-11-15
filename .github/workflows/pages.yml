@@ -19,6 +19,8 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+      - name: Check Python script syntax
+        run: python3 -m py_compile scripts/check_site.py scripts/check_quality.py scripts/check_live.py
       - name: Validate static website
         run: python3 scripts/check_site.py
       - name: Audit accessibility and sitemap quality
