@@ -46,8 +46,25 @@ clearPrefs?.addEventListener('click',()=>{
 const savedTheme=readTheme();
 applyTheme(allowedThemes.has(savedTheme)?savedTheme:'heritage');
 themeButtons.forEach(item=>item.addEventListener('click',()=>applyTheme(item.dataset.setTheme,true)));
+const originalPageLinks=[...document.querySelectorAll('a[href]')]
+ .map(link=>[link,link.getAttribute('href')])
+ .filter(([,href])=>/^[a-z0-9-]+\.html(?:[?#]|$)/i.test(href||''));
+const syncPageLinkLanguage=(en)=>{
+ for(const [link,original] of originalPageLinks){
+  const hashPos=original.indexOf('#');
+  const hash=hashPos<0?'':original.slice(hashPos);
+  const fileAndQuery=hashPos<0?original:original.slice(0,hashPos);
+  const queryPos=fileAndQuery.indexOf('?');
+  const path=queryPos<0?fileAndQuery:fileAndQuery.slice(0,queryPos);
+  const search=new URLSearchParams(queryPos<0?'':fileAndQuery.slice(queryPos+1));
+  if(en)search.set('lang','en');else search.delete('lang');
+  const next=path+(search.size?'?'+search.toString():'')+hash;
+  if(link.getAttribute('href')!==next)link.setAttribute('href',next);
+ }
+};
 const update=()=>{
 const en=document.documentElement.lang==='en';
+syncPageLinkLanguage(en);
 // Dynamic ARIA names follow the actual language of the visible interface.
 const nav=document.getElementById('navlinks');
 if(nav)nav.setAttribute('aria-label',en?'Main navigation':'القائمة الرئيسية');

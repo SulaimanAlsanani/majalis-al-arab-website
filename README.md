@@ -8,6 +8,7 @@ Premium bilingual (Arabic/English) static website for **Majalis Al Arab Trading 
 - Royal Heritage, Warm Sand, and Modern Noir themes with accessible, persistent selection across pages
 - Restaurant, diwaniya, roasteries, products, values, and branch sections
 - Shareable catalog/FAQ searches; filter choices support browser Back/Forward without creating history entries per keystroke
+- Internal links preserve the selected Arabic/English language in shareable URLs, including catalog shortcuts
 - Demonstration enquiry form (copies text only; does **not** send messages)
 - Automated deployment to GitHub Pages via GitHub Actions; only production HTML, assets, sitemap, robots.txt and .nojekyll are packaged for publication
 
