@@ -292,6 +292,16 @@ for module_name, module in [("catalog", catalog_js), ("FAQ", faq_js)]:
 if homepage.count('class="spotlight-card" href="catalog.html?q=') != 3:
     errors.append("Homepage product quick links are not configured")
 
+# Both CSS hero rules and the desktop preload must use the same URL.
+# Different query strings cause duplicate downloads of the largest image.
+hero_url = "https://images.unsplash.com/photo-1442512595331-e89e73853f31?auto=format&fit=crop&w=1280&q=70"
+home_html = (ROOT / "index.html").read_text(encoding="utf-8")
+home_css = (ROOT / "assets" / "styles.css").read_text(encoding="utf-8")
+if home_html.count(hero_url) != 1 or home_css.count(hero_url) != 2:
+    errors.append("Desktop hero preload and CSS backgrounds must use the same optimized URL")
+if 'w=1600&q=75' in home_html or 'w=1600&q=75' in home_css:
+    errors.append("Obsolete full-size desktop hero URL is still requested")
+
 # Performance and keyboard-accessibility invariants for every static page.
 for page in PAGES + ["404.html"]:
     markup = (ROOT / page).read_text(encoding="utf-8")

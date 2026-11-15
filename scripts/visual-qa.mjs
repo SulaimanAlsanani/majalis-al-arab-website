@@ -47,6 +47,15 @@ try{
    }
 
    if(pathname==='index.html'){
+     const expectedDesktop='https://images.unsplash.com/photo-1442512595331-e89e73853f31?auto=format&fit=crop&w=1280&q=70';
+     const media=size.width<=760?'(max-width: 760px)':'(min-width: 761px)';
+     const preloads=await page.locator('link[rel="preload"][as="image"]').evaluateAll(nodes=>nodes.map(el=>({url:el.href,media:el.media})));
+     const heroBackground=await page.evaluate(()=>getComputedStyle(document.querySelector('.premium-hero'),'::before').backgroundImage);
+     const matching=preloads.filter(el=>el.media===media);
+     if(matching.length!==1||!heroBackground.includes(matching[0].url)||(size.width>760&&matching[0].url!==expectedDesktop))
+       errors.push(`${size.name}: desktop/mobile hero preload differs from the active image background`);
+   }
+   if(pathname==='index.html'){
      const cards=await page.locator('.editorial-businesses .editorial-card-photo').evaluateAll(images=>images.map(img=>({loading:img.loading,decoding:img.decoding,width:img.width,height:img.height,alt:img.alt,sizes:img.sizes,srcset:img.srcset})));
      if(cards.length!==2||cards.some(img=>img.loading!=='lazy'||img.decoding!=='async'||img.width===0||img.height===0||img.alt!==''||!img.sizes.includes('370px')||!img.srcset.includes('480w')||!img.srcset.includes('800w')||!img.srcset.includes('1200w')))
        errors.push(`${size.name}: editorial photo lazy loading or reserved image geometry is missing`);
