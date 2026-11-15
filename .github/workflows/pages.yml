@@ -66,6 +66,24 @@ jobs:
           test -f dist/.nojekyll
           printf '{"commit":"%s"}\n' "$GITHUB_SHA" > dist/build-info.json
           test -s dist/build-info.json
+      - name: Minify production CSS and JavaScript
+        run: |
+          npm install --no-save esbuild@0.25.12
+          for css in dist/assets/*.css; do
+            npx --no-install esbuild "$css" --minify --outfile="$css.min"
+            mv "$css.min" "$css"
+          done
+          for js in dist/assets/*.js; do
+            npx --no-install esbuild "$js" --minify --outfile="$js.min"
+            mv "$js.min" "$js"
+            node --check "$js"
+          done
+          python3 scripts/check_build_sizes.py
+      - name: Gate production artifact on responsive browser QA
+        run: |
+          python3 -m http.server 4174 --directory dist --bind 127.0.0.1 >/tmp/majalis-production-http.log 2>&1 &
+          sleep 2
+          SITE_ORIGIN=http://127.0.0.1:4174 node scripts/visual-qa.mjs
       - name: Upload static artifact
         uses: actions/upload-pages-artifact@v3
         with:
