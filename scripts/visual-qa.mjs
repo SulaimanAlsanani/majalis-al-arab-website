@@ -231,8 +231,8 @@ try{
   const selectedSand=await page.locator('[data-set-theme="sand"]').getAttribute('aria-pressed');
   if(selectedSand!=='true'||await page.locator('body').getAttribute('data-theme')!=='sand'||await page.locator('meta[name="theme-color"]').getAttribute('content')!=='#4a382b')
    errors.push(`${size.name}: Warm Sand theme and browser chrome color did not activate`);
-  if(!String(await page.locator('[data-set-theme="sand"]').getAttribute('aria-label')).includes('Warm Sand'))
-   errors.push(`${size.name}: theme accessible label does not match the current English language`);
+  if(!String(await page.locator('[data-set-theme="sand"]').getAttribute('aria-label')).includes('الطابع الرملي الدافئ'))
+   errors.push(`${size.name}: theme accessible label does not match the active Arabic language`);
   await page.goto(`${origin}/about.html`,{waitUntil:'domcontentloaded'});
   if(await page.locator('body').getAttribute('data-theme')!=='sand'||await page.locator('[data-set-theme="sand"]').getAttribute('aria-pressed')!=='true')
    errors.push(`${size.name}: selected theme did not persist to About page`);
