@@ -1,7 +1,7 @@
 import { chromium } from 'playwright';
 import fs from 'node:fs/promises';
 
-const origin='http://127.0.0.1:4173';
+const origin=(process.env.SITE_ORIGIN||'http://127.0.0.1:4173').replace(/\/$/,'');
 const pages=['index.html','about.html','restaurant.html','diwaniya.html','roasteries.html','catalog.html','faq.html','gallery.html','locations.html','gifts.html','hospitality.html','business.html','privacy.html','404.html'];
 const sizes=[{name:'mobile',width:390,height:844},{name:'tablet',width:820,height:1180},{name:'desktop',width:1440,height:900}];
 const errors=[];
