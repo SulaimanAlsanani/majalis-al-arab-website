@@ -11,13 +11,15 @@ const normalize=text=>String(text||'').normalize('NFKC').toLocaleLowerCase().rep
 const params=new URL(location.href).searchParams;
 let category=allowed.has(params.get('category'))?params.get('category'):'all';
 search.value=(params.get('q')||'').slice(0,120);
-function syncUrl(){
+function syncUrl(push=false){
  const u=new URL(location.href);
  if(search.value.trim())u.searchParams.set('q',search.value.trim());else u.searchParams.delete('q');
  if(category!=='all')u.searchParams.set('category',category);else u.searchParams.delete('category');
- history.replaceState(null,'',u.pathname+u.search+u.hash);
+ const next=u.pathname+u.search+u.hash;
+ const current=location.pathname+location.search+location.hash;
+ if(next!==current)history[push?'pushState':'replaceState'](null,'',next);
 }
-function display(sync=false){
+function display(sync=false,push=false){
  const query=normalize(search.value);
  let visible=0;
  for(const entry of entries){
@@ -32,11 +34,11 @@ function display(sync=false){
  search.placeholder=document.documentElement.lang==='en'?search.dataset.placeholderEn:search.dataset.placeholderAr;
  for(const item of filters)item.setAttribute('aria-pressed',String(item.dataset.faqFilter===category));
  if(reset)reset.disabled=!query&&category==='all';
- if(sync)syncUrl();
+ if(sync)syncUrl(push);
 }
 search.addEventListener('input',()=>display(true));
-filters.forEach(button=>button.addEventListener('click',()=>{category=button.dataset.faqFilter;display(true)}));
-reset?.addEventListener('click',()=>{search.value='';category='all';display(true);search.focus()});
+filters.forEach(button=>button.addEventListener('click',()=>{category=button.dataset.faqFilter;display(true,true)}));
+reset?.addEventListener('click',()=>{search.value='';category='all';display(true,true);search.focus()});
 const observer=new MutationObserver(()=>display(false));
 observer.observe(document.documentElement,{attributes:true,attributeFilter:['lang']});
 window.addEventListener('popstate',()=>{const p=new URL(location.href).searchParams;search.value=(p.get('q')||'').slice(0,120);category=allowed.has(p.get('category'))?p.get('category'):'all';display(false)});

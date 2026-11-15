@@ -94,6 +94,13 @@ try{
   const foodRoute=await page.evaluate(()=>new URLSearchParams(location.search).get('category'));
   if(foodRoute!=='food'||await page.locator('.catalog-card:visible').count()!==2)
    errors.push(`${size.name}: catalog category filter or URL sync failed`);
+  await page.goBack({waitUntil:'domcontentloaded'});
+  if(new URL(page.url()).searchParams.has('category')||await page.locator('.catalog-card:visible').count()!==6)
+   errors.push(`${size.name}: browser Back failed to restore previous Catalog filter`);
+  await page.goForward({waitUntil:'domcontentloaded'});
+  if(new URL(page.url()).searchParams.get('category')!=='food'||await page.locator('.catalog-card:visible').count()!==2)
+   errors.push(`${size.name}: browser Forward failed to restore Catalog food category`);
+
   // FAQ filters must support direct links and a reversible reset.
   await page.goto(`${origin}/faq.html?category=locations`,{waitUntil:'domcontentloaded'});
   await page.waitForTimeout(100);
@@ -105,6 +112,16 @@ try{
   await page.locator('#faqSearch').fill('coffee');
   if(await page.locator('.faq-item:visible').count()===0)
    errors.push(`${size.name}: English FAQ search returned no coffee results`);
+  await page.locator('[data-faq-filter="products"]').click();
+  const productRoute=await page.evaluate(()=>new URLSearchParams(location.search).get('category'));
+  if(productRoute!=='products')errors.push(`${size.name}: FAQ category selection missing from URL`);
+  await page.goBack({waitUntil:'domcontentloaded'});
+  if(new URL(page.url()).searchParams.get('category')!==null||new URL(page.url()).searchParams.get('q')!=='coffee')
+   errors.push(`${size.name}: browser Back did not restore FAQ keyword-only search`);
+  await page.goForward({waitUntil:'domcontentloaded'});
+  if(new URL(page.url()).searchParams.get('category')!=='products')
+   errors.push(`${size.name}: browser Forward did not restore FAQ product category`);
+
   // Contact enquiry export must have human-readable field labels and stay local.
   await page.goto(`${origin}/index.html`,{waitUntil:'domcontentloaded'});
   await page.locator('#name').fill('Sample Visitor');
