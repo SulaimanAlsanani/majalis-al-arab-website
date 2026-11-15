@@ -9,7 +9,7 @@ Premium bilingual (Arabic/English) static website for **Majalis Al Arab Trading 
 - Restaurant, diwaniya, roasteries, products, values, and branch sections
 - Shareable catalog/FAQ searches; filter choices support browser Back/Forward without creating history entries per keystroke
 - Demonstration enquiry form (copies text only; does **not** send messages)
-- Automated deployment to GitHub Pages via GitHub Actions
+- Automated deployment to GitHub Pages via GitHub Actions; only production HTML, assets, sitemap, robots.txt and .nojekyll are packaged for publication
 
 ## Publication
 1. Go to **Settings → Pages** in this repository.
