@@ -163,3 +163,15 @@ img{max-width:100%;height:auto}
 /* Consistent visible theme switch on interior pages (not only the homepage footer). */
 .inner-footer .themes{display:flex;align-items:center;gap:12px;margin-top:15px}
 .inner-footer .themes button{display:inline-block;min-width:44px;min-height:44px;cursor:pointer}
+
+/* Lazy below-the-fold editorial imagery: preserve fixed geometry and visual fallback. */
+.editorial-businesses .card-image:has(.editorial-card-photo){
+ position:relative;overflow:hidden;background-image:none!important;background-color:#263b31
+}
+.editorial-businesses .editorial-card-photo{
+ position:absolute;inset:0;display:block;width:100%;height:100%;object-fit:cover;
+ transform:translateZ(0)
+}
+.editorial-businesses .card-image:has(.editorial-card-photo)::after{
+ content:"";position:absolute;inset:0;pointer-events:none;background:linear-gradient(180deg,transparent 70%,#14261e20)
+}
