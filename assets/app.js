@@ -3,11 +3,21 @@ const translations=[...document.querySelectorAll('[data-ar][data-en]')];
 const languageButton=document.getElementById('langBtn');
 const menuButton=document.getElementById('menuBtn');
 const menu=document.getElementById('navlinks');
+const originalCanonical=document.querySelector('link[rel="canonical"]')?.href||location.origin+location.pathname;
+const updateSeoLanguage=value=>{
+ const canonical=document.querySelector('link[rel="canonical"]');
+ const target=value==='en'?originalCanonical+(originalCanonical.includes('?')?'&':'?')+'lang=en':originalCanonical;
+ if(canonical)canonical.href=target;
+ const socialUrl=document.querySelector('meta[property="og:url"]');
+ if(socialUrl)socialUrl.content=target;
+ const socialLocale=document.querySelector('meta[property="og:locale"]');
+ if(socialLocale)socialLocale.content=value==='en'?'en_US':'ar_SA';
+};
 const read=(key)=>{try{return localStorage.getItem(key)}catch(_){return null}};
 const save=(key,value)=>{try{localStorage.setItem(key,value)}catch(_){}};
 let language='ar';
 const closeMenu=()=>{if(!menu||!menuButton)return;menu.classList.remove('open');menuButton.setAttribute('aria-expanded','false')};
-const setLanguage=(value)=>{if(!['ar','en'].includes(value))return;language=value;document.documentElement.lang=value;document.documentElement.dir=value==='ar'?'rtl':'ltr';document.body.classList.toggle('en',value==='en');translations.forEach(element=>{const t=element.dataset[value];if(t!==undefined)element.innerHTML=t});if(languageButton)languageButton.textContent=value==='ar'?'EN':'عربي';document.title=value==='ar'?'مجالس العرب | أصالة الضيافة وروعة اللقاء':'Majalis Al Arab | Authentic Hospitality';save('majalis-language',value);const status=document.getElementById('status');if(status)status.textContent=''};
+const setLanguage=(value)=>{if(!['ar','en'].includes(value))return;language=value;document.documentElement.lang=value;document.documentElement.dir=value==='ar'?'rtl':'ltr';document.body.classList.toggle('en',value==='en');translations.forEach(element=>{const t=element.dataset[value];if(t!==undefined)element.innerHTML=t});if(languageButton)languageButton.textContent=value==='ar'?'EN':'عربي';document.title=value==='ar'?'مجالس العرب | أصالة الضيافة وروعة اللقاء':'Majalis Al Arab | Authentic Hospitality';updateSeoLanguage(value);save('majalis-language',value);const status=document.getElementById('status');if(status)status.textContent=''};
 const updateLanguageUrl=()=>{
  const url=new URL(location.href);
  if(language==='en')url.searchParams.set('lang','en');else url.searchParams.delete('lang');
