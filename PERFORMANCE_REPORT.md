@@ -82,3 +82,14 @@ Workflow: [Live Website Lighthouse run 43692169306](https://github.com/SulaimanA
 | Catalog mobile | 99 | 100 | 100 | 100 | 1.62 s | 1.62 s |
 
 The CSS-background hero was retained after the native HTML-picture experiment underperformed on desktop. Scores vary from earlier results (85 desktop, 93 mobile); repeatable Web Vitals field measurements are still needed before claiming a sustained improvement. Desktop 90+ remains an open target. The publicly selectable color-theme controls and their keyboard interactions were restored across homepage and interior-page footers; responsive Visual QA passed for commit `853ba982ff8789ed0cb2e40ac6078efcdd5683f0`.
+
+
+## Lazy business imagery and mobile theme UI — 15 November 2026
+
+Changes:
+- The Restaurant and Diwaniya card photos now use below-the-fold `<img loading="lazy" decoding="async" fetchpriority="low">` with explicit image geometry and an ornamental fallback. The homepage hero still uses the previous, prioritized CSS background.
+- Dynamic mobile browser `theme-color` now follows the saved Heritage, Warm Sand or Modern Noir palette across routes.
+- [Visual QA](https://github.com/SulaimanAlsanani/majalis-al-arab-website/actions/runs/43695171562) passed mobile, tablet and desktop checks for this set of changes.
+- [Published-site Lighthouse](https://github.com/SulaimanAlsanani/majalis-al-arab-website/actions/runs/43695265387) completed with home mobile **92**, home desktop **68**, catalog mobile **93** (all three achieved accessibility, best-practices, and SEO **100**). This single run does **not** establish an improvement from lazy loading: even the unchanged catalog scored lower than earlier runs, indicating measurement variability or changing network conditions. The desktop 90+ target is not complete.
+
+The remaining `Properly size images` issue is associated with externally hosted illustration assets. Official, approved source images and licensed web fonts are prerequisites for more deterministic asset control and repeatable production measurements.
