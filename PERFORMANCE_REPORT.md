@@ -143,3 +143,23 @@ Removed the unused Tajawal 500 weight from the Google Fonts fallback stylesheet 
 The [live-site Lighthouse audit](https://github.com/SulaimanAlsanani/majalis-al-arab-website/actions/runs/43725242058) passed, and the deployment [completed successfully](https://github.com/SulaimanAlsanani/majalis-al-arab-website/actions/runs/43725104259). Measured performance: home mobile **93**, home desktop **80**, catalog mobile **99**; all three accessibility, best practices and SEO **100**.
 
 **Important null result:** the audit still recorded **six** `fonts.gstatic.com` WOFF2 requests. Simply removing the unused CSS weight did **not** establish lower transfer volume or better performance; compared with earlier 85 desktop run, the score was lower, but isolated Lighthouse runs vary with test conditions. Future font optimization should use licensed and controlled assets, actual text coverage/subsets and repeated comparable published-site measurements, rather than merely removing family-weight parameters.
+
+## Self-hosted Tajawal fallback and viewport-triggered photography — 15 November 2026
+
+The homepage now keeps its two illustrative business-card photographs behind a 64px IntersectionObserver boundary, with fixed dimensions and `noscript` fallback. Photos no longer compete with the priority hero at initial load. [Deployed version](https://github.com/SulaimanAlsanani/majalis-al-arab-website/actions/runs/43725401390) and [visual QA](https://github.com/SulaimanAlsanani/majalis-al-arab-website/actions/runs/43725401329) passed.
+
+The production release bundles **Tajawal v5.3.0** (Arabic and Latin WOFF2, weights 400/700/800) locally from the pinned `@fontsource/tajawal` package and includes the upstream **SIL Open Font License 1.1** copyright notice in `assets/Tajawal-OFL.txt`. Only the published artifact is rewritten: development HTML retains remote Google Fonts for convenient static preview. Production browser QA verifies local font loading and refuses Google Fonts requests. The priority font stack still starts with DIN Next Arabic if installed; a licensed DIN webfont remains **not provided**.
+
+### Published Lighthouse after local fallback
+
+| Scenario | Performance | Accessibility | Best Practices | SEO | LCP | External requests | Transfer |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
+| Homepage mobile | **100** | 100 | 100 | 100 | **1.75 s** | **2** | 109,976 B |
+| Homepage desktop | **90** | 100 | 100 | 100 | **1.83 s** | **2** | 125,560 B |
+| Catalog mobile | **100** | 100 | 100 | 100 | **1.32 s** | **0** | 80,701 B |
+
+- [Production deploy and test gate](https://github.com/SulaimanAlsanani/majalis-al-arab-website/actions/runs/43726058239): **success**.
+- [Lighthouse against the published site](https://github.com/SulaimanAlsanani/majalis-al-arab-website/actions/runs/43726172640): **success**, correct published SHA.
+- Prior [live audit before local font hosting](https://github.com/SulaimanAlsanani/majalis-al-arab-website/actions/runs/43725510815): homepage desktop **85**, homepage mobile **99**, catalog mobile **99**; desktop had 9 external requests and catalog had 7. Following font hosting the desktop external-request count dropped to **2**, and the catalog count to **0**. Overall desktop transfer volume did **not** materially drop, because fonts were moved rather than removed.
+
+The **90/100 desktop** objective was reached **in one published synthetic Lighthouse run**. Treat it as an achieved lab result, **not** a stable field performance guarantee. The external Unsplash imagery is still illustrative and must be replaced with approved official photography before launch; do not imply those images document the establishment.

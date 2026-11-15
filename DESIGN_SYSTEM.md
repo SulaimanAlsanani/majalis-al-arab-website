@@ -13,8 +13,9 @@
 ## Typography
 - Brand font: **DIN Next Arabic / DIN Next LT Arabic** is now first in the global font stack on every page via `assets/signature.css`.
 - Licensing status: the repository has **no licensed DIN webfont files or an Adobe Fonts web project embed**. Therefore browsers without DIN installed currently fall back to Tajawal; configuring the CSS stack is **not proof of universal DIN rendering**.
+- Production fallback: `@fontsource/tajawal@5.3.0` is packaged as same-origin WOFF2 (400/700/800, Arabic/Latin), with its upstream OFL 1.1 license notice. This is an open-source fallback **not** a licensed DIN Next replacement.
 - Production requirement: provide a licensed web-use font package or the official Adobe Fonts web project embed for this domain, then verify actual `document.fonts` rendering in desktop/mobile browsers. Adobe Fonts may not be self-hosted without a separate license.
-- English: DM Sans.
+- English and Arabic: the same preferred DIN Next Arabic stack where available, with self-hosted open-licensed Tajawal as the consistent production fallback; no separate DM Sans request.
 - Desktop hero: responsive `clamp(44px, 6vw, 78px)`.
 - Section titles: responsive `clamp(30px, 3.45vw, 46px)`.
 - Descriptions: approximately 16–19px, with generous line height.

@@ -11,6 +11,7 @@ Premium bilingual (Arabic/English) static website for **Majalis Al Arab Trading 
 - Internal links preserve the selected Arabic/English language in shareable URLs, including catalog shortcuts
 - Demonstration enquiry form (copies text only; does **not** send messages)
 - Automated deployment to GitHub Pages via GitHub Actions; only production HTML, assets, sitemap, robots.txt and .nojekyll are packaged for publication
+- Production build minifies CSS/JavaScript, defers decorative card photos until viewport entry, and packages an **OFL-licensed local Tajawal fallback** instead of external Google Fonts. Visual QA tests the optimized release before deployment. DIN Next Arabic remains preferred but requires licensed webfont assets to render universally.
 
 ## Publication
 1. Go to **Settings → Pages** in this repository.
@@ -44,6 +45,7 @@ assets/
 - GitHub Pages has now been enabled. An actual deployment succeeded for commit `ac8f64c` on 2026-11-14: https://github.com/SulaimanAlsanani/majalis-al-arab-website/actions/runs/43595067862
 - New commits trigger the Pages workflow automatically. Each release should be confirmed by a successful **Deploy static website to GitHub Pages** run and a live-URL smoke test; transient GitHub artifact-metadata failures should not be mistaken for content validation failures.
 - The published preview URL remains https://sulaimanalsanani.github.io/majalis-al-arab-website/ until an official domain is approved.
+- Latest verified Pages release (2026-11-15): [4bac599de](https://github.com/SulaimanAlsanani/majalis-al-arab-website/actions/runs/43726058239), with a [published Lighthouse audit](https://github.com/SulaimanAlsanani/majalis-al-arab-website/actions/runs/43726172640) of 90 desktop and 100 mobile homepage performance in one lab run.
 
 ## Known launch constraints
 - Sample photography is illustrative, not documentary imagery of Majalis Al Arab.
