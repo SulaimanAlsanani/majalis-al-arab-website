@@ -134,3 +134,12 @@ Verified measurements from the [published-site Lighthouse run](https://github.co
 The desktop hero image was about **45.9 KB** transferred, rather than the earlier larger candidate. The desktop run also loaded two illustrative card images (about **42.3 KB** and **30.2 KB**) and six distinct Tajawal `.woff2` font requests (each about 9–10.5 KB); external media and font resources are significant contributors to bytes transferred. These counts are from a single simulated Lighthouse run, not real-user transfer statistics. The LCP-element node was unavailable in this Lighthouse audit format, so no specific element can be asserted as LCP.
 
 **Next priorities:** (1) obtain licensed DIN Next Arabic webfont assets or an authorized provider embed, (2) consider reducing unnecessary font weights/subsets only after checking visual fidelity and licensing, (3) replace the externally hosted illustrative imagery with officially approved optimized files, (4) confirm improvements by repeated measurements on the **published site**. Do not infer production compression problems from the local Python test server, and do not claim the 90+ desktop target is achieved: it remains **85** in this single published audit.
+
+
+## Optional font weight experiment — 15 November 2026
+
+Removed the unused Tajawal 500 weight from the Google Fonts fallback stylesheet URLs on all **14** HTML pages; the retained weights are 400, 700 and 800. The preferred DIN Next Arabic stack was left unchanged (a licensed embedded font is still needed for universal DIN rendering). Source QA now prevents accidentally requesting the unused 500 weight again.
+
+The [live-site Lighthouse audit](https://github.com/SulaimanAlsanani/majalis-al-arab-website/actions/runs/43725242058) passed, and the deployment [completed successfully](https://github.com/SulaimanAlsanani/majalis-al-arab-website/actions/runs/43725104259). Measured performance: home mobile **93**, home desktop **80**, catalog mobile **99**; all three accessibility, best practices and SEO **100**.
+
+**Important null result:** the audit still recorded **six** `fonts.gstatic.com` WOFF2 requests. Simply removing the unused CSS weight did **not** establish lower transfer volume or better performance; compared with earlier 85 desktop run, the score was lower, but isolated Lighthouse runs vary with test conditions. Future font optimization should use licensed and controlled assets, actual text coverage/subsets and repeated comparable published-site measurements, rather than merely removing family-weight parameters.
