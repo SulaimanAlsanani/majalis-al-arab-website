@@ -36,9 +36,37 @@ for(const scenario of scenarios){
     .filter(a=>a.score!==null&&a.score!==undefined&&a.score<.9&&a.details?.type==='opportunity')
     .map(a=>({title:a.title,displayValue:a.displayValue,score:a.score}))
     .sort((a,b)=>a.score-b.score).slice(0,10);
-  results.push({name:scenario.name,url:origin+scenario.path,categories,metrics,topIssues});
+  // Capture the slowest visible element and heaviest transfer requests for targeted fixes.
+  // Lighthouse versions differ in detail schemas: treat absent entries as unknown, never zero.
+  const lcpAudit=lhr.audits['largest-contentful-paint-element'];
+  const lcpNode=lcpAudit?.details?.items?.[0]?.node;
+  const lcpElement=lcpNode?{
+    snippet:lcpNode.snippet||null,
+    selector:lcpNode.selector||null,
+    nodeLabel:lcpNode.nodeLabel||null
+  }:null;
+  const requests=lhr.audits['network-requests']?.details?.items||[];
+  const external=new URL(origin).origin;
+  const resources=requests
+    .filter(item=>typeof item.url==='string')
+    .map(item=>({
+      url:item.url,
+      type:item.resourceType||'unknown',
+      transferBytes:typeof item.transferSize==='number'?item.transferSize:null,
+      resourceBytes:typeof item.resourceSize==='number'?item.resourceSize:null,
+      external:!item.url.startsWith(external)
+    }))
+    .sort((a,b)=>(b.transferBytes??0)-(a.transferBytes??0));
+  const diagnostics={
+    lcpElement,
+    requestCount:resources.length,
+    measuredTransferBytes:resources.reduce((sum,item)=>sum+(item.transferBytes??0),0),
+    externalRequestCount:resources.filter(item=>item.external).length,
+    largestTransfers:resources.slice(0,10)
+  };
+  results.push({name:scenario.name,url:origin+scenario.path,categories,metrics,topIssues,diagnostics});
   await writeFile('performance-reports/'+scenario.name+'.json',JSON.stringify(lhr));
-  console.log(scenario.name,JSON.stringify({categories,metrics,topIssues}));
+  console.log(scenario.name,JSON.stringify({categories,metrics,topIssues,diagnostics}));
  }finally{await chrome.kill()}
 }
 await writeFile('performance-reports/summary.json',JSON.stringify({measuredAt:new Date().toISOString(),results},null,2));
