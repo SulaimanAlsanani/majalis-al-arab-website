@@ -325,3 +325,145 @@ footer{background:var(--deep)}
   .editorial-products .spotlight-card{transition:none!important}
   .btn:hover,.editorial-businesses .card:hover,.editorial-products .spotlight-card:hover{transform:none!important}
 }
+
+
+/* Majalis Courtyard v3 — original warm editorial hospitality direction.
+   Independent visual interpretation of the broader Sorrel editorial style.
+   No third-party template code, images, components or licensed typography copied.
+   Existing brand copy, form behavior, internal routes and themes remain unchanged. */
+:root{
+  --courtyard-curve:18px;
+  --courtyard-shadow:0 22px 60px rgba(41,42,29,.10);
+}
+body[data-theme="heritage"]{
+  --bg:#fcf9f2;--cream:#f0e9db;--dark:#344532;--deep:#25362b;
+  --gold:#bd9261;--text:#30382d;--muted:#60675a;--border:#ddd8c9;
+  --studio-accent:#835f3a;--studio-soft:#f3ede0;
+  --signature-ink:#344532;--signature-ivory:#fcf9f2;
+  --signature-gold:#bd9261;--signature-readable-gold:#835f3a;
+  --signature-readable-muted:#60675a;
+}
+body[data-theme="sand"]{
+  --bg:#fff9f0;--cream:#f2e4d1;--dark:#624533;--deep:#493327;
+  --gold:#b78155;--text:#4d3a30;--muted:#69594f;--border:#dfcdb7;
+  --studio-accent:#845331;--studio-soft:#f7ecdf;
+}
+body[data-theme="noir"]{
+  --bg:#f8f8f3;--cream:#e9ebe3;--dark:#363d39;--deep:#252d2a;
+  --gold:#ae9c78;--text:#353e38;--muted:#5e6960;--border:#d1d7cd;
+  --studio-accent:#6e634b;--studio-soft:#eff0e9;
+}
+.header{background:color-mix(in srgb,var(--bg) 97%,transparent)}
+.announcement{background:var(--deep);color:#ead7b5}
+.brand .mark{border-radius:50%;background:var(--cream);border-color:#b79b76}
+.brand .mark::before{border-color:#cdb68c}
+.navlinks>a,.nav-dropdown summary{font-weight:700}
+.navlinks a[aria-current="page"]{color:var(--studio-accent)}
+.hero.premium-hero{
+  background:var(--deep);
+  min-height:clamp(615px,77svh,850px);
+}
+.hero.premium-hero::before{
+  filter:saturate(.7) contrast(1.01) brightness(.9);
+  background-position:center 48%;
+}
+.hero.premium-hero::after{
+  background:linear-gradient(270deg,rgba(30,48,35,.88),rgba(30,48,35,.60) 42%,rgba(30,48,35,.10) 100%),
+    linear-gradient(0deg,rgba(25,37,28,.29),transparent 34%);
+}
+body.en .hero.premium-hero::after{
+  background:linear-gradient(90deg,rgba(30,48,35,.88),rgba(30,48,35,.60) 42%,rgba(30,48,35,.10)),
+    linear-gradient(0deg,rgba(25,37,28,.29),transparent 34%);
+}
+.hero.premium-hero .hero-inner{padding-block:clamp(95px,11vw,155px)}
+.hero.premium-hero .kicker{
+  color:#f1d8ab;letter-spacing:.065em;font-size:12px;
+  border-color:#dfcda3;
+}
+.hero.premium-hero h1{
+  font-size:clamp(48px,6.4vw,91px);max-width:830px;
+  line-height:1.31;letter-spacing:-.03em;
+  text-shadow:0 6px 35px #18291a60;
+}
+.hero.premium-hero h1 i{color:#e7c999}
+.hero.premium-hero p{max-width:550px;line-height:2.05}
+.hero.premium-hero .btn.gold{
+  background:#e4c99c;border-color:#e4c99c;color:#283b2c;
+}
+.hero.premium-hero .btn.ghost{border-color:#ece3d1b0}
+.hero.premium-hero .btn.gold:hover{background:#f0d8b1}
+.section{padding-block:clamp(75px,9.3vw,130px)}
+.section.sand,.inner-section.sand{background:var(--cream)}
+.section h2,.inner-section h2{
+  font-size:clamp(36px,4.15vw,58px);line-height:1.48;
+  letter-spacing:-.018em;
+}
+.section .kicker,.inner-section .kicker,.small-title{letter-spacing:.06em}
+.editorial-about .editorial-image{
+  border-radius:210px 210px 12px 12px;
+  filter:saturate(.78);box-shadow:none;
+}
+.editorial-about .editorial-image::before{
+  border-radius:210px 210px 12px 12px;
+  border-color:#bca58377;
+}
+.editorial-businesses .cards{gap:clamp(16px,2.1vw,27px)}
+.editorial-businesses .card{
+  border-radius:var(--courtyard-curve);
+  background:var(--bg);border-color:#e4dece;
+}
+.editorial-businesses .card:hover{
+  transform:translateY(-4px);box-shadow:var(--courtyard-shadow);
+}
+.editorial-businesses .card .card-image{height:clamp(260px,25vw,365px)}
+.editorial-businesses .card .card-body{min-height:235px;padding:clamp(26px,2.6vw,35px)}
+.editorial-businesses .card h3{font-size:clamp(23px,2.1vw,29px)}
+.editorial-products .spotlight-card{
+  border-radius:var(--courtyard-curve);
+  background:color-mix(in srgb,var(--bg) 86%,var(--cream));
+  min-height:clamp(220px,23vw,300px);
+}
+.editorial-products .spotlight-card:hover{background:var(--cream)}
+.editorial-locations .location-feature{border-radius:var(--courtyard-curve)}
+.editorial-contact{background:var(--deep)}
+.editorial-contact .contact-form{
+  background:#f9f5ec;border-radius:var(--courtyard-curve);
+  border:1px solid #d9ccb8;box-shadow:var(--courtyard-shadow);
+}
+.editorial-contact .contact-form :where(input,textarea,select){
+  border-radius:7px;
+}
+.inner-hero{
+  background:radial-gradient(circle at 75% 100%,#e3c58e2d,transparent 44%),var(--dark);
+  min-height:clamp(330px,37vw,450px);
+}
+.inner-hero h1{font-size:clamp(40px,5.3vw,73px);line-height:1.38}
+.inner-tile,.service-panel,.catalog-card{
+  border-radius:var(--courtyard-curve);
+  border-color:var(--border);
+  box-shadow:0 5px 20px rgba(48,56,43,.025);
+}
+.inner-tile:hover,.service-panel:hover,.catalog-card:hover{
+  border-color:#bfa57f;
+}
+.inner-cta{background:var(--deep)}
+.detail-image{border-radius:var(--courtyard-curve)}
+.inner-footer{border-top:1px solid #b99b72}
+@media(max-width:760px){
+  .hero.premium-hero{min-height:600px}
+  .hero.premium-hero::after,body.en .hero.premium-hero::after{
+    background:linear-gradient(0deg,rgba(27,45,32,.89),rgba(27,45,32,.60) 57%,rgba(27,45,32,.13));
+  }
+  .hero.premium-hero .hero-inner{padding-block:86px 101px}
+  .hero.premium-hero h1{font-size:clamp(39px,9vw,60px);line-height:1.32}
+  .editorial-about .editorial-image,.editorial-about .editorial-image::before{
+    border-radius:105px 105px 9px 9px;
+  }
+  .editorial-businesses .card .card-body{min-height:0}
+  .editorial-businesses .card .card-image{height:255px}
+  .inner-hero{min-height:0}
+}
+@media(prefers-reduced-motion:reduce){
+  .editorial-businesses .card{transition:none}
+  .editorial-businesses .card:hover{transform:none}
+}
