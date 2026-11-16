@@ -382,6 +382,19 @@ for required in [
 if "w=1280&q=70" not in atelier_css or "w=900&q=70" not in atelier_css:
     errors.append("Cinematic hero background does not match responsive image preloads")
 
+
+# Chapter IV: original bilingual experience index and layout integrity.
+if home_markup.count('class="experience-index"') != 1:
+    errors.append("Homepage experience navigation section missing")
+for destination in ('restaurant.html','diwaniya.html','roasteries.html'):
+    section = home_markup.split('class="experience-index"',1)[-1].split('</section>',1)[0]
+    if f'href="{destination}"' not in section:
+        errors.append(f"Experience index link missing: {destination}")
+if "experience-layout" not in atelier_css or "experience-links" not in atelier_css:
+    errors.append("Editorial experience navigation styles missing")
+if "@media(max-width:760px)" not in atelier_css:
+    errors.append("Mobile editorial navigation styles missing")
+
 if errors:
     print("\n".join(errors), file=sys.stderr)
     sys.exit(1)
