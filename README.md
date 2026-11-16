@@ -51,3 +51,11 @@ assets/
 - Sample photography is illustrative, not documentary imagery of Majalis Al Arab.
 - The contact form is client-side copy-only; there is no server or email connection.
 - Prices, menu items, exact branch map, hours, and service availability require confirmation.
+
+
+## Design release — 2026-11-16
+- Homepage includes a bilingual, direct-link experience index for restaurant, diwaniya and roasteries.
+- The original responsive Chapter IV editorial design is implemented in `assets/atelier.css` across 14 pages.
+- All existing theme switching, catalog/FAQ filtering, accessibility landmarks and the copy-only demo enquiry flow remain in place.
+- GitHub Pages deployment runs automatically for pushes to `main`; deployment should be considered verified only when the Pages workflow and published `build-info.json` reflect the release commit.
+- The release workflow gates deployment on static validation, production bundling and Playwright browser checks for mobile, tablet and desktop.
