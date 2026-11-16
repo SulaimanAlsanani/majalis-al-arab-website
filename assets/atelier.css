@@ -467,3 +467,81 @@ body.en .hero.premium-hero::after{
   .editorial-businesses .card{transition:none}
   .editorial-businesses .card:hover{transform:none}
 }
+
+
+/* Majalis Chapter IV — hospitality editorial redesign.
+   New experience index, asymmetrical content rhythm, lighter inner pages. */
+:root{--chapter-gap:clamp(24px,4vw,72px)}
+.experience-index{background:#233b30;color:#f9f5ec;border-top:1px solid #d4b48655}
+body[data-theme="sand"] .experience-index{background:#4a352b}
+body[data-theme="noir"] .experience-index{background:#303a35}
+.experience-layout{
+ display:grid;grid-template-columns:minmax(200px,.82fr) minmax(0,1.7fr);
+ gap:clamp(24px,6vw,100px);align-items:center;padding-block:clamp(35px,5vw,70px)
+}
+.experience-heading{border-inline-start:2px solid #d4b486;padding-inline-start:clamp(18px,2.5vw,32px)}
+.experience-eyebrow{display:block;color:#e5c99b;font-size:12px;letter-spacing:.12em;font-weight:800;margin-bottom:10px}
+.experience-heading p{font-size:clamp(16px,1.5vw,19px);line-height:1.85;margin:0;color:#f2eee4}
+.experience-links{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:0}
+.experience-links a{
+ display:flex;flex-direction:column;align-items:flex-start;justify-content:space-between;
+ min-height:127px;padding:12px clamp(12px,1.8vw,28px);
+ border-inline-start:1px solid #ffffff42;transition:background .25s ease;color:#fff
+}
+.experience-links a:hover,.experience-links a:focus-visible{background:#ffffff13}
+.experience-links a>span:first-child{font:700 12px/1.2 system-ui;color:#d9c39b}
+.experience-links strong{font-size:clamp(17px,1.65vw,23px);line-height:1.5}
+.experience-arrow{align-self:flex-end;color:#e0c18b;font-size:21px;line-height:1}
+.experience-links a:focus-visible{outline:3px solid #e5c99b;outline-offset:2px}
+.editorial-about{background:var(--bg)}
+.editorial-about .copy{position:relative}
+.editorial-about .copy::before{
+ content:"";display:block;width:58px;height:2px;background:var(--gold);margin-bottom:26px
+}
+.editorial-about .editorial-image{
+ border-radius:clamp(95px,15vw,220px) clamp(95px,15vw,220px) 12px 12px;
+}
+.editorial-businesses .cards{grid-template-columns:repeat(3,minmax(0,1fr))}
+.editorial-businesses .card{position:relative;box-shadow:0 10px 30px #2b35250a}
+.editorial-businesses .card .card-image::after{
+ content:"";position:absolute;inset:0;background:linear-gradient(0deg,#162a1b38,transparent 45%);
+ pointer-events:none
+}
+.editorial-businesses .card .card-body{min-height:245px}
+.editorial-businesses .card .underlink{margin-top:auto}
+.editorial-products .spotlight-card{position:relative;overflow:hidden;border:1px solid var(--border)}
+.editorial-products .spotlight-card::after{
+ content:"";position:absolute;inset-inline-start:28px;bottom:24px;
+ width:43px;height:1px;background:var(--gold);opacity:.6
+}
+.editorial-products .spotlight-card h3{font-size:clamp(21px,2vw,28px)}
+.editorial-locations .location-feature{box-shadow:0 16px 45px #29332610}
+.inner-hero .wrap{max-width:var(--studio-max)}
+.inner-hero::before{
+ content:"";position:absolute;inset:0;pointer-events:none;
+ background:linear-gradient(135deg,transparent 40%,#c6ac7212 100%)
+}
+.inner-section .inner-tile-grid{align-items:stretch}
+.inner-tile,.service-panel,.catalog-card{transition:border-color .2s ease,box-shadow .2s ease}
+.inner-tile:hover,.service-panel:hover,.catalog-card:hover{box-shadow:0 14px 38px #26332812}
+@media(max-width:980px){
+ .experience-layout{grid-template-columns:1fr;gap:24px}
+ .experience-links a{min-height:110px}
+}
+@media(max-width:760px){
+ .experience-layout{padding-block:32px 39px}
+ .experience-heading{padding-inline-start:18px}
+ .experience-links{grid-template-columns:1fr;border-top:1px solid #ffffff38}
+ .experience-links a{
+  min-height:68px;padding:12px 8px;display:grid;
+  grid-template-columns:30px minmax(0,1fr) 25px;align-items:center;
+  border-inline-start:0;border-bottom:1px solid #ffffff38;gap:13px
+ }
+ .experience-links strong{font-size:19px}
+ .experience-arrow{align-self:center}
+ .editorial-businesses .cards{grid-template-columns:1fr}
+ .editorial-businesses .card .card-body{min-height:0}
+}
+@media(prefers-reduced-motion:reduce){
+ .experience-links a,.inner-tile,.service-panel,.catalog-card{transition:none}
+}
