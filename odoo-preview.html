@@ -24,7 +24,7 @@
                 </nav>
                 <div class="majalis-actions">
                     <button class="majalis-bag" aria-label="سلة الطلب" type="button" data-open-cart="">
-                        <span class="majalis-inline-icon" aria-hidden="true">▢</span>
+                        <span class="majalis-basket-icon" aria-hidden="true"></span>
                         <span class="majalis-bag-label">سلّتي</span>
                         <sup class="majalis-cart-count my_cart_quantity" aria-live="polite" data-trial-cart-count="">0</sup>
                     </button>
@@ -356,7 +356,12 @@
                 <button type="button" data-open-cart="">سلة الطلب</button>
             </div>
         </footer>
-        <dialog class="majalis-trial-dialog majalis-trial-cart" id="preview-cart" aria-labelledby="preview-cart-title">
+        <div class="majalis-mobile-cart" data-majalis-mobile-cart hidden>
+    <button type="button" class="majalis-button majalis-button-gold" data-open-cart>
+        <span>عرض السلة</span><span class="majalis-mobile-count" data-majalis-mobile-count>0</span>
+    </button>
+</div>
+<dialog class="majalis-trial-dialog majalis-trial-cart" id="preview-cart" aria-labelledby="preview-cart-title">
     <header class="majalis-dialog-head">
         <h2 id="preview-cart-title">سلتك التجريبية</h2>
         <form method="dialog"><button class="majalis-close" aria-label="إغلاق السلة">×</button></form>

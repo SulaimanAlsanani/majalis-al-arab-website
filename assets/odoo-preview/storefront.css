@@ -271,7 +271,7 @@
 
 .majalis-button-gold { background: var(--ml-gold); color: #26190b; }
 .majalis-button-gold:hover { background: var(--ml-gold-hover); color: #26190b; }
-.majalis-button-outline { border-color: var(--ml-border-strong); color: var(--ml-gold); }
+.majalis-button-outline { background: transparent; border-color: var(--ml-border-strong); color: var(--ml-gold); }
 .majalis-button-outline:hover { background: #292115; color: var(--ml-gold-hover); }
 .majalis-button:disabled { cursor: progress; opacity: .58; }
 .majalis-button[aria-busy="true"] { opacity: .85; }
@@ -719,4 +719,75 @@ button { cursor: pointer; }
     border-radius: 6px;
     min-height: 42px;
     padding-inline: 10px;
+}
+
+
+.majalis-menu-tools {
+    position: sticky;
+    inset-block-start: 0;
+    z-index: 5;
+    padding-block: 12px;
+    margin-block-end: 14px;
+    background: var(--ml-black);
+    border-block-end: 1px solid var(--ml-border);
+}
+
+.majalis-mobile-cart { display: none; }
+.majalis-mobile-cart[hidden] { display: none !important; }
+
+@media (max-width: 740px) {
+    .majalis-hero { min-height: 414px; }
+    .majalis-hero-inner { padding-block: 105px 26px; }
+    .majalis-hero h1 { font-size: clamp(2.7rem, 8.6vw, 4rem); }
+    .majalis-menu-tools { gap: 8px; padding-block: 6px 9px; }
+    .majalis-catalog:has(.majalis-mobile-cart:not([hidden])) {
+        padding-block-end: calc(68px + env(safe-area-inset-bottom));
+    }
+
+    .majalis-mobile-cart {
+        display: block;
+        position: fixed;
+        z-index: 1020;
+        inset-inline: 0;
+        inset-block-end: 0;
+        padding: 9px 18px max(9px, env(safe-area-inset-bottom));
+        border-block-start: 1px solid var(--ml-border);
+        background: var(--ml-black);
+    }
+
+    .majalis-mobile-cart .majalis-button { justify-content: space-between; width: 100%; min-height: 46px; }
+    .majalis-mobile-count {
+        display: inline-grid;
+        place-items: center;
+        min-width: 29px;
+        height: 26px;
+        padding-inline: 5px;
+        border-radius: 5px;
+        background: #3a2915;
+        color: var(--ml-cream);
+    }
+    .majalis-catalog:has(.majalis-mobile-cart:not([hidden])) .majalis-status:not(:empty) {
+        inset-block-end: calc(73px + env(safe-area-inset-bottom));
+    }
+}
+
+.majalis-basket-icon {
+    color: var(--ml-gold);
+    position: relative;
+    display: inline-block;
+    width: 14px;
+    height: 12px;
+    border: 1px solid currentColor;
+    border-radius: 2px;
+}
+.majalis-basket-icon::before {
+    content: "";
+    position: absolute;
+    inset-block-start: -5px;
+    inset-inline-start: 3px;
+    width: 6px;
+    height: 6px;
+    border: 1px solid currentColor;
+    border-radius: 50% 50% 0 0;
+    border-block-end: 0;
 }

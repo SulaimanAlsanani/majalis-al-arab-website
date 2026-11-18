@@ -83,6 +83,8 @@ function renderCart() {
     }
     cartLines.replaceChildren(rows);
     select("[data-trial-cart-count]").textContent = count;
+    select("[data-majalis-mobile-count]").textContent = count;
+    select("[data-majalis-mobile-cart]").hidden = count === 0;
     select("[data-cart-total]").textContent = formatPrice(total);
     select("[data-empty-cart]").hidden = count > 0;
     for (const dish of dishes.values()) {
