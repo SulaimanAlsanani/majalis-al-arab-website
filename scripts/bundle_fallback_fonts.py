@@ -45,6 +45,11 @@ preconnect = re.compile(r'<link\b[^>]*href="https://fonts\.(?:googleapis|gstatic
 count = 0
 for page in sorted(DIST.glob("*.html")):
     text = page.read_text(encoding="utf-8")
+    if page.name == "odoo-preview.html":
+        # This preview already bundles its own local faces.
+        if "fonts.googleapis.com" in text or "fonts.gstatic.com" in text:
+            raise RuntimeError(f"{page.name}: external webfont reference in the storefront preview")
+        continue
     text, replaced = font_link.subn("", text)
     if replaced != 2:
         raise RuntimeError(f"{page.name}: expected two Google Fonts fallback references, got {replaced}")
