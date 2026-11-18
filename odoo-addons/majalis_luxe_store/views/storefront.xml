@@ -58,7 +58,8 @@
                         <i class="fa fa-user-o" aria-hidden="true"/>
                     </a>
                     <a t-if="website.has_ecommerce_access()" class="majalis-bag" href="/shop/cart"
-                       aria-label="سلة الطلب" t-att-aria-current="'page' if majalis_cart_current else None">
+                       aria-label="سلة الطلب" t-att-aria-current="'page' if majalis_cart_current else None"
+                       t-att-data-majalis-open-cart="'1' if majalis_catalog_current else None">
                         <i class="fa fa-shopping-bag" aria-hidden="true"/>
                         <span class="majalis-bag-label">سلّتي</span>
                         <sup class="majalis-cart-count my_cart_quantity" data-majalis-cart-count="" aria-live="polite"
@@ -83,7 +84,8 @@
         <div id="wrap" class="majalis-catalog"
              dir="rtl" lang="ar"
              data-added="تمت إضافة الصنف إلى سلتك."
-             data-failed="تعذرت إضافة الصنف. حاول مرة أخرى أو افتح تفاصيله.">
+             data-failed="تعذرت إضافة الصنف. حاول مرة أخرى أو افتح تفاصيله."
+             data-cart-failed="تعذر تحديث عرض السلة. افتح السلة الكاملة للتحقق من الطلب.">
             <t t-set="is_catalog_home" t-value="not category and not search and pager['page']['num'] == 1"/>
             <t t-call="majalis_luxe_store.store_header">
                 <t t-set="majalis_catalog_current" t-value="True"/>
@@ -160,6 +162,7 @@
                 </div>
             </section>
             <t t-call="majalis_luxe_store.store_footer"/>
+            <t t-call="majalis_luxe_store.cart_panel"/>
         </div>
     </template>
 
@@ -170,13 +173,13 @@
         <t t-set="variant_id" t-value="majalis_quick_variants.get(product.id)"/>
         <t t-set="line_count" t-value="majalis_cart_quantities.get(product.id, 0)"/>
         <t t-set="product_href" t-value="keep(product.website_url) + selected_attributes_hash"/>
-        <article class="majalis-card" itemscope="itemscope" itemtype="https://schema.org/Product">
+        <article class="majalis-card" t-att-data-majalis-template="product.id" itemscope="itemscope" itemtype="https://schema.org/Product">
             <div class="majalis-card-media">
                 <a t-att-href="product_href" t-att-aria-label="product.name" itemprop="url">
                     <img t-attf-src="/web/image/product.template/#{product.id}/image_512"
                          t-att-alt="product.name" itemprop="image" width="512" height="512" loading="lazy"/>
                 </a>
-                <span t-if="variant_id or line_count" class="majalis-in-cart" data-majalis-in-cart="" t-att-hidden="not line_count">
+                <span class="majalis-in-cart" data-majalis-in-cart="" t-att-hidden="not line_count">
                     <i class="fa fa-check" aria-hidden="true"/>
                     في السلة <span data-majalis-line-count="" t-out="'%g' % line_count"/>
                 </span>
@@ -197,7 +200,7 @@
                     <span t-elif="not any(ptav.price_extra for ptav in product.attribute_line_ids.product_template_value_ids)"
                           class="majalis-description" t-field="website.prevent_zero_price_sale_text"/>
                     <button t-if="variant_id and show_dish_price" type="button" class="majalis-button majalis-button-gold majalis-add"
-                            t-att-data-majalis-product="variant_id" t-att-data-quantity="line_count"
+                            t-att-data-majalis-product="variant_id"
                             t-attf-aria-label="أضف #{product.name} إلى السلة">
                         <i class="fa fa-plus" aria-hidden="true"/> أضف للسلة
                     </button>

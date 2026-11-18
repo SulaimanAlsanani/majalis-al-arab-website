@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <template id="cart_panel" name="Majalis quick cart">
+        <div class="majalis-mobile-cart" data-majalis-mobile-cart="" t-att-hidden="not majalis_cart_quantity">
+            <a href="/shop/cart" class="majalis-button majalis-button-gold" data-majalis-open-cart="">
+                <span><i class="fa fa-shopping-bag" aria-hidden="true"/> عرض السلة</span>
+                <span class="majalis-mobile-count" data-majalis-mobile-count="" t-out="majalis_cart_quantity"/>
+            </a>
+        </div>
+
+        <dialog class="majalis-quick-cart" data-majalis-dialog="" aria-labelledby="majalis-quick-cart-title">
+            <header class="majalis-cart-head">
+                <h2 id="majalis-quick-cart-title">سلة طلبك</h2>
+                <form method="dialog">
+                    <button type="submit" class="majalis-cart-close" aria-label="إغلاق السلة">×</button>
+                </form>
+            </header>
+            <p class="majalis-cart-help" data-majalis-cart-loading="" role="status" hidden="hidden">جارٍ تحميل السلة…</p>
+            <p class="majalis-cart-help" data-majalis-cart-feedback="" role="status" aria-live="polite"/>
+            <p class="majalis-cart-help" data-majalis-cart-empty="" hidden="hidden">سلتك فارغة. اختر أطباقك من القائمة.</p>
+            <ul class="majalis-cart-lines" data-majalis-cart-lines=""/>
+            <div class="majalis-cart-summary" data-majalis-cart-summary="" hidden="hidden">
+                <strong>إجمالي السلة</strong>
+                <bdi data-majalis-cart-total=""/>
+            </div>
+            <div class="majalis-cart-actions">
+                <a href="/shop/cart" class="majalis-button majalis-button-gold">متابعة الطلب</a>
+                <form method="dialog">
+                    <button type="submit" class="majalis-button majalis-button-outline">متابعة التصفح</button>
+                </form>
+            </div>
+        </dialog>
+
+        <template data-majalis-cart-row="">
+            <li class="majalis-cart-row">
+                <div class="majalis-cart-dish">
+                    <strong data-majalis-cart-name=""/>
+                    <bdi data-majalis-line-price=""/>
+                </div>
+                <div class="majalis-cart-stepper" data-majalis-stepper="">
+                    <button type="button" data-majalis-cart-delta="1" aria-label="زيادة الكمية">+</button>
+                    <span data-majalis-cart-line-quantity=""/>
+                    <button type="button" data-majalis-cart-delta="-1" aria-label="خفض الكمية">−</button>
+                </div>
+                <span class="majalis-cart-locked" data-majalis-cart-locked="" hidden="hidden"/>
+            </li>
+        </template>
+    </template>
+</odoo>
