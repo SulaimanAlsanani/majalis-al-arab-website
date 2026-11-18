@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <template id="shop_catalog" inherit_id="website_sale.products" name="Majalis Al Arab catalog">
+        <xpath expr="//div[@id='wrap']" position="before">
+            <t t-if="website.majalis_luxe_store">
+                <t t-set="no_header" t-value="True"/>
+                <t t-set="no_footer" t-value="True"/>
+                <t t-set="additional_title" t-value="category.name or 'قائمة الطعام'"/>
+                <t t-call="majalis_luxe_store.catalog"/>
+            </t>
+        </xpath>
+        <xpath expr="//div[@id='wrap']" position="attributes">
+            <attribute name="t-if">not website.majalis_luxe_store</attribute>
+        </xpath>
+    </template>
+
+    <template id="store_layout" inherit_id="website.layout" name="Majalis checkout styles">
+        <xpath expr="//div[@id='wrapwrap']" position="attributes">
+            <attribute name="t-att-data-majalis-flow">
+                '1' if website.majalis_luxe_store and '/shop/' in request.httprequest.path else None
+            </attribute>
+        </xpath>
+    </template>
+
+    <template id="brand" name="Majalis brand">
+        <a href="/shop" class="majalis-brand" aria-label="متجر مجالس العرب">
+            <span class="majalis-mark" aria-hidden="true"><i/></span>
+            <span>مجالس العرب <small lang="en" dir="ltr">MAJALIS AL ARAB</small></span>
+        </a>
+    </template>
+
+    <template id="catalog" name="Majalis catalog content">
+        <div id="wrap" class="majalis-catalog"
+             dir="rtl" lang="ar"
+             data-added="تمت إضافة الصنف إلى سلتك."
+             data-failed="تعذرت إضافة الصنف. حاول مرة أخرى أو افتح تفاصيله.">
+            <t t-set="is_catalog_home" t-value="not category and not search and pager['page']['num'] == 1"/>
+            <header class="majalis-top">
+                <div class="majalis-shell majalis-top-inner">
+                    <t t-call="majalis_luxe_store.brand"/>
+                    <nav class="majalis-nav" aria-label="التنقل في المتجر">
+                        <a href="/shop#majalis-menu" aria-current="page">قائمة الطعام</a>
+                        <a href="/shop#majalis-story">عن مجالس العرب</a>
+                    </nav>
+                    <div class="majalis-actions">
+                        <a class="majalis-account" href="/my/home" aria-label="حسابي" title="حسابي">
+                            <i class="fa fa-user-o" aria-hidden="true"/>
+                        </a>
+                        <a class="majalis-bag" href="/shop/cart" aria-label="سلة الطلب">
+                            <i class="fa fa-shopping-bag" aria-hidden="true"/>
+                            <span class="majalis-bag-label">سلّتي</span>
+                            <span class="majalis-cart-count" data-majalis-cart-count="" aria-live="polite" t-out="majalis_cart_quantity"/>
+                        </a>
+                    </div>
+                </div>
+            </header>
+
+            <section t-if="is_catalog_home" class="majalis-hero" aria-labelledby="majalis-hero-title">
+                <img class="majalis-hero-photo" src="/majalis_luxe_store/static/img/hero.webp"
+                     alt="" width="1440" height="960" fetchpriority="high"/>
+                <div class="majalis-shell majalis-hero-inner">
+                    <span class="majalis-kicker"><span class="majalis-diamond"/> من مطبخ مجالس العرب</span>
+                    <h1 id="majalis-hero-title">سفرة الأصالة <em>توصلك إلى بابك</em></h1>
+                    <p>اختر من أطباقنا السعودية واليمنية، واطلب سفرتك من مجالس العرب.</p>
+                    <a href="#majalis-menu" class="majalis-button majalis-button-gold">
+                        تصفّح قائمة الطعام <span aria-hidden="true">←</span>
+                    </a>
+                </div>
+            </section>
+
+            <section id="majalis-menu" class="majalis-menu majalis-shell" aria-labelledby="majalis-menu-title">
+                <div class="majalis-intro">
+                    <div class="majalis-ornament" aria-hidden="true"><span/></div>
+                    <h2 t-if="is_catalog_home" id="majalis-menu-title">قائمة <em>الطعام</em></h2>
+                    <h1 t-else="" id="majalis-menu-title" t-out="category.name or ('نتائج البحث' if search else 'قائمة الطعام')"/>
+                </div>
+                <div class="majalis-menu-tools">
+                    <nav class="majalis-filters" aria-label="أقسام قائمة الطعام">
+                        <a href="/shop#majalis-menu" t-att-class="'is-current' if not category else None"
+                           t-att-aria-current="'page' if not category else None">كل الأطباق</a>
+                        <t t-set="menu_categories" t-value="categories | category.child_id.filtered(lambda item: item.can_access_from_current_website())"/>
+                        <a t-foreach="menu_categories" t-as="section"
+                           t-att-href="keep('/shop/category/' + slug(section)) + '#majalis-menu'"
+                           t-att-class="'is-current' if category == section else None"
+                           t-att-aria-current="'page' if category == section else None" t-out="section.name"/>
+                    </nav>
+                    <form method="get" class="majalis-search" role="search" aria-label="بحث في الأطباق"
+                          t-att-action="('/shop/category/' + slug(category) if category else '/shop') + '#majalis-menu'">
+                        <i class="fa fa-search" aria-hidden="true"/>
+                        <input type="search" name="search" aria-label="اسم الطبق" placeholder="ابحث عن طبق..."
+                               t-att-value="original_search or search"/>
+                        <button type="submit" aria-label="بحث">بحث</button>
+                    </form>
+                </div>
+
+                <p t-if="original_search" class="majalis-message">
+                    عرض نتائج قريبة من <strong t-out="original_search"/>.
+                </p>
+                <p class="majalis-status" data-majalis-status="" role="status" aria-atomic="true"/>
+                <div t-if="products" class="majalis-grid">
+                    <t t-foreach="products" t-as="product" t-call="majalis_luxe_store.product_card"/>
+                </div>
+                <div t-else="" class="majalis-empty">
+                    <i class="fa fa-cutlery" aria-hidden="true"/>
+                    <p t-if="search">لم نجد أطباقًا تطابق بحثك.</p>
+                    <p t-else="">لا توجد أطباق متاحة في هذا القسم حاليًا.</p>
+                    <a href="/shop#majalis-menu" class="majalis-button majalis-button-outline">عرض كل الأطباق</a>
+                </div>
+                <div t-if="pager['page_count'] &gt; 1" class="majalis-pager">
+                    <t t-call="website.pager"/>
+                </div>
+            </section>
+
+            <section t-if="is_catalog_home" id="majalis-story" class="majalis-shell majalis-story">
+                <div class="majalis-story-photo">
+                    <img src="/majalis_luxe_store/static/img/table.webp" alt="طبق دجاج وأرز من مجالس العرب"
+                         width="512" height="512" loading="lazy"/>
+                </div>
+                <div class="majalis-story-body">
+                    <span class="majalis-kicker"><span class="majalis-diamond"/> عن مجالس العرب</span>
+                    <h2>أطباق تجمعنا</h2>
+                    <p>من المضغوط والمظبي إلى أطباق الأرز، اختر ما يناسب سفرتك للغداء أو للعزيمة.</p>
+                    <a href="#majalis-menu" class="majalis-button majalis-button-outline">
+                        اختر أطباقك <span aria-hidden="true">←</span>
+                    </a>
+                </div>
+            </section>
+            <footer class="majalis-foot">
+                <div class="majalis-shell majalis-foot-inner">
+                    <t t-call="majalis_luxe_store.brand"/>
+                    <a href="/shop#majalis-menu">قائمة الطعام</a>
+                    <a href="/shop/cart">سلة الطلب</a>
+                </div>
+            </footer>
+        </div>
+    </template>
+
+    <template id="product_card" name="Majalis dish card">
+        <t t-set="dish_prices" t-value="get_product_prices(product)"/>
+        <t t-set="dish_price" t-value="dish_prices['price_reduce']"/>
+        <t t-set="show_dish_price" t-value="dish_price or not website.prevent_zero_price_sale"/>
+        <t t-set="variant_id" t-value="majalis_quick_variants.get(product.id)"/>
+        <t t-set="line_count" t-value="majalis_cart_quantities.get(variant_id, 0)"/>
+        <t t-set="product_href" t-value="keep(product.website_url) + selected_attributes_hash"/>
+        <article class="majalis-card" itemscope="itemscope" itemtype="https://schema.org/Product">
+            <div class="majalis-card-media">
+                <a t-att-href="product_href" t-att-aria-label="product.name" itemprop="url">
+                    <img t-attf-src="/web/image/product.template/#{product.id}/image_512"
+                         t-att-alt="product.name" itemprop="image" width="512" height="512" loading="lazy"/>
+                </a>
+                <span t-if="variant_id" class="majalis-in-cart" data-majalis-in-cart="" t-att-hidden="not line_count">
+                    <i class="fa fa-check" aria-hidden="true"/>
+                    في السلة <span data-majalis-line-count="" t-out="'%g' % line_count"/>
+                </span>
+            </div>
+            <div class="majalis-card-body">
+                <h3><a t-att-href="product_href" itemprop="name" t-field="product.name"/></h3>
+                <p t-if="product.description_sale" class="majalis-description" t-field="product.description_sale"/>
+                <div class="majalis-card-bottom">
+                    <div class="majalis-price" t-if="show_dish_price" itemprop="offers" itemscope="itemscope"
+                         itemtype="https://schema.org/Offer">
+                        <span t-out="dish_price" t-options="{'widget': 'monetary', 'display_currency': website.currency_id}"/>
+                        <del t-if="dish_prices.get('base_price', 0) &gt; dish_price"
+                             t-out="dish_prices['base_price']"
+                             t-options="{'widget': 'monetary', 'display_currency': website.currency_id}"/>
+                        <meta itemprop="price" t-att-content="dish_price"/>
+                        <meta itemprop="priceCurrency" t-att-content="website.currency_id.name"/>
+                    </div>
+                    <span t-elif="not any(ptav.price_extra for ptav in product.attribute_line_ids.product_template_value_ids)"
+                          class="majalis-description" t-field="website.prevent_zero_price_sale_text"/>
+                    <button t-if="variant_id and show_dish_price" type="button" class="majalis-button majalis-button-gold majalis-add"
+                            t-att-data-majalis-product="variant_id" t-att-data-quantity="line_count"
+                            t-attf-aria-label="أضف #{product.name} إلى السلة">
+                        <i class="fa fa-plus" aria-hidden="true"/> أضف للسلة
+                    </button>
+                    <a t-else="" t-att-href="product_href" class="majalis-button majalis-button-outline majalis-add">
+                        التفاصيل <i class="fa fa-angle-left" aria-hidden="true"/>
+                    </a>
+                </div>
+            </div>
+        </article>
+    </template>
+</odoo>

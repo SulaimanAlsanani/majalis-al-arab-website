@@ -1,0 +1,648 @@
+@font-face {
+    font-family: Majalis Naskh;
+    src: url(/majalis_luxe_store/static/fonts/naskh-ar.woff2) format("woff2");
+    font-style: normal;
+    font-weight: 400 700;
+    font-display: swap;
+    unicode-range: U+0600-06FF, U+0750-077F, U+0870-08FF, U+FB50-FDFF, U+FE70-FEFC;
+}
+
+@font-face {
+    font-family: Majalis Tajawal;
+    src: url(/majalis_luxe_store/static/fonts/tajawal-regular-ar.woff2) format("woff2");
+    font-style: normal;
+    font-weight: 400 500;
+    font-display: swap;
+    unicode-range: U+0600-06FF, U+0750-077F, U+0870-08FF, U+FB50-FDFF, U+FE70-FEFC;
+}
+
+@font-face {
+    font-family: Majalis Tajawal;
+    src: url(/majalis_luxe_store/static/fonts/tajawal-bold-ar.woff2) format("woff2");
+    font-style: normal;
+    font-weight: 600 800;
+    font-display: swap;
+    unicode-range: U+0600-06FF, U+0750-077F, U+0870-08FF, U+FB50-FDFF, U+FE70-FEFC;
+}
+
+.majalis-catalog,
+[data-majalis-flow="1"] {
+    --ml-black: #100f0d;
+    --ml-surface: #191713;
+    --ml-panel: #201c16;
+    --ml-border: #373024;
+    --ml-border-strong: #51432c;
+    --ml-gold: #e6b657;
+    --ml-gold-hover: #f4cb78;
+    --ml-cream: #fcf4e5;
+    --ml-muted: #c1b5a2;
+    --ml-sans: "Majalis Tajawal", "Noto Sans Arabic", system-ui, sans-serif;
+    --ml-serif: "Majalis Naskh", "Noto Naskh Arabic", Georgia, serif;
+    background: var(--ml-black);
+    color: var(--ml-cream);
+}
+
+.majalis-catalog {
+    font: 400 1rem/1.65 var(--ml-sans);
+    text-align: start;
+    min-width: 0;
+}
+
+.majalis-catalog :where(a) {
+    color: inherit;
+    text-decoration: none;
+}
+
+.majalis-catalog :where(a, button, input):focus-visible {
+    outline: 2px solid var(--ml-gold);
+    outline-offset: 4px;
+}
+
+.majalis-shell {
+    width: min(100% - 80px, 1200px);
+    margin-inline: auto;
+}
+
+.majalis-top {
+    background: #13110f;
+    border-bottom: 1px solid var(--ml-border);
+}
+
+.majalis-top-inner {
+    min-height: 79px;
+    display: flex;
+    gap: 24px;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.majalis-brand {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    color: var(--ml-cream);
+    font: 700 1.6rem/.95 var(--ml-serif);
+    white-space: nowrap;
+}
+
+.majalis-brand small {
+    display: block;
+    text-align: right;
+    font: 600 .53rem/1.5 system-ui, sans-serif;
+    letter-spacing: .20em;
+    margin-block-start: 5px;
+    color: var(--ml-gold);
+}
+
+.majalis-mark {
+    display: grid;
+    flex: 0 0 auto;
+    place-items: center;
+    width: 43px;
+    height: 43px;
+    color: var(--ml-gold);
+    position: relative;
+    border: 1px solid var(--ml-border-strong);
+    border-radius: 50%;
+    background: #231b10;
+}
+
+.majalis-mark::before,
+.majalis-mark::after,
+.majalis-mark > i {
+    content: "";
+    grid-area: 1 / 1;
+    width: 17px;
+    height: 17px;
+    border: 1px solid currentColor;
+}
+
+.majalis-mark::after { transform: rotate(45deg); }
+.majalis-mark > i { width: 4px; height: 4px; background: currentColor; transform: rotate(45deg); }
+
+.majalis-nav,
+.majalis-actions,
+.majalis-bag,
+.majalis-foot-inner {
+    display: flex;
+    align-items: center;
+    gap: 26px;
+}
+
+.majalis-nav a {
+    color: var(--ml-muted);
+    font-weight: 700;
+    padding-block: 8px;
+}
+
+.majalis-nav a[aria-current],
+.majalis-nav a:hover,
+.majalis-foot a:hover { color: var(--ml-gold); }
+
+.majalis-actions { gap: 14px; }
+
+.majalis-account {
+    display: grid;
+    width: 37px;
+    height: 40px;
+    place-items: center;
+    color: var(--ml-gold);
+}
+
+.majalis-bag {
+    gap: 9px;
+    color: var(--ml-cream);
+    min-height: 42px;
+    padding: 3px 11px 3px 8px;
+    border: 1px solid var(--ml-border-strong);
+    border-radius: 8px;
+    white-space: nowrap;
+}
+
+.majalis-bag > i { color: var(--ml-gold); }
+.majalis-bag:hover { border-color: var(--ml-gold); color: var(--ml-cream); }
+
+.majalis-cart-count {
+    display: inline-grid;
+    min-width: 24px;
+    height: 24px;
+    place-items: center;
+    padding-inline: 4px;
+    background: var(--ml-gold);
+    color: #21170b;
+    border-radius: 50px;
+    font: 700 .75rem/1 system-ui, sans-serif;
+}
+
+.majalis-hero {
+    position: relative;
+    isolation: isolate;
+    display: grid;
+    align-items: center;
+    min-height: 515px;
+    overflow: hidden;
+    border-bottom: 1px solid var(--ml-border);
+    background: #15120e;
+}
+
+.majalis-hero-photo {
+    position: absolute;
+    inset-block: 0;
+    inset-inline-end: 0;
+    width: 70%;
+    height: 100%;
+    object-fit: cover;
+    object-position: 40% 54%;
+    z-index: -2;
+}
+
+.majalis-hero::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    /* rtl:ignore */
+    background: linear-gradient(270deg, #15120e 8%, #15120e 28%, rgba(21,18,14,.90) 41%, rgba(21,18,14,.25) 65%, rgba(21,18,14,.03) 100%),
+                linear-gradient(0deg, rgba(19,16,12,.6), transparent 35%);
+}
+
+.majalis-hero-inner { padding-block: 62px 66px; }
+
+.majalis-kicker {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    color: var(--ml-gold);
+    font-weight: 700;
+}
+
+.majalis-diamond,
+.majalis-ornament > span {
+    width: 8px;
+    height: 8px;
+    flex: 0 0 auto;
+    transform: rotate(45deg);
+    border: 1px solid var(--ml-gold);
+}
+
+.majalis-catalog :is(h1, h2, h3) {
+    color: var(--ml-cream);
+    font-family: var(--ml-serif);
+    font-weight: 700;
+    letter-spacing: normal;
+}
+
+.majalis-catalog :is(h1, h2) em {
+    color: var(--ml-gold);
+    font-style: normal;
+}
+
+.majalis-hero h1 {
+    margin: 18px 0 10px;
+    font-size: clamp(3.7rem, 6.2vw, 6.4rem);
+    line-height: 1.05;
+}
+
+.majalis-hero h1 em { display: block; }
+
+.majalis-hero p,
+.majalis-story p {
+    color: var(--ml-muted);
+    font-size: clamp(1.05rem, 2vw, 1.26rem);
+    margin-block: 18px 28px;
+    max-width: 28rem;
+}
+
+.majalis-button {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    padding: 9px 17px;
+    min-height: 43px;
+    border: 1px solid transparent;
+    border-radius: 7px;
+    font: 700 .98rem/1.25 var(--ml-sans);
+    text-align: center;
+    transition: background-color .16s ease, border-color .16s ease;
+}
+
+.majalis-button-gold { background: var(--ml-gold); color: #26190b; }
+.majalis-button-gold:hover { background: var(--ml-gold-hover); color: #26190b; }
+.majalis-button-outline { border-color: var(--ml-border-strong); color: var(--ml-gold); }
+.majalis-button-outline:hover { background: #292115; color: var(--ml-gold-hover); }
+.majalis-button:disabled { cursor: progress; opacity: .58; }
+.majalis-button[aria-busy="true"] { opacity: .85; }
+.majalis-hero .majalis-button { min-height: 51px; padding-inline: 21px; }
+
+.majalis-menu { padding-block: 46px 76px; scroll-margin-top: 18px; }
+
+.majalis-intro { text-align: center; margin-bottom: 24px; }
+
+.majalis-intro :is(h1, h2) {
+    margin-block: 11px 0;
+    font-size: clamp(2.8rem, 4.4vw, 4rem);
+    line-height: 1.18;
+}
+
+.majalis-ornament {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 13px;
+}
+
+.majalis-ornament::before,
+.majalis-ornament::after {
+    content: "";
+    width: 28px;
+    height: 1px;
+    background: var(--ml-border-strong);
+}
+
+.majalis-menu-tools {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 18px;
+    padding-block: 0 20px;
+}
+
+.majalis-filters {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.majalis-filters a {
+    min-height: 40px;
+    display: flex;
+    align-items: center;
+    border: 1px solid var(--ml-border);
+    border-radius: 7px;
+    padding: 5px 14px;
+    color: var(--ml-muted);
+    background: #171510;
+    font-weight: 700;
+}
+
+.majalis-filters a:hover,
+.majalis-filters a.is-current {
+    color: var(--ml-gold);
+    border-color: var(--ml-border-strong);
+    background: #2a2115;
+}
+
+.majalis-search {
+    display: flex;
+    align-items: center;
+    flex: 0 1 295px;
+    min-width: 0;
+    gap: 9px;
+    padding: 4px 12px 4px 4px;
+    background: var(--ml-surface);
+    border: 1px solid var(--ml-border);
+    border-radius: 7px;
+    color: var(--ml-gold);
+}
+
+.majalis-search input {
+    flex: 1 1 0;
+    min-width: 0;
+    width: 100%;
+    border: 0;
+    background: transparent;
+    color: var(--ml-cream);
+    font: inherit;
+}
+
+.majalis-search input::placeholder { color: var(--ml-muted); opacity: 1; }
+
+.majalis-search button {
+    color: var(--ml-gold);
+    background: #292115;
+    border: 1px solid var(--ml-border-strong);
+    border-radius: 5px;
+    min-height: 34px;
+    padding-inline: 12px;
+    font-weight: 700;
+}
+
+.majalis-search button:hover { border-color: var(--ml-gold); }
+
+.majalis-status,
+.majalis-message {
+    color: var(--ml-gold);
+    font-weight: 700;
+    margin-block: 0 9px;
+}
+
+.majalis-status:not(:empty) {
+    position: fixed;
+    inset-inline-end: 20px;
+    inset-block-end: 20px;
+    z-index: 1040;
+    max-width: min(26rem, 100% - 40px);
+    padding: 9px 15px;
+    margin: 0;
+    background: var(--ml-panel);
+    border: 1px solid var(--ml-border-strong);
+    border-radius: 8px;
+    box-shadow: 0 8px 24px rgba(0,0,0,.3);
+    pointer-events: none;
+}
+
+.majalis-status:empty {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    overflow: hidden;
+    clip-path: inset(50%);
+}
+
+.majalis-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 19px;
+}
+
+.majalis-card {
+    display: flex;
+    flex-direction: column;
+    background: var(--ml-surface);
+    border: 1px solid var(--ml-border);
+    border-radius: 12px;
+    overflow: hidden;
+}
+
+.majalis-card:focus-within,
+.majalis-card:hover { border-color: var(--ml-border-strong); }
+
+.majalis-card-media {
+    position: relative;
+    border-bottom: 1px solid var(--ml-border);
+    background: var(--ml-panel);
+}
+
+.majalis-card-media a {
+    display: block;
+    overflow: hidden;
+}
+
+.majalis-card-media img {
+    display: block;
+    width: 100%;
+    height: auto;
+    aspect-ratio: 1.62;
+    object-fit: cover;
+    object-position: center 53%;
+    transition: transform .25s ease;
+}
+
+.majalis-card-media a:hover img { transform: scale(1.04); }
+
+.majalis-in-cart {
+    position: absolute;
+    inset-block-start: 12px;
+    inset-inline-start: 12px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    color: #ecfaf0;
+    background: #263d2d;
+    border: 1px solid #81ac8c;
+    border-radius: 6px;
+    padding: 5px 9px;
+    font-size: .9rem;
+    font-weight: 700;
+}
+
+.majalis-in-cart[hidden] { display: none; }
+
+.majalis-card-body {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    padding: 15px 17px 17px;
+}
+
+.majalis-card h3 {
+    font-size: 1.68rem;
+    line-height: 1.24;
+    margin-block: 0 5px;
+    overflow-wrap: anywhere;
+}
+
+.majalis-card h3 a:hover { color: var(--ml-gold); }
+
+.majalis-description {
+    color: var(--ml-muted);
+    margin-block: 2px 13px;
+    white-space: pre-line;
+    overflow-wrap: anywhere;
+}
+
+.majalis-card-bottom {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: auto;
+    padding-top: 10px;
+}
+
+.majalis-price {
+    display: flex;
+    align-items: baseline;
+    flex-wrap: wrap;
+    gap: 5px 8px;
+    color: var(--ml-gold);
+    font-size: 1.23rem;
+    font-weight: 700;
+}
+
+.majalis-price del { font-size: .88rem; color: var(--ml-muted); }
+.majalis-add { margin-inline-start: auto; min-height: 39px; }
+
+.majalis-empty {
+    padding: 52px 20px;
+    border: 1px solid var(--ml-border);
+    border-radius: 12px;
+    text-align: center;
+    color: var(--ml-muted);
+}
+
+.majalis-empty i { color: var(--ml-gold); font-size: 1.5rem; margin-bottom: 8px; }
+
+.majalis-pager { display: flex; justify-content: center; margin-top: 28px; }
+
+.majalis-pager .page-link {
+    --pagination-bg: var(--ml-surface);
+    --pagination-color: var(--ml-cream);
+    --pagination-border-color: var(--ml-border);
+    --pagination-active-color: var(--ml-black);
+    --pagination-active-bg: var(--ml-gold);
+    --pagination-active-border-color: var(--ml-gold);
+    --pagination-hover-color: var(--ml-gold);
+    --pagination-hover-bg: var(--ml-panel);
+    --pagination-hover-border-color: var(--ml-border-strong);
+    --pagination-disabled-color: var(--ml-muted);
+    --pagination-disabled-bg: var(--ml-surface);
+    --pagination-disabled-border-color: var(--ml-border);
+}
+
+.majalis-story {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    background: var(--ml-surface);
+    border: 1px solid var(--ml-border);
+    border-radius: 12px;
+    overflow: hidden;
+    margin-bottom: 64px;
+}
+
+.majalis-story-photo { min-height: 325px; position: relative; }
+.majalis-story-photo img { position: absolute; width: 100%; height: 100%; object-fit: cover; }
+.majalis-story-body { padding: clamp(25px, 5vw, 65px); align-self: center; }
+.majalis-story h2 { font-size: clamp(2.45rem, 4vw, 4.2rem); margin-block: 9px 0; }
+.majalis-story p { margin-block: 4px 18px; }
+
+.majalis-foot { background: #15130f; border-top: 1px solid var(--ml-border); }
+.majalis-foot-inner { min-height: 104px; padding-block: 18px; flex-wrap: wrap; }
+.majalis-foot-inner .majalis-brand { margin-inline-end: auto; }
+
+[data-majalis-flow="1"] :is(#product_detail, .oe_website_sale) {
+    --body-color: var(--ml-cream);
+    --body-color-rgb: 252, 244, 229;
+    --body-bg: var(--ml-black);
+    --body-bg-rgb: 16, 15, 13;
+    --border-color: var(--ml-border);
+    --emphasis-color: var(--ml-cream);
+    --secondary-color: var(--ml-muted);
+    --secondary-color-rgb: 193, 181, 162;
+    --link-color: var(--ml-gold);
+    --link-color-rgb: 230, 182, 87;
+    --link-hover-color: var(--ml-gold-hover);
+    --link-hover-color-rgb: 244, 203, 120;
+    --light: var(--ml-panel);
+    --light-rgb: 32, 28, 22;
+    --secondary-bg: var(--ml-panel);
+    color: var(--ml-cream);
+}
+
+[data-majalis-flow="1"] :is(#product_detail, .oe_website_sale) .btn-primary {
+    --btn-color: #26190b;
+    --btn-bg: var(--ml-gold);
+    --btn-border-color: var(--ml-gold);
+    --btn-hover-color: #26190b;
+    --btn-hover-bg: var(--ml-gold-hover);
+    --btn-hover-border-color: var(--ml-gold-hover);
+}
+
+[data-majalis-flow="1"] .o_website_sale_checkout :is(.o_total_card, .accordion-item, .accordion-button) {
+    --card-bg: var(--ml-surface);
+    --card-border-color: var(--ml-border);
+    --accordion-bg: var(--ml-surface);
+    --accordion-btn-bg: var(--ml-surface);
+    --accordion-active-bg: var(--ml-panel);
+    --accordion-active-color: var(--ml-cream);
+}
+
+[data-majalis-flow="1"] .oe_website_sale :is(.form-control, .form-select) {
+    background-color: var(--ml-surface);
+    border-color: var(--ml-border-strong);
+    color: var(--ml-cream);
+}
+
+[data-majalis-flow="1"] .oe_website_sale .btn-link {
+    --btn-color: var(--ml-gold);
+    --btn-hover-color: var(--ml-gold-hover);
+}
+
+@media (max-width: 960px) {
+    .majalis-shell { width: min(100% - 54px, 1200px); }
+    .majalis-hero { min-height: 470px; }
+    .majalis-grid { gap: 13px; }
+    .majalis-card-body { padding-inline: 13px; }
+}
+
+@media (max-width: 740px) {
+    .majalis-shell { width: calc(100% - 36px); }
+    .majalis-top-inner { min-height: 65px; gap: 10px; }
+    .majalis-nav { display: none; }
+    .majalis-brand { font-size: 1.4rem; gap: 9px; }
+    .majalis-mark { width: 37px; height: 37px; }
+    .majalis-actions { gap: 4px; }
+    .majalis-hero { min-height: 490px; align-items: end; }
+    .majalis-hero-photo { width: 100%; height: 100%; object-position: 28% center; }
+    .majalis-hero::before {
+        background: linear-gradient(0deg, #15120e 0%, rgba(21,18,14,.92) 25%, rgba(21,18,14,.41) 69%, rgba(21,18,14,.04) 100%);
+    }
+    .majalis-hero-inner { padding-block: 125px 34px; }
+    .majalis-hero h1 { font-size: clamp(3rem, 9vw, 4.5rem); }
+    .majalis-hero p { margin-block: 12px 18px; max-width: 21rem; }
+    .majalis-menu { padding-block: 33px 43px; }
+    .majalis-menu-tools { align-items: stretch; flex-direction: column; gap: 12px; }
+    .majalis-search { flex-basis: auto; }
+    .majalis-filters { flex-wrap: nowrap; overflow-x: auto; padding-block: 4px; }
+    .majalis-filters a { flex: 0 0 auto; }
+    .majalis-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .majalis-story { grid-template-columns: 1fr; margin-bottom: 38px; }
+    .majalis-story-photo { min-height: 245px; }
+    .majalis-foot-inner { gap: 13px; }
+}
+
+@media (max-width: 480px) {
+    .majalis-grid { grid-template-columns: 1fr; }
+    .majalis-card-media img { aspect-ratio: 1.9; }
+    .majalis-card-body { padding-inline: 16px; }
+    .majalis-foot-inner .majalis-brand { width: 100%; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .majalis-catalog *, .majalis-catalog *::before, .majalis-catalog *::after {
+        transition: none !important;
+    }
+}
