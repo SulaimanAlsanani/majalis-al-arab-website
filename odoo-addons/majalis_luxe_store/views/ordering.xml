@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <template id="product_flow" inherit_id="website_sale.product" name="Majalis dish details">
+        <xpath expr="//t[@t-call='website.layout']" position="inside">
+            <t t-set="majalis_native_flow" t-value="website.majalis_luxe_store"/>
+        </xpath>
+        <xpath expr="//*[@id='product_details']/*[@t-field='product.description_ecommerce']" position="after">
+            <p t-if="website.majalis_luxe_store and not product.description_ecommerce and product.description_sale"
+               class="majalis-dish-summary" t-field="product.description_sale"/>
+        </xpath>
+    </template>
+
+    <template id="checkout_flow" inherit_id="website_sale.checkout_layout" name="Majalis checkout">
+        <xpath expr="//t[@t-call='website.layout']" position="inside">
+            <t t-set="majalis_native_flow" t-value="website.majalis_luxe_store"/>
+        </xpath>
+    </template>
+
+    <template id="address_flow" inherit_id="website_sale.address" name="Majalis delivery address">
+        <xpath expr="//t[@t-call='website.layout']" position="inside">
+            <t t-set="majalis_native_flow" t-value="website.majalis_luxe_store"/>
+        </xpath>
+    </template>
+
+    <template id="cart_title" inherit_id="website_sale.cart" name="Majalis cart title">
+        <xpath expr="//t[@t-call='website_sale.checkout_layout']/div[hasclass('col')]/h3[1]" position="before">
+            <h1 t-if="website.majalis_luxe_store" class="majalis-order-title">مراجعة طلبك</h1>
+        </xpath>
+        <xpath expr="//t[@t-call='website_sale.checkout_layout']/div[hasclass('col')]/h3[1]" position="attributes">
+            <attribute name="t-if">not website.majalis_luxe_store</attribute>
+        </xpath>
+    </template>
+</odoo>

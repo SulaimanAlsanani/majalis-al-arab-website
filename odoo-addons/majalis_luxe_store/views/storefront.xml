@@ -14,11 +14,26 @@
         </xpath>
     </template>
 
-    <template id="store_layout" inherit_id="website.layout" name="Majalis checkout styles">
+    <template id="store_layout" inherit_id="website.layout" name="Majalis storefront navigation">
         <xpath expr="//div[@id='wrapwrap']" position="attributes">
-            <attribute name="t-att-data-majalis-flow">
-                '1' if website.majalis_luxe_store and '/shop/' in request.httprequest.path else None
-            </attribute>
+            <attribute name="t-att-data-majalis-flow">'1' if majalis_native_flow else None</attribute>
+        </xpath>
+        <xpath expr="//header[@id='top']" position="before">
+            <t t-if="majalis_native_flow and not no_header" t-call="majalis_luxe_store.store_header">
+                <t t-set="majalis_cart_quantity" t-value="request.session.get('website_sale_cart_quantity')"/>
+                <t t-if="majalis_cart_quantity is None" t-set="majalis_cart_quantity"
+                   t-value="website.sale_get_order().cart_quantity or 0"/>
+                <t t-set="majalis_cart_current" t-value="request.httprequest.path.rstrip('/').endswith('/shop/cart')"/>
+            </t>
+        </xpath>
+        <xpath expr="//header[@id='top']" position="attributes">
+            <attribute name="t-if" add="not majalis_native_flow" separator=" and "/>
+        </xpath>
+        <xpath expr="//footer[@id='bottom']" position="before">
+            <t t-if="majalis_native_flow and not no_footer" t-call="majalis_luxe_store.store_footer"/>
+        </xpath>
+        <xpath expr="//footer[@id='bottom']" position="attributes">
+            <attribute name="t-if" add="not majalis_native_flow" separator=" and "/>
         </xpath>
     </template>
 
@@ -29,31 +44,50 @@
         </a>
     </template>
 
+    <template id="store_header" name="Majalis store header">
+        <header class="majalis-top" lang="ar" dir="rtl">
+            <div class="majalis-shell majalis-top-inner">
+                <t t-call="majalis_luxe_store.brand"/>
+                <nav class="majalis-nav" aria-label="التنقل في المتجر">
+                    <a href="/shop#majalis-menu"
+                       t-att-aria-current="'page' if majalis_catalog_current else None">قائمة الطعام</a>
+                    <a href="/shop#majalis-story">عن مجالس العرب</a>
+                </nav>
+                <div class="majalis-actions">
+                    <a class="majalis-account" href="/my/home" aria-label="حسابي" title="حسابي">
+                        <i class="fa fa-user-o" aria-hidden="true"/>
+                    </a>
+                    <a t-if="website.has_ecommerce_access()" class="majalis-bag" href="/shop/cart"
+                       aria-label="سلة الطلب" t-att-aria-current="'page' if majalis_cart_current else None">
+                        <i class="fa fa-shopping-bag" aria-hidden="true"/>
+                        <span class="majalis-bag-label">سلّتي</span>
+                        <sup class="majalis-cart-count my_cart_quantity" data-majalis-cart-count="" aria-live="polite"
+                             t-att-data-order-id="request.session.get('sale_order_id', '')" t-out="majalis_cart_quantity"/>
+                    </a>
+                </div>
+            </div>
+        </header>
+    </template>
+
+    <template id="store_footer" name="Majalis store footer">
+        <footer class="majalis-foot" lang="ar" dir="rtl">
+            <div class="majalis-shell majalis-foot-inner">
+                <t t-call="majalis_luxe_store.brand"/>
+                <a href="/shop#majalis-menu">قائمة الطعام</a>
+                <a t-if="website.has_ecommerce_access()" href="/shop/cart">سلة الطلب</a>
+            </div>
+        </footer>
+    </template>
+
     <template id="catalog" name="Majalis catalog content">
         <div id="wrap" class="majalis-catalog"
              dir="rtl" lang="ar"
              data-added="تمت إضافة الصنف إلى سلتك."
              data-failed="تعذرت إضافة الصنف. حاول مرة أخرى أو افتح تفاصيله.">
             <t t-set="is_catalog_home" t-value="not category and not search and pager['page']['num'] == 1"/>
-            <header class="majalis-top">
-                <div class="majalis-shell majalis-top-inner">
-                    <t t-call="majalis_luxe_store.brand"/>
-                    <nav class="majalis-nav" aria-label="التنقل في المتجر">
-                        <a href="/shop#majalis-menu" aria-current="page">قائمة الطعام</a>
-                        <a href="/shop#majalis-story">عن مجالس العرب</a>
-                    </nav>
-                    <div class="majalis-actions">
-                        <a class="majalis-account" href="/my/home" aria-label="حسابي" title="حسابي">
-                            <i class="fa fa-user-o" aria-hidden="true"/>
-                        </a>
-                        <a class="majalis-bag" href="/shop/cart" aria-label="سلة الطلب">
-                            <i class="fa fa-shopping-bag" aria-hidden="true"/>
-                            <span class="majalis-bag-label">سلّتي</span>
-                            <span class="majalis-cart-count" data-majalis-cart-count="" aria-live="polite" t-out="majalis_cart_quantity"/>
-                        </a>
-                    </div>
-                </div>
-            </header>
+            <t t-call="majalis_luxe_store.store_header">
+                <t t-set="majalis_catalog_current" t-value="True"/>
+            </t>
 
             <section t-if="is_catalog_home" class="majalis-hero" aria-labelledby="majalis-hero-title">
                 <img class="majalis-hero-photo" src="/majalis_luxe_store/static/img/hero.webp"
@@ -125,13 +159,7 @@
                     </a>
                 </div>
             </section>
-            <footer class="majalis-foot">
-                <div class="majalis-shell majalis-foot-inner">
-                    <t t-call="majalis_luxe_store.brand"/>
-                    <a href="/shop#majalis-menu">قائمة الطعام</a>
-                    <a href="/shop/cart">سلة الطلب</a>
-                </div>
-            </footer>
+            <t t-call="majalis_luxe_store.store_footer"/>
         </div>
     </template>
 
@@ -140,7 +168,7 @@
         <t t-set="dish_price" t-value="dish_prices['price_reduce']"/>
         <t t-set="show_dish_price" t-value="dish_price or not website.prevent_zero_price_sale"/>
         <t t-set="variant_id" t-value="majalis_quick_variants.get(product.id)"/>
-        <t t-set="line_count" t-value="majalis_cart_quantities.get(variant_id, 0)"/>
+        <t t-set="line_count" t-value="majalis_cart_quantities.get(product.id, 0)"/>
         <t t-set="product_href" t-value="keep(product.website_url) + selected_attributes_hash"/>
         <article class="majalis-card" itemscope="itemscope" itemtype="https://schema.org/Product">
             <div class="majalis-card-media">
@@ -148,7 +176,7 @@
                     <img t-attf-src="/web/image/product.template/#{product.id}/image_512"
                          t-att-alt="product.name" itemprop="image" width="512" height="512" loading="lazy"/>
                 </a>
-                <span t-if="variant_id" class="majalis-in-cart" data-majalis-in-cart="" t-att-hidden="not line_count">
+                <span t-if="variant_id or line_count" class="majalis-in-cart" data-majalis-in-cart="" t-att-hidden="not line_count">
                     <i class="fa fa-check" aria-hidden="true"/>
                     في السلة <span data-majalis-line-count="" t-out="'%g' % line_count"/>
                 </span>

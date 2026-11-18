@@ -48,12 +48,12 @@
     min-width: 0;
 }
 
-.majalis-catalog :where(a) {
+:is(.majalis-catalog, .majalis-top, .majalis-foot) :where(a) {
     color: inherit;
     text-decoration: none;
 }
 
-.majalis-catalog :where(a, button, input):focus-visible {
+:is(.majalis-catalog, .majalis-top, .majalis-foot, [data-majalis-flow="1"]) :where(a, button, input, select):focus-visible {
     outline: 2px solid var(--ml-gold);
     outline-offset: 4px;
 }
@@ -62,6 +62,8 @@
     width: min(100% - 80px, 1200px);
     margin-inline: auto;
 }
+
+.majalis-top, .majalis-foot { font: 400 1rem/1.65 var(--ml-sans); }
 
 .majalis-top {
     background: #13110f;
@@ -160,9 +162,10 @@
 }
 
 .majalis-bag > i { color: var(--ml-gold); }
-.majalis-bag:hover { border-color: var(--ml-gold); color: var(--ml-cream); }
+.majalis-bag:hover, .majalis-bag[aria-current] { border-color: var(--ml-gold); color: var(--ml-cream); }
 
 .majalis-cart-count {
+    position: static;
     display: inline-grid;
     min-width: 24px;
     height: 24px;
@@ -570,6 +573,7 @@
     --light-rgb: 32, 28, 22;
     --secondary-bg: var(--ml-panel);
     color: var(--ml-cream);
+    font-family: var(--ml-sans);
 }
 
 [data-majalis-flow="1"] :is(#product_detail, .oe_website_sale) .btn-primary {
@@ -581,13 +585,29 @@
     --btn-hover-border-color: var(--ml-gold-hover);
 }
 
-[data-majalis-flow="1"] .o_website_sale_checkout :is(.o_total_card, .accordion-item, .accordion-button) {
-    --card-bg: var(--ml-surface);
-    --card-border-color: var(--ml-border);
-    --accordion-bg: var(--ml-surface);
-    --accordion-btn-bg: var(--ml-surface);
-    --accordion-active-bg: var(--ml-panel);
-    --accordion-active-color: var(--ml-cream);
+[data-majalis-flow="1"] .o_website_sale_checkout .o_total_card {
+    --card-color: var(--ml-cream);
+    --o-cc1-bg: var(--ml-surface);
+    background-color: var(--ml-surface);
+    border-color: var(--ml-border);
+    color: var(--ml-cream);
+}
+
+[data-majalis-flow="1"] .o_total_card :is(.accordion-item, .accordion-button) {
+    background-color: var(--ml-surface);
+    color: var(--ml-cream);
+}
+
+[data-majalis-flow="1"] .o_wizard :is(.o_wizard_step_active, .dropdown-toggle) {
+    color: var(--ml-gold);
+}
+
+[data-majalis-flow="1"] .o_wizard .dropdown-menu {
+    --dropdown-bg: var(--ml-surface);
+    --dropdown-border-color: var(--ml-border);
+    --dropdown-link-color: var(--ml-cream);
+    --dropdown-link-hover-color: var(--ml-gold);
+    --dropdown-link-hover-bg: var(--ml-panel);
 }
 
 [data-majalis-flow="1"] .oe_website_sale :is(.form-control, .form-select) {
@@ -599,6 +619,52 @@
 [data-majalis-flow="1"] .oe_website_sale .btn-link {
     --btn-color: var(--ml-gold);
     --btn-hover-color: var(--ml-gold-hover);
+}
+
+[data-majalis-flow="1"] .oe_website_sale {
+    max-width: min(100% - 36px, 1200px);
+}
+
+[data-majalis-flow="1"] .oe_website_sale :is(h1, h2, h3) {
+    color: var(--ml-cream);
+    font-family: var(--ml-serif);
+}
+
+[data-majalis-flow="1"] :is(#product_details h1, .majalis-order-title) {
+    margin-block: 0 12px;
+    font-size: clamp(2.25rem, 4vw, 3.15rem);
+    line-height: 1.2;
+}
+
+[data-majalis-flow="1"] #product_details .majalis-dish-summary {
+    margin-block: 0 22px;
+    color: var(--ml-muted);
+    font-size: 1.12rem;
+    white-space: pre-line;
+}
+
+[data-majalis-flow="1"] #product_details .product_price .oe_price {
+    color: var(--ml-gold);
+}
+
+[data-majalis-flow="1"] .o_wsale_product_images :is(.o_wsale_product_images_view, .product_detail_img) {
+    border-radius: 12px;
+}
+
+[data-majalis-flow="1"] :is(.o_website_sale_checkout, .o_wsale_address_fill) {
+    padding-block: clamp(1.2rem, 3.5vw, 2.5rem) !important;
+}
+
+[data-majalis-flow="1"] .oe_website_sale .form-control::placeholder {
+    color: var(--ml-muted);
+}
+
+[data-majalis-flow="1"] .oe_website_sale .btn-outline-secondary {
+    --btn-color: var(--ml-gold);
+    --btn-border-color: var(--ml-border-strong);
+    --btn-hover-bg: var(--ml-panel);
+    --btn-hover-color: var(--ml-cream);
+    --btn-hover-border-color: var(--ml-gold);
 }
 
 @media (max-width: 960px) {

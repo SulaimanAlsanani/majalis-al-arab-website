@@ -1,7 +1,7 @@
 {
     'name': 'Majalis Al Arab | Storefront',
     'summary': 'Arabic restaurant storefront for the Odoo eCommerce catalog',
-    'version': '18.0.1.0.0',
+    'version': '18.0.1.1.0',
     'category': 'Website/eCommerce',
     'author': 'Kayan',
     'license': 'LGPL-3',
@@ -9,6 +9,7 @@
     'data': [
         'views/res_config_settings.xml',
         'views/storefront.xml',
+        'views/ordering.xml',
     ],
     'assets': {
         'web.assets_frontend': [

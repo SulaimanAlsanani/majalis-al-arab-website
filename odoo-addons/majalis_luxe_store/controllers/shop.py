@@ -15,7 +15,7 @@ class MajalisShop(WebsiteSale):
         order = website.sale_get_order()
         quantities = defaultdict(float)
         for line in order.website_order_line:
-            quantities[line.product_id.id] += line.product_uom_qty
+            quantities[line.product_id.product_tmpl_id.id] += line.product_uom_qty
 
         variants = {}
         for product in values['products']:
