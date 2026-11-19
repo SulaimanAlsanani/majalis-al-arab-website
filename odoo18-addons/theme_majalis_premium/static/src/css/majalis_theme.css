@@ -1,0 +1,18 @@
+:root{--majalis-ink:#17272a;--majalis-gold:#ab864f;--majalis-cream:#f8f7f3}
+.majalis-theme{direction:rtl;font-family:"DIN Next Arabic","DIN Next LT Arabic","Tajawal",sans-serif;color:var(--majalis-ink);background:var(--majalis-cream)}
+.majalis-theme .majalis-wrap{width:min(1280px,100%);margin:auto;padding-inline:clamp(16px,3vw,64px)}
+.majalis-theme .majalis-hero{padding:65px 0;background:#17272a;color:white}
+.majalis-theme .majalis-hero .majalis-wrap{display:grid;grid-template-columns:1.1fr .9fr;gap:40px;align-items:center}
+.majalis-theme .majalis-hero h1{font-size:clamp(2.1rem,4vw,4rem);line-height:1.25;font-weight:800}
+.majalis-theme .majalis-hero p{color:#d7e1dc;line-height:1.9;max-width:540px}
+.majalis-theme .majalis-hero img{width:100%;height:315px;object-fit:cover;border-radius:18px}
+.majalis-theme .majalis-button{display:inline-flex;padding:13px 24px;border-radius:10px;background:var(--majalis-gold);color:white;font-weight:700;text-decoration:none}
+.majalis-theme .majalis-button:hover{background:#927044;color:white}
+.majalis-theme .majalis-sections{padding:54px 0}
+.majalis-theme .majalis-sections h2{font-size:1.9rem;font-weight:800}
+.majalis-theme .majalis-tiles{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:17px;margin-top:24px}
+.majalis-theme .majalis-tile{background:white;border:1px solid #e9e6df;border-radius:16px;padding:24px;display:flex;flex-direction:column;gap:12px;min-height:185px}
+.majalis-theme .majalis-tile h3{font-size:1.25rem;font-weight:800}
+.majalis-theme .majalis-tile a{font-weight:700;color:#80612f}
+.majalis-theme .majalis-tile p{color:#6d7873;line-height:1.75}
+@media(max-width:767px){.majalis-theme .majalis-hero .majalis-wrap{grid-template-columns:1fr}.majalis-theme .majalis-hero img{height:205px}.majalis-theme .majalis-tiles{grid-template-columns:1fr}.majalis-theme .majalis-hero{padding:36px 0}}
