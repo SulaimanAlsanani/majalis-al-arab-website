@@ -53,3 +53,13 @@ This is a responsive, Arabic RTL **design prototype**, not a production ecommerc
 ## Safety
 
 No change to the live Odoo database, main branch, payments, checkout configuration or production hosting is authorized by this branch.
+
+
+## Generated product photography integration — 19 Nov 2026
+
+- The storefront now expects `premium-store/assets/products/01.webp` through `28.webp`, indexed by the product's fixed numeric ID.
+- The complete 28-image bundle was generated in a separate downloadable archive with a JSON mapping. Images are 600×600 WebP.
+- **Critical:** the binary image files are not committed to this GitHub branch yet. Until the `assets/products` folder is uploaded, frontend image-error handling deliberately loads the old illustrative fallback photos. Do not describe the live preview as having all 28 new photos.
+- The archive is named `majalis_28_product_images.zip`; unzip its `assets/products` folder into `premium-store/assets/products/` on this preview branch before visual verification.
+- Generated images are illustrative and must be approved against each real dish. Variants made from contact sheets are not photographs of food served at the restaurant.
+- Every product photo call (catalog cards, homepage story products, detailed product view and cart lines) uses the same ID-to-asset function, ensuring consistent mapping once the files are installed.
