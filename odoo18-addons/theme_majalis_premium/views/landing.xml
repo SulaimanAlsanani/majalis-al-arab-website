@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+  <template id="majalis_landing_page" name="Majalis Al Arab premium landing">
+    <t t-call="website.layout">
+      <div id="wrap" class="oe_structure majalis-theme">
+        <section class="majalis-hero">
+          <div class="majalis-wrap">
+            <div>
+              <span>مجالس العرب | تجربة ضيافة سعودية</span>
+              <h1>الطعم اللي تعرفه، والجلسة اللي تحبها.</h1>
+              <p>من أطباق الفطور والعريكة إلى القهوة والحلا، اكتشف قائمة مجالس العرب وتسوق بسهولة من متجر أودو الأصلي.</p>
+              <a class="majalis-button" href="/shop">تصفح قائمة الطعام ←</a>
+            </div>
+            <img src="https://images.unsplash.com/photo-1546833999-b9f581a1996d?auto=format&amp;fit=crop&amp;w=1100&amp;q=80" alt="طبق عربي - صورة توضيحية" loading="lazy"/>
+          </div>
+        </section>
+        <section class="majalis-sections">
+          <div class="majalis-wrap">
+            <h2>على كيفك، من أول لقمة لآخر رشفة</h2>
+            <p>استكشف اختيارات من أطباقنا، وأكمل طلبك من متجر أودو المرتبط بالمخزون والأسعار الفعلية.</p>
+            <div class="majalis-tiles">
+              <article class="majalis-tile">
+                <h3>فطور يفتح النفس</h3><p>الشكشوكة والبيض والفول والكبدة، خيارات على ذوقك.</p><a href="/shop">تصفح الأطباق ←</a>
+              </article>
+              <article class="majalis-tile">
+                <h3>حكاية العريكة والمعصوب</h3><p>نكهات جنوبية قريبة من الذاكرة، وخيارات تكمل لمّتك.</p><a href="/shop">شاهد القائمة ←</a>
+              </article>
+              <article class="majalis-tile">
+                <h3>قهوة وحلا… وتطول السوالف</h3><p>قهوة وشاي وحلويات تناسب وقتك وجلساتك.</p><a href="/shop">اكتشف المزيد ←</a>
+              </article>
+              <article class="majalis-tile">
+                <h3>جلسات خاصة</h3><p>أجواء للّمة الأهل والأصحاب. اسأل عن التفاصيل ومواعيد التوفر.</p><a href="https://wa.me/966549792477?text=Majalis%20private%20seating" target="_blank" rel="noopener noreferrer">استفسر عن الجلسات ←</a>
+              </article>
+              <article class="majalis-tile">
+                <h3>السوني والبلايستيشن</h3><p>وقت اللعب له جوّه. استفسر عن الأجهزة والجلسات المتاحة.</p><a href="https://wa.me/966549792477?text=PlayStation%20inquiry" target="_blank" rel="noopener noreferrer">استفسر عن الألعاب ←</a>
+              </article>
+              <article class="majalis-tile">
+                <h3>حجز مشاهدة المباريات</h3><p>استمتع بأجواء المباراة مع مجموعتك، واستفسر عن إمكانية الحجز.</p><a href="https://wa.me/966549792477?text=Football%20viewing%20inquiry" target="_blank" rel="noopener noreferrer">استفسر عن المباريات ←</a>
+              </article>
+            </div>
+          </div>
+        </section>
+      </div>
+    </t>
+  </template>
+  <record id="majalis_premium_page" model="website.page">
+    <field name="name">مجالس العرب - المتجر التجريبي</field>
+    <field name="url">/majalis-store</field>
+    <field name="view_id" ref="majalis_landing_page"/>
+    <field name="is_published" eval="False"/>
+  </record>
+</odoo>
