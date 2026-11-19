@@ -63,3 +63,13 @@ No change to the live Odoo database, main branch, payments, checkout configurati
 - The archive is named `majalis_28_product_images.zip`; unzip its `assets/products` folder into `premium-store/assets/products/` on this preview branch before visual verification.
 - Generated images are illustrative and must be approved against each real dish. Variants made from contact sheets are not photographs of food served at the restaurant.
 - Every product photo call (catalog cards, homepage story products, detailed product view and cart lines) uses the same ID-to-asset function, ensuring consistent mapping once the files are installed.
+
+## Resumed development — 19 Nov 2026
+
+- Added an Arabic catalog search toolbar, sorting by price (ascending/descending) or name, and a reset-filters action.
+- Improved navigation between home, shop and seating, including cases where the full catalog was open.
+- Added a local, non-transactional order summary with copy-to-clipboard, explicitly warning that no order is sent.
+- Improved cart open/close focus behavior for keyboard navigation.
+- Verified the single-file prototype JavaScript parses successfully after the changes.
+- **Photo integration is incomplete:** 28 generated product images exist in the downloadable ZIP, but the 28 WebP binaries have not been added to the GitHub branch; the browser uses fallback photography. Upload `assets/products/*.webp` under `premium-store/` before treating this task as delivered.
+- Still pending: run end-to-end Chrome interaction testing, check RTL at all device sizes, verify actual restaurant menu/prices and approve generated images against real dishes, test Odoo 18 staging module.
