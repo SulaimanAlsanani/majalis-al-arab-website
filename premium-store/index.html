@@ -188,8 +188,9 @@ function updateCounts(){el('headerCount').textContent=count();el('mobileCount').
 function notify(message){const t=el('toast');t.textContent=message;t.hidden=false;clearTimeout(notify.timer);notify.timer=setTimeout(()=>t.hidden=true,2600)}
 function productById(id){return PRODUCTS.find(p=>p.id===Number(id))}
 function addItem(id,qty=1,note=''){const p=productById(id);if(!p)return;const normalized=String(note||'').trim().slice(0,250);const previous=state.cart.find(x=>x.id===p.id&&x.note===normalized);if(previous)previous.qty=Math.min(99,previous.qty+qty);else state.cart.push({id:p.id,qty:Math.min(99,qty),note:normalized});save();updateCounts();notify('تمت إضافة '+p.name+' إلى السلة');renderCartArea()}
-function changeCart(index,delta){const l=state.cart[index];if(!l)return;l.qty+=delta;if(l.qty<=0)state.cart.splice(index,1);else l.qty=Math.min(99,l.qty);save();updateCounts();render()}
-function removeCart(index){state.cart.splice(index,1);save();updateCounts();render()}
+function refreshCartPage(){const y=window.scrollY;renderCart();updateCounts();requestAnimationFrame(()=>{const max=Math.max(0,document.documentElement.scrollHeight-window.innerHeight);window.scrollTo({top:Math.min(y,max),behavior:'instant'})})}
+function changeCart(index,delta){const l=state.cart[index];if(!l)return;l.qty+=delta;if(l.qty<=0)state.cart.splice(index,1);else l.qty=Math.min(99,l.qty);save();updateCounts();if(currentPath()==='/cart')refreshCartPage();else render()}
+function removeCart(index){state.cart.splice(index,1);save();updateCounts();if(currentPath()==='/cart')refreshCartPage();else render()}
 function toggleFavorite(id){const i=state.favorites.indexOf(id);if(i<0)state.favorites.push(id);else state.favorites.splice(i,1);save();render()}
 function sectionHeading(title,desc='',extra=''){return '<div class="panel-head"><div><h2>'+title+'</h2>'+(desc?'<p>'+desc+'</p>':'')+'</div>'+extra+'</div>'}
 function card(p){const f=state.favorites.includes(p.id);return '<article class="product-card"><div style="position:relative"><button class="card-photo" data-product="'+p.id+'" aria-label="تفاصيل '+p.name+'">'+imgTag(p)+'</button>'+(p.demo?'<span class="demo-sticker">تجريبي</span>':'')+'<button class="card-fav '+(f?'saved':'')+'" data-fav="'+p.id+'" aria-label="'+(f?'إزالة من المفضلة':'إضافة للمفضلة')+'" aria-pressed="'+f+'">'+(f?'♥':'♡')+'</button></div><div class="card-body"><button class="card-title" data-product="'+p.id+'">'+p.name+'</button><p class="card-category">'+p.category+'</p><div class="card-bottom"><span class="card-price">'+money(p.price)+'</span><button class="add-button" data-product="'+p.id+'" aria-label="عرض وإضافة '+p.name+'">+</button></div></div></article>'}
@@ -230,9 +231,9 @@ const category=e.target.closest('[data-category]');if(category){if(category.data
 if(e.target.closest('[data-reset]')){state.category='الكل';state.sort='default';state.query='';render();return}
 const inc=e.target.closest('[data-inc]');if(inc){changeCart(Number(inc.dataset.inc),1);return}
 const dec=e.target.closest('[data-dec]');if(dec){changeCart(Number(dec.dataset.dec),-1);return}
-const rec=e.target.closest('[data-rec-add]');if(rec){addItem(Number(rec.dataset.recAdd));if(currentPath()==='/cart')renderCart();return}
+const rec=e.target.closest('[data-rec-add]');if(rec){addItem(Number(rec.dataset.recAdd));if(currentPath()==='/cart')refreshCartPage();return}
 const noteEdit=e.target.closest('[data-note-edit]');if(noteEdit){const box=el('noteEditor-'+noteEdit.dataset.noteEdit);box.hidden=!box.hidden;if(!box.hidden)el('lineNote-'+noteEdit.dataset.noteEdit)?.focus();return}
-const noteSave=e.target.closest('[data-note-save]');if(noteSave){const i=Number(noteSave.dataset.noteSave);if(state.cart[i]){state.cart[i].note=el('lineNote-'+i).value.trim().slice(0,250);save();renderCart();notify('تم حفظ الملاحظة')}return}
+const noteSave=e.target.closest('[data-note-save]');if(noteSave){const i=Number(noteSave.dataset.noteSave);if(state.cart[i]){state.cart[i].note=el('lineNote-'+i).value.trim().slice(0,250);save();refreshCartPage();notify('تم حفظ الملاحظة')}return}
 const noteCancel=e.target.closest('[data-note-cancel]');if(noteCancel){el('noteEditor-'+noteCancel.dataset.noteCancel).hidden=true;return}
 if(e.target.closest('#previewOrderMobile')){orderPreview();return}
 if(e.target.closest('#closeOrderReview')){el('orderSummary').hidden=true;el('previewOrder')?.focus();return}
@@ -243,7 +244,7 @@ if(e.target.closest('[data-clear]')){if(!confirm('هل تريد إفراغ ال�
 if(e.target.closest('[data-back]')){route(state.origin||'/menu');return}
 if(e.target.closest('#qtyMinus')||e.target.closest('#qtyPlus')){const p=productById(state.currentProduct);state.quantity=Math.min(99,Math.max(1,state.quantity+(e.target.id==='qtyPlus'?1:-1)));el('selectedQty').textContent=state.quantity;el('selectedTotal').textContent=money(p.price*state.quantity);return}
 if(e.target.closest('#addSelected')){addItem(state.currentProduct,state.quantity,el('itemNote')?.value||'');route('/cart');return}
-if(e.target.closest('[data-mode]')){state.fulfillment=e.target.closest('[data-mode]').dataset.mode;renderCart();return}
+if(e.target.closest('[data-mode]')){state.fulfillment=e.target.closest('[data-mode]').dataset.mode;refreshCartPage();return}
 if(e.target.closest('#previewOrder')){orderPreview();return}
 if(e.target.closest('#copySummary')){const t=el('summaryText');if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(t.value).then(()=>notify('تم نسخ ملخص السلة')).catch(()=>{t.select();notify('حدد النص لنسخه')})}else{t.select();notify('حدد النص لنسخه')}return}
 });
