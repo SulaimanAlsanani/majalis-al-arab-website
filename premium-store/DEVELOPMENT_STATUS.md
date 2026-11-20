@@ -119,3 +119,13 @@ The storefront at \`premium-store/index.html\` has been rebuilt as a **Majalis-b
 - No unverified shipping fees, taxes, discounts or ETA are fabricated. Any production checkout requires Odoo 18 integration and independent testing.
 - JavaScript syntax and isolated contact validation checks passed. Complete browser visual and E2E tests have not been performed.
 - Changes are on feature/majalis-cart-detail-20261120, preserving the older preview branch.
+
+## Dedicated checkout restructure — 20 Nov 2026
+
+- Removed fulfillment, customer/address, and payment interface blocks from the cart page; cart now links to a new dedicated #/checkout route.
+- Checkout sections: (1) pickup/delivery selection, (2) phone-only contact and optional consent-based browser geolocation for delivery, (3) visually prepared but inactive payment methods.
+- SPL National Address API publicly describes phone-number-related lookup possibilities. A real lookup requires an approved SPL integration, eligibility, security/privacy controls, and any applicable phone ownership verification/OTP. The preview button **does not query SPL or send an OTP**.
+- A mobile phone number cannot reveal the phone holder's current GPS position. The browser may request geolocation only on an explicit user click and permission; GPS is distinct from the registered National Address.
+- Checkout supports local review showing phone, selected service method, optional consented coordinates and items-only subtotal. It cannot actually submit or pay for an order.
+- Cart remains compact, with notes and quantities; both desktop and mobile cart continue buttons route to checkout.
+- JavaScript syntax and static route/component checks passed. Real browser QA and the Odoo 18, SPL and payment integrations remain pending.
