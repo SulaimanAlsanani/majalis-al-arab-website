@@ -352,6 +352,23 @@ body{background:var(--brand-bg);color:var(--ink)}
 .feature-category strong{font-size:9px}
 .homepage-services{margin:0 0 15px}
 }
+
+/* Balanced hero sizing: match/exceed 229px promotional banners without losing category prominence */
+.discovery-hero{height:242px;min-height:242px;margin-bottom:16px}
+.discovery-copy{padding:25px 35px}
+.discovery-copy h1{font-size:clamp(30px,3vw,43px);line-height:1.24;margin:11px 0 9px}
+.discovery-copy p{font-size:13px;line-height:1.7;margin-bottom:13px}
+.discovery-kicker{font-size:11px;padding:5px 12px}
+.discover-btn,.discover-outline{padding:10px 17px;font-size:12px}
+.discovery-labels{font-size:10px;margin-top:10px}
+.discovery-visual{height:242px}
+.discovery-circle{height:168px;width:168px}
+.discovery-circle strong{font-size:27px}
+.discovery-circle span{font-size:13px}
+@media(max-width:1100px){.discovery-hero{height:232px;min-height:232px}.discovery-visual{height:232px}}
+@media(max-width:780px){.discovery-hero{height:207px;min-height:207px}.discovery-copy{height:207px;padding:21px 23px}.discovery-copy h1{font-size:31px}.discovery-copy p{font-size:12px}.discovery-labels{display:flex}}
+@media(max-width:520px){.discovery-hero{height:191px;min-height:191px}.discovery-copy{height:191px;padding:17px 18px}.discovery-copy h1{font-size:27px}.discovery-copy p{font-size:11px}.discovery-labels{display:none}}
+
 </style></head>
 <body>
 <div class="topline"><div class="wrap announce-inner"><span>✦ اكتشف الأصناف والعروض في تجربة مجالس العرب الجديدة</span><span>معاينة تجريبية — لا يُنفّذ طلب فعلي</span></div></div>
