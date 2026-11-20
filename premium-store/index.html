@@ -502,14 +502,54 @@ body:has(#heroSlider) .page{padding-top:8px}
  .first-fold-categories .feature-category strong{font-size:9px}
 }
 
+
+/* Slim navigation and icon-only cart; remove redundant announcement and spacing */
+.site-header{box-shadow:0 2px 12px #17212f0b}
+.header-inner{min-height:59px;gap:11px;padding-top:4px;padding-bottom:4px}
+.brand{gap:8px}
+.brand-icon{height:37px;width:37px;border-radius:12px;font-size:22px}
+.brand-spark{top:4px;left:5px}
+.brand-name strong{font-size:17px;line-height:1.2}
+.brand-name small{font-size:9px;letter-spacing:.8px}
+.header-search{height:39px;border-radius:11px}
+.header-search input{font-size:12px}
+.header-cart.header-cart-icon{display:inline-flex;position:relative;flex:0 0 43px;width:43px;height:40px;align-items:center;justify-content:center;border-radius:11px;padding:0;color:#fff;gap:0}
+.header-cart-icon svg{width:21px;height:21px;flex:none}
+.header-cart-icon .cart-count{position:absolute;top:-5px;left:-6px;background:#fff;color:#9E1C3B;border:1px solid #EBC3CC;min-width:18px;height:18px;line-height:18px;font-size:10px;padding:0 3px}
+body:has(#heroSlider) .page{padding-top:5px}
+@media(max-width:1100px){body:has(#heroSlider) .header-inner{min-height:57px}}
+@media(max-width:780px){
+ .header-inner{gap:9px;min-height:52px;padding-top:5px;padding-bottom:5px}
+ body:has(#heroSlider) .header-inner{min-height:52px;padding-top:5px;padding-bottom:5px}
+ .brand-icon{height:35px;width:35px;font-size:21px}
+ .brand-name strong{font-size:16px}
+ .brand-name small{font-size:8px}
+ .header-cart.header-cart-icon{display:inline-flex;flex-basis:39px;width:39px;height:37px}
+ .header-cart-icon svg{height:19px;width:19px}
+ .search-shell{max-width:none;min-width:0}
+ body:has(#heroSlider) .page{padding-top:4px}
+}
+@media(max-width:520px){
+ .wrap{padding-inline:12px}
+ .header-inner{gap:6px;padding-top:5px;padding-bottom:5px}
+ body:has(#heroSlider) .header-inner{gap:6px;padding-top:5px;padding-bottom:5px}
+ .brand{gap:6px}
+ .brand-icon{width:34px;height:34px;border-radius:10px}
+ .brand-name strong{font-size:15px}
+ .brand-name small{font-size:7px;letter-spacing:0}
+ .header-cart.header-cart-icon{width:37px;height:35px;flex-basis:37px;order:2}
+ .search-shell{order:3;flex:1 0 100%;margin:0;max-width:none}
+ .search-shell .header-search{height:35px;border-radius:10px}
+ body:has(#heroSlider) .page{padding-top:4px}
+}
+
 </style></head>
 <body>
-<div class="topline"><div class="wrap announce-inner"><span>✦ اكتشف الأصناف والعروض في تجربة مجالس العرب الجديدة</span><span>معاينة تجريبية — لا يُنفّذ طلب فعلي</span></div></div>
 <header class="site-header"><div class="wrap header-inner">
 <a href="#/" class="brand" aria-label="الصفحة الرئيسية"><span class="brand-icon">م<span class="brand-spark">✦</span></span><span class="brand-name"><strong>مجالس العرب</strong><small>MAJALIS AL ARAB</small></span></a>
 <div class="search-shell"><label class="header-search"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="m16 16 5 5"/></svg><input id="globalSearch" placeholder="ابحث عن صنف أو مشروب..." aria-label="البحث عن منتج" autocomplete="off"></label><div id="searchSuggestions" class="search-suggestions" hidden role="region" aria-label="اقتراحات البحث"></div></div>
 <a class="nav-link" href="#/">الرئيسية</a><a class="nav-link" href="#/menu">قائمة الطعام</a><a class="nav-link" href="#/offers">العروض</a><a class="nav-link" href="#/favorites">المفضلة</a><a class="nav-link" href="#/orders">طلباتي</a><a class="nav-link" href="#/seating">الجلسات</a><a class="nav-link" href="#/account">حسابي</a>
-<button id="headerCart" class="cart-button header-cart" type="button">🛍️ السلة <span class="cart-count" id="headerCount">0</span></button>
+<button id="headerCart" class="cart-button header-cart header-cart-icon" type="button" aria-label="فتح سلة المشتريات" title="السلة"><svg viewBox="0 0 24 24" width="21" height="21" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M3 4h2l2.2 10.1a2 2 0 0 0 2 1.6h8.9a2 2 0 0 0 2-1.6L22 7H6"/><circle cx="10" cy="20" r="1"/><circle cx="18" cy="20" r="1"/></svg><span class="cart-count" id="headerCount">0</span></button>
 </div></header>
 <main class="wrap page" id="app" tabindex="-1"></main>
 <footer class="site-footer"><div class="wrap footer-inner"><div><strong>مجالس العرب</strong><p>أطباق وجلسات على ذوقك. هذه معاينة تصميمية للمتجر الإلكتروني.</p></div><div class="footer-links"><a href="#/menu">قائمة الطعام</a><a href="#/offers">العروض</a><a href="#/favorites">المفضلة</a><a href="#/orders">الطلبات</a><a href="#/account">حسابي</a><a href="#/help">مركز المساعدة</a><a href="https://wa.me/966549792477" target="_blank" rel="noopener noreferrer">واتساب 0549792477</a><p>جميع المنتجات والأسعار والصور تحتاج اعتماد المطعم قبل الإطلاق.</p></div></div></footer>
