@@ -107,3 +107,15 @@ The storefront at \`premium-store/index.html\` has been rebuilt as a **Majalis-b
 6. Toggle pickup/delivery; verify **no fabricated fees or ETA**.
 7. Preview an order and copy its summary; verify **no order is sent**.
 8. Test all external WhatsApp inquiry links.
+
+
+## Expanded demonstration menu and font — 20 November 2026
+
+- Kept the original 28 catalogue records with their original numeric IDs, names, prices and existing browser-cart compatibility.
+- Added 97 explicitly **fictional/demo** menu entries in additional categories, for 125 total records in 12 categories. New IDs start at 29.
+- The demo menu includes additional breakfasts, arika/masoub, stews/salads, desserts, drinks, grilled meals, sandwiches, starters, sharing platters, specialty coffee, sides and imaginary offers.
+- New demo product cards display "تجريبي" and detail pages explicitly state demo products/prices are not approved restaurant menu items.
+- Added a six-tile quick collection explorer; category filters, global search, favorites, cart and detail routes operate on the expanded catalog.
+- Font stack prefers locally installed **DIN Next Arabic** followed by **Tajawal** (loaded from Google Fonts), IBM Plex Sans Arabic and a system fallback. A licensed, hosted DIN Next Arabic web font must be obtained to ensure all visitors see the actual DIN font.
+- New demo product photos are category-related generic illustrative imagery, **not item-specific photography**. Original 28 image assets are still not uploaded to this branch, so their fallback images remain active.
+- No new menu entries were created in Odoo, and the frontend preview is neither a live menu nor a functioning checkout.
