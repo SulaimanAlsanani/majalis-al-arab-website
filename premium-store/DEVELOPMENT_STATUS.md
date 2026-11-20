@@ -151,3 +151,12 @@ The storefront at \`premium-store/index.html\` has been rebuilt as a **Majalis-b
 - Added a floating back-to-top button that appears after scrolling, plus keyboard Escape handling for search suggestions.
 - Smoke-tested 10 static routes, nonempty checkout, 125 catalog entries in 12 categories, search suggestions and recently viewed product display using minimal DOM stubs.
 - Pending: device/browser visual QA, accessible contrast and keyboard interaction audit, licensed DIN web font delivery, verified menu imagery, Odoo catalog/order APIs, authentic payments and fulfillment.
+
+## Home section banners and discovery — 21 Nov 2026
+
+- Added five CSS-drawn editorial banners integrated throughout the home page: breakfast, southern arika/masoub, family sharing meals, desserts and specialty coffee.
+- Added a four-card discovery journey section for breakfast, sharing platters, drinks and desserts.
+- Each editorial banner links into the appropriate filtered menu category. Fixed existing category-card click handler to navigate from the home page to the selected menu filter.
+- Kept the previously restored brighter red/white palette for the broader storefront. Campaigns each use a distinctive complementary gradient with geometric motifs, without invented product imagery or claims of real discounts.
+- Added a disclaimer that campaign ideas, illustrative product content and offers are demonstration-only.
+- Smoke-checked 125 products, 12 categories, five rendered banners, quick journeys, and menu/cart/checkout route rendering with DOM stubs. Full browser visual and interaction QA still pending.
