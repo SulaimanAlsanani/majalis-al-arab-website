@@ -8,8 +8,11 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;600;700;800&family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
-@font-face{font-family:'DIN Next Arabic';src:local('DIN Next Arabic'),local('DIN Next LT Arabic'),local('DINNextLTArabic-Regular'),local('DIN Next LT Arabic Regular');font-style:normal;font-weight:400;font-display:swap}
-@font-face{font-family:'DIN Next Arabic';src:local('DIN Next Arabic Bold'),local('DIN Next LT Arabic Bold'),local('DINNextLTArabic-Bold');font-style:normal;font-weight:700 900;font-display:swap}
+/* DIN Next LT W23 font names verified against supplied font metadata.
+   Local font faces only: licensed files must not be redistributed publicly without webfont rights. */
+@font-face{font-family:'DIN Next Arabic';src:local('DIN Next LT W23 Regular'),local('DINNextLTW23-Regular'),local('DIN NEXT ARABIC REGULAR'),local('DIN Next Arabic'),local('DIN Next LT Arabic');font-weight:400;font-style:normal;font-display:swap}
+@font-face{font-family:'DIN Next Arabic';src:local('DIN Next LT W23 Medium'),local('DINNextLTW23-Medium'),local('DIN NEXT ARABIC MEDIUM');font-weight:500 600;font-style:normal;font-display:swap}
+@font-face{font-family:'DIN Next Arabic';src:local('DIN Next LT W23 Bold 2'),local('DINNextLTW23-Bold2'),local('DIN NEXT ARABIC BOLD'),local('DIN Next Arabic Bold'),local('DIN Next LT Arabic Bold');font-weight:700 900;font-style:normal;font-display:swap}
 :root{--yellow:#ffc928;--yellow2:#ffda59;--ink:#18212c;--muted:#727e8b;--border:#e8eaee;--bg:#f8f9fa;--white:#fff;--dark:#152537;--red:#e54848;--radius:17px;--shadow:0 7px 25px #2330470b}*{box-sizing:border-box}
 html{scroll-behavior:smooth;scroll-padding-top:146px}body{margin:0;background:var(--bg);color:var(--ink);font:15px "DIN Next Arabic","DIN Next LT Arabic","DINNextLTArabic","Tajawal","IBM Plex Sans Arabic",Tahoma,sans-serif;-webkit-font-smoothing:antialiased}
 button,input,textarea,select{font:inherit}button{cursor:pointer}a{text-decoration:none;color:inherit}img{max-width:100%}button:focus-visible,a:focus-visible,input:focus-visible,textarea:focus-visible,select:focus-visible{outline:3px solid #bc8700;outline-offset:3px}
