@@ -179,3 +179,11 @@ The storefront at \`premium-store/index.html\` has been rebuilt as a **Majalis-b
 - Added compact homepage CTA actions for menu, session inquiries and external WhatsApp contact.
 - Added three more campaign banners with single-row product rails: curated picks (not verified sales rankings), additional demonstration options (not actual newly launched products) and evening coffee/dessert suggestions. Totals: eight editorial banners followed by eight horizontal carousels.
 - Code smoke tested 125 catalog records / 12 categories, all eight banner-before-rail pairs, and horizontal-only slide action; no scrollIntoView inside carousel action. Full browser rendering and Odoo integration still need real-device QA.
+
+## Seven-slide expanded hero — 21 Nov 2026
+
+- Raised main hero to 338px desktop (about +40% vs 242px), 325px tablet, 285px small tablet, and 264px compact phone (+38% vs 191px).
+- Added 7 original, CSS-designed slides: restaurant introduction, breakfast, southern specialties, sharing meals, desserts, coffee, and seating/entertainment. These are sample campaigns and don't assert real offers.
+- Slide track transitions horizontally using CSS translate3d; dot and previous/next controls permit direct navigation without moving the vertical document position.
+- Autoplay every five seconds, pauses during hover, focus or recent touch/manual navigation, ignores hidden tabs and respects reduced-motion preferences.
+- JavaScript smoke testing found seven rendered slides, seven selectors, eight retained horizontal product rails and verified slide 3 renders with transform translate3d(200%,0,0) without invoking page scroll. Full visual browser QA is pending.
