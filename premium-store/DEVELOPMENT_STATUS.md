@@ -141,3 +141,13 @@ The storefront at \`premium-store/index.html\` has been rebuilt as a **Majalis-b
 - All 12 representative routes were exercised with JavaScript DOM stubs (home, menu, offers, favorites, orders, account, addresses, help, seating, cart, checkout and one product). The checkout was tested with a nonempty example cart. Syntax passes.
 - **No live Odoo order/payment/tracking/address integrations exist yet.** National Address and GPS steps are only consented/local UI demonstration. E2E Chrome, accessibility, real payment/tax calculation, production content approval and deployment tests remain pending.
 - Current working branch: feature/majalis-cart-detail-20261120; older branch and main were not modified.
+
+## Calmer visual system and usability upgrades — 21 November 2026
+
+- Muted primary actions and prominent banners from saturated red to calm dusty rose/brick tones (#B65A66, #A95260, #93424F); softened page backgrounds, borders and hover states.
+- Preserved brand recognition with the Majalis name, independent design and amber/cream highlights; DIN Next Arabic is used only when installed locally, with Tajawal as the fallback.
+- Added instant header search suggestions with product images, names, categories, illustrative prices and a full-results link. Search runs only on the frontend catalog and does not query Odoo.
+- Added a local recently viewed products strip to the home page; stores up to eight product IDs in localStorage and renders up to five items when available.
+- Added a floating back-to-top button that appears after scrolling, plus keyboard Escape handling for search suggestions.
+- Smoke-tested 10 static routes, nonempty checkout, 125 catalog entries in 12 categories, search suggestions and recently viewed product display using minimal DOM stubs.
+- Pending: device/browser visual QA, accessible contrast and keyboard interaction audit, licensed DIN web font delivery, verified menu imagery, Odoo catalog/order APIs, authentic payments and fulfillment.
