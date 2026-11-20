@@ -402,6 +402,43 @@ body{background:var(--brand-bg);color:var(--ink)}
 @media(max-width:780px){.hero-slider{height:285px}.hero-slide.discovery-hero{display:block}.hero-slide .discovery-copy{padding:25px 49px 35px;height:100%}.hero-slide .discovery-copy h1{font-size:33px}.hero-slide .discovery-copy p{font-size:12px;line-height:1.8}.hero-slide .discovery-visual{display:none}.hero-slide .discovery-labels{display:none}.hero-arrow{height:31px;width:31px;font-size:15px}.hero-next{left:7px}.hero-prev{right:7px}}
 @media(max-width:520px){.hero-slider{height:264px;border-radius:16px}.hero-slide .discovery-copy{padding:20px 38px 36px}.hero-slide .discovery-copy h1{font-size:28px;margin:9px 0 6px}.hero-slide .discovery-copy p{font-size:11px;line-height:1.7;margin-bottom:9px}.hero-slide .discovery-kicker{font-size:10px;padding:5px 10px}.hero-slide .discover-btn,.hero-slide .discover-outline{font-size:10px;padding:8px 10px}.hero-dots{bottom:12px}.hero-index{left:10px;bottom:11px;font-size:9px}}
 @media(prefers-reduced-motion:reduce){.hero-track,.hero-dots button{transition:none}}
+
+/* Hero v3: +15% height at all breakpoints and balanced content hierarchy */
+.hero-slider{height:389px}
+.hero-slide .discovery-copy{padding:34px clamp(43px,5.2vw,78px)}
+.hero-slide .discovery-copy h1{font-size:clamp(30px,3.4vw,44px);line-height:1.22;margin:10px 0 10px}
+.hero-slide .discovery-copy p{font-size:12px;line-height:1.75;max-width:490px;margin-bottom:15px}
+.hero-slide .discovery-kicker{font-size:11px;padding:6px 12px}
+.hero-slide .discover-btn,.hero-slide .discover-outline{font-size:11px;padding:10px 16px}
+.hero-slide .discovery-actions{gap:9px}
+.hero-slide .discovery-labels{font-size:9px;gap:11px;margin-top:12px}
+.hero-slide .discovery-circle{height:196px;width:196px}
+.hero-slide .discovery-circle strong{font-size:26px}
+.hero-slide .discovery-circle span{font-size:12px}
+@media(max-width:1100px){
+.hero-slider{height:374px}
+.hero-slide .discovery-copy{padding:30px 52px}
+.hero-slide .discovery-copy h1{font-size:35px}
+.hero-slide .discovery-copy p{font-size:12px}
+}
+@media(max-width:780px){
+.hero-slider{height:328px}
+.hero-slide .discovery-copy{height:100%;padding:29px 49px 44px}
+.hero-slide .discovery-copy h1{font-size:29px;line-height:1.25}
+.hero-slide .discovery-copy p{font-size:11px;line-height:1.75;max-width:480px}
+.hero-slide .discovery-kicker{font-size:10px}
+.hero-slide .discover-btn,.hero-slide .discover-outline{font-size:10px;padding:9px 13px}
+}
+@media(max-width:520px){
+.hero-slider{height:304px}
+.hero-slide .discovery-copy{padding:25px 39px 42px}
+.hero-slide .discovery-copy h1{font-size:25px;margin:8px 0 7px}
+.hero-slide .discovery-copy p{font-size:10px;line-height:1.7;margin-bottom:11px}
+.hero-slide .discovery-kicker{font-size:9px;padding:5px 9px}
+.hero-slide .discover-btn,.hero-slide .discover-outline{font-size:9px;padding:8px 10px}
+.hero-slide .discovery-actions{gap:6px}
+}
+
 </style></head>
 <body>
 <div class="topline"><div class="wrap announce-inner"><span>✦ اكتشف الأصناف والعروض في تجربة مجالس العرب الجديدة</span><span>معاينة تجريبية — لا يُنفّذ طلب فعلي</span></div></div>
