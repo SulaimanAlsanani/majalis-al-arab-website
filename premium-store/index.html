@@ -71,7 +71,57 @@ button,input,textarea,select{font:inherit}button{cursor:pointer}a{text-decoratio
 @media(max-width:1100px){.basket-grid{grid-template-columns:minmax(0,1fr) 285px}.basket-banner{display:block}.basket-steps{margin-top:19px}.basket-suggestions .basket-suggestion-grid{grid-template-columns:1fr}}
 @media(max-width:780px){.basket-grid{grid-template-columns:1fr}.basket-overview{position:static}.basket-suggestions .basket-suggestion-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.basket-banner{padding:21px}.basket-main{gap:15px}.basket-mobile-total{display:flex;align-items:center;justify-content:space-between;position:fixed;inset-inline:0;bottom:62px;z-index:21;background:#fff;box-shadow:0 -6px 20px #111c2b1b;border-top:1px solid #e7eaee;padding:10px 15px;gap:12px}.basket-mobile-total span{font-size:11px;color:#8b96a0}.basket-mobile-total b{display:block;font-size:17px;color:#182535}.basket-mobile-total button{border:0;border-radius:10px;background:#ffc928;padding:12px 17px;font-weight:700}.basket-grid{padding-bottom:80px}}
 @media(max-width:520px){.basket-section,.basket-overview{padding:16px}.basket-banner h1{font-size:23px}.basket-steps{font-size:10px;gap:6px;overflow:auto}.basket-steps span{padding:6px}.basket-item{grid-template-columns:75px minmax(0,1fr);gap:9px}.basket-image{width:75px;height:78px}.basket-name{font-size:14px}.basket-actions>strong{font-size:15px}.basket-item-title{gap:5px}.basket-methods{gap:8px}.basket-methods button{padding:12px}.basket-section-title{flex-wrap:wrap}.basket-suggestions .basket-suggestion-grid{grid-template-columns:1fr}}
-.basket-empty-buttons{display:flex;justify-content:center;gap:10px;flex-wrap:wrap}.basket-empty-buttons .outlined{background:#fff;border-color:#e1e5e9}@media(max-width:520px){.basket-empty-buttons{flex-direction:column;align-items:center}.basket-empty-buttons button{width:100%;max-width:280px}}</style></head>
+.basket-empty-buttons{display:flex;justify-content:center;gap:10px;flex-wrap:wrap}.basket-empty-buttons .outlined{background:#fff;border-color:#e1e5e9}@media(max-width:520px){.basket-empty-buttons{flex-direction:column;align-items:center}.basket-empty-buttons button{width:100%;max-width:280px}}
+/* Compact cart items and complete checkout-preview form */
+.basket-item{grid-template-columns:76px minmax(0,1fr);gap:12px;padding:11px 0;align-items:start}
+.basket-image{width:76px;height:78px;border-radius:11px;align-self:start}
+.basket-image img{width:100%;height:100%;object-fit:cover}
+.basket-category{font-size:10px;line-height:1.3}
+.basket-name{font-size:14px;line-height:1.45;margin:1px 0 0}
+.basket-delete{height:27px;width:27px;font-size:17px}
+.basket-unit{font-size:11px;margin:1px 0 3px}
+.basket-actions{margin-top:0;gap:7px}
+.basket-actions>strong{font-size:14px}
+.basket-actions .stepper{padding:2px;gap:8px;border-radius:7px}
+.basket-actions .stepper button{width:24px;height:24px;font-size:14px;border-radius:5px}
+.basket-actions .stepper span{font-size:12px}
+.basket-note-text{font-size:11px;line-height:1.45;margin:4px 0 0;max-width:100%;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.basket-edit-note{font-size:11px;line-height:1.35;padding:3px 0}
+.basket-note-editor{margin-top:6px;padding:10px}
+.basket-section-title{padding-bottom:12px}
+.basket-form-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:13px;margin-top:17px}
+.basket-customer-title,.basket-payment-head{display:flex;align-items:start;justify-content:space-between;gap:15px}
+.basket-customer-title p,.basket-payment-head p{font-size:12px;color:#7e8995;line-height:1.8;margin:5px 0 0}
+.basket-customer-title>span,.basket-payment-head>span{padding:6px 10px;background:#fff2cc;color:#886300;border-radius:99px;font-size:12px;font-weight:700;white-space:nowrap}
+.basket-field{display:flex;flex-direction:column;gap:7px;min-width:0;font-size:12px;font-weight:700;color:#2d3b4b}
+.basket-field b{color:#b34e43}
+.basket-field input{width:100%;background:#fff;border:1px solid #dfe4e9;border-radius:10px;height:43px;padding:0 12px;color:#213244;min-width:0;font-size:13px}
+.basket-field input:focus{border-color:#e8bb2d;outline:2px solid #ffe8a2}
+.basket-contact-hint{background:#f5f8fa;color:#667686;font-size:11px;line-height:1.8;padding:11px;border-radius:10px;margin-top:15px}
+.basket-validation{color:#a72929;background:#fff0f0;border:1px solid #f6cece;padding:12px;border-radius:10px;font-size:12px;margin-top:12px;line-height:1.8}
+.basket-payment-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin-top:19px}
+.basket-payment-grid>div{display:flex;gap:5px;flex-direction:column;align-items:start;padding:13px 11px;background:#f8f9fa;border:1px solid #e7e9ed;border-radius:12px;color:#8b97a1}
+.basket-payment-grid span{font-size:22px}.basket-payment-grid strong{font-size:12px}.basket-payment-grid small{font-size:10px}
+.basket-promo{display:flex;align-items:center;gap:10px;margin-top:18px;border-top:1px solid #edf0f2;padding-top:18px}
+.basket-promo>span{white-space:nowrap;font-weight:700;font-size:12px}
+.basket-promo input{width:100%;min-width:0;flex:1;border:1px solid #e3e6e9;padding:10px 11px;border-radius:9px;background:#f7f8f9;color:#9ba5af;font-size:12px}
+.basket-promo button{border:0;background:#edf0f2;color:#939fa9;border-radius:9px;padding:10px;font-weight:700;font-size:12px}
+.basket-review-title{display:flex;align-items:start;justify-content:space-between;gap:18px}
+.basket-review-title span{color:#a67b11;font-size:12px;font-weight:700}
+.basket-review-title h2{font-size:22px;margin:7px 0}
+.basket-review-title p{color:#687888;font-size:12px;line-height:1.8;margin:0}
+.basket-review-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin:21px 0}
+.basket-review-grid>div{background:#f7f9fb;border:1px solid #ebedf0;border-radius:13px;padding:14px}
+.basket-review-grid strong{display:block;font-size:12px;color:#73808e}.basket-review-grid p{font-size:16px;font-weight:700;color:#1e2a39;margin:6px 0}
+.basket-review-grid small{font-size:11px;color:#8793a0;line-height:1.7}
+.basket-review-label{display:block;font-size:13px;font-weight:700;margin-bottom:9px}
+.basket-preview textarea{min-height:245px;line-height:1.9}
+.basket-review-actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:12px}
+.basket-review-warning{margin:18px 0 0;font-size:11px;color:#82661e;line-height:1.8;padding:12px;background:#fff9e8;border-radius:10px}
+@media(max-width:780px){.basket-grid{gap:13px}.basket-section{padding:17px}.basket-form-grid{gap:10px}.basket-item{padding:10px 0}}
+@media(max-width:520px){.basket-item{grid-template-columns:68px minmax(0,1fr);gap:9px;padding:10px 0}.basket-image{width:68px;height:70px}.basket-name{font-size:13px}.basket-unit,.basket-note-text{font-size:10px}.basket-actions .stepper button{width:23px;height:23px}.basket-form-grid{grid-template-columns:1fr;gap:11px}.basket-payment-grid{grid-template-columns:1fr 1fr}.basket-promo{flex-wrap:wrap}.basket-promo>span{width:100%}.basket-review-grid{grid-template-columns:1fr}.basket-review-title{flex-wrap:wrap}.basket-review-actions button{width:100%}}
+@media print{body{background:#fff}.site-header,.topline,.site-footer,.mobile-bottom,.basket-banner,.basket-grid,.basket-mobile-total,.basket-review-actions,.basket-review-title .outlined{display:none!important}.basket-preview{border:0;box-shadow:none;margin:0;padding:0}.basket-preview textarea{border:0;height:450px}.basket-preview .basket-review-warning{border:1px solid #ddd}}
+</style></head>
 <body>
 <div class="topline">مجالس العرب — تجربة طلب تجريبية، لا تُرسل طلبات حقيقية</div>
 <header class="site-header"><div class="wrap header-inner">
