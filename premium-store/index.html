@@ -556,6 +556,64 @@ body{font-family:var(--store-font)}
 h1,h2,h3,h4,h5,h6,p,span,strong,b,small,label,a,button,input,textarea,select{font-family:inherit}
 /* Uniform DIN Next Arabic font scale throughout the store */
 body{font-weight:400}h1,h2,h3,h4,h5,h6,strong,b,.brand-name,.card-title,.home-section-head,.discovery-copy h1,.editorial-copy h2{font-weight:700}button,input,textarea,select{font-family:var(--store-font)}
+
+/* Reorganized storefront homepage: clear content hierarchy without repeated editorial campaigns */
+.home-start-hint{display:flex;align-items:center;justify-content:space-between;gap:14px;padding:12px 17px;border:1px solid #F2E6E9;background:#fff;border-radius:14px;color:#5C5560;margin:3px 0 31px;font-size:12px}
+.home-start-hint button{background:none;color:#B22345;font-size:12px;font-weight:700;white-space:nowrap;border:0}
+.home-content-group{margin:32px 0 44px}
+.homepage-group-heading{display:flex;align-items:center;justify-content:space-between;gap:16px;margin:0 0 18px;padding:0 0 13px;border-bottom:1px solid #EDE8EA}
+.homepage-group-heading>div>span{display:block;font-size:11px;font-weight:700;color:#A82344;margin-bottom:5px}
+.homepage-group-heading h2{font-size:clamp(22px,2.4vw,30px);letter-spacing:-.3px;margin:0 0 5px;font-weight:700;line-height:1.4}
+.homepage-group-heading p{margin:0;font-size:12px;color:#737680;line-height:1.7}
+.homepage-group-heading>button{border:1px solid #EAC9D3;background:#fff;color:#B22345;border-radius:11px;padding:9px 13px;font-weight:700;font-size:11px;white-space:nowrap}
+.home-content-group>.home-showcase{margin:16px 0 25px}
+.home-content-group>.home-showcase+.home-showcase{margin-top:25px}
+.home-content-group>.home-showcase .home-section-head{margin-bottom:12px}
+.home-content-group>.home-showcase .home-section-head h2{font-size:21px}
+.home-content-group>.home-showcase .home-section-head span{font-size:11px;color:#7B6D73}
+.home-offers-group .promo-two{margin:12px 0 26px}
+.home-experience-section{margin:40px 0 44px}
+.home-experience-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:13px}
+.home-experience-card{min-width:0;display:flex;flex-direction:column;align-items:flex-start;text-align:right;min-height:218px;position:relative;overflow:hidden;border:0;border-radius:18px;color:#fff;padding:24px 23px;gap:7px}
+.home-experience-card::after{content:"";position:absolute;left:-60px;top:-50px;width:210px;height:210px;border-radius:50%;border:30px solid #ffffff12;pointer-events:none}
+.experience-private{background:linear-gradient(115deg,#8F1C37,#BC3B5B)}
+.experience-matches{background:linear-gradient(115deg,#17463D,#2D866D)}
+.experience-games{background:linear-gradient(115deg,#332759,#6750A1)}
+.home-experience-card .experience-icon{font-size:25px}
+.home-experience-card .experience-label{font-size:11px;opacity:.83}
+.home-experience-card strong{font-size:21px;line-height:1.35}
+.home-experience-card small{font-size:11px;opacity:.9;line-height:1.6}
+.home-experience-card b{font-size:11px;margin-top:auto;border-bottom:1px solid #ffffff77;padding-bottom:3px}
+.home-experience-card:hover{filter:brightness(1.07)}
+.home-content-group+.home-content-group{margin-top:38px}
+.home-explore-group{margin-bottom:30px}
+@media(max-width:780px){
+ .home-start-hint{margin:2px 0 22px;padding:10px 12px;font-size:11px}
+ .home-content-group{margin:24px 0 32px}
+ .homepage-group-heading{margin-bottom:13px}
+ .homepage-group-heading h2{font-size:22px}
+ .homepage-group-heading p{font-size:11px}
+ .home-experience-section{margin:30px 0 32px}
+ .home-experience-grid{gap:9px}
+ .home-experience-card{padding:17px 13px;min-height:200px}
+ .home-experience-card strong{font-size:17px}
+ .home-experience-card small{font-size:10px}
+}
+@media(max-width:560px){
+ .home-start-hint{gap:10px;align-items:flex-start}
+ .home-start-hint button{font-size:10px;white-space:normal;flex:0 0 96px}
+ .homepage-group-heading{align-items:start;gap:9px}
+ .homepage-group-heading h2{font-size:20px}
+ .homepage-group-heading>button{font-size:10px;padding:7px 9px}
+ .home-experience-grid{grid-template-columns:1fr;gap:8px}
+ .home-experience-card{min-height:132px;padding:14px 18px;gap:3px}
+ .home-experience-card .experience-icon{position:absolute;left:18px;top:16px;font-size:29px}
+ .home-experience-card strong{font-size:19px}
+ .home-experience-card b{margin-top:5px}
+ .home-experience-section{margin-top:24px}
+ .home-content-group>.home-showcase .home-section-head h2{font-size:19px}
+}
+
 </style></head>
 <body>
 <header class="site-header"><div class="wrap header-inner">
@@ -687,7 +745,31 @@ function homepageDisclosure(){return '<div class="homepage-disclosure"><span>ⓘ
 function homepageServices(){return '<section class="homepage-services" aria-label="خدمات وتجارب مجالس العرب"><button data-go="/menu"><span>🛍️</span><strong>قائمة الطعام</strong><small>تصفّح وخصّص طلبك</small></button><button data-go="/seating"><span>🛋️</span><strong>الجلسات الخاصة</strong><small>استفسر عن التوفر</small></button><button data-go="/seating"><span>⚽</span><strong>مشاهدة المباريات</strong><small>جلسات بطابع مختلف</small></button><button data-go="/seating"><span>🎮</span><strong>بلايستيشن</strong><small>استفسر عن الأجهزة</small></button><button data-category="القهوة المختصة"><span>☕</span><strong>قهوة وحلا</strong><small>وقت المزاج الحلو</small></button></section>'}
 function homeFinalActions(){return '<section class="home-actions" aria-label="روابط سريعة"><div><span>✦ تجربة مجالس العرب</span><h2>الطلب أو الاستفسار… كله من مكان واحد</h2><p>ابدأ بتصفح الأصناف، واستفسر عن الجلسات عبر قنوات التواصل الرسمية.</p></div><div><button data-go="/menu">تصفح الطعام ←</button><button data-go="/seating">الجلسات والاستفسار</button><a href="https://wa.me/966549792477" target="_blank" rel="noopener noreferrer">تواصل واتساب</a></div></section>'}
 
-function renderHome(){const byCategory=(name,n=14)=>PRODUCTS.filter(p=>p.category===name).slice(0,n).map(p=>p.id);el('app').innerHTML=homeBanner()+featureCategories()+homepageServices()+promotionalBanners()+quickOrderJourneys()+campaignBanner(0)+productShowcase('فطور على الأصول','شكشوكة، فول، كبدة وخيارات تفتح النفس',byCategory('الفطور والعشاء'),'/menu','breakfast')+campaignBanner(1)+productShowcase('نكهات الجنوب','العريكة والمعصوب والفتة بطابعها المحبوب',byCategory('العريكة والمعصوب'),'/menu','south')+campaignBanner(2)+productShowcase('للجلسات واللمة','وجبات عائلية وأطباق مشاركة تجريبية',byCategory('الوجبات العائلية').concat(byCategory('المشويات والأطباق الرئيسية',8)),'/menu','family')+campaignBanner(3)+productShowcase('وقت الحلا','تشكيلة من الحلويات لختام الوجبة',byCategory('الحلا'),'/menu','sweet')+campaignBanner(4)+productShowcase('لأصحاب القهوة','قهوة مختصة وقهوة عربية ومشروبات',byCategory('القهوة المختصة').concat(byCategory('المشروبات',8)),'/menu','coffee')+campaignBanner(5)+productShowcase('مختارات نقترحها لك','اختيارات تحريرية تجريبية وليست إحصاءات طلبات فعلية',[1,8,12,18,24,27,2,16,21,26,42,55],'/menu','popular')+campaignBanner(6)+productShowcase('جرب خيارات جديدة','مجموعة من الأصناف الافتراضية الإضافية',[29,32,37,44,52,64,76,82,93,110,120],'/menu','new')+campaignBanner(7)+productShowcase('لجلسة المساء','قهوة وحلا ومشروبات تكمل جلستك',[23,24,25,26,27,28,61,63,65,100,101,102],'/menu','evening')+recentShowcase()+homeTrustStrip()+homeFinalActions()+homepageDisclosure()+'<section class="home-final-cta"><div><h2>سفرتك تكمل باختياراتك</h2><p>تصفّح الأقسام واختر اللي يشهيك، وخل تفاصيل طلبك مرتبة من البداية.</p></div><button data-go="/menu">تصفّح المنيو الآن ←</button></section>'}
+function homeSectionIntro(kicker,title,desc,more='/menu'){return '<div class="homepage-group-heading"><div><span>'+kicker+'</span><h2>'+title+'</h2><p>'+desc+'</p></div><button type="button" data-go="'+more+'">استكشف المزيد ←</button></div>'}
+function homeExperiences(){return '<section class="home-experience-section" aria-label="تجارب مجالس العرب">'+homeSectionIntro('مساحات وتجارب','مو بس مطعم… مجالس تجمعنا','الجلسات الخاصة والمباريات والبلايستيشن؛ الاستفسار عن التوفر مباشرة مع الفرع.','/seating')+'<div class="home-experience-grid"><button type="button" class="home-experience-card experience-private" data-go="/seating"><span class="experience-icon">🛋️</span><span class="experience-label">جلسات خاصة</span><strong>جلستك على كيفك</strong><small>استكشف الجلسات والاستفسار عن التوفر</small><b>استفسر عن الجلسات ←</b></button><button type="button" class="home-experience-card experience-matches" data-go="/seating"><span class="experience-icon">⚽</span><span class="experience-label">مشاهدة المباريات</span><strong>للحماس جمهور</strong><small>أجواء متابعة المباريات مع الرفاق</small><b>استكشف الخيارات ←</b></button><button type="button" class="home-experience-card experience-games" data-go="/seating"><span class="experience-icon">🎮</span><span class="experience-label">بلايستيشن</span><strong>المنافسة تحلى</strong><small>استفسر عن الأجهزة والمواعيد</small><b>اطلع على التفاصيل ←</b></button></div></section>'}
+function renderHome(){
+ const byCategory=(name,n=14)=>PRODUCTS.filter(p=>p.category===name).slice(0,n).map(p=>p.id);
+ const breakfast=productShowcase('فطور على الأصول','شكشوكة وفول وكبدة وخيارات تفتح النفس',byCategory('الفطور والعشاء'),'/menu','breakfast');
+ const southern=productShowcase('نكهات الجنوب','العريكة والمعصوب والفتة',byCategory('العريكة والمعصوب'),'/menu','south');
+ const sharing=productShowcase('للجلسات واللّمّة','أطباق مشاركة ووجبات عائلية تجريبية',byCategory('الوجبات العائلية').concat(byCategory('المشويات والأطباق الرئيسية',8)),'/menu','family');
+ const curated=productShowcase('مختارات نقترحها لك','اختيارات تجريبية للعرض وليست ترتيبًا فعليًا للمبيعات',[1,8,12,18,24,27,2,16,21,26,42,55],'/menu','popular');
+ const sweets=productShowcase('وقت الحلا','حلويات تكمّل الوجبة',byCategory('الحلا'),'/menu','sweet');
+ const coffee=productShowcase('قهوة ومشروبات','من القهوة المختصة للمشروبات المتنوعة',byCategory('القهوة المختصة').concat(byCategory('المشروبات',8)),'/menu','coffee');
+ const newChoices=productShowcase('خيارات تستحق التجربة','أصناف إضافية تجريبية وليست منتجات أُطلقت حديثًا',[29,32,37,44,52,64,76,82,93,110,120],'/menu','new');
+ const evening=productShowcase('لجلسة المساء','حلا وقهوة ومشروبات مناسبة للجلسة',[23,24,25,26,27,28,61,63,65,100,101,102],'/menu','evening');
+ el('app').innerHTML=
+  homeBanner()+
+  featureCategories()+
+  '<section class="home-start-hint" aria-label="تصفح خيارات المتجر"><span>✦ اختر قسمك المفضل، أو تصفّح المنتجات والجلسات مباشرة.</span><button type="button" data-go="/menu">قائمة الطعام كاملة ←</button></section>'+
+  '<section class="home-content-group home-discover-group" aria-label="اختيارات الطعام">'+homeSectionIntro('من قائمتنا','خلّ اختيارك أسهل','مجموعة من الأقسام الرئيسية للبدء، دون الحاجة للبحث بين عشرات البنرات.')+
+  curated+breakfast+southern+'</section>'+
+  '<section class="home-content-group home-offers-group" aria-label="العروض وخيارات المشاركة">'+homeSectionIntro('للّمة والأصحاب','العروض ووجبات المشاركة','اكتشف الأفكار والعروض التجريبية دون اعتبارها أسعارًا أو عروضًا معتمدة.','/offers')+
+  promotionalBanners()+sharing+'</section>'+
+  homeExperiences()+
+  '<section class="home-content-group home-taste-group" aria-label="الحلا والقهوة">'+homeSectionIntro('نكمل جلستك','الحلا والقهوة والمشروبات','كل ما يكمّل الجلسة في مكان واحد.')+sweets+coffee+evening+'</section>'+
+  '<section class="home-content-group home-explore-group" aria-label="استكشف مزيدًا من المنتجات">'+homeSectionIntro('اكتشف أكثر','خيارات إضافية من قائمتنا','أصناف متنوعة تستحق التصفح.', '/menu')+newChoices+recentShowcase()+'</section>'+
+  homeTrustStrip()+homeFinalActions()+homepageDisclosure();
+}
 function renderMenu(){el('app').innerHTML='<div class="menu-heading"><div><span>تجربة مجالس العرب</span><h1>قائمة الطعام</h1><p>125 صنفًا بينها 97 صنفًا تجريبيًا. الأسعار والصور للمعاينة فقط.</p></div><button data-go="/favorites">♡ أصنافي المفضلة</button></div>'+quickNav()+'<div class="shop-layout"><section class="catalog-panel" id="catalog">'+catalog()+'</section>'+sideCart()+'</div>'}
 function renderDetail(id){const p=productById(id);if(!p){route('/');return}rememberViewed(id);const related=PRODUCTS.filter(x=>x.id!==p.id&&x.category===p.category).slice(0,3);const crumb='<button class="back-link" data-back>→ العودة إلى قائمة الطعام</button>';el('app').innerHTML=crumb+'<article class="detail-route"><div class="detail-layout"><div class="detail-image">'+imgTag(p)+'</div><div class="detail-info"><span class="eyebrow">'+p.category+(p.demo?' · صنف تجريبي':'')+'</span><h1>'+p.name+'</h1><div class="amount">'+money(p.price)+'</div><p class="detail-description">اختر الكمية المناسبة وسجّل ملاحظات التحضير إن رغبت. لا تتوفر بيانات مؤكدة عن المكونات والحساسية والسعرات حتى استكمال ربط القائمة.'+(p.demo?' هذا الصنف وسعره افتراضيان لغرض المعاينة فقط.':'')+'</p><div class="option-box"><h3>التخصيص والإضافات</h3><p>الخيارات المعتمدة لهذا المنتج لم تُربط بعد. لن نعرض إضافات أو رسومًا غير مؤكدة.</p></div><label class="field-label" for="itemNote">ملاحظات للمطبخ (اختياري)</label><textarea class="note-input" maxlength="250" id="itemNote" placeholder="مثال: بدون فلفل — يخضع لتأكيد المطعم"></textarea><div class="detail-controls"><div class="stepper"><button id="qtyMinus" aria-label="تقليل الكمية">−</button><span id="selectedQty">1</span><button id="qtyPlus" aria-label="زيادة الكمية">+</button></div><button class="solid-action" id="addSelected">أضف للسلة · <span id="selectedTotal">'+money(p.price)+'</span></button></div></div></div></article>'+(related.length?'<section class="recs"><h2>أصناف قد تعجبك</h2><div class="product-grid">'+related.map(card).join('')+'</div></section>':'');state.quantity=1;state.note='';state.currentProduct=id;state.origin='/menu'}
 
