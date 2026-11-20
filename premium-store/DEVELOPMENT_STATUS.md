@@ -107,3 +107,15 @@ The storefront at \`premium-store/index.html\` has been rebuilt as a **Majalis-b
 6. Toggle pickup/delivery; verify **no fabricated fees or ETA**.
 7. Preview an order and copy its summary; verify **no order is sent**.
 8. Test all external WhatsApp inquiry links.
+
+## Compact detailed cart and checkout preview — 20 November 2026
+
+- Reduced cart product images to 76x78 pixels on desktop and 68x70 on mobile; compact typography, spacing, steppers and note editing.
+- Preserve vertical scroll position when changing cart quantities, notes, recommendations and pickup/delivery mode.
+- Customer/contact fields require recipient name and a valid Saudi mobile number before preview; delivery additionally requires city, district and street. Pickup has an optional requested branch.
+- Contact details are held in sessionStorage within the browser session for drafting a preview. No order, delivery request or payment is transmitted.
+- Checkout-style payment methods and coupon field are displayed as disabled and nonfunctional.
+- Detailed review displays recipient, service type, item count and items-only subtotal with copy and print actions.
+- No unverified shipping fees, taxes, discounts or ETA are fabricated. Any production checkout requires Odoo 18 integration and independent testing.
+- JavaScript syntax and isolated contact validation checks passed. Complete browser visual and E2E tests have not been performed.
+- Changes are on feature/majalis-cart-detail-20261120, preserving the older preview branch.
