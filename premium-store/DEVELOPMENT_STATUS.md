@@ -160,3 +160,12 @@ The storefront at \`premium-store/index.html\` has been rebuilt as a **Majalis-b
 - Kept the previously restored brighter red/white palette for the broader storefront. Campaigns each use a distinctive complementary gradient with geometric motifs, without invented product imagery or claims of real discounts.
 - Added a disclaimer that campaign ideas, illustrative product content and offers are demonstration-only.
 - Smoke-checked 125 products, 12 categories, five rendered banners, quick journeys, and menu/cart/checkout route rendering with DOM stubs. Full browser visual and interaction QA still pending.
+
+## Vibrant home banners and RTL automatic carousels — 21 November 2026
+
+- Moved five editorial banners immediately above their relevant product category rows: breakfast, southern dishes, family/sharing, desserts and coffee/drinks.
+- Each homepage section is a single horizontal row with an overflow scroller, previous/next controls, product cards and a position counter.
+- Auto-advance every 3000ms on the home page; interval is cleaned up when leaving the page. Autoplay skips hovered/focused tracks, pauses for 9 seconds after manual control or touch/wheel activity, skips hidden browser tabs and respects reduced-motion preferences.
+- Strengthened banners with vivid red, blue, magenta and coffee-purple gradients while preserving the red/white Majalis storefront identity.
+- Kept all shopping pages, cart and checkout untouched. Product/carousel content remains demonstrative and requires approval.
+- Verified via JavaScript syntax check and in-memory DOM smoke test: 125 products, 12 catalog sections, 5 editorial banners all preceding their matching carousels, 5 horizontal rails, 10 arrow controls and 3000ms interval setup. Full graphical and real-device tests remain outstanding.
