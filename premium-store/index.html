@@ -614,6 +614,46 @@ body{font-weight:400}h1,h2,h3,h4,h5,h6,strong,b,.brand-name,.card-title,.home-se
  .home-content-group>.home-showcase .home-section-head h2{font-size:19px}
 }
 
+
+/* Soft differentiated category colors and calmer, earlier experience section */
+.first-fold-categories .feature-category{
+ background:var(--category-wash,#fff);
+ border-color:var(--category-border,#eaecef);
+ transition:background .18s,border-color .18s,transform .18s,box-shadow .18s;
+}
+.first-fold-categories .feature-category-icon{background:var(--category-icon,#ffffffb0)}
+.first-fold-categories .feature-category:hover{border-color:var(--category-accent,#D798A9);box-shadow:0 7px 17px #2523350c}
+.first-fold-categories .feature-category:nth-child(1){--category-wash:#FFF3E8;--category-border:#F8E8D9;--category-icon:#FFE9D2;--category-accent:#DFA66A}
+.first-fold-categories .feature-category:nth-child(2){--category-wash:#FFF5E5;--category-border:#F1E7D4;--category-icon:#FFECCD;--category-accent:#D8B16E}
+.first-fold-categories .feature-category:nth-child(3){--category-wash:#FFF0EE;--category-border:#F3E1DE;--category-icon:#FFE3DE;--category-accent:#D59B92}
+.first-fold-categories .feature-category:nth-child(4){--category-wash:#F3F2FF;--category-border:#E9E5F6;--category-icon:#EAE7FD;--category-accent:#A6A0D4}
+.first-fold-categories .feature-category:nth-child(5){--category-wash:#F0F8EE;--category-border:#E2F0E0;--category-icon:#E0F1DC;--category-accent:#9BCA9B}
+.first-fold-categories .feature-category:nth-child(6){--category-wash:#FFF0F6;--category-border:#F5E2EB;--category-icon:#FCE1EE;--category-accent:#D8A0BA}
+.first-fold-categories .feature-category:nth-child(7){--category-wash:#F2F0EB;--category-border:#E9E4DA;--category-icon:#E8E0D3;--category-accent:#B7A58C}
+.first-fold-categories .feature-category:nth-child(8){--category-wash:#EBF8FD;--category-border:#DDECF3;--category-icon:#D9F1FC;--category-accent:#93C6DB}
+.first-fold-categories .feature-category:nth-child(9){--category-wash:#FFF6EA;--category-border:#F5E8D7;--category-icon:#FFEDD5;--category-accent:#DDAB70}
+.first-fold-categories .feature-category:nth-child(10){--category-wash:#F9F0F3;--category-border:#F1E1E7;--category-icon:#F5DEE8;--category-accent:#D09BAD}
+.home-start-hint{margin-bottom:12px}
+.home-experience-section{margin:15px 0 32px}
+.home-experience-card{color:#222932;border:1px solid transparent}
+.home-experience-card::after{border-color:#ffffff56}
+.experience-private{background:linear-gradient(110deg,#F4DDE5,#FBEAF0);border-color:#EBC9D4}
+.experience-matches{background:linear-gradient(110deg,#DDF1E8,#EDF8F2);border-color:#C5E3D5}
+.experience-games{background:linear-gradient(110deg,#E9E3F8,#F3EEFC);border-color:#D9CCEF}
+.home-experience-card .experience-label{opacity:1;color:#6F6670}
+.home-experience-card small{opacity:1;color:#615C65}
+.home-experience-card b{color:#9E2140;border-bottom-color:#B2234559}
+.experience-matches b{color:#236C58;border-bottom-color:#236C5859}
+.experience-games b{color:#5B4592;border-bottom-color:#5B459259}
+.home-experience-card:hover{filter:brightness(.985)}
+@media(max-width:780px){
+ .home-start-hint{margin-bottom:10px}
+ .home-experience-section{margin:12px 0 27px}
+}
+@media(max-width:560px){
+ .home-experience-section{margin:11px 0 23px}
+}
+
 </style></head>
 <body>
 <header class="site-header"><div class="wrap header-inner">
@@ -761,11 +801,11 @@ function renderHome(){
   homeBanner()+
   featureCategories()+
   '<section class="home-start-hint" aria-label="تصفح خيارات المتجر"><span>✦ اختر قسمك المفضل، أو تصفّح المنتجات والجلسات مباشرة.</span><button type="button" data-go="/menu">قائمة الطعام كاملة ←</button></section>'+
+  homeExperiences()+
   '<section class="home-content-group home-discover-group" aria-label="اختيارات الطعام">'+homeSectionIntro('من قائمتنا','خلّ اختيارك أسهل','مجموعة من الأقسام الرئيسية للبدء، دون الحاجة للبحث بين عشرات البنرات.')+
   curated+breakfast+southern+'</section>'+
   '<section class="home-content-group home-offers-group" aria-label="العروض وخيارات المشاركة">'+homeSectionIntro('للّمة والأصحاب','العروض ووجبات المشاركة','اكتشف الأفكار والعروض التجريبية دون اعتبارها أسعارًا أو عروضًا معتمدة.','/offers')+
   promotionalBanners()+sharing+'</section>'+
-  homeExperiences()+
   '<section class="home-content-group home-taste-group" aria-label="الحلا والقهوة">'+homeSectionIntro('نكمل جلستك','الحلا والقهوة والمشروبات','كل ما يكمّل الجلسة في مكان واحد.')+sweets+coffee+evening+'</section>'+
   '<section class="home-content-group home-explore-group" aria-label="استكشف مزيدًا من المنتجات">'+homeSectionIntro('اكتشف أكثر','خيارات إضافية من قائمتنا','أصناف متنوعة تستحق التصفح.', '/menu')+newChoices+recentShowcase()+'</section>'+
   homeTrustStrip()+homeFinalActions()+homepageDisclosure();
