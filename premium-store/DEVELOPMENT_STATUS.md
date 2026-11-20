@@ -73,3 +73,37 @@ No change to the live Odoo database, main branch, payments, checkout configurati
 - Verified the single-file prototype JavaScript parses successfully after the changes.
 - **Photo integration is incomplete:** 28 generated product images exist in the downloadable ZIP, but the 28 WebP binaries have not been added to the GitHub branch; the browser uses fallback photography. Upload `assets/products/*.webp` under `premium-store/` before treating this task as delivered.
 - Still pending: run end-to-end Chrome interaction testing, check RTL at all device sizes, verify actual restaurant menu/prices and approve generated images against real dishes, test Odoo 18 staging module.
+
+
+## Delivery-style redesign — 20 November 2026
+
+The storefront at \`premium-store/index.html\` has been rebuilt as a **Majalis-branded, mobile-first restaurant ordering prototype**. The experience uses commonly recognizable delivery-commerce patterns. It is not a reproduction of HungerStation proprietary software, imagery, logos, or services.
+
+### Implemented
+- Responsive restaurant header and menu-first landing page, with mobile bottom navigation.
+- 28 existing catalog items, searchable by name, categorized and sortable by price/name.
+- Product cards with favorites; favorites stay in local browser storage.
+- **Dedicated full product detail route** at \`#/product/:id\` showing a product image, price, detail information, kitchen notes and quantity controls.
+- One or more cart lines per product depending on distinct kitchen notes, synchronized cart totals, quantity adjustment, line removal and clear-cart.
+- Fulfillment preference mockup (pickup/delivery) with explicit warnings that store logistics are not configured.
+- Copyable order summary, deliberately not submitted to Odoo or any payment provider.
+- Three seating/gaming/football inquiry cards linking to the Majalis WhatsApp number.
+- Compatible with web browser and mobile layouts. JavaScript syntax validation completed.
+
+### Must be completed before release
+- The WebP images for \`assets/products/01.webp\` … \`28.webp\` are still uncommitted to GitHub; the frontend uses fallback images when files are absent.
+- Product photos and prototype prices require real restaurant approval.
+- Real product variants, toppings, allergies, calories and inventory must be supplied by Odoo 18.
+- Delivery zones, branch selection, pickup availability, taxes, fees and payments require native integration; no placeholder amounts should be presented as guaranteed.
+- Full interactive browser QA, responsive visual QA, accessibility audit and Odoo integration tests remain outstanding.
+- Existing Odoo staging theme addon is still a separate basic prototype, **not** an installation of this rebuilt web store.
+
+### Suggested QA checklist
+1. Open the main page on desktop and mobile; change category and sort.
+2. Open a product card, adjust quantity and add kitchen notes.
+3. Add the same product with a different note; verify separate cart lines.
+4. Refresh the browser; verify persisted cart and favorites.
+5. Change cart quantities, remove an item and inspect the total.
+6. Toggle pickup/delivery; verify **no fabricated fees or ETA**.
+7. Preview an order and copy its summary; verify **no order is sent**.
+8. Test all external WhatsApp inquiry links.
