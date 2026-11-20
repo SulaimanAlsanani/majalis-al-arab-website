@@ -140,7 +140,7 @@ if(e.target.closest('#qtyMinus')||e.target.closest('#qtyPlus')){const p=productB
 if(e.target.closest('#addSelected')){addItem(state.currentProduct,state.quantity,el('itemNote')?.value||'');route('/cart');return}
 if(e.target.closest('[data-mode]')){state.fulfillment=e.target.closest('[data-mode]').dataset.mode;renderCart();return}
 if(e.target.closest('#previewOrder')){orderPreview();return}
-if(e.target.closest('#copySummary')){const t=el('summaryText');navigator.clipboard?.writeText(t.value).then(()=>notify('تم نسخ ملخص السلة')).catch(()=>{t.select();notify('حدد النص لنسخه')});return}
+if(e.target.closest('#copySummary')){const t=el('summaryText');if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(t.value).then(()=>notify('تم نسخ ملخص السلة')).catch(()=>{t.select();notify('حدد النص لنسخه')})}else{t.select();notify('حدد النص لنسخه')}return}
 });
 document.addEventListener('change',e=>{if(e.target.id==='sortSelect'){state.sort=e.target.value;render()}});
 el('globalSearch').addEventListener('input',e=>{state.query=e.target.value.trim();state.category='الكل';if(currentPath()!=='/menu'&&currentPath()!=='/')route('/menu');else{const panel=el('catalog');if(panel)panel.innerHTML=catalog();}});
