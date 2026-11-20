@@ -129,3 +129,15 @@ The storefront at \`premium-store/index.html\` has been rebuilt as a **Majalis-b
 - Checkout supports local review showing phone, selected service method, optional consented coordinates and items-only subtotal. It cannot actually submit or pay for an order.
 - Cart remains compact, with notes and quantities; both desktop and mobile cart continue buttons route to checkout.
 - JavaScript syntax and static route/component checks passed. Real browser QA and the Odoo 18, SPL and payment integrations remain pending.
+
+## Multi-page food-delivery redesign — 21 November 2026
+
+- Rebuilt landing experience with Majalis-branded red/white discovery hero, independent decorative artwork, category tiles, editorial campaign banners, multiple product showcase grids and trust highlights.
+- Added separate routed pages for /offers, /favorites, /orders, /account, /addresses and /help. Existing /menu, /seating, /cart, /checkout and /product/:id remain supported.
+- Global navigation and mobile bottom navigation now expose offers, orders and account; account page links to the other destinations.
+- Order history and tracking stages are **illustrative only** and explicitly empty; no fictional completed orders or tracking metrics are shown.
+- Uses original Majalis labels and artwork and common modern food delivery interaction patterns rather than Jahez trademarks, app icons, proprietary assets or source code.
+- Retains catalog of 125 products in 12 categories, including 97 labeled demo entries. Product photos are still mostly category-specific illustrative images, not verified dish photography.
+- All 12 representative routes were exercised with JavaScript DOM stubs (home, menu, offers, favorites, orders, account, addresses, help, seating, cart, checkout and one product). The checkout was tested with a nonempty example cart. Syntax passes.
+- **No live Odoo order/payment/tracking/address integrations exist yet.** National Address and GPS steps are only consented/local UI demonstration. E2E Chrome, accessibility, real payment/tax calculation, production content approval and deployment tests remain pending.
+- Current working branch: feature/majalis-cart-detail-20261120; older branch and main were not modified.
