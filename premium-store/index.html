@@ -376,7 +376,7 @@ if(e.target.closest('#accountLogin')){notify('تسجيل الدخول غير م�
 const routeBtn=e.target.closest('[data-route],[data-go]');if(routeBtn){route(routeBtn.dataset.route||routeBtn.dataset.go);return}
 const product=e.target.closest('[data-product]');if(product){el('searchSuggestions').hidden=true;route('/product/'+product.dataset.product);return}
 const fav=e.target.closest('[data-fav]');if(fav){toggleFavorite(Number(fav.dataset.fav));return}
-const category=e.target.closest('[data-category]');if(category){if(currentPath()!=='/'&&currentPath()!=='/menu'){state.category=category.dataset.category;route('/menu');return}if(category.dataset.category==='المفضلة'){state.category='الكل';state.sort='fav'}else{state.category=category.dataset.category;if(state.sort==='fav')state.sort='default'}render();return}
+const category=e.target.closest('[data-category]');if(category){if(category.dataset.category==='المفضلة'){state.category='الكل';state.sort='fav'}else{state.category=category.dataset.category;if(state.sort==='fav')state.sort='default'}if(currentPath()!=='/menu'){route('/menu');return}render();return}
 if(e.target.closest('[data-reset]')){state.category='الكل';state.sort='default';state.query='';render();return}
 const inc=e.target.closest('[data-inc]');if(inc){changeCart(Number(inc.dataset.inc),1);return}
 const dec=e.target.closest('[data-dec]');if(dec){changeCart(Number(dec.dataset.dec),-1);return}
