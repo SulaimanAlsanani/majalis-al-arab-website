@@ -169,3 +169,13 @@ The storefront at \`premium-store/index.html\` has been rebuilt as a **Majalis-b
 - Strengthened banners with vivid red, blue, magenta and coffee-purple gradients while preserving the red/white Majalis storefront identity.
 - Kept all shopping pages, cart and checkout untouched. Product/carousel content remains demonstrative and requires approval.
 - Verified via JavaScript syntax check and in-memory DOM smoke test: 125 products, 12 catalog sections, 5 editorial banners all preceding their matching carousels, 5 horizontal rails, 10 arrow controls and 3000ms interval setup. Full graphical and real-device tests remain outstanding.
+
+## Reference color + horizontal-only carousel repair — 21 November 2026
+
+- Sampled user's attached color swatch: predominant RGB (178,35,69), hex #B22345. Applied as primary store brand with discreet stronger-red #C62846, darker #8F1C37 and light pink #F9E7EC/near-white #FBFBFC.
+- Replaced slideHomeRail's card.scrollIntoView() call, which could vertically scroll the entire document, with rail.scrollTo({left:-offset,behavior:'smooth'}) on the horizontal RTL rail only. Scroll extent is bounded, and position indicators update.
+- Retained automatic carousel stepping every 3000 milliseconds, with pause after manual interaction and reduced-motion support.
+- Added homepage service cards for menu, private seating, football match viewing, PlayStation and coffee/dessert (all exploratory, not booking/availability guarantees).
+- Added compact homepage CTA actions for menu, session inquiries and external WhatsApp contact.
+- Added three more campaign banners with single-row product rails: curated picks (not verified sales rankings), additional demonstration options (not actual newly launched products) and evening coffee/dessert suggestions. Totals: eight editorial banners followed by eight horizontal carousels.
+- Code smoke tested 125 catalog records / 12 categories, all eight banner-before-rail pairs, and horizontal-only slide action; no scrollIntoView inside carousel action. Full browser rendering and Odoo integration still need real-device QA.
