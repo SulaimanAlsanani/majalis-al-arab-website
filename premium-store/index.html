@@ -2873,6 +2873,77 @@ body:has(#heroSlider) .header-inner .brand.brand-official{
  .first-fold-categories .home-section-head{margin-bottom:8px!important}
  .first-fold-categories .home-section-head h2{font-size:clamp(17px,4.45vw,21px)!important;line-height:1.4!important}
 }
+
+/* Header action: browse sessions, matching the existing menu CTA. 
+   Badge must grow with the COMPLETE cart quantity (1, 10, 100, 1000...). */
+.site-header .header-seating-cta,
+body:has(#heroSlider) .site-header .header-seating-cta{
+ display:inline-flex!important;align-items:center!important;justify-content:center!important;
+ min-height:39px!important;padding:10px 18px!important;border-radius:10px!important;
+ font-size:12px!important;white-space:nowrap!important;
+ background:#ffdf00!important;color:#22160f!important;
+ border:0!important;font-weight:800!important;
+}
+.site-header .header-cart.header-cart-icon,
+body:has(#heroSlider) .site-header .header-cart.header-cart-icon{
+ position:relative!important;overflow:visible!important;isolation:isolate;
+}
+.site-header .header-cart.header-cart-icon .cart-count,
+body:has(#heroSlider) .site-header .header-cart.header-cart-icon .cart-count{
+ position:absolute!important;top:-8px!important;inset-inline-end:-9px!important;
+ display:inline-flex!important;align-items:center!important;justify-content:center!important;
+ box-sizing:border-box!important;
+ width:max-content!important;min-width:20px!important;max-width:none!important;
+ height:20px!important;min-height:20px!important;
+ padding:0 5px!important;line-height:1!important;
+ font-size:11px!important;font-weight:800!important;
+ border-radius:999px!important;white-space:nowrap!important;overflow:visible!important;
+ font-variant-numeric:tabular-nums!important;
+ z-index:3!important;
+}
+.site-header>.header-inner.wrap,body:has(#heroSlider) .site-header>.header-inner.wrap{overflow:visible!important}
+@media(max-width:780px){
+ .site-header .header-seating-cta,
+ body:has(#heroSlider) .site-header .header-seating-cta{
+  font-size:10px!important;min-height:34px!important;padding:7px 10px!important;
+ }
+}
+@media(max-width:700px){
+ .site-header>.header-inner.wrap,body:has(#heroSlider) .site-header>.header-inner.wrap{
+  height:auto!important;min-height:60px!important;
+  display:flex!important;flex-wrap:wrap!important;
+  justify-content:space-between!important;
+  gap:6px 9px!important;padding:7px 12px!important;
+ }
+ .site-header .brand.brand-official,body:has(#heroSlider) .header-inner .brand.brand-official{
+  flex:0 0 100%!important;margin:0!important;
+ }
+ .site-header .reference-top-actions,body:has(#heroSlider) .reference-top-actions{
+  display:flex!important;flex:1 1 auto!important;
+  justify-content:flex-start!important;gap:6px!important;
+  min-width:0!important;
+ }
+ .site-header .reference-top-cta,body:has(#heroSlider) .site-header .reference-top-cta{
+  display:inline-flex!important;align-items:center!important;justify-content:center!important;
+  min-height:32px!important;padding:6px 9px!important;font-size:10px!important;
+ }
+ .site-header .header-seating-cta,body:has(#heroSlider) .site-header .header-seating-cta{
+  min-height:32px!important;padding:6px 9px!important;font-size:10px!important;
+ }
+ .site-header .header-language-trigger{min-height:32px!important;padding:6px 8px!important}
+ .site-header .header-cart.header-cart-icon,
+ body:has(#heroSlider) .site-header .header-cart.header-cart-icon{
+  flex:0 0 34px!important;width:34px!important;height:34px!important;min-width:34px!important;
+  margin-inline-end:7px!important;
+ }
+}
+@media(max-width:370px){
+ .site-header .reference-top-cta,body:has(#heroSlider) .site-header .reference-top-cta,
+ .site-header .header-seating-cta,body:has(#heroSlider) .site-header .header-seating-cta{
+  font-size:9px!important;padding:6px!important;
+ }
+ .site-header .header-language-trigger{font-size:9px!important;padding:6px 5px!important}
+}
 </style></head>
 <body>
 <header class="site-header"><div class="wrap header-inner">
@@ -2888,6 +2959,7 @@ body:has(#heroSlider) .header-inner .brand.brand-official{
   </div>
  </details>
  <button type="button" class="reference-top-cta" data-go="/menu">تصفح القائمة</button>
+ <button type="button" class="reference-top-cta header-seating-cta" data-go="/seating">تصفح الجلسات</button>
 </div>
 <button id="headerCart" class="cart-button header-cart header-cart-icon" type="button" aria-label="فتح سلة المشتريات" title="السلة"><svg viewBox="0 0 24 24" width="21" height="21" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M3 4h2l2.2 10.1a2 2 0 0 0 2 1.6h8.9a2 2 0 0 0 2-1.6L22 7H6"/><circle cx="10" cy="20" r="1"/><circle cx="18" cy="20" r="1"/></svg><span class="cart-count" id="headerCount">0</span></button>
 </div></header>
