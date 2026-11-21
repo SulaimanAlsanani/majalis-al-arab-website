@@ -813,6 +813,102 @@ body:has(#heroSlider) .header-inner{min-height:64px}
  .header-main-nav .nav-link{font-size:10px;padding:7px 10px}
 }
 
+
+/* Sitewide spacing rhythm: remove redundant whitespace without compressing controls */
+:root{--space-xs:6px;--space-sm:10px;--space-md:16px;--space-lg:24px;--space-xl:32px}
+.wrap{max-width:1296px;padding-inline:clamp(12px,2.2vw,26px)}
+.page{padding-top:10px;padding-bottom:22px}
+body:has(#heroSlider) .page{padding-top:7px}
+.hero-slider{margin-bottom:12px}
+.first-fold-categories{padding-block:8px 10px}
+.first-fold-categories .home-section-head{margin-bottom:10px}
+.first-fold-categories .feature-category-grid{gap:9px}
+.first-fold-categories .feature-category{padding-block:10px;min-height:86px}
+.home-start-hint{margin-block:4px 14px;padding:10px 15px}
+.home-experience-section{margin:16px 0 28px}
+.home-experience-section .homepage-group-heading{margin-bottom:14px}
+.home-experience-grid{gap:12px}
+.home-experience-card{min-height:185px;padding:19px 20px;gap:5px}
+.home-content-group{margin:26px 0 32px}
+.home-content-group+.home-content-group{margin-top:28px}
+.homepage-group-heading{gap:14px;margin-bottom:16px;padding-bottom:12px}
+.homepage-group-heading h2{margin-bottom:4px}
+.home-content-group>.home-showcase{margin:14px 0 22px}
+.home-content-group>.home-showcase+.home-showcase{margin-top:22px}
+.home-content-group>.home-showcase .home-section-head{margin-bottom:10px}
+.home-section-head{gap:12px}
+.home-section-head h2{line-height:1.35}
+.showcase-head-actions{gap:8px}
+.product-rail{gap:12px}
+.product-card{border-radius:15px}
+.promo-two{gap:14px;margin:12px 0 18px}
+.promo-box{padding:22px 25px;min-height:195px}
+.home-offers-group .promo-two{margin:10px 0 20px}
+.home-trust-strip{gap:10px;margin-block:24px}
+.home-trust-strip>div{padding:14px}
+.home-actions{margin-block:26px;padding:23px 27px;gap:18px}
+.home-final-cta{margin-block:22px;padding:22px 26px}
+.homepage-disclosure{margin-block:18px 0;padding:11px 14px}
+.menu-heading,.interior-heading{margin-bottom:15px}
+.menu-heading h1,.interior-heading h1{margin-block:4px}
+.menu-heading p,.interior-heading p{margin-top:5px}
+.quick-nav{gap:8px;padding-block:10px 13px}
+.quick-nav button{padding:9px 13px}
+.shop-layout{gap:18px}
+.panel-head{margin:15px 0 12px}
+.product-grid{gap:13px}
+.back-link{margin-bottom:12px}
+.detail-info{padding:clamp(18px,2.5vw,30px)}
+.basket-banner,.checkout-title{padding:21px 25px;margin-bottom:17px}
+.cart-route,.checkout-layout{gap:18px}
+.booking-cards{gap:13px}
+.site-footer{margin-top:36px;padding-top:29px}
+@media(max-width:780px){
+ .wrap{padding-inline:14px}
+ .page{padding-top:8px}
+ body:has(#heroSlider) .page{padding-top:6px}
+ .hero-slider{margin-bottom:10px}
+ .first-fold-categories{padding-block:7px 9px}
+ .first-fold-categories .feature-category-grid{gap:7px}
+ .first-fold-categories .feature-category{min-height:72px;padding:8px 5px}
+ .home-start-hint{margin-block:3px 11px;padding:9px 12px}
+ .home-experience-section{margin:12px 0 24px}
+ .home-experience-grid{gap:9px}
+ .home-experience-card{min-height:170px;padding:16px 13px}
+ .home-content-group{margin:21px 0 27px}
+ .home-content-group+.home-content-group{margin-top:22px}
+ .homepage-group-heading{gap:10px;margin-bottom:13px;padding-bottom:10px}
+ .home-content-group>.home-showcase{margin-block:12px 18px}
+ .home-content-group>.home-showcase+.home-showcase{margin-top:18px}
+ .product-rail{gap:10px}
+ .promo-two{gap:10px}
+ .promo-box{min-height:170px;padding:18px}
+ .home-actions{padding:20px;margin-block:20px}
+ .site-footer{margin-top:28px}
+}
+@media(max-width:560px){
+ .wrap{padding-inline:12px}
+ .site-header>.header-inner.wrap{padding-inline:12px}
+ .first-fold-categories .feature-category-grid{gap:6px}
+ .first-fold-categories .feature-category{min-height:67px;padding:7px 3px}
+ .home-experience-section{margin:11px 0 20px}
+ .home-experience-card{min-height:125px;padding:12px 16px}
+ .home-content-group{margin:18px 0 24px}
+ .homepage-group-heading{margin-bottom:11px}
+ .home-content-group>.home-showcase{margin:11px 0 17px}
+ .home-content-group>.home-showcase+.home-showcase{margin-top:17px}
+ .product-rail{gap:9px}
+ .promo-box{min-height:155px;padding:16px}
+ .home-actions{padding:17px;margin-block:18px}
+ .home-trust-strip{margin-block:18px;gap:8px}
+ .home-trust-strip>div{padding:10px}
+ .menu-heading,.interior-heading{margin-bottom:12px}
+ .panel-head{margin:12px 0 9px}
+ .product-grid{gap:10px}
+ .basket-banner,.checkout-title{padding:17px;margin-bottom:13px}
+ .site-footer{margin-top:23px}
+}
+
 </style></head>
 <body>
 <header class="site-header"><div class="wrap header-inner">
