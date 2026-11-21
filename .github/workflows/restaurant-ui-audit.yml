@@ -40,7 +40,7 @@ jobs:
                 await Promise.all(imgs.map(im=> im.complete ? null : new Promise(resolve=>{im.onload=resolve;im.onerror=resolve;setTimeout(resolve,5000)})));
                 return {cards:el.length,photos:imgs.length,broken:imgs.filter(im=>!im.complete||!im.naturalWidth).map(im=>im.src),horizontalOverflow:document.documentElement.scrollWidth>innerWidth+4,bodyText:document.body.innerText.length,route:location.href};
               });
-              await page.screenshot({path:'audit-screenshots/'+view.name+'.png',fullPage:true});
+              await page.screenshot({path:'audit-screenshots/'+view.name+'.jpg',type:'jpeg',quality:82,fullPage:false});
               console.log('VISUAL_AUDIT '+view.name+' '+JSON.stringify({result,errors}));
               if(result.cards!==10||result.photos!==10||result.broken.length||errors.length||result.horizontalOverflow)failures.push({view:view.name,result,errors});
               await page.close();
@@ -55,7 +55,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: restaurant-store-desktop-mobile
-          path: audit-screenshots/*.png
+          path: audit-screenshots/*.jpg
 
       - name: Publish browser test findings
         if: always()
@@ -63,6 +63,6 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           if [ -f audit-results.txt ]; then
-            git add -f audit-results.txt
+            git add -f audit-results.txt audit-screenshots/*.jpg
             git diff --cached --quiet || (git commit -m "test: record chromium browser audit outcome" && git push)
           fi
