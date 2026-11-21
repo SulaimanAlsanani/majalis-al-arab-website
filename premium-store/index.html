@@ -913,7 +913,7 @@ body:has(#heroSlider) .page{padding-top:7px}
 /* Section-specific photography for all 15 restaurant hero slides */
 #heroSlider .hero-slide{position:relative;isolation:isolate;overflow:hidden;background:#222B34}
 #heroSlider .hero-slide .discovery-visual{display:block!important;position:absolute;inset:0;width:100%;height:100%;z-index:0;pointer-events:none;overflow:hidden}
-#heroSlider .restaurant-hero-photo{width:100%;height:100%;display:block;object-fit:cover;object-position:center;filter:saturate(1.04);opacity:.93}
+#heroSlider .restaurant-hero-photo{width:100%;height:100%;display:block;object-fit:contain;object-position:left center;filter:saturate(1.04);opacity:.93}
 #heroSlider .restaurant-hero-overlay{position:absolute;inset:0;display:block;background:linear-gradient(270deg,rgba(26,25,34,.97) 0%,rgba(35,28,36,.91) 25%,rgba(43,30,42,.74) 46%,rgba(35,28,36,.23) 74%,rgba(25,23,31,.08) 100%)}
 #heroSlider .hero-slide .discovery-copy{z-index:2;position:relative}
 #heroSlider .hero-slide .discovery-copy h1,#heroSlider .hero-slide .discovery-copy h1 em{color:#fff;text-shadow:0 2px 15px #00000046}
@@ -930,6 +930,12 @@ body:has(#heroSlider) .page{padding-top:7px}
  #heroSlider .restaurant-hero-photo{opacity:.78}
  #heroSlider .restaurant-hero-overlay{background:linear-gradient(270deg,rgba(26,25,34,.97),rgba(35,28,36,.88) 69%,rgba(25,23,31,.52))}
 }
+
+
+/* Display the entire restaurant banner image without cropping it */
+#heroSlider .hero-slide .restaurant-hero-photo{object-fit:contain;object-position:left center;transform:none}
+#heroSlider .hero-slide .discovery-visual{background:linear-gradient(115deg,#29232F,#4C2D3D 65%,#201F28)}
+@media(max-width:780px){#heroSlider .hero-slide .restaurant-hero-photo{object-fit:contain;object-position:center}}
 
 </style></head>
 <body>
