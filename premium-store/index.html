@@ -3610,11 +3610,10 @@ button:focus-visible,a:focus-visible,[tabindex]:focus-visible{outline:3px solid 
 
 /* Borderless storefront refinement: no decorative borders anywhere in the UI. */
 /* Keep the existing spacing, rounded geometry and subtle elevation; remove visible borders globally. */
-:where(body) :is(header,footer,main,section,article,aside,nav,div,button,a,summary,details,input,textarea,select,label,figure,img,span,ul,ol,li,p,h1,h2,h3,h4,h5,h6),
-:where(body) :is(header,footer,main,section,article,aside,nav,div,button,a,summary,details,input,textarea,select,label,figure,img,span,ul,ol,li,p,h1,h2,h3,h4,h5,h6)::before,
-:where(body) :is(header,footer,main,section,article,aside,nav,div,button,a,summary,details,input,textarea,select,label,figure,img,span,ul,ol,li,p,h1,h2,h3,h4,h5,h6)::after{
- border-width:0!important;
- border-style:none!important;
+body :not(#__borderless_reset_a):not(#__borderless_reset_b):not(#__borderless_reset_c),
+body :not(#__borderless_reset_a):not(#__borderless_reset_b):not(#__borderless_reset_c)::before,
+body :not(#__borderless_reset_a):not(#__borderless_reset_b):not(#__borderless_reset_c)::after{
+ border:0!important;
 }
 /* Draw selected and focused states without borders so interactions remain understandable. */
 :where(button,input,textarea,select,a,summary,[tabindex]):focus-visible{
