@@ -1207,6 +1207,59 @@ button:focus-visible,a:focus-visible,input:focus-visible,textarea:focus-visible,
 .retail-promo-symbol img{position:relative;object-fit:contain;max-height:205px;width:80%;filter:drop-shadow(0 9px 12px #44332a19)}
 @media(max-width:780px){.retail-promo{min-height:170px;grid-template-columns:1fr 39%;margin:16px 0 24px}.retail-promo-symbol{min-height:170px}.retail-promo-symbol img{max-height:145px;width:95%}.retail-promo>div:first-child{padding:15px}.retail-promo h2{font-size:19px}.retail-promo p{font-size:11px}.retail-promo button{font-size:11px;padding:8px 12px}}
 @media(max-width:420px){.retail-promo{min-height:150px}.retail-promo-symbol{min-height:150px}.retail-promo>div:first-child{padding:10px}.retail-promo h2{font-size:17px}.retail-promo p{font-size:10px}}
+
+/* Restaurant-matched category cards, retaining supermarket imagery and names. */
+.first-fold-categories{padding:3px 0 18px!important;margin-block:clamp(9px,1.4vw,18px) clamp(20px,2.7vw,34px)!important;background:transparent!important}
+.first-fold-categories .home-section-head{display:flex!important;align-items:center!important;justify-content:space-between!important;gap:14px!important;margin:0 0 14px!important}
+.first-fold-categories .home-section-head h2{font-size:clamp(21px,2.15vw,31px)!important;font-weight:800!important;line-height:1.36!important;letter-spacing:-.025em!important;color:#29282e!important}
+.first-fold-categories .home-section-head>div>span{display:none!important}
+.first-fold-categories .home-section-head button{background:#f7f6f7!important;color:#343238!important;border:0!important;border-radius:999px!important;padding:9px 14px!important;font-weight:700!important;white-space:nowrap!important}
+.first-fold-categories .feature-category-grid{display:grid!important;grid-template-columns:repeat(6,minmax(0,1fr))!important;gap:clamp(10px,1.5vw,18px)!important;margin:0!important}
+.first-fold-categories .feature-category,
+.first-fold-categories .feature-category:nth-child(n){
+ --category-wash:#fff!important;
+ display:flex!important;flex-direction:column!important;align-items:center!important;justify-content:flex-start!important;
+ gap:10px!important;min-width:0!important;min-height:0!important;
+ padding:14px 7px 12px!important;border:0!important;border-radius:16px!important;
+ background:#fff!important;box-shadow:none!important;
+ transition:transform .2s ease,background .2s ease!important;
+}
+.first-fold-categories .feature-category:hover{transform:translateY(-2px)!important;background:#fcfbfb!important;box-shadow:none!important}
+.first-fold-categories .feature-category-icon,
+.first-fold-categories .feature-category:nth-child(n) .feature-category-icon{
+ display:grid!important;place-items:center!important;
+ width:clamp(76px,7.4vw,104px)!important;height:clamp(76px,7.4vw,104px)!important;
+ min-width:0!important;flex:none!important;aspect-ratio:1/1!important;
+ padding:5px!important;overflow:hidden!important;
+ border:0!important;border-radius:50%!important;
+ background:#fbf9f9!important;box-shadow:none!important;
+}
+.first-fold-categories .feature-category-icon img{
+ display:block!important;position:static!important;
+ width:88%!important;height:88%!important;max-width:88%!important;max-height:88%!important;
+ object-fit:contain!important;object-position:center!important;
+ border-radius:50%!important;background:transparent!important;
+}
+.first-fold-categories .feature-category strong{
+ font-size:12px!important;font-weight:750!important;line-height:1.5!important;
+ color:#30343a!important;text-align:center!important;
+ white-space:normal!important;text-wrap:balance!important;
+}
+.first-fold-categories .feature-category:focus-visible{outline:3px solid #7754a1!important;outline-offset:2px!important}
+@media(max-width:1000px){
+ .first-fold-categories .feature-category-grid{grid-template-columns:repeat(4,minmax(0,1fr))!important}
+}
+@media(max-width:620px){
+ .first-fold-categories .feature-category-grid{grid-template-columns:repeat(3,minmax(0,1fr))!important;gap:9px!important}
+ .first-fold-categories .feature-category{padding:9px 3px 8px!important;gap:7px!important}
+ .first-fold-categories .feature-category-icon{width:clamp(66px,20vw,85px)!important;height:clamp(66px,20vw,85px)!important}
+ .first-fold-categories .feature-category strong{font-size:11px!important}
+ .first-fold-categories .home-section-head h2{font-size:clamp(18px,4.4vw,23px)!important}
+}
+@media(max-width:370px){
+ .first-fold-categories .feature-category-grid{grid-template-columns:repeat(2,minmax(0,1fr))!important}
+}
+@media(prefers-reduced-motion:reduce){.first-fold-categories .feature-category{transition:none!important}.first-fold-categories .feature-category:hover{transform:none!important}}
 </style></head>
 <body>
 <header class="site-header"><div class="wrap header-inner">
