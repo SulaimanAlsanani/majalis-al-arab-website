@@ -1548,6 +1548,58 @@ body{background:#fafafa;color:var(--hs-ink)}
  .quick-nav{top:57px}
 }
 @media(max-width:390px){.hs-order-options small{display:none}.hs-order-options>button{min-height:65px}}
+
+/* Full storefront experience: restaurant identity, category-first browsing and persistent cart. */
+.hs-restaurant-intro{display:flex;align-items:center;gap:14px;padding:15px 19px;border-radius:18px;
+ background:#fff;border:1px solid #ededed;margin:14px 0 12px;box-shadow:0 5px 17px #1d252e08}
+.hs-restaurant-intro-logo{flex:0 0 66px;width:66px;height:66px;border-radius:16px;background:#b82d49;color:white;
+ display:grid;place-items:center;font-size:39px;font-weight:900}
+.hs-restaurant-intro-info{flex:1;min-width:0}
+.hs-restaurant-intro-eyebrow{color:#929292;font-size:11px;font-weight:700}
+.hs-restaurant-intro-info h2{font-size:clamp(19px,2vw,26px);line-height:1.3;margin:3px 0 9px;color:#24282e;font-weight:900}
+.hs-restaurant-intro-tags{display:flex;align-items:center;gap:7px;flex-wrap:wrap}
+.hs-restaurant-intro-tags span{padding:5px 9px;border-radius:999px;background:#f8f8f8;color:#535960;font-size:10px;font-weight:750}
+.hs-restaurant-intro-tags .hs-restaurant-intro-demo{background:#fff6dc;color:#7f6226}
+.hs-restaurant-intro-action{background:#ffda29;border:0;border-radius:12px;padding:12px 17px;font-weight:850;font-size:12px;color:#1c1c1c;cursor:pointer}
+.hs-restaurant-intro-action:hover{background:#f1ca1e}
+.hs-catalog-entry{display:flex;align-items:center;gap:14px;justify-content:space-between;background:#fffdf6;border:1px solid #f3ebd1;
+ padding:15px 20px;border-radius:16px;margin:6px 0 16px}
+.hs-catalog-entry>div:first-child{display:flex;flex-direction:column;gap:5px}
+.hs-catalog-entry strong{font-size:15px;color:#24272d}
+.hs-catalog-entry span{font-size:11px;color:#797b7f}
+.hs-catalog-entry-actions{display:flex;gap:6px;flex-wrap:wrap}
+.hs-catalog-entry-actions button{background:white;border:1px solid #eae4d1;border-radius:999px;padding:8px 12px;cursor:pointer;font-size:11px;font-weight:750}
+.hs-catalog-entry-actions button:hover{background:#ffda29;border-color:#ffda29}
+.hs-floating-order{position:fixed;z-index:31;bottom:18px;inset-inline-start:18px;display:flex;align-items:center;gap:10px;
+ width:min(380px,calc(100% - 24px));padding:11px 12px;border-radius:17px;background:#24262b;color:white;
+ box-shadow:0 12px 36px #0004}
+.hs-floating-order[hidden]{display:none!important}
+.hs-floating-order-icon{display:grid;place-items:center;background:#ffffff1c;width:41px;height:41px;border-radius:12px;font-size:21px}
+.hs-floating-order-text{min-width:0;display:flex;flex-direction:column;gap:3px;flex:1}
+.hs-floating-order-text strong{font-size:12px}
+.hs-floating-order-text small{font-size:10px;color:#dddddf}
+.hs-floating-order>button{background:#ffda29;color:#1b1b1b;border:0;border-radius:11px;padding:11px 12px;font-weight:850;font-size:11px;cursor:pointer}
+.product-grid{align-items:stretch}
+.product-grid .product-card{height:100%}
+.product-card .card-bottom{margin-top:auto}
+.product-card .card-body{display:flex;flex-direction:column;gap:5px}
+.product-card .card-title{text-align:start}
+.product-card .card-photo img{transition:transform .18s ease}
+.product-card:hover .card-photo img{transform:scale(1.035)}
+.quick-nav button{transition:background .18s,border-color .18s}
+@media(max-width:780px){
+ .hs-restaurant-intro{padding:12px;gap:9px;flex-wrap:wrap}
+ .hs-restaurant-intro-logo{width:47px;height:47px;flex-basis:47px;border-radius:12px;font-size:27px}
+ .hs-restaurant-intro-info h2{font-size:17px;margin:2px 0 6px}
+ .hs-restaurant-intro-eyebrow{font-size:10px}
+ .hs-restaurant-intro-tags span{font-size:9px;padding:4px 6px}
+ .hs-restaurant-intro-action{padding:9px 12px;font-size:10px}
+ .hs-catalog-entry{flex-direction:column;align-items:stretch;padding:13px;gap:10px}
+ .hs-catalog-entry-actions{overflow-x:auto;flex-wrap:nowrap;scrollbar-width:none}
+ .hs-catalog-entry-actions button{flex:none;white-space:nowrap}
+ .hs-floating-order{bottom:calc(72px + env(safe-area-inset-bottom));width:calc(100% - 24px);inset-inline:12px;padding:9px;border-radius:14px}
+}
+@media(min-width:781px){.hs-restaurant-intro-action{margin-inline-start:auto}}
 </style></head>
 <body>
 <header class="site-header"><div class="wrap header-inner">
@@ -1557,6 +1609,11 @@ body{background:#fafafa;color:var(--hs-ink)}
 <button id="headerCart" class="cart-button header-cart header-cart-icon" type="button" aria-label="فتح سلة المشتريات" title="السلة"><svg viewBox="0 0 24 24" width="21" height="21" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M3 4h2l2.2 10.1a2 2 0 0 0 2 1.6h8.9a2 2 0 0 0 2-1.6L22 7H6"/><circle cx="10" cy="20" r="1"/><circle cx="18" cy="20" r="1"/></svg><span class="cart-count" id="headerCount">0</span></button>
 </div></header>
 <main class="wrap page" id="app" tabindex="-1"></main>
+<div class="hs-floating-order" id="floatingOrder" hidden>
+  <div class="hs-floating-order-icon" aria-hidden="true">🛍</div>
+  <div class="hs-floating-order-text"><strong id="floatingOrderLabel">راجع سلتك</strong><small id="floatingOrderTotal">الإجمالي التجريبي</small></div>
+  <button type="button" data-go="/cart">عرض السلة ←</button>
+</div>
 <footer class="site-footer"><div class="wrap footer-inner"><div><strong>مجالس العرب</strong><p>أطباق وجلسات على ذوقك. هذه معاينة تصميمية للمتجر الإلكتروني.</p></div><div class="footer-links"><a href="#/menu">قائمة الطعام</a><a href="#/offers">العروض</a><a href="#/favorites">المفضلة</a><a href="#/orders">الطلبات</a><a href="#/account">حسابي</a><a href="#/help">مركز المساعدة</a><a href="https://wa.me/966549792477" target="_blank" rel="noopener noreferrer">واتساب 0549792477</a><p>جميع المنتجات والأسعار والصور تحتاج اعتماد المطعم قبل الإطلاق.</p></div></div></footer>
 <nav class="mobile-bottom" aria-label="التنقل على الجوال"><button data-route="/" id="mHome"><span>⌂</span>الرئيسية</button><button data-route="/menu" id="mMenu"><span>☷</span>المنيو</button><button data-route="/offers" id="mOffers"><span>٪</span>العروض</button><button data-route="/orders" id="mOrders"><span>▤</span>طلباتي</button><button data-route="/account" id="mAccount"><span>♙</span>حسابي</button><button data-route="/cart" id="mCart"><span>🛒</span>السلة <span class="number" id="mobileCount">0</span></button></nav>
 <div class="toast" id="toast" hidden role="status" aria-live="polite"></div><button id="scrollTop" type="button" class="scroll-top" aria-label="العودة إلى أعلى الصفحة" hidden>↑</button>
@@ -1610,7 +1667,16 @@ function currentPath(){const h=decodeURIComponent(location.hash.slice(1));return
 function route(path){location.hash='#'+path;if(currentPath()===path)render()}
 function count(){return state.cart.reduce((s,l)=>s+l.qty,0)}
 function total(){return state.cart.reduce((s,l)=>s+(PRODUCTS.find(p=>p.id===l.id)?.price||0)*l.qty,0)}
-function updateCounts(){el('headerCount').textContent=count();el('mobileCount').textContent=count()}
+function updateCounts(){
+ el('headerCount').textContent=count();
+ el('mobileCount').textContent=count();
+ const float=el('floatingOrder');
+ if(float){
+   float.hidden=!count();
+   el('floatingOrderLabel').textContent=count()+' صنف في سلتك';
+   el('floatingOrderTotal').textContent='الإجمالي التجريبي: '+money(total());
+ }
+}
 function notify(message){const t=el('toast');t.textContent=message;t.hidden=false;clearTimeout(notify.timer);notify.timer=setTimeout(()=>t.hidden=true,2600)}
 function productById(id){return PRODUCTS.find(p=>p.id===Number(id))}
 const RECENTS_KEY='majalis_recent_product_ids_v1';
@@ -1747,6 +1813,18 @@ function quickOrderHub(){
  '</div></section>';
 }
 function homeExperiences(){return '<section class="home-experience-section" aria-label="تجارب مجالس العرب">'+homeSectionIntro('مساحات وتجارب','مو بس مطعم… مجالس تجمعنا','الجلسات الخاصة والمباريات والبلايستيشن؛ الاستفسار عن التوفر مباشرة مع الفرع.','/seating')+'<div class="home-experience-grid"><button type="button" class="home-experience-card experience-private" data-go="/seating"><span class="experience-icon">🛋️</span><span class="experience-label">جلسات خاصة</span><strong>جلستك على كيفك</strong><small>استكشف الجلسات والاستفسار عن التوفر</small><b>استفسر عن الجلسات ←</b></button><button type="button" class="home-experience-card experience-matches" data-go="/seating"><span class="experience-icon">⚽</span><span class="experience-label">مشاهدة المباريات</span><strong>للحماس جمهور</strong><small>أجواء متابعة المباريات مع الرفاق</small><b>استكشف الخيارات ←</b></button><button type="button" class="home-experience-card experience-games" data-go="/seating"><span class="experience-icon">🎮</span><span class="experience-label">بلايستيشن</span><strong>المنافسة تحلى</strong><small>استفسر عن الأجهزة والمواعيد</small><b>اطلع على التفاصيل ←</b></button></div></section>'}
+function serviceModeBanner(){
+ return '<section class="hs-restaurant-intro" aria-label="متجر مجالس العرب">'+
+ '<div class="hs-restaurant-intro-logo">م</div>'+
+ '<div class="hs-restaurant-intro-info"><span class="hs-restaurant-intro-eyebrow">مطاعم وديوانية مجالس العرب</span><h2>الأكلات اللي تحبها، على ذوقك</h2>'+
+ '<div class="hs-restaurant-intro-tags"><span>🍽 قائمة متنوعة</span><span>☕ قهوة وحلا</span><span>♧ جلسات</span><span class="hs-restaurant-intro-demo">نسخة استعراضية — الطلب والدفع غير مفعلين</span></div></div>'+
+ '<button type="button" class="hs-restaurant-intro-action" data-go="/menu">استكشف المنيو ←</button>'+
+ '</section>';
+}
+function compactMenuEntry(){
+ return '<section class="hs-catalog-entry" aria-label="تصفح سريع حسب الفئة"><div><strong>اختر من أصناف مجالس العرب</strong><span>استكشف الفطور، المشويات، المقبلات، الحلا والمشروبات</span></div>'+
+ '<div class="hs-catalog-entry-actions"><button data-category="الفطور والعشاء">الفطور</button><button data-category="المشويات والأطباق الرئيسية">المشويات</button><button data-category="الحلا">الحلا</button><button data-category="المشروبات">المشروبات</button></div></section>';
+}
 function renderHome(){
  const byCategory=(name,n=14)=>PRODUCTS.filter(p=>p.category===name).slice(0,n).map(p=>p.id);
  const breakfast=productShowcase('فطور على الأصول','شكشوكة وفول وكبدة وخيارات تفتح النفس',byCategory('الفطور والعشاء'),'/menu','breakfast');
@@ -1759,6 +1837,7 @@ function renderHome(){
  const evening=productShowcase('لجلسة المساء','حلا وقهوة ومشروبات مناسبة للجلسة',[23,24,25,26,27,28,61,63,65,100,101,102],'/menu','evening');
  el('app').innerHTML=
   homeBanner()+
+  serviceModeBanner()+
   featureCategories()+
   menuQrBanner()+
   quickOrderHub()+
@@ -1771,7 +1850,7 @@ function renderHome(){
   '<section class="home-content-group home-explore-group" aria-label="استكشف مزيدًا من المنتجات">'+homeSectionIntro('اكتشف أكثر','خيارات إضافية من قائمتنا','أصناف متنوعة تستحق التصفح.', '/menu')+newChoices+recentShowcase()+'</section>'+
   homeTrustStrip()+homeFinalActions()+homepageDisclosure();
 }
-function renderMenu(){el('app').innerHTML='<div class="menu-heading"><div><span>تجربة مجالس العرب</span><h1>قائمة الطعام</h1><p>125 صنفًا بينها 97 صنفًا تجريبيًا. الأسعار والصور للمعاينة فقط.</p></div><button data-go="/favorites">♡ أصنافي المفضلة</button></div>'+quickNav()+'<div class="shop-layout"><section class="catalog-panel" id="catalog">'+catalog()+'</section>'+sideCart()+'</div>'}
+function renderMenu(){el('app').innerHTML=serviceModeBanner()+compactMenuEntry()+'<div class="menu-heading"><div><span>تجربة مجالس العرب</span><h1>قائمة الطعام</h1><p>125 صنفًا بينها 97 صنفًا تجريبيًا. الأسعار والصور للمعاينة فقط.</p></div><button data-go="/favorites">♡ أصنافي المفضلة</button></div>'+quickNav()+'<div class="shop-layout"><section class="catalog-panel" id="catalog">'+catalog()+'</section>'+sideCart()+'</div>'}
 function renderDetail(id){const p=productById(id);if(!p){route('/');return}rememberViewed(id);const related=PRODUCTS.filter(x=>x.id!==p.id&&x.category===p.category).slice(0,3);const crumb='<button class="back-link" data-back>→ العودة إلى قائمة الطعام</button>';el('app').innerHTML=crumb+'<article class="detail-route"><div class="detail-layout"><div class="detail-image">'+imgTag(p)+'</div><div class="detail-info"><span class="eyebrow">'+p.category+(p.demo?' · صنف تجريبي':'')+'</span><h1>'+p.name+'</h1><div class="amount">'+money(p.price)+'</div><p class="detail-description">اختر الكمية المناسبة وسجّل ملاحظات التحضير إن رغبت. لا تتوفر بيانات مؤكدة عن المكونات والحساسية والسعرات حتى استكمال ربط القائمة.'+(p.demo?' هذا الصنف وسعره افتراضيان لغرض المعاينة فقط.':'')+'</p><div class="option-box"><h3>التخصيص والإضافات</h3><p>الخيارات المعتمدة لهذا المنتج لم تُربط بعد. لن نعرض إضافات أو رسومًا غير مؤكدة.</p></div><label class="field-label" for="itemNote">ملاحظات للمطبخ (اختياري)</label><textarea class="note-input" maxlength="250" id="itemNote" placeholder="مثال: بدون فلفل — يخضع لتأكيد المطعم"></textarea><div class="detail-controls"><div class="stepper"><button id="qtyMinus" aria-label="تقليل الكمية">−</button><span id="selectedQty">1</span><button id="qtyPlus" aria-label="زيادة الكمية">+</button></div><button class="solid-action" id="addSelected">أضف للسلة · <span id="selectedTotal">'+money(p.price)+'</span></button></div></div></div></article>'+(related.length?'<section class="recs"><h2>أصناف قد تعجبك</h2><div class="product-grid">'+related.map(card).join('')+'</div></section>':'');state.quantity=1;state.note='';state.currentProduct=id;state.origin='/menu'}
 
 function customerField(key,label,placeholder='',required=false,type='text'){const val=escapeHtml(state.customer[key]||'');return '<label class="basket-field" for="customer-'+key+'"><span>'+label+(required?' <b aria-hidden="true">*</b>':'')+'</span><input id="customer-'+key+'" data-customer="'+key+'" type="'+type+'" value="'+val+'" placeholder="'+placeholder+'" maxlength="120" '+(required?'required':'')+' autocomplete="'+(key==='name'?'name':key==='phone'?'tel':key==='street'?'street-address':'off')+'"></label>'}
