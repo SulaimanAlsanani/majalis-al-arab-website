@@ -1204,13 +1204,13 @@ function heroCategoryArt(slide){
  '<div class="showcase-phone-status"><span>9:41</span><span class="phone-camera"></span><span>▂ ▰</span></div>'+
  '<div class="showcase-phone-head"><span>سوق التجزئة</span><span>◈</span></div>'+
  '<div class="showcase-phone-search">ابحث عن منتجاتك <span>⌕</span></div>'+
- '<div class="showcase-phone-cover market-phone-cover"><img src="'+slide.image+'" alt="" loading="lazy" decoding="async"><span class="market-phone-cover-title">'+groupName+'</span></div>'+
+ '<div class="showcase-phone-cover market-phone-cover"><img src="'+slide.image+'" alt="" loading="lazy" decoding="async" onerror="this.hidden=true"><span class="market-phone-cover-title">'+groupName+'</span></div>'+
  '<div class="showcase-phone-caption">اختيارات '+groupName+'</div>'+
- '<div class="showcase-phone-tiles market-phone-tiles">'+set.map(id=>'<img src="'+photo(id,300)+'" alt="" loading="lazy" decoding="async">').join('')+'</div>'+
+ '<div class="showcase-phone-tiles market-phone-tiles">'+set.map(id=>'<img src="'+photo(id,300)+'" alt="" loading="lazy" decoding="async" onerror="this.hidden=true">').join('')+'</div>'+
  '<div class="showcase-phone-nav"><i></i><i></i><i></i></div></div></div>'+
- '<div class="showcase-float showcase-float-one"><img src="'+photo(set[0],420)+'" alt="" loading="lazy" decoding="async"></div>'+
- '<div class="showcase-float showcase-float-two"><img src="'+photo(set[1],420)+'" alt="" loading="lazy" decoding="async"></div>'+
- '<div class="showcase-float showcase-float-three"><img src="'+photo(set[2],420)+'" alt="" loading="lazy" decoding="async"></div></div>';
+ '<div class="showcase-float showcase-float-one"><img src="'+photo(set[0],420)+'" alt="" loading="lazy" decoding="async" onerror="this.hidden=true"></div>'+
+ '<div class="showcase-float showcase-float-two"><img src="'+photo(set[1],420)+'" alt="" loading="lazy" decoding="async" onerror="this.hidden=true"></div>'+
+ '<div class="showcase-float showcase-float-three"><img src="'+photo(set[2],420)+'" alt="" loading="lazy" decoding="async" onerror="this.hidden=true"></div></div>';
 }
 
 function homeBanner(){return '<section class="hero-slider" id="heroSlider" aria-label="بنرات سوق التجزئة المتحركة" aria-roledescription="عرض شرائح"><div class="hero-track" id="heroTrack">'+HERO_SLIDES.map((x,i)=>'<article class="discovery-hero hero-slide hero-'+x.style+'" aria-label="البنر '+(i+1)+' من '+HERO_SLIDES.length+'" aria-hidden="'+(i!==0)+'"><div class="discovery-copy"><span class="discovery-kicker">'+x.kicker+'</span><h1>'+x.title+'<br><em>'+x.em+'</em></h1><p>'+x.desc+'</p><div class="discovery-actions">'+heroAction(x.primary,x.path,x.category,true)+heroAction(x.secondary,x.secondaryPath,x.secondaryCategory,false)+'</div><div class="discovery-labels"><span>✦ تجربة تصفح تجريبية</span><span>✦ خيارات متنوعة</span></div></div><div class="discovery-visual">'+heroCategoryArt(x)+'</div></article>').join('')+'</div><button type="button" class="hero-arrow hero-next" data-hero-move="1" aria-label="البنر التالي">❮</button><button type="button" class="hero-arrow hero-prev" data-hero-move="-1" aria-label="البنر السابق">❯</button><div class="hero-dots" role="group" aria-label="اختيار البنر">'+HERO_SLIDES.map((_,i)=>'<button type="button" data-hero-index="'+i+'" class="'+(i===0?'active':'')+'" aria-label="عرض البنر '+(i+1)+'" aria-current="'+(i===0)+'"></button>').join('')+'</div><span class="hero-index" id="heroIndex">1 / '+HERO_SLIDES.length+'</span></section>'}
