@@ -910,32 +910,79 @@ body:has(#heroSlider) .page{padding-top:7px}
 }
 
 
-/* Section-specific photography for all 15 restaurant hero slides */
-#heroSlider .hero-slide{position:relative;isolation:isolate;overflow:hidden;background:#222B34}
-#heroSlider .hero-slide .discovery-visual{display:block!important;position:absolute;inset:0;width:100%;height:100%;z-index:0;pointer-events:none;overflow:hidden}
-#heroSlider .restaurant-hero-photo{width:100%;height:100%;display:block;object-fit:contain;object-position:left center;filter:saturate(1.04);opacity:.93}
-#heroSlider .restaurant-hero-overlay{position:absolute;inset:0;display:block;background:linear-gradient(270deg,rgba(26,25,34,.97) 0%,rgba(35,28,36,.91) 25%,rgba(43,30,42,.74) 46%,rgba(35,28,36,.23) 74%,rgba(25,23,31,.08) 100%)}
-#heroSlider .hero-slide .discovery-copy{z-index:2;position:relative}
-#heroSlider .hero-slide .discovery-copy h1,#heroSlider .hero-slide .discovery-copy h1 em{color:#fff;text-shadow:0 2px 15px #00000046}
-#heroSlider .hero-slide .discovery-copy p{color:#F1EDEF;text-shadow:0 1px 9px #0008}
-#heroSlider .hero-slide .discovery-kicker{background:#ffffff24;border:1px solid #ffffff63;color:#fff}
-#heroSlider .hero-slide .discovery-labels{color:#FBE7E8}
-#heroSlider .hero-slide .discover-btn{background:#B22345;border-color:#B22345;color:#fff}
-#heroSlider .hero-slide .discover-outline{border-color:#FFFFFFA5;color:#fff;background:#25192260}
-#heroSlider .hero-slide .discover-outline:hover{background:#B2234578}
+/* Full-bleed section photography: each restaurant banner uses one image over its entire surface.
+   Different overlay palettes allow photo + text to coexist without splitting the slide. */
+#heroSlider .hero-slide{
+ position:relative;isolation:isolate;overflow:hidden;
+ --overlay-rgb:38,22,30;
+ --accent:#F3CCB5;
+ background:rgb(var(--overlay-rgb));
+}
+#heroSlider .hero-slide.hero-main{--overlay-rgb:57,24,34;--accent:#FFE1B4}
+#heroSlider .hero-slide.hero-sessions{--overlay-rgb:56,37,29;--accent:#F5D8AE}
+#heroSlider .hero-slide.hero-playstation{--overlay-rgb:27,24,63;--accent:#D6CBFF}
+#heroSlider .hero-slide.hero-matches{--overlay-rgb:8,60,43;--accent:#BCF1D7}
+#heroSlider .hero-slide.hero-breakfast{--overlay-rgb:93,48,18;--accent:#FFE0AC}
+#heroSlider .hero-slide.hero-southern{--overlay-rgb:93,51,22;--accent:#FFE0A0}
+#heroSlider .hero-slide.hero-grills{--overlay-rgb:71,29,23;--accent:#FDD0B2}
+#heroSlider .hero-slide.hero-sandwiches{--overlay-rgb:74,52,23;--accent:#F8E6B7}
+#heroSlider .hero-slide.hero-salads{--overlay-rgb:25,69,43;--accent:#D6F0B7}
+#heroSlider .hero-slide.hero-appetizers{--overlay-rgb:107,45,23;--accent:#FFE1B4}
+#heroSlider .hero-slide.hero-family{--overlay-rgb:68,28,47;--accent:#F8D6CD}
+#heroSlider .hero-slide.hero-dessert{--overlay-rgb:93,38,59;--accent:#FFD4DE}
+#heroSlider .hero-slide.hero-coffee{--overlay-rgb:56,35,26;--accent:#F5D1A2}
+#heroSlider .hero-slide.hero-drinks{--overlay-rgb:14,59,76;--accent:#C1EDFF}
+#heroSlider .hero-slide.hero-offers{--overlay-rgb:108,27,46;--accent:#FFD3CB}
+#heroSlider .hero-slide .discovery-visual{
+ display:block!important;position:absolute!important;inset:0;
+ width:100%;height:100%;z-index:0;pointer-events:none;overflow:hidden;
+ background:transparent!important;
+}
+#heroSlider .hero-slide .restaurant-hero-photo{
+ display:block;width:100%;height:100%;object-fit:cover!important;
+ object-position:center center!important;opacity:1;
+ transform:none;filter:saturate(1.04);
+}
+#heroSlider .hero-slide .restaurant-hero-overlay{
+ position:absolute;inset:0;display:block;
+ background:linear-gradient(270deg,
+ rgba(var(--overlay-rgb),.98) 0%,
+ rgba(var(--overlay-rgb),.96) 23%,
+ rgba(var(--overlay-rgb),.78) 44%,
+ rgba(var(--overlay-rgb),.36) 67%,
+ rgba(var(--overlay-rgb),.10) 100%);
+}
+#heroSlider .hero-slide .discovery-copy{
+ position:relative;z-index:2;
+}
+#heroSlider .hero-slide .discovery-copy h1{color:#fff;text-shadow:0 2px 15px #0005}
+#heroSlider .hero-slide .discovery-copy h1 em{color:var(--accent);text-shadow:0 2px 15px #0005}
+#heroSlider .hero-slide .discovery-copy p{color:#F6F2F3;text-shadow:0 1px 8px #0007}
+#heroSlider .hero-slide .discovery-kicker{background:#FFFFFF1C;border:1px solid #FFFFFF66;color:var(--accent)}
+#heroSlider .hero-slide .discovery-labels{color:#F7EBEB}
+#heroSlider .hero-slide .discover-btn{background:#fff;color:rgb(var(--overlay-rgb));border-color:#fff}
+#heroSlider .hero-slide .discover-btn:hover{background:#FFF1EF}
+#heroSlider .hero-slide .discover-outline{background:#FFFFFF12;border-color:#FFFFFFA0;color:#fff}
+#heroSlider .hero-slide .discover-outline:hover{background:#FFFFFF32}
 @media(max-width:780px){
- #heroSlider .restaurant-hero-overlay{background:linear-gradient(270deg,rgba(26,25,34,.97) 0%,rgba(35,28,36,.87) 49%,rgba(43,30,42,.4) 77%,rgba(25,23,31,.15) 100%)}
+ #heroSlider .hero-slide .restaurant-hero-photo{object-fit:cover!important;object-position:center!important;opacity:1}
+ #heroSlider .hero-slide .restaurant-hero-overlay{
+ background:linear-gradient(270deg,
+ rgba(var(--overlay-rgb),.98),
+ rgba(var(--overlay-rgb),.91) 53%,
+ rgba(var(--overlay-rgb),.56) 78%,
+ rgba(var(--overlay-rgb),.25));
+ }
 }
 @media(max-width:520px){
- #heroSlider .restaurant-hero-photo{opacity:.78}
- #heroSlider .restaurant-hero-overlay{background:linear-gradient(270deg,rgba(26,25,34,.97),rgba(35,28,36,.88) 69%,rgba(25,23,31,.52))}
+ #heroSlider .hero-slide .restaurant-hero-photo{object-fit:cover!important;opacity:1}
+ #heroSlider .hero-slide .restaurant-hero-overlay{
+ background:linear-gradient(270deg,
+ rgba(var(--overlay-rgb),.97),
+ rgba(var(--overlay-rgb),.90) 70%,
+ rgba(var(--overlay-rgb),.53));
+ }
 }
-
-
-/* Display the entire restaurant banner image without cropping it */
-#heroSlider .hero-slide .restaurant-hero-photo{object-fit:contain;object-position:left center;transform:none}
-#heroSlider .hero-slide .discovery-visual{background:linear-gradient(115deg,#29232F,#4C2D3D 65%,#201F28)}
-@media(max-width:780px){#heroSlider .hero-slide .restaurant-hero-photo{object-fit:contain;object-position:center}}
 
 </style></head>
 <body>
