@@ -20,23 +20,28 @@ test('meal cards show the full-width photo above the product details and control
   await expect(photo).toHaveAccessibleName(/تفاصيل.*ر\.س/);
   await expect(first.locator('.card-title')).toBeVisible();
   await expect(first.locator('.card-price')).toContainText('ر.س');
-  await expect(first.locator('.card-fav svg')).toBeVisible();
-  await expect(first.locator('.add-button .card-cart-plus')).toBeVisible();
+  await expect(first.locator('.add-button svg')).toBeVisible();
   await expect(first.locator('.add-button')).toHaveAccessibleName(/أضف .* إلى السلة/);
   await expect(first.locator('.add-button')).toHaveText('');
   const dimensions = await photo.evaluate(node => {
     const image = node.getBoundingClientRect();
     const card = node.closest('.product-card');
-    const details = [...card.querySelectorAll('.card-title, .card-fav, .card-price, .add-button')];
+    const title = card.querySelector('.card-title').getBoundingClientRect();
+    const price = card.querySelector('.card-price').getBoundingClientRect();
+    const add = card.querySelector('.add-button').getBoundingClientRect();
     return {
       ratio: image.width / image.height,
       horizontalInset: card.getBoundingClientRect().width - image.width,
-      detailsBelowPhoto: details.every(element => element.getBoundingClientRect().top >= image.bottom)
+      detailsBelowPhoto: [title, price, add].every(rect => rect.top >= image.bottom),
+      priceBelowTitle: price.top >= title.bottom,
+      addOnLeft: add.right <= title.left
     };
   });
   expect(dimensions.ratio).toBeCloseTo(16 / 9, 1);
   expect(dimensions.horizontalInset).toBeLessThanOrEqual(2);
   expect(dimensions.detailsBelowPhoto).toBe(true);
+  expect(dimensions.priceBelowTitle).toBe(true);
+  expect(dimensions.addOnLeft).toBe(true);
 });
 
 test('search with Arabic text, filters and product detail notes are functional', async ({page}) => {
