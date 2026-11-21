@@ -3607,6 +3607,27 @@ button:focus-visible,a:focus-visible,[tabindex]:focus-visible{outline:3px solid 
 @media(max-width:780px){.majalis-promo{min-height:185px!important;grid-template-columns:minmax(0,1fr) 39%!important}.majalis-promo-copy{padding:18px 14px!important;gap:7px!important}.majalis-promo-copy h2{font-size:clamp(18px,3.8vw,25px)!important}.majalis-promo-copy p{font-size:11px!important}.majalis-promo-art{min-height:185px!important}.majalis-promo:not(.breakfast) .majalis-promo-photo{width:90%!important;height:80%!important;left:0!important}.majalis-promo:not(.breakfast) .majalis-promo-photo.second{width:43%!important;height:45%!important;right:-4%!important;bottom:1%!important}.home-content-group{padding:21px 0!important}.home-section-head h2,.homepage-group-heading h2{font-size:clamp(18px,4vw,23px)!important}.product-card .card-name-line{min-height:32px!important}.product-card .card-body{gap:6px!important}}
 @media(max-width:420px){.majalis-promo{min-height:165px!important;border-radius:16px!important}.majalis-promo-copy{padding:12px!important}.majalis-promo-copy h2{font-size:17px!important}.majalis-promo-copy p{font-size:10px!important}.majalis-promo-copy button{font-size:10px!important;padding:7px 12px!important;min-height:34px!important}.majalis-promo-art{min-height:165px!important}.home-section-head,.homepage-group-heading{align-items:flex-start!important}.home-content-group{padding:18px 0!important}.product-card .card-name-line{min-height:30px!important}}
 @media(prefers-reduced-motion:reduce){.product-card,.feature-category,.majalis-promo,.home-experience-card{transition:none!important;animation:none!important}.product-card:hover,.first-fold-categories .feature-category:hover{transform:none!important}}
+
+/* Borderless storefront refinement: no decorative borders anywhere in the UI. */
+/* Keep the existing spacing, rounded geometry and subtle elevation; remove visible borders globally. */
+:where(body) :is(header,footer,main,section,article,aside,nav,div,button,a,summary,details,input,textarea,select,label,figure,img,span,ul,ol,li,p,h1,h2,h3,h4,h5,h6),
+:where(body) :is(header,footer,main,section,article,aside,nav,div,button,a,summary,details,input,textarea,select,label,figure,img,span,ul,ol,li,p,h1,h2,h3,h4,h5,h6)::before,
+:where(body) :is(header,footer,main,section,article,aside,nav,div,button,a,summary,details,input,textarea,select,label,figure,img,span,ul,ol,li,p,h1,h2,h3,h4,h5,h6)::after{
+ border-width:0!important;
+ border-style:none!important;
+}
+/* Draw selected and focused states without borders so interactions remain understandable. */
+:where(button,input,textarea,select,a,summary,[tabindex]):focus-visible{
+ outline:3px solid #7754a1!important;
+ outline-offset:3px!important;
+}
+.product-card:hover{box-shadow:0 8px 23px #1c141216!important}
+.product-card .card-photo{background:#f8f8f8!important}
+:where(input,textarea,select){background-color:#fafafa}
+:where(input,textarea,select):focus{box-shadow:0 0 0 2px #7754a13b!important}
+.fulfillment button.selected,.size-options button.selected,.orders-tabs button.active{
+ box-shadow:inset 0 0 0 2px #d7ad34!important;
+}
 </style></head>
 <body>
 <header class="site-header"><div class="wrap header-inner">
