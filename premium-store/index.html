@@ -1674,12 +1674,12 @@ body{background:#fafafa;color:var(--hs-ink)}
 }
 #heroSlider .reference-hero-ring{
  position:absolute;aspect-ratio:1;width:min(96%,620px);height:auto;
- border-radius:50%;border:clamp(28px,4vw,55px) solid #ffdf00;
- background:#20c1ee;bottom:-43%;left:1%;z-index:0;
+ border-radius:50%;border:clamp(28px,4vw,55px) solid var(--ring,#ffdf00);
+ background:var(--disc,#20c1ee);bottom:-43%;left:1%;z-index:0;
 }
 #heroSlider .reference-hero-disc{
  position:absolute;width:68%;aspect-ratio:1;border-radius:50%;
- background:#19bdf1;left:14%;bottom:-30%;z-index:0;
+ background:color-mix(in srgb,var(--disc,#19bdf1) 84%,white);left:14%;bottom:-30%;z-index:0;
 }
 #heroSlider .reference-hero-phone{
  position:absolute;width:clamp(225px,24vw,345px);height:111%;
