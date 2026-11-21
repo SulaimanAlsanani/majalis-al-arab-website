@@ -2144,6 +2144,214 @@ body:has(#heroSlider) .header-cart.header-cart-icon .cart-count{font-size:8.8px!
  #heroSlider .reference-phone-caption{font-size:7.13px!important}
  #heroSlider .reference-phone-grid span{height:32.1px!important}
 }
+
+/* Reference-accurate composition (original Majalis content & artwork):
+   white slim nav, full-bleed warm cream hero, prominent left phone,
+   floating dishes, yellow / colored circles, text block right and categories immediately below. */
+body:has(#heroSlider){background:#fff!important}
+body:has(#heroSlider) .site-header{border-bottom:1px solid #efeee8!important}
+body:has(#heroSlider) .page{max-width:1320px!important;padding-top:0!important}
+#heroSlider.hero-slider{
+ width:100vw!important;
+ max-width:none!important;
+ height:clamp(510px,37vw,605px)!important;
+ min-height:510px!important;
+ position:relative!important;
+ left:50%!important;
+ transform:translateX(-50%)!important;
+ margin:0 0 28px!important;
+ padding:0!important;
+ border:0!important;
+ border-radius:0!important;
+ background:#fffff8!important;
+ box-shadow:none!important;
+}
+#heroSlider .hero-track,#heroSlider .hero-slide{height:100%!important}
+#heroSlider .hero-slide{background:#fffff8!important}
+#heroSlider .hero-slide .discovery-copy{
+ top:0!important;bottom:0!important;
+ inset-inline-start:0!important;inset-inline-end:auto!important;
+ width:49%!important;height:100%!important;
+ padding:30px clamp(36px,5.5vw,105px) 45px 32px!important;
+ display:flex!important;flex-direction:column!important;
+ justify-content:center!important;align-items:flex-start!important;
+ text-align:right!important;z-index:7!important;
+}
+#heroSlider .hero-slide .discovery-kicker{
+ color:#7a4930!important;font-size:clamp(12px,1.05vw,15px)!important;
+ margin:0 0 19px!important;line-height:1.4!important;
+}
+#heroSlider .hero-slide .discovery-copy h1{
+ color:#552c18!important;
+ font-size:clamp(36px,3.2vw,57px)!important;
+ font-weight:900!important;
+ line-height:1.42!important;
+ letter-spacing:-.04em!important;
+ max-width:700px!important;
+ margin:0 0 22px!important;
+}
+#heroSlider .hero-slide .discovery-copy h1 em{
+ display:inline-block!important;
+ font-size:inherit!important;line-height:1.15!important;
+ padding:2px 13px 6px!important;border-radius:13px!important;
+ background:#f024b5!important;color:#fff!important;
+ font-style:normal!important;
+}
+#heroSlider .hero-slide .discovery-copy p{
+ color:#34241c!important;
+ font-size:clamp(14px,1.14vw,17px)!important;
+ font-weight:650!important;line-height:1.75!important;
+ max-width:630px!important;
+ margin:0 0 24px!important;
+}
+#heroSlider .hero-slide .discovery-actions{
+ display:flex!important;flex-wrap:wrap!important;
+ gap:12px!important;align-items:center!important;
+}
+#heroSlider .hero-slide .discover-btn{
+ background:#ffdf00!important;color:#22160f!important;
+ padding:13px 25px!important;font-size:13px!important;
+ font-weight:900!important;border:0!important;border-radius:11px!important;
+}
+#heroSlider .hero-slide .discover-outline{
+ font-size:12px!important;padding:12px 17px!important;
+ border-radius:11px!important;border:1px solid #d7c8b4!important;
+ background:#fffefa!important;color:#50331e!important;
+}
+#heroSlider .hero-slide .discovery-labels{display:none!important}
+#heroSlider .hero-slide .discovery-visual{
+ position:absolute!important;inset-inline-end:0!important;
+ inset-inline-start:auto!important;top:0!important;bottom:0!important;
+ width:56%!important;height:100%!important;
+ overflow:hidden!important;background:transparent!important;z-index:3!important;
+}
+#heroSlider .reference-hero-art{position:absolute!important;inset:0!important;overflow:hidden!important}
+#heroSlider .reference-hero-phone{
+ position:absolute!important;
+ width:clamp(285px,23vw,390px)!important;
+ height:111%!important;
+ top:11%!important;left:48%!important;
+ transform:translateX(-50%)!important;
+ border:5px solid #181519!important;
+ border-radius:46px!important;padding:6px!important;
+ box-shadow:0 5px 13px #170f0b30!important;
+ z-index:4!important;
+}
+#heroSlider .reference-hero-screen{
+ border-radius:34px!important;
+ background:#fff0f0!important;
+ padding:14px 9px!important;
+}
+#heroSlider .reference-phone-status{font-size:12px!important;height:33px!important}
+#heroSlider .reference-phone-notch{height:19px!important}
+#heroSlider .reference-phone-top{font-size:12px!important;padding:6px 9px!important}
+#heroSlider .reference-phone-search{font-size:10px!important;padding:11px!important;margin:5px 3px 11px!important}
+#heroSlider .reference-phone-feature{height:34%!important}
+#heroSlider .reference-phone-caption{font-size:13px!important;padding:10px 4px!important}
+#heroSlider .reference-phone-grid span{height:74px!important}
+#heroSlider .reference-hero-ring{
+ width:min(92%,700px)!important;aspect-ratio:1!important;
+ left:3%!important;bottom:-42%!important;
+ border-width:clamp(35px,3.8vw,55px)!important;
+ background:var(--disc,#20c1ee)!important;
+ border-color:var(--ring,#ffdf00)!important;
+ z-index:1!important;
+}
+#heroSlider .reference-hero-disc{
+ width:67%!important;left:14%!important;bottom:-28%!important;
+ background:color-mix(in srgb,var(--disc,#20c1ee) 88%,white)!important;z-index:1!important;
+}
+#heroSlider .reference-food-float{
+ width:clamp(110px,11vw,175px)!important;
+ object-fit:contain!important;z-index:5!important;
+ filter:drop-shadow(0 9px 8px #372b1836)!important;
+}
+#heroSlider .reference-float-one{right:8%!important;top:24%!important}
+#heroSlider .reference-float-two{left:7%!important;top:42%!important}
+#heroSlider .reference-float-three{left:70%!important;bottom:9%!important}
+#heroSlider .hero-arrow{
+ background:#ffffffdb!important;
+ width:36px!important;height:36px!important;
+ z-index:9!important;
+}
+#heroSlider .hero-dots{bottom:16px!important;z-index:9!important}
+#heroSlider .hero-index{z-index:9!important}
+.first-fold-categories{padding:3px 0 18px!important;margin:0!important}
+.first-fold-categories .home-section-head{
+ display:flex!important;align-items:center!important;justify-content:space-between!important;
+ margin-bottom:16px!important;
+}
+.first-fold-categories .home-section-head h2{
+ color:#552c18!important;font-size:clamp(28px,2.65vw,42px)!important;
+ font-weight:850!important;line-height:1.45!important;
+}
+.first-fold-categories .home-section-head span{display:none!important}
+.first-fold-categories .feature-category-grid{margin-block:0!important}
+@media(max-width:1100px){
+ #heroSlider.hero-slider{height:520px!important;min-height:0!important}
+ #heroSlider .hero-slide .discovery-copy{width:52%!important;padding:25px 38px 32px 22px!important}
+ #heroSlider .hero-slide .discovery-copy h1{font-size:clamp(31px,3.4vw,44px)!important}
+ #heroSlider .hero-slide .discovery-copy p{font-size:13px!important}
+ #heroSlider .hero-slide .discovery-visual{width:53%!important}
+ #heroSlider .reference-hero-phone{width:285px!important;left:48%!important}
+ #heroSlider .reference-food-float{width:120px!important}
+ #heroSlider .reference-hero-ring{width:90%!important}
+}
+@media(max-width:780px){
+ #heroSlider.hero-slider{height:420px!important}
+ #heroSlider .hero-slide .discovery-copy{
+  width:57%!important;padding:19px 20px 30px 12px!important;
+  justify-content:center!important;
+ }
+ #heroSlider .hero-slide .discovery-kicker{font-size:10px!important;margin-bottom:10px!important}
+ #heroSlider .hero-slide .discovery-copy h1{
+  font-size:clamp(23px,3.6vw,32px)!important;line-height:1.35!important;margin-bottom:12px!important;
+ }
+ #heroSlider .hero-slide .discovery-copy h1 em{padding:1px 7px 4px!important;border-radius:8px!important}
+ #heroSlider .hero-slide .discovery-copy p{font-size:10.5px!important;line-height:1.65!important;margin-bottom:12px!important}
+ #heroSlider .hero-slide .discover-btn{font-size:10px!important;padding:10px 13px!important}
+ #heroSlider .hero-slide .discover-outline{font-size:10px!important;padding:9px!important}
+ #heroSlider .hero-slide .discovery-visual{width:47%!important}
+ #heroSlider .reference-hero-phone{width:215px!important;height:110%!important;top:13%!important;left:47%!important}
+ #heroSlider .reference-food-float{width:88px!important}
+ #heroSlider .reference-phone-status{font-size:9px!important;height:25px!important}
+ #heroSlider .reference-phone-top{font-size:9px!important}
+ #heroSlider .reference-phone-search{font-size:8px!important;padding:8px!important}
+ #heroSlider .reference-phone-caption{font-size:10px!important}
+ #heroSlider .reference-phone-grid span{height:48px!important}
+ #heroSlider .reference-hero-ring{width:125%!important;left:-15%!important;bottom:-39%!important}
+ #heroSlider .reference-hero-disc{width:92%!important}
+ .first-fold-categories .home-section-head h2{font-size:25px!important}
+}
+@media(max-width:520px){
+ #heroSlider.hero-slider{height:335px!important;margin-bottom:15px!important}
+ #heroSlider .hero-slide .discovery-copy{width:61%!important;padding:14px 12px 20px 8px!important}
+ #heroSlider .hero-slide .discovery-kicker{font-size:8px!important;margin-bottom:7px!important}
+ #heroSlider .hero-slide .discovery-copy h1{
+  font-size:clamp(20px,5vw,25px)!important;line-height:1.32!important;margin-bottom:8px!important;
+ }
+ #heroSlider .hero-slide .discovery-copy p{font-size:8px!important;line-height:1.6!important;margin-bottom:9px!important}
+ #heroSlider .hero-slide .discovery-actions{gap:5px!important}
+ #heroSlider .hero-slide .discover-btn{font-size:8px!important;padding:8px 9px!important}
+ #heroSlider .hero-slide .discover-outline{font-size:8px!important;padding:7px 8px!important}
+ #heroSlider .hero-slide .discovery-visual{width:42%!important}
+ #heroSlider .reference-hero-phone{width:142px!important;height:111%!important;top:15%!important;left:47%!important;border-width:3px!important;border-radius:24px!important;padding:3px!important}
+ #heroSlider .reference-hero-screen{border-radius:19px!important;padding:8px 5px!important}
+ #heroSlider .reference-phone-status{font-size:6px!important;height:17px!important}
+ #heroSlider .reference-phone-top{font-size:7px!important;padding:3px!important}
+ #heroSlider .reference-phone-search{font-size:6px!important;padding:5px!important;margin:2px!important}
+ #heroSlider .reference-phone-caption{font-size:8px!important;padding:5px 2px!important}
+ #heroSlider .reference-phone-grid span{height:34px!important}
+ #heroSlider .reference-food-float{width:58px!important}
+ #heroSlider .reference-float-one{right:0!important;top:22%!important}
+ #heroSlider .reference-float-two{left:0!important;top:43%!important}
+ #heroSlider .reference-float-three{left:74%!important;bottom:8%!important}
+ #heroSlider .reference-hero-ring{width:142%!important;left:-27%!important;bottom:-37%!important;border-width:25px!important}
+ #heroSlider .reference-hero-disc{width:105%!important;bottom:-19%!important;left:0!important}
+ #heroSlider .hero-arrow{width:25px!important;height:25px!important}
+ #heroSlider .hero-dots{bottom:9px!important}
+ .first-fold-categories .home-section-head h2{font-size:22px!important}
+}
 </style></head>
 <body>
 <header class="site-header"><div class="wrap header-inner">
@@ -2310,7 +2518,7 @@ function heroCategoryArt(slide){
 function homeBanner(){return '<section class="hero-slider" id="heroSlider" aria-label="بنرات مجالس العرب المتحركة" aria-roledescription="عرض شرائح"><div class="hero-track" id="heroTrack">'+HERO_SLIDES.map((x,i)=>'<article class="discovery-hero hero-slide hero-'+x.style+'" aria-label="البنر '+(i+1)+' من '+HERO_SLIDES.length+'" aria-hidden="'+(i!==0)+'"><div class="discovery-copy"><span class="discovery-kicker">'+x.kicker+'</span><h1>'+x.title+'<br><em>'+x.em+'</em></h1><p>'+x.desc+'</p><div class="discovery-actions">'+heroAction(x.primary,x.path,x.category,true)+heroAction(x.secondary,x.secondaryPath,x.secondaryCategory,false)+'</div><div class="discovery-labels"><span>✦ تجربة تصفح تجريبية</span><span>✦ خيارات متنوعة</span></div></div><div class="discovery-visual">'+heroCategoryArt(x)+'</div></article>').join('')+'</div><button type="button" class="hero-arrow hero-next" data-hero-move="1" aria-label="البنر التالي">❮</button><button type="button" class="hero-arrow hero-prev" data-hero-move="-1" aria-label="البنر السابق">❯</button><div class="hero-dots" role="group" aria-label="اختيار البنر">'+HERO_SLIDES.map((_,i)=>'<button type="button" data-hero-index="'+i+'" class="'+(i===0?'active':'')+'" aria-label="عرض البنر '+(i+1)+'" aria-current="'+(i===0)+'"></button>').join('')+'</div><span class="hero-index" id="heroIndex">1 / '+HERO_SLIDES.length+'</span></section>'}
 
 const CATEGORY_PLATE_IMAGES={"الفطور والعشاء":"assets/categories/breakfast.png","العريكة والمعصوب":"assets/categories/areeka-masoob.png","المشويات والأطباق الرئيسية":"assets/categories/grills.png","السندويتشات":"assets/categories/sandwiches.png","الإيدامات والسلطات":"assets/categories/salads.png","الحلا":"assets/categories/desserts.png","القهوة المختصة":"assets/categories/coffee.png","المشروبات":"assets/categories/drinks.png","المقبلات":"assets/categories/appetizers.png","الوجبات العائلية":"assets/categories/family-meals.png","العروض التجريبية":"assets/categories/family-meals.png"};
-function featureCategories(){const featured=[['🍳','فطور','الفطور والعشاء'],['🍯','عريكة ومعصوب','العريكة والمعصوب'],['🍗','مشويات','المشويات والأطباق الرئيسية'],['🥪','سندويتشات','السندويتشات'],['🥗','سلطات','الإيدامات والسلطات'],['🍰','حلويات','الحلا'],['☕','قهوة','القهوة المختصة'],['🥤','مشروبات','المشروبات'],['🍟','مقبلات','المقبلات'],['🎁','وجبات عائلية','الوجبات العائلية']];return '<section class="first-fold-categories" aria-label="أقسام قائمة الطعام"><div class="home-section-head"><div><span>تصفّح حسب المزاج</span><h2>وش تشتهي اليوم؟</h2></div><button data-go="/menu">كل الأقسام ←</button></div><div class="feature-category-grid">'+featured.map(([icon,label,category])=>'<button type="button" class="feature-category" data-category="'+category+'"><span class="feature-category-icon feature-category-photo"><img src="'+CATEGORY_PLATE_IMAGES[category]+'" alt="طبق '+label+'" loading="lazy" decoding="async" onerror="this.onerror=null;this.remove();"><span class="category-photo-fallback" aria-hidden="true">'+icon+'</span></span><strong>'+label+'</strong></button>').join('')+'</div></section>'}
+function featureCategories(){const featured=[['🍳','فطور','الفطور والعشاء'],['🍯','عريكة ومعصوب','العريكة والمعصوب'],['🍗','مشويات','المشويات والأطباق الرئيسية'],['🥪','سندويتشات','السندويتشات'],['🥗','سلطات','الإيدامات والسلطات'],['🍰','حلويات','الحلا'],['☕','قهوة','القهوة المختصة'],['🥤','مشروبات','المشروبات'],['🍟','مقبلات','المقبلات'],['🎁','وجبات عائلية','الوجبات العائلية']];return '<section class="first-fold-categories" aria-label="أقسام قائمة الطعام"><div class="home-section-head"><div><span>تصفّح حسب المزاج</span><h2>وش حاب تطلب اليوم؟</h2></div><button data-go="/menu">كل الأقسام ←</button></div><div class="feature-category-grid">'+featured.map(([icon,label,category])=>'<button type="button" class="feature-category" data-category="'+category+'"><span class="feature-category-icon feature-category-photo"><img src="'+CATEGORY_PLATE_IMAGES[category]+'" alt="طبق '+label+'" loading="lazy" decoding="async" onerror="this.onerror=null;this.remove();"><span class="category-photo-fallback" aria-hidden="true">'+icon+'</span></span><strong>'+label+'</strong></button>').join('')+'</div></section>'}
 function menuQrBanner(){
  return '<section class="menu-qr-banner" aria-label="تصفح متجر مجالس العرب بسهولة">'+
    '<div class="menu-banner-brand"><span class="menu-banner-mark" aria-hidden="true">م</span><strong>مجالس العرب</strong><small>مطاعم • ديوانية • جلسات</small></div>'+
@@ -2382,8 +2590,8 @@ function renderHome(){
  const evening=productShowcase('لجلسة المساء','حلا وقهوة ومشروبات مناسبة للجلسة',[23,24,25,26,27,28,61,63,65,100,101,102],'/menu','evening');
  el('app').innerHTML=
   homeBanner()+
-  serviceModeBanner()+
   featureCategories()+
+  serviceModeBanner()+
   menuQrBanner()+
   quickOrderHub()+
   homeExperiences()+
