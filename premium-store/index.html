@@ -1130,6 +1130,83 @@ body:has(#heroSlider) .page{padding-top:7px}
  .first-fold-categories .feature-category-icon.feature-category-photo{height:45px!important}
  .first-fold-categories .feature-category strong{font-size:9px!important}
 }
+
+/* Supermarket category-card parity (source: supermarket-store/index.html).
+   Preserve restaurant category labels and locally hosted plate photos. */
+.first-fold-categories .feature-category-grid{
+  display:grid!important;
+  grid-template-columns:repeat(6,minmax(0,1fr))!important;
+  gap:12px!important;
+  margin:0!important;
+}
+.first-fold-categories .feature-category:nth-child(n){
+  --category-wash:#fff;
+  --category-border:#e5e9e6;
+  --category-icon:#fff;
+  min-width:0;
+  min-height:137px!important;
+  padding:14px 8px 12px!important;
+  gap:9px!important;
+  background:#fff!important;
+  border-radius:17px!important;
+  border:1px solid #e6e9e8!important;
+  box-shadow:0 3px 12px #11182707!important;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+}
+.first-fold-categories .feature-category:nth-child(3n+1){background:#eaf7ed!important;border-color:#d5ead9!important}
+.first-fold-categories .feature-category:nth-child(3n+2){background:#fff8e7!important;border-color:#f2e8c8!important}
+.first-fold-categories .feature-category:nth-child(3n){background:#f0f5fa!important;border-color:#deeaf1!important}
+.first-fold-categories .feature-category:hover{
+  border-color:#86b99a!important;
+  box-shadow:0 7px 17px #2523350c!important;
+  transform:translateY(-2px);
+}
+.first-fold-categories .feature-category-icon.feature-category-photo{
+  display:flex!important;
+  align-items:center;
+  justify-content:center;
+  position:relative;
+  width:100%!important;
+  height:90px!important;
+  border:0!important;
+  border-radius:10px!important;
+  background:#fff!important;
+  overflow:hidden;
+}
+.first-fold-categories .feature-category-icon.feature-category-photo img{
+  position:absolute;
+  inset:0;
+  display:block;
+  width:100%!important;
+  height:100%!important;
+  max-height:90px!important;
+  object-fit:contain!important;
+  object-position:center;
+  background:#fff!important;
+}
+.first-fold-categories .feature-category strong{
+  font-size:12px!important;
+  line-height:1.5!important;
+  color:#1b2833!important;
+  text-align:center;
+  white-space:normal!important;
+  overflow-wrap:anywhere;
+}
+@media(max-width:1000px){
+  .first-fold-categories .feature-category-grid{grid-template-columns:repeat(4,minmax(0,1fr))!important}
+}
+@media(max-width:620px){
+  .first-fold-categories .feature-category-grid{grid-template-columns:repeat(3,minmax(0,1fr))!important;gap:8px!important}
+  .first-fold-categories .feature-category:nth-child(n){min-height:121px!important;padding:10px 6px!important;gap:8px!important}
+  .first-fold-categories .feature-category-icon.feature-category-photo{height:76px!important}
+  .first-fold-categories .feature-category-icon.feature-category-photo img{max-height:76px!important}
+  .first-fold-categories .feature-category strong{font-size:11px!important}
+}
+@media(max-width:370px){
+  .first-fold-categories .feature-category-grid{grid-template-columns:repeat(2,minmax(0,1fr))!important}
+}
 </style></head>
 <body>
 <header class="site-header"><div class="wrap header-inner">
