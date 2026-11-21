@@ -1320,6 +1320,54 @@ body:has(#heroSlider) .page{padding-top:7px}
   }
   .first-fold-categories .feature-category strong{font-size:9px!important}
 }
+
+/* Hero-only proportional 10% reduction: height, typography and illustration.
+   Previous heights 381/367/321/298px => 343/330/289/268px. */
+#heroSlider.hero-slider{height:343px!important;min-height:0!important}
+#heroSlider .hero-slide .discovery-copy{
+  padding:clamp(20px,2.52vw,41.4px) clamp(30.6px,4.77vw,76.5px)!important;
+}
+#heroSlider .hero-slide .discovery-kicker{font-size:clamp(9px,.9vw,11.7px)!important}
+#heroSlider .hero-slide .discovery-copy h1{
+  font-size:clamp(25.2px,3.015vw,46.8px)!important;
+  margin:11.7px 0 10.8px!important;
+}
+#heroSlider .hero-slide .discovery-copy p{
+  font-size:clamp(9.9px,.99vw,12.6px)!important;
+  margin-bottom:15.3px!important;
+}
+#heroSlider .hero-slide .discover-btn{
+  padding:9.9px 18px!important;font-size:90%!important;border-radius:10.8px!important;
+}
+#heroSlider .hero-slide .discover-outline{
+  padding:9.9px 16.2px!important;font-size:90%!important;border-radius:10.8px!important;
+}
+#heroSlider .hero-slide .discovery-actions{gap:8.1px!important}
+#heroSlider .hero-slide .discovery-labels{font-size:90%!important;margin-top:11.7px!important}
+#heroSlider .hero-showcase{
+  transform:scale(.9)!important;
+  transform-origin:50% 50%!important;
+}
+@media(max-width:1100px){
+  #heroSlider.hero-slider{height:330px!important}
+}
+@media(max-width:780px){
+  #heroSlider.hero-slider{height:289px!important}
+  #heroSlider .hero-slide .discovery-copy{padding-inline:36px!important}
+  #heroSlider .hero-slide .discovery-copy h1{font-size:clamp(21.6px,3.6vw,30.6px)!important}
+}
+@media(max-width:520px){
+  #heroSlider.hero-slider{height:268px!important}
+  #heroSlider .hero-slide .discovery-copy{padding:15.3px 27px 24.3px!important}
+  #heroSlider .hero-slide .discovery-kicker{font-size:9px!important}
+  #heroSlider .hero-slide .discovery-copy h1{
+    font-size:clamp(19.8px,5.49vw,26.1px)!important;
+    margin:7.2px 0!important;
+  }
+  #heroSlider .hero-slide .discovery-copy p{font-size:9px!important;margin-bottom:8.1px!important}
+  #heroSlider .hero-slide .discover-btn,
+  #heroSlider .hero-slide .discover-outline{padding:7.2px 9px!important;font-size:9px!important}
+}
 </style></head>
 <body>
 <header class="site-header"><div class="wrap header-inner">
