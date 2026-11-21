@@ -4,7 +4,7 @@ on:
     branches: [feature/restaurant-real-category-photos-20261121]
     paths: ['.github/workflows/restaurant-ui-audit.yml']
 permissions:
-  contents: read
+  contents: write
 jobs:
   browser-audit:
     runs-on: ubuntu-latest
@@ -22,7 +22,7 @@ jobs:
         shell: bash
         run: |
           mkdir -p audit-screenshots
-          node <<'JS'
+          node <<'JS' | tee audit-results.txt
           const { chromium }=require('playwright');
           const path=require('path');
           (async()=>{
@@ -56,3 +56,13 @@ jobs:
         with:
           name: restaurant-store-desktop-mobile
           path: audit-screenshots/*.png
+
+      - name: Publish browser test findings
+        if: always()
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          if [ -f audit-results.txt ]; then
+            git add -f audit-results.txt
+            git diff --cached --quiet || (git commit -m "test: record chromium browser audit outcome" && git push)
+          fi
