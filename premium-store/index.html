@@ -3357,6 +3357,18 @@ body:has(#heroSlider) .reference-top-actions{gap:0!important}
   .product-card .card-title{font-size:12px!important}
   .product-card .card-price{font-size:12px!important}
 }
+
+/* Hide scrollbars beneath meal carousels without disabling swipe or arrow navigation. */
+.product-rail{
+  scrollbar-width:none!important;
+  -ms-overflow-style:none!important;
+  padding-bottom:3px!important;
+}
+.product-rail::-webkit-scrollbar{
+  display:none!important;
+  width:0!important;
+  height:0!important;
+}
 </style></head>
 <body>
 <header class="site-header"><div class="wrap header-inner">
