@@ -2807,10 +2807,28 @@ body:has(#heroSlider) .header-inner .brand.brand-official{
 @media(max-width:350px){
  .site-header .brand-official-wordmark{width:104px!important;max-width:104px!important}
 }
+
+/* Final approved Arabic calligraphy sits immediately to the LEFT of circular seal in RTL header. */
+.site-header .brand.brand-official,
+body:has(#heroSlider) .header-inner .brand.brand-official{
+ direction:rtl!important;flex-direction:row!important;align-items:center!important;
+ justify-content:flex-start!important;gap:9px!important;
+}
+.site-header .brand-official-seal{flex:0 0 auto!important}
+.site-header .brand-official-wordmark{
+ display:block!important;flex:0 1 auto!important;object-fit:contain!important;
+ object-position:center!important;width:235px!important;
+ height:auto!important;max-height:51px!important;
+ max-width:min(33vw,235px)!important;
+}
+@media(max-width:780px){.site-header .brand-official-wordmark{width:170px!important;max-width:170px!important;max-height:42px!important}}
+@media(max-width:520px){.site-header .brand-official-wordmark{width:136px!important;max-width:136px!important;max-height:37px!important}}
+@media(max-width:420px){.site-header .brand-official-wordmark{width:114px!important;max-width:114px!important}}
+@media(max-width:350px){.site-header .brand-official-wordmark{width:100px!important;max-width:100px!important}}
 </style></head>
 <body>
 <header class="site-header"><div class="wrap header-inner">
-<a href="#/" class="brand brand-official" aria-label="مجالس العرب — الصفحة الرئيسية"><img class="brand-official-seal" src="assets/brand/majalis-logo.jpg" alt="شعار مجالس العرب الرسمي" width="54" height="54" decoding="async"><img class="brand-official-wordmark" src="assets/brand/majalis-restaurants-wordmark.jpg" alt="مطاعم وديوانية مجالس العرب" width="235" height="56" decoding="async"></a>
+<a href="#/" class="brand brand-official" aria-label="مجالس العرب — الصفحة الرئيسية"><img class="brand-official-seal" src="assets/brand/majalis-logo.jpg" alt="شعار مجالس العرب الرسمي" width="54" height="54" decoding="async"><img class="brand-official-wordmark" src="assets/brand/majalis-restaurants-wordmark-final.jpg" alt="مطاعم وديوانية مجالس العرب" width="235" height="56" decoding="async"></a>
 <div class="reference-top-actions" aria-label="إجراءات المتجر">
  <details class="header-language" id="headerLanguage">
   <summary class="header-language-trigger" aria-label="اختيار اللغة"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c-5 6-5 12 0 18M12 3c5 6 5 12 0 18"/></svg><span>العربية</span><svg class="language-chevron" viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></summary>
@@ -2828,7 +2846,7 @@ body:has(#heroSlider) .header-inner .brand.brand-official{
 <div class="legacy-search-hidden" hidden aria-hidden="true" inert><div class="search-shell"><label class="header-search"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="m16 16 5 5"/></svg><input id="globalSearch" placeholder="ابحث عن صنف أو مشروب..." aria-label="البحث عن منتج" autocomplete="off"></label><div id="searchSuggestions" class="search-suggestions" hidden role="region" aria-label="اقتراحات البحث"></div></div>
 </div>
 <main class="wrap page" id="app" tabindex="-1"></main>
-<footer class="site-footer"><div class="wrap footer-inner"><div><div class="footer-official-brand"><img src="assets/brand/majalis-logo.jpg" alt="" width="48" height="48" loading="lazy" decoding="async"><img src="assets/brand/majalis-restaurants-wordmark.jpg" alt="مطاعم وديوانية مجالس العرب" width="200" height="48" loading="lazy" decoding="async"></div><p>أطباق وجلسات على ذوقك. هذه معاينة تصميمية للمتجر الإلكتروني.</p></div><div class="footer-links"><a href="#/menu">قائمة الطعام</a><a href="#/offers">العروض</a><a href="#/favorites">المفضلة</a><a href="#/orders">الطلبات</a><a href="#/account">حسابي</a><a href="#/help">مركز المساعدة</a><a href="https://wa.me/966549792477" target="_blank" rel="noopener noreferrer">واتساب 0549792477</a><p>جميع المنتجات والأسعار والصور تحتاج اعتماد المطعم قبل الإطلاق.</p></div></div></footer>
+<footer class="site-footer"><div class="wrap footer-inner"><div><div class="footer-official-brand"><img src="assets/brand/majalis-logo.jpg" alt="" width="48" height="48" loading="lazy" decoding="async"><img src="assets/brand/majalis-restaurants-wordmark-final.jpg" alt="مطاعم وديوانية مجالس العرب" width="200" height="48" loading="lazy" decoding="async"></div><p>أطباق وجلسات على ذوقك. هذه معاينة تصميمية للمتجر الإلكتروني.</p></div><div class="footer-links"><a href="#/menu">قائمة الطعام</a><a href="#/offers">العروض</a><a href="#/favorites">المفضلة</a><a href="#/orders">الطلبات</a><a href="#/account">حسابي</a><a href="#/help">مركز المساعدة</a><a href="https://wa.me/966549792477" target="_blank" rel="noopener noreferrer">واتساب 0549792477</a><p>جميع المنتجات والأسعار والصور تحتاج اعتماد المطعم قبل الإطلاق.</p></div></div></footer>
 <nav class="mobile-bottom" aria-label="التنقل على الجوال"><button data-route="/" id="mHome"><span>⌂</span>الرئيسية</button><button data-route="/menu" id="mMenu"><span>☷</span>المنيو</button><button data-route="/offers" id="mOffers"><span>٪</span>العروض</button><button data-route="/orders" id="mOrders"><span>▤</span>طلباتي</button><button data-route="/account" id="mAccount"><span>♙</span>حسابي</button><button data-route="/cart" id="mCart"><span>🛒</span>السلة <span class="number" id="mobileCount">0</span></button></nav>
 <div class="toast" id="toast" hidden role="status" aria-live="polite"></div><button id="scrollTop" type="button" class="scroll-top" aria-label="العودة إلى أعلى الصفحة" hidden>↑</button>
 <script src="storefront-api.js"></script>
