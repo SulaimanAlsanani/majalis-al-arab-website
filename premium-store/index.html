@@ -2103,6 +2103,47 @@ body:has(#heroSlider) .header-cart.header-cart-icon .cart-count{font-size:8.8px!
  #heroSlider .reference-phone-caption{font-size:6.6px!important}
  #heroSlider .reference-phone-grid span{height:29.7px!important}
 }
+
+/* Fine tuning: slightly enlarge banner content (+8%) relative to preceding iteration,
+   preserving header height, banner dimensions, rotating slides and slide-specific palettes. */
+#heroSlider .hero-slide .discovery-kicker{font-size:clamp(9.83px,.802vw,11.59px)!important;margin-bottom:8.9px!important}
+#heroSlider .hero-slide .discovery-copy h1{font-size:clamp(25.84px,2.495vw,42.77px)!important;margin-bottom:11.6px!important}
+#heroSlider .hero-slide .discovery-copy p{font-size:clamp(10.69px,.82vw,12.47px)!important;max-width:438px!important;margin-bottom:11.6px!important}
+#heroSlider .hero-slide .discovery-actions{gap:6px!important}
+#heroSlider .hero-slide .discover-btn{font-size:9.8px!important;padding:8.91px 16.93px!important}
+#heroSlider .hero-slide .discover-outline{font-size:9.8px!important;padding:8.02px 12.47px!important}
+#heroSlider .hero-slide .discovery-labels{font-size:8.91px!important;margin-top:8.3px!important}
+#heroSlider .reference-hero-phone{
+ width:clamp(165.2px,17.375vw,244.7px)!important;
+ height:84.65%!important;top:14.3%!important;left:48%!important;
+}
+#heroSlider .reference-food-float{width:clamp(71.3px,7.57vw,120px)!important}
+#heroSlider .reference-phone-status{font-size:8.91px!important;height:26.1px!important}
+#heroSlider .reference-phone-top{font-size:8.91px!important}
+#heroSlider .reference-phone-search{font-size:8.32px!important;padding:8.32px!important}
+#heroSlider .reference-phone-caption{font-size:9.8px!important}
+#heroSlider .reference-phone-grid span{height:49.9px!important}
+#heroSlider .reference-hero-ring{width:min(73.95%,463.3px)!important;border-width:clamp(21.4px,2.85vw,38.3px)!important}
+#heroSlider .reference-hero-disc{width:55.2%!important}
+@media(max-width:780px){
+ #heroSlider .hero-slide .discovery-copy h1{font-size:clamp(20.49px,2.762vw,24.95px)!important}
+ #heroSlider .hero-slide .discovery-copy p{font-size:8.91px!important}
+ #heroSlider .reference-hero-phone{width:155.6px!important;height:81.1%!important;top:18.9%!important}
+ #heroSlider .reference-food-float{width:73px!important}
+}
+@media(max-width:520px){
+ #heroSlider .hero-slide .discovery-kicker{font-size:8.02px!important}
+ #heroSlider .hero-slide .discovery-copy h1{font-size:clamp(17.82px,4.63vw,22.275px)!important}
+ #heroSlider .hero-slide .discovery-copy p{font-size:8.02px!important}
+ #heroSlider .hero-slide .discover-btn,#heroSlider .hero-slide .discover-outline{font-size:8.02px!important;padding:5.94px 7.13px!important}
+ #heroSlider .reference-hero-phone{width:114px!important;height:75.73%!important;top:22.5%!important}
+ #heroSlider .reference-food-float{width:49px!important}
+ #heroSlider .reference-phone-status{font-size:6.24px!important;height:17.82px!important}
+ #heroSlider .reference-phone-top{font-size:7.13px!important}
+ #heroSlider .reference-phone-search{font-size:6.24px!important;padding:4.75px!important}
+ #heroSlider .reference-phone-caption{font-size:7.13px!important}
+ #heroSlider .reference-phone-grid span{height:32.1px!important}
+}
 </style></head>
 <body>
 <header class="site-header"><div class="wrap header-inner">
