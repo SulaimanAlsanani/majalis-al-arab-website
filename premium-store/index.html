@@ -1090,6 +1090,46 @@ body:has(#heroSlider) .page{padding-top:7px}
 .collection-strip .collection-icon{display:block;width:75px;height:63px;overflow:hidden;border-radius:11px;background:white}
 .collection-strip .collection-icon img{display:block;width:100%;height:100%;object-fit:contain}
 @media(max-width:780px){.collection-strip .collection-icon{width:64px;height:53px}}
+
+/* Neutral, compact restaurant category cards — editorial storefront design */
+.first-fold-categories .feature-category-grid{gap:8px!important;margin-bottom:12px!important}
+.first-fold-categories .feature-category,
+.first-fold-categories .feature-category:nth-child(n){
+  --category-wash:#fff;--category-border:#e6e8eb;--category-icon:#fff;--category-accent:#b6bec6;
+  background:#fff!important;
+  border:1px solid #e6e8eb!important;
+  border-radius:12px!important;
+  box-shadow:0 1px 5px rgba(20,30,40,.035)!important;
+  min-height:100px!important;
+  padding:7px 5px 6px!important;
+  gap:5px!important;
+}
+.first-fold-categories .feature-category:hover{
+  background:#fff!important;border-color:#bdc6cc!important;
+  box-shadow:0 3px 10px rgba(20,30,40,.07)!important;
+  transform:translateY(-1px);
+}
+.first-fold-categories .feature-category-icon.feature-category-photo{
+  height:60px!important;width:100%!important;
+  border-radius:8px!important;background:#fff!important
+}
+.first-fold-categories .feature-category-icon.feature-category-photo img{object-fit:contain!important}
+.first-fold-categories .feature-category strong{
+  font-size:11px!important;font-weight:700!important;line-height:1.25!important;
+  color:#26323a!important
+}
+@media(max-width:780px){
+ .first-fold-categories .feature-category-grid{gap:6px!important}
+ .first-fold-categories .feature-category{min-height:89px!important;padding:5px 3px!important;gap:4px!important;border-radius:10px!important}
+ .first-fold-categories .feature-category-icon.feature-category-photo{height:52px!important}
+ .first-fold-categories .feature-category strong{font-size:10px!important}
+}
+@media(max-width:420px){
+ .first-fold-categories .feature-category-grid{gap:5px!important}
+ .first-fold-categories .feature-category{min-height:79px!important;padding:4px 2px!important;gap:3px!important;border-radius:9px!important}
+ .first-fold-categories .feature-category-icon.feature-category-photo{height:45px!important}
+ .first-fold-categories .feature-category strong{font-size:9px!important}
+}
 </style></head>
 <body>
 <header class="site-header"><div class="wrap header-inner">
