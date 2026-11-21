@@ -3182,6 +3182,50 @@ body:has(#heroSlider) .reference-top-actions{gap:0!important}
 @media(max-width:560px){
  .home-experience-card.experience-matches>.experience-real-photo{width:45%!important;height:98%!important}
 }
+
+/* Meal cards shared by the home rails, menu, offers and favorites. */
+.product-rail,.product-grid{gap:12px}
+.product-rail .product-card{flex-basis:calc((100% - 36px)/4)}
+.catalog-panel .product-grid{grid-template-columns:repeat(4,minmax(0,1fr))}
+.product-card{display:flex;flex-direction:column}
+.product-card .card-photo{aspect-ratio:16/9}
+.product-card .card-photo img{position:absolute;inset:0;height:100%!important}
+.product-card .card-photo .product-photo-illustrative{
+ object-fit:contain!important;padding:8px;background:#f7f2eb!important;
+}
+.detail-image img.product-photo-illustrative{object-fit:contain;background:#f7f2eb}
+.product-card .card-photo:focus-visible{outline-offset:-4px}
+.card-photo-caption{
+ display:none;position:absolute;inset-block-end:8px;inset-inline-end:8px;
+ padding:2px 6px;border-radius:5px;background:#fff;color:#574b47;font-size:11px;
+}
+.card-photo:has(.product-photo-illustrative) .card-photo-caption{display:block}
+.product-card-logo{
+ position:absolute;inset-block-end:8px;inset-inline-start:8px;
+ width:clamp(33px,3.7vw,53px);aspect-ratio:1;padding:4px;
+ border-radius:10px;background:#fff;box-shadow:0 1px 7px #18111125;pointer-events:none;
+}
+.product-card-logo img{display:block;width:100%;height:100%;object-fit:contain}
+.product-card .card-body{flex:1;gap:7px}
+.product-card .card-title{font-size:clamp(14px,1.2vw,17px)}
+.product-card .add-button{
+ min-width:40px;min-height:40px;padding:0 8px;line-height:1;
+ background:#f7efe4!important;color:#7e253a!important;font-size:23px;
+}
+.product-card .add-button:not(:disabled):hover{background:#eddfd1!important}
+.product-card .add-button:disabled{background:#edeef0!important;color:#646b74!important}
+@media(max-width:1240px){
+ .catalog-panel .product-grid{grid-template-columns:repeat(3,minmax(0,1fr))}
+}
+@media(max-width:1000px){
+ .product-rail .product-card{flex-basis:calc((100% - 24px)/3)}
+}
+@media(max-width:780px){
+ .product-rail,.product-grid{gap:9px}
+ .product-rail .product-card{flex-basis:calc((100% - 9px)/2)}
+ .catalog-panel .product-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+ .product-card .add-button{min-width:44px;min-height:44px}
+}
 </style></head>
 <body>
 <header class="site-header"><div class="wrap header-inner">
@@ -3262,10 +3306,28 @@ try{const c=JSON.parse(sessionStorage.getItem('majalis_preview_customer_v1')||'{
 state.favorites=safeGet(FAV_KEY,[]).filter(n=>Number.isInteger(n)&&PRODUCTS.some(p=>p.id===n));
 function save(){try{localStorage.setItem(STORAGE,JSON.stringify(state.cart));localStorage.setItem(FAV_KEY,JSON.stringify(state.favorites));localStorage.setItem('majalis_basket_general_note_v1',JSON.stringify(state.generalNote||''))}catch{}}
 function money(n){return Number(n).toLocaleString('ar-SA')+' ر.س'}
-function imageFor(p){return p.imageUrl|| (p.demo?fallbackFor(p):'assets/products/'+String(p.id).padStart(2,'0')+'.webp')}
-function fallbackFor(p){return 'https://images.unsplash.com/'+p.photo+'?auto=format&fit=crop&w=650&q=78'}
-function imgTag(p,className='',alt=true){return '<img class="'+className+'" src="'+escapeHtml(imageFor(p))+'" data-fallback="'+escapeHtml(fallbackFor(p))+'" alt="'+(alt?escapeHtml(p.name):'')+'" loading="lazy" decoding="async" width="320" height="240">'}
-function photoError(e){const t=e.target;if(t.tagName==='IMG'&&t.dataset.fallback&&t.src!==t.dataset.fallback){t.src=t.dataset.fallback;t.removeAttribute('data-fallback')}}
+const PREVIEW_PRODUCT_PHOTOS={
+ 1:'kibda',2:'kibda-cheese',3:'beef-salad',4:'chicken-salad',
+ 13:'areeka',14:'areeka',15:'areeka',16:'date-fatta'
+};
+function imgTag(p,className='',alt=true){
+ const localPhoto=!approvedCatalog&&PREVIEW_PRODUCT_PHOTOS[p.id];
+ const photo=p.imageUrl||(localPhoto?'assets/products/'+localPhoto+'.webp':'');
+ const fallback=Object.hasOwn(CATEGORY_PLATE_IMAGES,p.category)?CATEGORY_PLATE_IMAGES[p.category]:'assets/categories/appetizers.png';
+ const fallbackAlt=alt?'صورة توضيحية':'';
+ return '<img class="'+className+(photo?'':' product-photo-illustrative')+'" src="'+escapeHtml(photo||fallback)+'"'+
+  (photo?' data-fallback="'+fallback+'" data-fallback-alt="'+fallbackAlt+'"':'')+
+  ' alt="'+(alt?(photo?escapeHtml(p.name):fallbackAlt):'')+'" loading="lazy" decoding="async" width="320" height="180">';
+}
+function photoError(e){
+ const t=e.target;
+ if(t.tagName!=='IMG'||!t.dataset.fallback)return;
+ t.src=t.dataset.fallback;
+ t.alt=t.dataset.fallbackAlt;
+ t.classList.add('product-photo-illustrative');
+ delete t.dataset.fallback;
+ delete t.dataset.fallbackAlt;
+}
 document.addEventListener('error',photoError,true);
 function currentPath(){const h=decodeURIComponent(location.hash.slice(1));return h.startsWith('/')?h:'/'}
 function route(path){location.hash='#'+path;if(currentPath()===path)render()}
@@ -3298,11 +3360,16 @@ function toggleFavorite(id){const i=state.favorites.indexOf(id);if(i<0)state.fav
 function sectionHeading(title,desc='',extra=''){return '<div class="panel-head"><div><h2>'+title+'</h2>'+(desc?'<p>'+desc+'</p>':'')+'</div>'+extra+'</div>'}
 function card(p){
  const f=state.favorites.includes(p.id),available=p.available!==false;
- return '<article class="product-card"><div class="product-card-image-wrap"><button class="card-photo" data-product="'+p.id+'" aria-label="تفاصيل '+escapeHtml(p.name)+'">'+imgTag(p)+'</button>'+
- (p.demo?'<span class="demo-sticker">تجريبي</span>':(available?'<span class="product-availability">القائمة الأساسية</span>':'<span class="product-availability sold-out">غير متوفر</span>'))+
- '<button class="card-fav '+(f?'saved':'')+'" data-fav="'+p.id+'" aria-label="'+(f?'إزالة من المفضلة':'إضافة للمفضلة')+'" aria-pressed="'+f+'">'+(f?'♥':'♡')+'</button></div>'+
- '<div class="card-body"><button class="card-title" data-product="'+p.id+'">'+escapeHtml(p.name)+'</button><p class="card-category">'+escapeHtml(p.category)+'</p>'+
- '<div class="card-bottom"><span class="card-price">'+money(p.price)+'</span><button class="add-button" '+(available?'data-product="'+p.id+'"':'disabled aria-disabled="true"')+' aria-label="'+(available?'عرض وإضافة '+escapeHtml(p.name):'الصنف غير متوفر')+'">'+(available?'+':'×')+'</button></div></div></article>';
+ const name=escapeHtml(p.name);
+ const status=!available?'<span class="product-availability sold-out">غير متوفر</span>':(p.demo?'<span class="demo-sticker">تجريبي</span>':'');
+ return '<article class="product-card"><div class="product-card-image-wrap">'+
+ '<button type="button" class="card-photo" data-product="'+p.id+'" aria-label="تفاصيل '+name+'">'+imgTag(p,'',false)+
+ '<span class="card-photo-caption" aria-hidden="true">صورة توضيحية</span></button>'+status+
+ '<span class="product-card-logo" aria-hidden="true"><img src="assets/brand/majalis-logo-official-transparent.png" alt="" width="48" height="48" loading="lazy" decoding="async"></span>'+
+ '<button type="button" class="card-fav '+(f?'saved':'')+'" data-fav="'+p.id+'" aria-label="'+(f?'إزالة من المفضلة':'إضافة للمفضلة')+'" aria-pressed="'+f+'">'+(f?'♥':'♡')+'</button></div>'+
+ '<div class="card-body"><button type="button" class="card-title" data-product="'+p.id+'">'+name+'</button>'+
+ '<div class="card-bottom"><span class="card-price">'+money(p.price)+'</span><button type="button" class="add-button" '+
+ (available?'data-card-add="'+p.id+'" aria-label="أضف '+name+' إلى السلة"':'disabled aria-label="الصنف غير متوفر"')+'>'+(available?'+':'×')+'</button></div></div></article>';
 }
 function cartContent(){if(!state.cart.length)return '<div class="cart-empty"><div class="cart-icon">🛍️</div><strong>سلتك تنتظر طلبك</strong><p>اختر وجباتك المفضلة، ثم راجع تفاصيل الطلب هنا.</p><button class="outlined" data-go="/menu">تصفح الأطباق</button></div>';return '<div class="cart-lines">'+state.cart.map((l,i)=>{const p=productById(l.id);return '<div class="cart-line">'+imgTag(p)+'<div class="cart-line-info"><strong>'+p.name+'</strong><small>'+(l.note?'ملاحظة: '+escapeHtml(l.note):'بدون ملاحظات')+'</small><div class="cart-line-row"><strong>'+money(p.price*l.qty)+'</strong><div class="stepper"><button data-dec="'+i+'" aria-label="تقليل">−</button><span>'+l.qty+'</span><button data-inc="'+i+'" aria-label="زيادة">+</button></div></div></div></div>'}).join('')+'</div>'}
 function sideCart(){return '<aside class="side-cart" id="cartArea"><div class="cart-head"><h2>🛍️ سلة مشترياتك</h2>'+(count()?'<button data-clear>إفراغ السلة</button>':'')+'</div>'+cartContent()+'<div class="cart-footer"><div class="total-row"><span>الإجمالي التجريبي</span><span>'+money(total())+'</span></div><button class="solid-action full" data-go="/cart" '+(!count()?'disabled':'')+'>راجع طلبك ←</button><p>الأسعار توضيحية؛ لا يشمل الإجمالي رسوم توصيل أو ضرائب إضافية غير معتمدة.</p></div></aside>'}
@@ -3476,12 +3543,16 @@ async function bootstrapApprovedCatalog(){
   if(notice)notice.textContent='تعذر الاتصال بـ Odoo، البيانات المعروضة تجريبية فقط.';
  }
 }
-function availableSizes(p){
- const sizes=['صغير','وسط','كبير'];
+const SIZE_LABELS=['صغير','وسط','كبير'];
+function sizeVariants(p){
  const base=p.name.replace(/\s+(صغير|وسط|كبير)$/,'');
- const variants=PRODUCTS.filter(x=>x.id!==p.id&&x.category===p.category&&x.name.replace(/\s+(صغير|وسط|كبير)$/,'')===base&&sizes.some(s=>x.name.endsWith(' '+s)));
+ return PRODUCTS.filter(x=>x.id!==p.id&&x.category===p.category&&x.name.replace(/\s+(صغير|وسط|كبير)$/,'')===base&&SIZE_LABELS.some(s=>x.name.endsWith(' '+s)));
+}
+function availableSizes(p){
+ const base=p.name.replace(/\s+(صغير|وسط|كبير)$/,'');
+ const variants=sizeVariants(p);
  if(!variants.length)return '<p>لم تعتمد إضافات أو أحجام منفصلة لهذا الصنف بعد. يمكنك كتابة ملاحظات التحضير.</p>';
- return '<p>اختر أحد الأحجام المسجلة في القائمة:</p><div class="size-options">'+[p,...variants].sort((a,b)=>sizes.findIndex(s=>a.name.endsWith(' '+s))-sizes.findIndex(s=>b.name.endsWith(' '+s))).map(v=>'<button type="button" class="'+(v.id===p.id?'selected':'')+'" data-product="'+v.id+'">'+escapeHtml(v.name.slice(base.length).trim())+' · '+money(v.price)+'</button>').join('')+'</div>';
+ return '<p>اختر أحد الأحجام المسجلة في القائمة:</p><div class="size-options">'+[p,...variants].sort((a,b)=>SIZE_LABELS.findIndex(s=>a.name.endsWith(' '+s))-SIZE_LABELS.findIndex(s=>b.name.endsWith(' '+s))).map(v=>'<button type="button" class="'+(v.id===p.id?'selected':'')+'" data-product="'+v.id+'">'+escapeHtml(v.name.slice(base.length).trim())+' · '+money(v.price)+'</button>').join('')+'</div>';
 }
 function renderHome(){
  const byCategory=(name,n=14)=>PRODUCTS.filter(p=>p.category===name).slice(0,n).map(p=>p.id);
@@ -3568,6 +3639,14 @@ if(e.target.closest('#closeCheckoutPreview')){el('checkoutPreview').hidden=true;
 const tab=e.target.closest('[data-order-tab]');if(tab){document.querySelectorAll('[data-order-tab]').forEach(b=>b.classList.toggle('active',b===tab));const panel=el('orderTabBody');if(panel)panel.innerHTML=tab.dataset.orderTab==='active'?'<span>▤</span><h2>لا توجد طلبات حالية</h2><p>ستظهر طلباتك الحقيقية هنا بعد الربط.</p><button class="solid-action" data-go="/menu">تصفّح المنيو</button>':'<span>◷</span><h2>لا توجد طلبات سابقة</h2><p>ستُعرض هنا الفواتير وسجل الطلبات عند تفعيل الخدمة.</p>';return}
 if(e.target.closest('#accountLogin')){notify('تسجيل الدخول غير متصل بعد بنظام Odoo');return}
 const routeBtn=e.target.closest('[data-route],[data-go]');if(routeBtn){route(routeBtn.dataset.route||routeBtn.dataset.go);return}
+const cardAdd=e.target.closest('[data-card-add]');
+if(cardAdd){
+ const p=productById(cardAdd.dataset.cardAdd);
+ if(!p)return;
+ if(p.options?.length||sizeVariants(p).length)route('/product/'+p.id);
+ else addItem(p.id);
+ return;
+}
 const product=e.target.closest('[data-product]');if(product){el('searchSuggestions').hidden=true;route('/product/'+product.dataset.product);return}
 const fav=e.target.closest('[data-fav]');if(fav){toggleFavorite(Number(fav.dataset.fav));return}
 const category=e.target.closest('[data-category]');if(category){if(category.dataset.category==='المفضلة'){state.category='الكل';state.sort='fav'}else{state.category=category.dataset.category;if(state.sort==='fav')state.sort='default'}if(currentPath()!=='/menu'){route('/menu');return}render();return}
