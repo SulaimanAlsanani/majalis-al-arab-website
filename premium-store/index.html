@@ -3030,6 +3030,81 @@ body:has(#heroSlider) .reference-top-actions{gap:0!important}
  .site-header .brand-official-wordmark{width:102px!important;max-width:102px!important}
  .site-header .brand-official-seal{width:32px!important;height:32px!important;min-width:32px!important}
 }
+
+/* Preserve the original pastel experience-card shapes and palette.
+   Add genuine photographic elements within the card's left visual space. */
+.home-experience-card{
+ isolation:isolate!important;
+ padding-inline-start:clamp(13px,1.3vw,20px)!important;
+ padding-inline-end:clamp(13px,1.3vw,20px)!important;
+}
+.home-experience-card>.experience-real-photo{
+ position:absolute!important;
+ left:12px!important;top:50%!important;transform:translateY(-50%)!important;
+ width:39%!important;height:calc(100% - 24px)!important;
+ max-width:220px!important;min-width:0!important;
+ display:block!important;
+ border-radius:14px!important;
+ object-fit:cover!important;object-position:center!important;
+ box-shadow:0 5px 14px #3220181b!important;
+ border:2px solid #ffffffb8!important;
+ z-index:1!important;pointer-events:none!important;
+}
+.home-experience-card>.experience-icon,
+.home-experience-card>.experience-label,
+.home-experience-card>strong,
+.home-experience-card>small,
+.home-experience-card>b{
+ position:relative!important;z-index:2!important;
+ max-width:55%!important;
+ text-align:right!important;
+ margin-inline-end:0!important;
+ align-self:flex-start!important;
+ overflow-wrap:break-word!important;
+}
+.home-experience-card::after{z-index:0!important}
+.home-experience-card>.experience-real-photo + .experience-icon{font-size:23px!important}
+.home-experience-card:focus-visible{outline:3px solid #b7862a!important;outline-offset:3px!important}
+@media(max-width:1100px){
+ .home-experience-card>.experience-real-photo{width:36%!important;left:9px!important;height:calc(100% - 18px)!important}
+ .home-experience-card>.experience-icon,
+ .home-experience-card>.experience-label,
+ .home-experience-card>strong,
+ .home-experience-card>small,
+ .home-experience-card>b{max-width:59%!important}
+ .home-experience-card>strong{font-size:clamp(15px,1.7vw,20px)!important}
+}
+@media(max-width:780px){
+ .home-experience-card>.experience-real-photo{left:7px!important;width:35%!important}
+ .home-experience-card>.experience-icon,
+ .home-experience-card>.experience-label,
+ .home-experience-card>strong,
+ .home-experience-card>small,
+ .home-experience-card>b{max-width:60%!important}
+ .home-experience-card>.experience-label{font-size:10px!important}
+ .home-experience-card>strong{font-size:clamp(13px,2vw,18px)!important}
+ .home-experience-card>small,.home-experience-card>b{font-size:10px!important}
+}
+@media(max-width:560px){
+ .home-experience-card{min-height:148px!important}
+ .home-experience-card>.experience-real-photo{
+  left:11px!important;width:39%!important;height:calc(100% - 20px)!important;
+ }
+ .home-experience-card>.experience-icon,
+ .home-experience-card>.experience-label,
+ .home-experience-card>strong,
+ .home-experience-card>small,
+ .home-experience-card>b{max-width:55%!important}
+ .home-experience-card>strong{font-size:18px!important}
+}
+@media(max-width:360px){
+ .home-experience-card>.experience-real-photo{width:36%!important}
+ .home-experience-card>.experience-icon,
+ .home-experience-card>.experience-label,
+ .home-experience-card>strong,
+ .home-experience-card>small,
+ .home-experience-card>b{max-width:60%!important}
+}
 </style></head>
 <body>
 <header class="site-header"><div class="wrap header-inner">
@@ -3294,7 +3369,7 @@ function quickOrderHub(){
  '<button type="button" data-go="/seating"><span class="hs-order-service-icon">⌂</span><span><strong>الجلسات</strong><small>اطّلع على خيارات الجلسات</small></span><b aria-hidden="true">←</b></button>'+
  '</div></section>';
 }
-function homeExperiences(){return '<section class="home-experience-section" aria-label="تجارب مجالس العرب">'+homeSectionIntro('مساحات وتجارب','مو بس مطعم… مجالس تجمعنا','الجلسات الخاصة والمباريات والبلايستيشن؛ الاستفسار عن التوفر مباشرة مع الفرع.','/seating')+'<div class="home-experience-grid"><button type="button" class="home-experience-card experience-private" data-go="/seating"><span class="experience-icon">🛋️</span><span class="experience-label">جلسات خاصة</span><strong>جلستك على كيفك</strong><small>استكشف الجلسات والاستفسار عن التوفر</small><b>استفسر عن الجلسات ←</b></button><button type="button" class="home-experience-card experience-matches" data-go="/seating"><span class="experience-icon">⚽</span><span class="experience-label">مشاهدة المباريات</span><strong>للحماس جمهور</strong><small>أجواء متابعة المباريات مع الرفاق</small><b>استكشف الخيارات ←</b></button><button type="button" class="home-experience-card experience-games" data-go="/seating"><span class="experience-icon">🎮</span><span class="experience-label">بلايستيشن</span><strong>المنافسة تحلى</strong><small>استفسر عن الأجهزة والمواعيد</small><b>اطلع على التفاصيل ←</b></button></div></section>'}
+function homeExperiences(){return '<section class="home-experience-section" aria-label="تجارب مجالس العرب">'+homeSectionIntro('مساحات وتجارب','مو بس مطعم… مجالس تجمعنا','الجلسات الخاصة والمباريات والبلايستيشن؛ الاستفسار عن التوفر مباشرة مع الفرع.','/seating')+'<div class="home-experience-grid"><button type="button" class="home-experience-card experience-private" data-go="/seating"><img class="experience-real-photo" src="https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?auto=format&fit=crop&w=720&q=82" alt="صورة فوتوغرافية لجلسة داخلية مريحة" loading="lazy" decoding="async" width="240" height="180"><span class="experience-icon">🛋️</span><span class="experience-label">جلسات خاصة</span><strong>جلستك على كيفك</strong><small>استكشف الجلسات والاستفسار عن التوفر</small><b>استفسر عن الجلسات ←</b></button><button type="button" class="home-experience-card experience-matches" data-go="/seating"><img class="experience-real-photo" src="https://images.unsplash.com/photo-1574629810360-7efbbe195018?auto=format&fit=crop&w=720&q=82" alt="صورة فوتوغرافية لمباراة كرة قدم" loading="lazy" decoding="async" width="240" height="180"><span class="experience-icon">⚽</span><span class="experience-label">مشاهدة المباريات</span><strong>للحماس جمهور</strong><small>أجواء متابعة المباريات مع الرفاق</small><b>استكشف الخيارات ←</b></button><button type="button" class="home-experience-card experience-games" data-go="/seating"><img class="experience-real-photo" src="https://images.unsplash.com/photo-1643489069237-3548135218c8?auto=format&fit=crop&w=720&q=82" alt="صورة فوتوغرافية ليد تحكم بلايستيشن" loading="lazy" decoding="async" width="240" height="180"><span class="experience-icon">🎮</span><span class="experience-label">بلايستيشن</span><strong>المنافسة تحلى</strong><small>استفسر عن الأجهزة والمواعيد</small><b>اطلع على التفاصيل ←</b></button></div></section>'}
 function serviceModeBanner(){
  return '<section class="hs-restaurant-intro" aria-label="متجر مجالس العرب">'+
  '<div class="hs-restaurant-intro-logo">م</div>'+
