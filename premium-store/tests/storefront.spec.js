@@ -10,15 +10,24 @@ test('homepage shows visible search, active banner, categories, and usable cart 
   await page.screenshot({path: 'test-results/home-' + test.info().project.name + '.png', fullPage: true});
 });
 
-test('all visible cards keep primary image and card price in normal bounds', async ({page}) => {
+test('meal cards keep a full-bleed image and accessible icon controls', async ({page}) => {
   await page.goto('/#/menu');
   const cards=page.locator('.product-grid .product-card');
   await expect(cards.first()).toBeVisible();
   expect(await cards.count()).toBeGreaterThan(20);
-  await expect(cards.first().locator('.card-price')).toContainText('ر.س');
-  const dimensions=await cards.first().evaluate(node=>({w:node.getBoundingClientRect().width, h:node.getBoundingClientRect().height}));
-  expect(dimensions.w).toBeGreaterThan(125);
-  expect(dimensions.h).toBeGreaterThan(140);
+  const first = cards.first();
+  const photo = first.locator('.card-photo');
+  await expect(photo).toHaveAccessibleName(/تفاصيل.*ر\.س/);
+  await expect(first.locator('.card-fav svg')).toBeVisible();
+  await expect(first.locator('.add-button svg')).toBeVisible();
+  const dimensions = await photo.evaluate(node => {
+    const image = node.getBoundingClientRect();
+    const card = node.closest('.product-card').getBoundingClientRect();
+    return { image: { width: image.width, height: image.height }, card: { width: card.width, height: card.height } };
+  });
+  expect(dimensions.image.width / dimensions.image.height).toBeCloseTo(16 / 9, 1);
+  expect(dimensions.card.width - dimensions.image.width).toBeLessThanOrEqual(2);
+  expect(dimensions.card.height - dimensions.image.height).toBeLessThanOrEqual(2);
 });
 
 test('search with Arabic text, filters and product detail notes are functional', async ({page}) => {
@@ -26,7 +35,7 @@ test('search with Arabic text, filters and product detail notes are functional',
   await page.locator('#globalSearch').fill('شكشوكة');
   await page.locator('#globalSearch').press('Enter');
   await expect(page.locator('.product-grid .product-card').first()).toBeVisible();
-  await expect(page.locator('.product-grid .product-card').first().locator('.card-title')).toContainText('شكشوكة');
+  await expect(page.locator('.product-grid .product-card').first().locator('.card-photo')).toHaveAccessibleName(/شكشوكة/);
   await page.locator('#globalSearch').fill('');
   await page.goto('/#/menu');
   await page.locator('#priceFilter').selectOption('under20');
