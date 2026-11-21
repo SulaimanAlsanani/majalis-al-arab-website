@@ -10,7 +10,7 @@ test('homepage shows visible search, active banner, categories, and usable cart 
   await page.screenshot({path: 'test-results/home-' + test.info().project.name + '.png', fullPage: true});
 });
 
-test('meal cards keep a full-bleed image and accessible icon controls', async ({page}) => {
+test('meal cards show the full-width photo above the product details and controls', async ({page}) => {
   await page.goto('/#/menu');
   const cards=page.locator('.product-grid .product-card');
   await expect(cards.first()).toBeVisible();
@@ -18,16 +18,24 @@ test('meal cards keep a full-bleed image and accessible icon controls', async ({
   const first = cards.first();
   const photo = first.locator('.card-photo');
   await expect(photo).toHaveAccessibleName(/تفاصيل.*ر\.س/);
+  await expect(first.locator('.card-title')).toBeVisible();
+  await expect(first.locator('.card-price')).toContainText('ر.س');
   await expect(first.locator('.card-fav svg')).toBeVisible();
   await expect(first.locator('.add-button svg')).toBeVisible();
+  await expect(first.locator('.add-button')).toContainText('أضف للسلة');
   const dimensions = await photo.evaluate(node => {
     const image = node.getBoundingClientRect();
-    const card = node.closest('.product-card').getBoundingClientRect();
-    return { image: { width: image.width, height: image.height }, card: { width: card.width, height: card.height } };
+    const card = node.closest('.product-card');
+    const details = [...card.querySelectorAll('.card-title, .card-fav, .card-price, .add-button')];
+    return {
+      ratio: image.width / image.height,
+      horizontalInset: card.getBoundingClientRect().width - image.width,
+      detailsBelowPhoto: details.every(element => element.getBoundingClientRect().top >= image.bottom)
+    };
   });
-  expect(dimensions.image.width / dimensions.image.height).toBeCloseTo(16 / 9, 1);
-  expect(dimensions.card.width - dimensions.image.width).toBeLessThanOrEqual(2);
-  expect(dimensions.card.height - dimensions.image.height).toBeLessThanOrEqual(2);
+  expect(dimensions.ratio).toBeCloseTo(16 / 9, 1);
+  expect(dimensions.horizontalInset).toBeLessThanOrEqual(2);
+  expect(dimensions.detailsBelowPhoto).toBe(true);
 });
 
 test('search with Arabic text, filters and product detail notes are functional', async ({page}) => {
