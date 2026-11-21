@@ -1,0 +1,58 @@
+name: Restaurant store browser visual audit
+on:
+  push:
+    branches: [feature/restaurant-real-category-photos-20261121]
+    paths: ['.github/workflows/restaurant-ui-audit.yml']
+permissions:
+  contents: read
+jobs:
+  browser-audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Install Chromium automation
+        run: |
+          npm install --no-save playwright@1.56.1
+          npx playwright install --with-deps chromium
+      - name: Test desktop and mobile rendering
+        shell: bash
+        run: |
+          mkdir -p audit-screenshots
+          node <<'JS'
+          const { chromium }=require('playwright');
+          const path=require('path');
+          (async()=>{
+            const browser=await chromium.launch({headless:true});
+            let failures=[];
+            for(const view of [{name:'desktop',width:1440,height:900},{name:'mobile',width:390,height:844}]){
+              const page=await browser.newPage({viewport:{width:view.width,height:view.height},deviceScaleFactor:1});
+              const errors=[];
+              page.on('pageerror',e=>errors.push(e.message));
+              await page.goto('file://'+path.resolve('premium-store/index.html'),{waitUntil:'domcontentloaded'});
+              await page.waitForTimeout(1600);
+              const result=await page.evaluate(async()=>{
+                const el=document.querySelectorAll('.first-fold-categories .feature-category');
+                const imgs=[...document.querySelectorAll('.first-fold-categories .feature-category img')];
+                await Promise.all(imgs.map(im=> im.complete ? null : new Promise(resolve=>{im.onload=resolve;im.onerror=resolve;setTimeout(resolve,5000)})));
+                return {cards:el.length,photos:imgs.length,broken:imgs.filter(im=>!im.complete||!im.naturalWidth).map(im=>im.src),horizontalOverflow:document.documentElement.scrollWidth>innerWidth+4,bodyText:document.body.innerText.length,route:location.href};
+              });
+              await page.screenshot({path:'audit-screenshots/'+view.name+'.png',fullPage:true});
+              console.log('VISUAL_AUDIT '+view.name+' '+JSON.stringify({result,errors}));
+              if(result.cards!==10||result.photos!==10||result.broken.length||errors.length||result.horizontalOverflow)failures.push({view:view.name,result,errors});
+              await page.close();
+            }
+            await browser.close();
+            if(failures.length){console.error('VISUAL_AUDIT_FAILED '+JSON.stringify(failures));process.exitCode=1}
+            else console.log('VISUAL_AUDIT_PASSED');
+          })().catch(e=>{console.error(e);process.exitCode=1});
+          JS
+      - name: Upload visual screenshots
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: restaurant-store-desktop-mobile
+          path: audit-screenshots/*.png
