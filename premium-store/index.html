@@ -2944,6 +2944,92 @@ body:has(#heroSlider) .site-header .header-cart.header-cart-icon .cart-count{
  }
  .site-header .header-language-trigger{font-size:9px!important;padding:6px 5px!important}
 }
+
+/* Minimal RTL header menu: hamburger is the LEFTMOST header control, after cart. */
+.site-header .header-site-menu{
+ position:relative!important;
+ display:block!important;
+ flex:0 0 42px!important;
+ width:42px!important;
+ height:42px!important;
+ margin:0!important;
+ z-index:125!important;
+}
+.site-header .header-site-menu-trigger{
+ list-style:none!important;display:flex!important;align-items:center!important;
+ justify-content:center!important;cursor:pointer!important;
+ width:42px!important;height:42px!important;
+ border-radius:11px!important;border:1px solid #e9e6df!important;
+ color:#30271e!important;background:#fff!important;
+}
+.site-header .header-site-menu-trigger::-webkit-details-marker{display:none!important}
+.site-header .header-site-menu-trigger::marker{display:none!important}
+.site-header .header-site-menu[open] .header-site-menu-trigger{
+ background:#fff8df!important;border-color:#e4c65b!important;
+}
+.site-header .header-site-menu-panel{
+ position:absolute!important;
+ top:calc(100% + 11px)!important;
+ inset-inline-end:0!important;
+ inset-inline-start:auto!important;
+ width:220px!important;
+ max-width:calc(100vw - 24px)!important;
+ background:#fff!important;
+ border:1px solid #e9e6df!important;
+ border-radius:14px!important;
+ padding:7px!important;
+ box-shadow:0 14px 34px #2c201426!important;
+ display:flex!important;flex-direction:column!important;gap:2px!important;
+ direction:rtl!important;
+}
+.site-header .header-site-menu-panel a{
+ display:block!important;
+ color:#3f3021!important;
+ font-size:13px!important;font-weight:750!important;
+ padding:11px 13px!important;
+ text-align:right!important;
+ border-radius:8px!important;
+ text-decoration:none!important;
+ white-space:nowrap!important;
+}
+.site-header .header-site-menu-panel a:hover,
+.site-header .header-site-menu-panel a:focus-visible{background:#fff5d5!important}
+.site-header .reference-top-actions,
+body:has(#heroSlider) .reference-top-actions{gap:0!important}
+.site-header .header-cart.header-cart-icon{overflow:visible!important}
+@media(max-width:780px){
+ .site-header .header-site-menu,
+ .site-header .header-site-menu-trigger{
+  width:35px!important;height:35px!important;flex-basis:35px!important;
+ }
+ .site-header .header-site-menu-trigger svg{width:20px!important;height:20px!important}
+}
+@media(max-width:700px){
+ .site-header>.header-inner.wrap,body:has(#heroSlider) .site-header>.header-inner.wrap{
+  flex-wrap:nowrap!important;
+  min-height:60px!important;height:60px!important;
+  justify-content:space-between!important;
+  gap:8px!important;
+ }
+ .site-header .brand.brand-official,body:has(#heroSlider) .header-inner .brand.brand-official{
+  flex:0 1 auto!important;margin-inline-end:auto!important;
+  min-width:0!important;
+ }
+ .site-header .reference-top-actions,body:has(#heroSlider) .reference-top-actions{
+  flex:0 0 auto!important;min-width:auto!important;
+  justify-content:flex-end!important;
+ }
+ .site-header .header-cart.header-cart-icon,
+ body:has(#heroSlider) .site-header .header-cart.header-cart-icon{
+  margin-inline-end:0!important;
+ }
+}
+@media(max-width:420px){
+ .site-header>.header-inner.wrap,body:has(#heroSlider) .site-header>.header-inner.wrap{gap:5px!important;padding-inline:8px!important}
+ .site-header .header-language-trigger{padding-inline:5px!important;font-size:9px!important}
+ .site-header .brand-official-wordmark{width:102px!important;max-width:102px!important}
+ .site-header .brand-official-seal{width:32px!important;height:32px!important;min-width:32px!important}
+}
 </style></head>
 <body>
 <header class="site-header"><div class="wrap header-inner">
@@ -2958,10 +3044,23 @@ body:has(#heroSlider) .site-header .header-cart.header-cart-icon .cart-count{
    <span class="language-coming" aria-disabled="true">اردو <small>قريبًا</small></span>
   </div>
  </details>
- <button type="button" class="reference-top-cta" data-go="/menu">تصفح القائمة</button>
- <button type="button" class="reference-top-cta header-seating-cta" data-go="/seating">تصفح الجلسات</button>
 </div>
 <button id="headerCart" class="cart-button header-cart header-cart-icon" type="button" aria-label="فتح سلة المشتريات" title="السلة"><svg viewBox="0 0 24 24" width="21" height="21" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M3 4h2l2.2 10.1a2 2 0 0 0 2 1.6h8.9a2 2 0 0 0 2-1.6L22 7H6"/><circle cx="10" cy="20" r="1"/><circle cx="18" cy="20" r="1"/></svg><span class="cart-count" id="headerCount">0</span></button>
+<details class="header-site-menu" id="headerSiteMenu">
+ <summary class="header-site-menu-trigger" aria-label="فتح قائمة الموقع" title="القائمة">
+  <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
+ </summary>
+ <nav class="header-site-menu-panel" aria-label="قائمة التنقل">
+  <a href="#/">الرئيسية</a>
+  <a href="#/menu">تصفح القائمة</a>
+  <a href="#/seating">تصفح الجلسات</a>
+  <a href="#/offers">العروض</a>
+  <a href="#/favorites">المفضلة</a>
+  <a href="#/orders">طلباتي</a>
+  <a href="#/account">حسابي</a>
+  <a href="#/help">المساعدة والتواصل</a>
+ </nav>
+</details>
 </div></header>
 <div class="legacy-search-hidden" hidden aria-hidden="true" inert><div class="search-shell"><label class="header-search"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="m16 16 5 5"/></svg><input id="globalSearch" placeholder="ابحث عن صنف أو مشروب..." aria-label="البحث عن منتج" autocomplete="off"></label><div id="searchSuggestions" class="search-suggestions" hidden role="region" aria-label="اقتراحات البحث"></div></div>
 </div>
@@ -3346,6 +3445,10 @@ document.addEventListener('input',e=>{if(e.target.id==='checkoutPhone'){state.cu
 document.addEventListener('change',e=>{if(e.target.id==='sortSelect'){state.sort=e.target.value;render()}if(e.target.id==='priceFilter'){state.priceFilter=e.target.value;render()}if(e.target.id==='demoFilter'){state.demoFilter=e.target.value;render()}});
 el('globalSearch').addEventListener('input',e=>{state.query=e.target.value.trim();state.category='الكل';updateSuggestions();if(currentPath()==='/menu'){const panel=el('catalog');if(panel)panel.innerHTML=catalog()}});
 el('headerCart').onclick=()=>route('/cart');
+const siteMenu=el('headerSiteMenu');
+siteMenu.addEventListener('click',e=>{if(e.target.closest('.header-site-menu-panel a'))siteMenu.open=false});
+document.addEventListener('click',e=>{if(!siteMenu.contains(e.target))siteMenu.open=false});
+document.addEventListener('keydown',e=>{if(e.key==='Escape')siteMenu.open=false});
 el('globalSearch').addEventListener('focus',updateSuggestions);
 document.addEventListener('click',e=>{if(!e.target.closest('.search-shell'))el('searchSuggestions').hidden=true});
 el('globalSearch').addEventListener('keydown',e=>{if(e.key==='Escape')el('searchSuggestions').hidden=true;if(e.key==='Enter'){el('searchSuggestions').hidden=true;route('/menu')}});
