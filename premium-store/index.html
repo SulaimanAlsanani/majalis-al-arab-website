@@ -1600,6 +1600,170 @@ body{background:#fafafa;color:var(--hs-ink)}
  .hs-floating-order{bottom:calc(72px + env(safe-area-inset-bottom));width:calc(100% - 24px);inset-inline:12px;padding:9px;border-radius:14px}
 }
 @media(min-width:781px){.hs-restaurant-intro-action{margin-inline-start:auto}}
+
+/* Reference-inspired landing hero — editorial cream backdrop, split copy and phone art.
+   All artwork uses original Majalis assets. */
+#heroSlider.hero-slider{
+ height:clamp(470px,38vw,590px)!important;
+ min-height:470px!important;
+ margin:0 0 16px!important;
+ border-radius:0!important;
+ overflow:hidden!important;
+ background:#fffef7!important;
+ box-shadow:none!important;
+}
+#heroSlider .hero-track,#heroSlider .hero-slide{height:100%!important}
+#heroSlider .hero-slide{
+ --bg:#fffef7!important;
+ --ink:#502914!important;
+ --hot:#e929ad!important;
+ background:#fffef7!important;
+}
+#heroSlider .hero-slide .discovery-copy{
+ position:absolute!important;inset-inline-start:0!important;inset-block:0!important;
+ width:49%!important;height:100%!important;
+ padding:clamp(25px,3.3vw,54px) clamp(22px,3.6vw,65px)!important;
+ justify-content:center!important;
+ align-items:flex-start!important;
+ text-align:right!important;
+ z-index:6!important;
+}
+#heroSlider .hero-slide .discovery-kicker{
+ font-size:clamp(12px,1.08vw,16px)!important;color:#7a503a!important;
+ margin-bottom:14px!important;
+}
+#heroSlider .hero-slide .discovery-copy h1{
+ font-size:clamp(32px,3.5vw,60px)!important;
+ line-height:1.28!important;font-weight:900!important;
+ margin:0 0 19px!important;
+ letter-spacing:-.035em!important;
+ color:#502914!important;
+}
+#heroSlider .hero-slide .discovery-copy h1 em{
+ color:#fff!important;background:#e929ad!important;
+ border-radius:12px!important;padding:.015em .16em .055em!important;
+ white-space:normal!important;
+}
+#heroSlider .hero-slide .discovery-copy p{
+ font-size:clamp(13px,1.1vw,17px)!important;
+ line-height:1.85!important;max-width:560px!important;
+ margin:0 0 19px!important;color:#543c30!important;
+}
+#heroSlider .hero-slide .discover-btn{
+ background:#ffdf00!important;color:#291b13!important;
+ border:0!important;border-radius:12px!important;
+ font-size:13px!important;font-weight:900!important;
+ padding:13px 24px!important;box-shadow:none!important;
+}
+#heroSlider .hero-slide .discover-outline{
+ background:transparent!important;color:#502914!important;
+ border:1px solid #50291440!important;border-radius:12px!important;
+ font-size:13px!important;padding:12px 17px!important;
+}
+#heroSlider .hero-slide .discovery-labels{font-size:11px!important;opacity:.6!important}
+#heroSlider .hero-slide .discovery-visual{
+ position:absolute!important;inset-inline-end:0!important;inset-inline-start:auto!important;
+ top:0!important;bottom:0!important;
+ height:100%!important;width:53%!important;min-height:0!important;
+ opacity:1!important;overflow:hidden!important;z-index:2!important;
+ background:transparent!important;
+}
+#heroSlider .reference-hero-art{
+ position:absolute;inset:0;overflow:hidden;isolation:isolate;
+ transform:none!important;
+}
+#heroSlider .reference-hero-ring{
+ position:absolute;aspect-ratio:1;width:min(96%,620px);height:auto;
+ border-radius:50%;border:clamp(28px,4vw,55px) solid #ffdf00;
+ background:#20c1ee;bottom:-43%;left:1%;z-index:0;
+}
+#heroSlider .reference-hero-disc{
+ position:absolute;width:68%;aspect-ratio:1;border-radius:50%;
+ background:#19bdf1;left:14%;bottom:-30%;z-index:0;
+}
+#heroSlider .reference-hero-phone{
+ position:absolute;width:clamp(225px,24vw,345px);height:111%;
+ left:43%;transform:translateX(-50%);
+ top:10%;z-index:3;background:#1a171c;
+ padding:6px;border-radius:42px;
+ border:3px solid #454044;
+ box-shadow:0 12px 26px #24140c30;
+}
+#heroSlider .reference-hero-screen{
+ display:flex;flex-direction:column;overflow:hidden;width:100%;height:100%;
+ background:#fff9f8;border-radius:34px;padding:13px 9px;
+ direction:rtl;position:relative;
+}
+#heroSlider .reference-phone-status{height:33px;display:flex;align-items:flex-start;justify-content:space-between;padding:3px 6px;direction:ltr;color:#2a262a;font:700 12px Arial,sans-serif;position:relative}
+#heroSlider .reference-phone-notch{position:absolute;width:37%;height:17px;background:#161418;border-radius:20px;left:31.5%;top:-5px}
+#heroSlider .reference-phone-top{display:flex;justify-content:space-between;align-items:center;font-size:12px;padding:6px 9px;color:#4d2733}
+#heroSlider .reference-phone-top strong{font-weight:900}
+#heroSlider .reference-phone-search{font-size:10px;background:#f0e9e7;color:#938789;border-radius:9px;padding:11px 9px;margin:5px 3px 11px}
+#heroSlider .reference-phone-feature{height:35%;background:#ffe7de;display:flex;align-items:center;justify-content:center;position:relative;border-radius:12px;overflow:hidden;flex-shrink:0}
+#heroSlider .reference-phone-feature img{height:100%;width:75%;object-fit:contain}
+#heroSlider .reference-phone-feature strong{position:absolute;bottom:10px;right:8px;font-size:12px;color:#702c42;background:#ffffffcf;padding:4px 7px;border-radius:6px}
+#heroSlider .reference-phone-caption{font-size:13px;font-weight:900;padding:10px 4px;color:#3f262a}
+#heroSlider .reference-phone-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:6px}
+#heroSlider .reference-phone-grid span{height:71px;background:#fff;border-radius:9px;display:grid;place-items:center}
+#heroSlider .reference-phone-grid img{width:100%;height:100%;object-fit:contain}
+#heroSlider .reference-phone-navbar{margin-top:auto;border-top:1px solid #eae0df;display:flex;justify-content:space-around;padding:10px}
+#heroSlider .reference-phone-navbar i{width:18px;height:6px;border-radius:4px;background:#d4c9c7}
+#heroSlider .reference-food-float{
+ display:block;position:absolute;z-index:4;
+ width:clamp(100px,11vw,170px);height:auto;aspect-ratio:1;object-fit:contain;
+ filter:drop-shadow(0 10px 9px #44321a2c);pointer-events:none;
+ animation:referenceFloat 5s ease-in-out infinite;
+}
+#heroSlider .reference-float-one{right:2%;top:20%;animation-delay:-1.4s;transform:rotate(-12deg)}
+#heroSlider .reference-float-two{left:1%;top:31%;animation-delay:-3s;transform:rotate(7deg)}
+#heroSlider .reference-float-three{left:66%;bottom:5%;animation-delay:-2s;transform:rotate(7deg)}
+@keyframes referenceFloat{0%,100%{translate:0 0}50%{translate:0 -10px}}
+#heroSlider .hero-arrow{z-index:9!important;width:38px!important;height:38px!important;border-radius:50%!important;background:#ffffffdd!important;color:#5a3a20!important;border:1px solid #ebddcc!important}
+#heroSlider .hero-dots{z-index:9!important;bottom:15px!important}
+#heroSlider .hero-dots button{width:8px!important;height:8px!important;border-radius:50%!important;background:#bbafa1!important}
+#heroSlider .hero-dots button.active{width:27px!important;border-radius:12px!important;background:#e929ad!important}
+#heroSlider .hero-index{z-index:9!important;color:#735c50!important}
+.first-fold-categories .home-section-head h2{font-size:clamp(24px,2.7vw,39px)!important;font-weight:850!important;color:#512d1b!important}
+.first-fold-categories{padding-top:22px!important}
+@media(max-width:1100px){
+ #heroSlider.hero-slider{height:480px!important;min-height:0!important}
+ #heroSlider .hero-slide .discovery-copy{width:52%!important;padding:26px!important}
+ #heroSlider .hero-slide .discovery-copy h1{font-size:clamp(30px,3.6vw,43px)!important}
+ #heroSlider .hero-slide .discovery-visual{width:49%!important}
+ #heroSlider .reference-hero-phone{width:230px!important}
+}
+@media(max-width:780px){
+ #heroSlider.hero-slider{height:420px!important;min-height:0!important}
+ #heroSlider .hero-slide .discovery-copy{width:58%!important;padding:18px!important}
+ #heroSlider .hero-slide .discovery-copy h1{font-size:clamp(25px,3.9vw,32px)!important}
+ #heroSlider .hero-slide .discovery-copy p{font-size:11px!important}
+ #heroSlider .hero-slide .discovery-visual{width:48%!important;opacity:1!important}
+ #heroSlider .reference-hero-phone{width:190px!important;left:51%!important}
+ #heroSlider .reference-food-float{width:100px!important}
+}
+@media(max-width:520px){
+ #heroSlider.hero-slider{height:385px!important;min-height:0!important;margin-bottom:10px!important}
+ #heroSlider .hero-slide .discovery-copy{width:66%!important;padding:16px 13px!important;justify-content:center!important}
+ #heroSlider .hero-slide .discovery-kicker{font-size:9px!important;margin-bottom:8px!important}
+ #heroSlider .hero-slide .discovery-copy h1{font-size:clamp(22px,6vw,29px)!important;line-height:1.24!important;margin:0 0 10px!important}
+ #heroSlider .hero-slide .discovery-copy p{font-size:9px!important;line-height:1.65!important;margin-bottom:9px!important}
+ #heroSlider .hero-slide .discovery-actions{gap:6px!important;flex-wrap:wrap!important}
+ #heroSlider .hero-slide .discover-btn,#heroSlider .hero-slide .discover-outline{font-size:9px!important;padding:8px 10px!important}
+ #heroSlider .hero-slide .discovery-labels{display:none!important}
+ #heroSlider .hero-slide .discovery-visual{width:43%!important;opacity:.9!important}
+ #heroSlider .reference-hero-phone{width:155px!important;left:60%!important;top:22%!important;height:98%!important;padding:4px!important;border-radius:26px!important}
+ #heroSlider .reference-hero-screen{border-radius:21px!important;padding:8px 5px!important}
+ #heroSlider .reference-phone-status{font-size:7px!important;height:21px!important}
+ #heroSlider .reference-phone-top{font-size:8px!important;padding:2px 4px!important}
+ #heroSlider .reference-phone-search{font-size:7px!important;padding:6px!important;margin:4px 2px!important}
+ #heroSlider .reference-phone-caption{font-size:9px!important;padding:5px 2px!important}
+ #heroSlider .reference-phone-grid span{height:42px!important}
+ #heroSlider .reference-food-float{width:66px!important}
+ #heroSlider .reference-float-two{left:-5%;top:36%}
+ #heroSlider .reference-float-three{left:67%;bottom:14%}
+ #heroSlider .hero-arrow{width:28px!important;height:28px!important}
+}
+@media(prefers-reduced-motion:reduce){#heroSlider .reference-food-float{animation:none!important}}
 </style></head>
 <body>
 <header class="site-header"><div class="wrap header-inner">
@@ -1702,7 +1866,7 @@ function catalog(){const rows=filterProducts();return '<div class="panel-head"><
 function hero(){return '<div class="crumbs"><span>الرئيسية</span><span>›</span><span>مجالس العرب</span></div><section class="restaurant-hero"><div class="restaurant-cover"><div class="cover-decoration"></div><div class="cover-word">مجالس العرب<small>ضيافتك تبدأ من هنا</small></div></div><div class="restaurant-heading"><div class="restaurant-badge">☕</div><div class="restaurant-copy"><h1>مجالس العرب</h1><p>فطور سعودي · عريكة ومعصوب · مشروبات · جلسات</p><div class="restaurant-tags"><span>متجر تجريبي</span><span>'+PRODUCTS.length+' صنفًا للمعاينة</span><span>الاستلام والتوصيل: يتطلبان تفعيلًا</span></div></div><button class="outlined" data-go="/seating">الجلسات والحجوزات</button></div><div class="service-notice">القائمة تشمل '+DEMO_PRODUCTS.length+' صنفًا تجريبيًا إضافيًا لأغراض التصميم، وليست منتجات أو أسعارًا معتمدة لدى مجالس العرب. لا يمكن تنفيذ الطلبات أو الدفع حتى الربط والتحقق من الفرع.</div></section>'}
 function collectionStrip(){return '<div class="collection-strip"><button data-category="الفطور والعشاء"><span class="collection-icon"><img src="assets/categories/breakfast.png" alt="" loading="lazy" decoding="async" onerror="this.onerror=null;this.remove()"></span><strong>فطور على كيفك</strong><small>وجبات صباحية متنوعة</small></button><button data-category="العريكة والمعصوب"><span class="collection-icon"><img src="assets/categories/areeka-masoob.png" alt="" loading="lazy" decoding="async" onerror="this.onerror=null;this.remove()"></span><strong>نكهة الجنوب</strong><small>العريكة والمعصوب والفتة</small></button><button data-category="المشويات والأطباق الرئيسية"><span class="collection-icon"><img src="assets/categories/grills.png" alt="" loading="lazy" decoding="async" onerror="this.onerror=null;this.remove()"></span><strong>وجبات مشبعة</strong><small>أطباق رئيسية تجريبية</small></button><button data-category="الحلا"><span class="collection-icon"><img src="assets/categories/desserts.png" alt="" loading="lazy" decoding="async" onerror="this.onerror=null;this.remove()"></span><strong>وقت الحلا</strong><small>كيك وحلويات متنوعة</small></button><button data-category="المشروبات"><span class="collection-icon"><img src="assets/categories/drinks.png" alt="" loading="lazy" decoding="async" onerror="this.onerror=null;this.remove()"></span><strong>مشروباتك المفضلة</strong><small>شاي وعصائر وقهوة</small></button><button data-category="العروض التجريبية"><span class="collection-icon"><img src="assets/categories/family-meals.png" alt="" loading="lazy" decoding="async" onerror="this.onerror=null;this.remove()"></span><strong>مجموعات وعروض</strong><small>عروض افتراضية للعرض فقط</small></button></div>'}
 const HERO_SLIDES=[
-{style:'main',image:'https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=1800&q=85',kicker:'✦ مجالس العرب',title:'لكل جمعة',em:'حكاية طعم',desc:'تصفح الأطباق والمشروبات والجلسات من واجهة واحدة.',primary:'قائمة الطعام',path:'/menu',secondary:'العروض التجريبية',secondaryPath:'/offers',symbol:'✦',short:'مجالس العرب',art:'اللمة أحلى'},
+{style:'main',image:'assets/categories/family-meals.png',kicker:'كل أطباقك المفضلة في مكان واحد',title:'تصفح مجالس العرب',em:'واختر ألذّ الأطباق',desc:'من الفطور والعريكة إلى المشويات والقهوة والحلا… استكشف قائمة الطعام والجلسات بسهولة، من أي جهاز.',primary:'قائمة الطعام',path:'/menu',secondary:'العروض التجريبية',secondaryPath:'/offers',symbol:'✦',short:'مجالس العرب',art:'اللمة أحلى'},
 {style:'sessions',image:'https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?auto=format&fit=crop&w=1800&q=85',kicker:'🛋️ الجلسات الخاصة',title:'خصوصية الجلسة',em:'ولمّة الأحباب',desc:'استكشف خيارات الجلسات الخاصة وتواصل مع الفرع للاستفسار عن التوفر.',primary:'استكشف الجلسات',path:'/seating',secondary:'تواصل معنا',secondaryPath:'/help',symbol:'🛋️',short:'جلسات خاصة',art:'راحة وخصوصية'},
 {style:'playstation',image:'https://images.unsplash.com/photo-1542751371-adc38448a05e?auto=format&fit=crop&w=1800&q=85',kicker:'🎮 البلايستيشن',title:'وقت التحدي',em:'والحماس',desc:'تعرف على خيارات البلايستيشن لدى مجالس العرب واستفسر عن الأجهزة والأوقات.',primary:'استفسر عن البلايستيشن',path:'/seating',secondary:'تواصل مع الفرع',secondaryPath:'/help',symbol:'🎮',short:'وقت اللعب',art:'أجواء حماس'},
 {style:'matches',image:'https://images.unsplash.com/photo-1574629810360-7efbbe195018?auto=format&fit=crop&w=1800&q=85',kicker:'⚽ المباريات',title:'عش أجواء',em:'المباراة',desc:'اكتشف خيارات مشاهدة المباريات والجلسات المناسبة، والتوفر بالتواصل المباشر.',primary:'جلسات المباريات',path:'/seating',secondary:'الاستفسارات',secondaryPath:'/help',symbol:'⚽',short:'شجع بحماس',art:'وقت المباراة'},
@@ -1723,43 +1887,40 @@ function heroAction(label,path,category,primary){return '<button type="button" c
 /* Photographic section compositions without illustrated icons or image-backed banners. */
 const HERO_DISPLAY_PHOTOS={"main":["photo-1544025162-d76694265947","photo-1553909489-cd47e0ef937f","photo-1578985545062-69928b1d9587"],"sessions":["photo-1517248135467-4c7edcad34c4","photo-1559339352-11d035aa65de","photo-1511920170033-f8396924c348"],"playstation":["photo-1535223289827-42f1e9919769","photo-1542751371-adc38448a05e","photo-1511512578047-dfb367046420"],"matches":["photo-1518091043644-c1d4457512c6","photo-1574629810360-7efbbe195018","photo-1522778119026-d647f0596c20"],"breakfast":["photo-1525351484163-7529414344d8","photo-1533089860892-a7c6f0a88666","photo-1490645935967-10de6ba17061"],"southern":["photo-1601050690597-df0568f70950","photo-1547592180-85f173990554","photo-1509440159596-0249088772ff"],"grills":["photo-1544025162-d76694265947","photo-1558030006-450675393462","photo-1432139555190-58524dae6a55"],"sandwiches":["photo-1553909489-cd47e0ef937f","photo-1568901346375-23c9450c58cd","photo-1528735602780-2552fd46c7af"],"salads":["photo-1512621776951-a57141f2eefd","photo-1490645935967-10de6ba17061","photo-1540420773420-3366772f4999"],"appetizers":["photo-1573080496219-bb080dd4f877","photo-1541592106381-b31e9677c0e5","photo-1562967914-608f82629710"],"family":["photo-1552566626-52f8b828add9","photo-1547592180-85f173990554","photo-1544025162-d76694265947"],"dessert":["photo-1578985545062-69928b1d9587","photo-1488477181946-6428a0291777","photo-1565958011703-44f9829ba187"],"coffee":["photo-1442512595331-e89e73853f31","photo-1509042239860-f550ce710b93","photo-1511920170033-f8396924c348"],"drinks":["photo-1600271886742-f049cd451bba","photo-1544145945-f90425340c7e","photo-1536935338788846bb9981813"],"offers":["photo-1552566626-52f8b828add9","photo-1568901346375-23c9450c58cd","photo-1578985545062-69928b1d9587"]};
 function heroCategoryArt(slide){
- const set=HERO_DISPLAY_PHOTOS[slide.style]||HERO_DISPLAY_PHOTOS.main;
- const photo=(id,w)=>'https://images.unsplash.com/'+id+'?auto=format&fit=crop&w='+w+'&q=82';
- if(slide.style==='sandwiches'){
-  const hero=photo('photo-1568901346375-23c9450c58cd',820);
-  const tiles=['photo-1568901346375-23c9450c58cd','photo-1553909489-cd47e0ef937f','photo-1528735602780-2552fd46c7af'];
-  return '<div class="hero-showcase sandwich-showcase" aria-hidden="true">'+
-   '<span class="showcase-halo"></span><span class="showcase-ring"></span>'+
-   '<div class="showcase-phone"><div class="showcase-phone-screen">'+
-    '<div class="showcase-phone-status"><span>9:41</span><span class="phone-camera"></span><span>▂ ▰</span></div>'+
-    '<div class="showcase-phone-head"><span>مجالس العرب</span><span>✦</span></div>'+
-    '<div class="showcase-phone-search">ابحث في قائمة الطعام <span>⌕</span></div>'+
-    '<div class="showcase-phone-cover sandwich-phone-cover"><img src="'+hero+'" alt="" loading="lazy" decoding="async"><span class="sandwich-cover-info"><strong>سندويتشات شهية</strong><small>خيارات طازجة ومميزة</small></span></div>'+
-    '<div class="showcase-phone-caption">اختر سندويتشك المفضل</div>'+
-    '<div class="showcase-phone-tiles sandwich-phone-tiles">'+tiles.map(id=>'<img src="'+photo(id,360)+'" alt="" loading="lazy" decoding="async">').join('')+'</div>'+
-    '<div class="showcase-phone-nav"><i></i><i></i><i></i></div>'+
+ const local={
+ main:['breakfast','grills','sandwiches'],
+ sessions:['coffee','desserts','family-meals'],
+ playstation:['sandwiches','drinks','appetizers'],
+ matches:['grills','sandwiches','drinks'],
+ breakfast:['breakfast','areeka-masoob','coffee'],
+ southern:['areeka-masoob','breakfast','desserts'],
+ grills:['grills','family-meals','appetizers'],
+ sandwiches:['sandwiches','appetizers','drinks'],
+ salads:['salads','appetizers','breakfast'],
+ appetizers:['appetizers','grills','salads'],
+ family:['family-meals','grills','salads'],
+ dessert:['desserts','coffee','drinks'],
+ coffee:['coffee','desserts','areeka-masoob'],
+ drinks:['drinks','coffee','desserts'],
+ offers:['family-meals','grills','sandwiches']
+ };
+ const set=local[slide.style]||local.main;
+ const asset=(name)=>'assets/categories/'+name+'.png';
+ return '<div class="reference-hero-art" aria-hidden="true">'+
+  '<div class="reference-hero-ring"></div><div class="reference-hero-disc"></div>'+
+  '<div class="reference-hero-phone"><div class="reference-hero-screen">'+
+    '<div class="reference-phone-status"><span>9:41</span><span class="reference-phone-notch"></span><span>◖ ▰</span></div>'+
+    '<div class="reference-phone-top"><strong>مجالس العرب</strong><span>⌕</span></div>'+
+    '<div class="reference-phone-search">ابحث عن صنفك المفضل ⌕</div>'+
+    '<div class="reference-phone-feature"><img src="'+asset(set[0])+'" alt="" loading="lazy"><strong>'+slide.short+'</strong></div>'+
+    '<div class="reference-phone-caption">وش تشتهي اليوم؟</div>'+
+    '<div class="reference-phone-grid">'+set.concat(set).slice(0,4).map((name)=>'<span><img src="'+asset(name)+'" alt="" loading="lazy"></span>').join('')+'</div>'+
+    '<div class="reference-phone-navbar"><i></i><i></i><i></i><i></i></div>'+
    '</div></div>'+
-   '<div class="showcase-float showcase-float-one"><img src="'+photo(tiles[1],420)+'" alt="" loading="lazy" decoding="async"></div>'+
-   '<div class="showcase-float showcase-float-two"><img src="'+photo(tiles[0],420)+'" alt="" loading="lazy" decoding="async"></div>'+
-   '<div class="showcase-float showcase-float-three"><img src="'+photo(tiles[2],420)+'" alt="" loading="lazy" decoding="async"></div>'+
-  '</div>';
- }
-
- return '<div class="hero-showcase" aria-hidden="true">'+
-  '<span class="showcase-halo"></span><span class="showcase-ring"></span>'+
-  '<div class="showcase-phone"><div class="showcase-phone-screen">'+
-   '<div class="showcase-phone-status"><span>9:41</span><span class="phone-camera"></span><span>▂ ▰</span></div>'+
-   '<div class="showcase-phone-head"><span>مجالس العرب</span><span>✦</span></div>'+
-   '<div class="showcase-phone-search">ابحث في قائمة الطعام <span>⌕</span></div>'+
-   '<div class="showcase-phone-cover"><img src="'+slide.image+'" alt="" loading="lazy" decoding="async"></div>'+
-   '<div class="showcase-phone-caption">'+slide.short+'</div>'+
-   '<div class="showcase-phone-tiles">'+set.slice(0,2).map(id=>'<img src="'+photo(id,280)+'" alt="" loading="lazy" decoding="async">').join('')+'</div>'+
-   '<div class="showcase-phone-nav"><i></i><i></i><i></i></div>'+
-  '</div></div>'+
-  '<div class="showcase-float showcase-float-one"><img src="'+photo(set[0],420)+'" alt="" loading="lazy" decoding="async"></div>'+
-  '<div class="showcase-float showcase-float-two"><img src="'+photo(set[1],420)+'" alt="" loading="lazy" decoding="async"></div>'+
-  '<div class="showcase-float showcase-float-three"><img src="'+photo(set[2],420)+'" alt="" loading="lazy" decoding="async"></div>'+
-  '</div>';
+  '<img class="reference-food-float reference-float-one" src="'+asset(set[0])+'" alt="" loading="lazy">'+
+  '<img class="reference-food-float reference-float-two" src="'+asset(set[1])+'" alt="" loading="lazy">'+
+  '<img class="reference-food-float reference-float-three" src="'+asset(set[2])+'" alt="" loading="lazy">'+
+ '</div>';
 }
 
 function homeBanner(){return '<section class="hero-slider" id="heroSlider" aria-label="بنرات مجالس العرب المتحركة" aria-roledescription="عرض شرائح"><div class="hero-track" id="heroTrack">'+HERO_SLIDES.map((x,i)=>'<article class="discovery-hero hero-slide hero-'+x.style+'" aria-label="البنر '+(i+1)+' من '+HERO_SLIDES.length+'" aria-hidden="'+(i!==0)+'"><div class="discovery-copy"><span class="discovery-kicker">'+x.kicker+'</span><h1>'+x.title+'<br><em>'+x.em+'</em></h1><p>'+x.desc+'</p><div class="discovery-actions">'+heroAction(x.primary,x.path,x.category,true)+heroAction(x.secondary,x.secondaryPath,x.secondaryCategory,false)+'</div><div class="discovery-labels"><span>✦ تجربة تصفح تجريبية</span><span>✦ خيارات متنوعة</span></div></div><div class="discovery-visual">'+heroCategoryArt(x)+'</div></article>').join('')+'</div><button type="button" class="hero-arrow hero-next" data-hero-move="1" aria-label="البنر التالي">❮</button><button type="button" class="hero-arrow hero-prev" data-hero-move="-1" aria-label="البنر السابق">❯</button><div class="hero-dots" role="group" aria-label="اختيار البنر">'+HERO_SLIDES.map((_,i)=>'<button type="button" data-hero-index="'+i+'" class="'+(i===0?'active':'')+'" aria-label="عرض البنر '+(i+1)+'" aria-current="'+(i===0)+'"></button>').join('')+'</div><span class="hero-index" id="heroIndex">1 / '+HERO_SLIDES.length+'</span></section>'}
