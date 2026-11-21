@@ -10,7 +10,7 @@ test('homepage shows visible search, active banner, categories, and usable cart 
   await page.screenshot({path: 'test-results/home-' + test.info().project.name + '.png', fullPage: true});
 });
 
-test('meal cards show the full-width photo above the product details and controls', async ({page}) => {
+test('meal cards show the complete photo in a gray frame above the product details', async ({page}) => {
   await page.goto('/#/menu');
   const cards=page.locator('.product-grid .product-card');
   await expect(cards.first()).toBeVisible();
@@ -18,6 +18,8 @@ test('meal cards show the full-width photo above the product details and control
   const first = cards.first();
   const photo = first.locator('.card-photo');
   await expect(photo).toHaveAccessibleName(/تفاصيل.*ر\.س/);
+  await expect(photo).toHaveCSS('background-color', 'rgb(247, 247, 247)');
+  await expect(photo.locator('img')).toHaveCSS('object-fit', 'contain');
   await expect(first.locator('.card-title')).toBeVisible();
   await expect(first.locator('.card-price')).toContainText('ر.س');
   await expect(first.locator('.add-button svg')).toBeVisible();
@@ -25,6 +27,7 @@ test('meal cards show the full-width photo above the product details and control
   await expect(first.locator('.add-button')).toHaveText('');
   const dimensions = await photo.evaluate(node => {
     const image = node.getBoundingClientRect();
+    const artwork = node.querySelector('img').getBoundingClientRect();
     const card = node.closest('.product-card');
     const title = card.querySelector('.card-title').getBoundingClientRect();
     const price = card.querySelector('.card-price').getBoundingClientRect();
@@ -32,6 +35,7 @@ test('meal cards show the full-width photo above the product details and control
     return {
       ratio: image.width / image.height,
       horizontalInset: card.getBoundingClientRect().width - image.width,
+      artworkInset: artwork.width < image.width && artwork.height < image.height,
       detailsBelowPhoto: [title, price, add].every(rect => rect.top >= image.bottom),
       priceBelowTitle: price.top >= title.bottom,
       addOnLeft: add.right <= title.left
@@ -39,6 +43,7 @@ test('meal cards show the full-width photo above the product details and control
   });
   expect(dimensions.ratio).toBeCloseTo(16 / 9, 1);
   expect(dimensions.horizontalInset).toBeLessThanOrEqual(2);
+  expect(dimensions.artworkInset).toBe(true);
   expect(dimensions.detailsBelowPhoto).toBe(true);
   expect(dimensions.priceBelowTitle).toBe(true);
   expect(dimensions.addOnLeft).toBe(true);
