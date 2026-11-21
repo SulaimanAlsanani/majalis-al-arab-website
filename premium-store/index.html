@@ -2639,12 +2639,44 @@ body:has(#heroSlider) .header-cart.header-cart-icon{width:31px!important;height:
  .site-header .brand-name{display:none!important}
  .site-header .reference-top-cta,body:has(#heroSlider) .reference-top-cta{padding:6px 7px!important;font-size:8px!important}
 }
+
+/* Final minimal header: only brand, language selector, menu CTA and cart.
+   Removed search bar and redundant navigation links from header markup. */
+.site-header>.header-inner.wrap,
+body:has(#heroSlider) .site-header>.header-inner.wrap{
+ display:flex!important;align-items:center!important;
+ min-height:54px!important;height:54px!important;
+ padding:7px clamp(12px,2.4vw,28px)!important;
+ gap:10px!important;
+ width:100%!important;max-width:min(1320px,100%)!important;
+}
+.site-header .brand,body:has(#heroSlider) .header-inner .brand{
+ margin-inline-end:auto!important;min-width:0!important;
+}
+.site-header .reference-top-actions,body:has(#heroSlider) .reference-top-actions{
+ display:flex!important;align-items:center!important;gap:9px!important;
+ margin:0!important;flex:0 0 auto!important;
+}
+.site-header .header-cart.header-cart-icon,body:has(#heroSlider) .header-cart.header-cart-icon{
+ width:33px!important;height:33px!important;min-width:33px!important;flex:0 0 33px!important;
+}
+.legacy-search-hidden{display:none!important}
+@media(max-width:780px){
+ .site-header>.header-inner.wrap,body:has(#heroSlider) .site-header>.header-inner.wrap{
+  min-height:49px!important;height:49px!important;
+  padding:6px 11px!important;gap:7px!important;
+ }
+ .site-header .reference-top-actions,body:has(#heroSlider) .reference-top-actions{gap:6px!important}
+}
+@media(max-width:370px){
+ .site-header .reference-top-cta,body:has(#heroSlider) .reference-top-cta{padding:6px!important}
+}
 </style></head>
 <body>
 <header class="site-header"><div class="wrap header-inner">
 <a href="#/" class="brand" aria-label="الصفحة الرئيسية"><span class="brand-icon">م<span class="brand-spark">✦</span></span><span class="brand-name"><strong>مجالس العرب</strong><small>MAJALIS AL ARAB</small></span></a>
-<div class="search-shell"><label class="header-search"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="m16 16 5 5"/></svg><input id="globalSearch" placeholder="ابحث عن صنف أو مشروب..." aria-label="البحث عن منتج" autocomplete="off"></label><div id="searchSuggestions" class="search-suggestions" hidden role="region" aria-label="اقتراحات البحث"></div></div>
-<nav class="header-main-nav" aria-label="التنقل الرئيسي"><a class="nav-link" href="#/">الرئيسية</a><a class="nav-link" href="#/menu">قائمة الطعام</a><a class="nav-link" href="#/offers">العروض</a><a class="nav-link" href="#/seating">الجلسات</a><a class="nav-link" href="#/favorites">المفضلة</a><a class="nav-link" href="#/orders">طلباتي</a><a class="nav-link" href="#/account">حسابي</a><a class="nav-link" href="#/help">المساعدة</a></nav>
+</div>
+
 <div class="reference-top-actions" aria-label="إجراءات المتجر">
  <details class="header-language" id="headerLanguage">
   <summary class="header-language-trigger" aria-label="اختيار اللغة"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c-5 6-5 12 0 18M12 3c5 6 5 12 0 18"/></svg><span>العربية</span><svg class="language-chevron" viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></summary>
@@ -2659,6 +2691,7 @@ body:has(#heroSlider) .header-cart.header-cart-icon{width:31px!important;height:
 </div>
 <button id="headerCart" class="cart-button header-cart header-cart-icon" type="button" aria-label="فتح سلة المشتريات" title="السلة"><svg viewBox="0 0 24 24" width="21" height="21" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M3 4h2l2.2 10.1a2 2 0 0 0 2 1.6h8.9a2 2 0 0 0 2-1.6L22 7H6"/><circle cx="10" cy="20" r="1"/><circle cx="18" cy="20" r="1"/></svg><span class="cart-count" id="headerCount">0</span></button>
 </div></header>
+<div class="legacy-search-hidden" hidden aria-hidden="true" inert><div class="search-shell"><label class="header-search"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="m16 16 5 5"/></svg><input id="globalSearch" placeholder="ابحث عن صنف أو مشروب..." aria-label="البحث عن منتج" autocomplete="off"></label><div id="searchSuggestions" class="search-suggestions" hidden role="region" aria-label="اقتراحات البحث"></div></div>
 <main class="wrap page" id="app" tabindex="-1"></main>
 <div class="hs-floating-order" id="floatingOrder" hidden>
   <div class="hs-floating-order-icon" aria-hidden="true">🛍</div>
