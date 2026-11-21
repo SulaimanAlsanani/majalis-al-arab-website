@@ -1532,6 +1532,96 @@ button:focus-visible,a:focus-visible,input:focus-visible,textarea:focus-visible,
 .site-footer .footer-links p{flex-basis:100%!important;color:#bdc7d0!important}
 @media(max-width:780px){.site-header .header-inner{min-height:60px!important;gap:5px!important}.site-header .header-language-trigger{padding:8px!important}.site-header .header-favorites-icon,.site-header .header-cart.header-cart-icon,.site-header .header-site-menu-trigger{width:39px!important;height:39px!important;flex-basis:39px!important;min-width:39px!important}.site-header .brand-icon{width:36px!important;height:36px!important}.site-header .brand-name strong{font-size:15px!important}.site-footer .footer-inner{flex-direction:column!important}}
 @media(max-width:420px){.site-header .header-inner{gap:3px!important}.site-header .header-language-trigger{gap:4px!important;padding:7px 4px!important;font-size:11px!important}.site-header .header-language-trigger svg{width:13px!important}.site-header .header-favorites-icon,.site-header .header-cart.header-cart-icon,.site-header .header-site-menu-trigger{width:36px!important;height:36px!important;flex-basis:36px!important;min-width:36px!important}.site-header .brand-name small{display:none!important}.site-header .brand-name strong{font-size:14px!important}}
+
+/* Exact restaurant phone/float components, adapted only to supermarket product photography. */
+#heroSlider .reference-hero-art{
+ position:absolute;inset:0;overflow:hidden;isolation:isolate;
+ transform:none!important;
+}
+#heroSlider .reference-hero-ring{
+ position:absolute;aspect-ratio:1;width:min(96%,620px);height:auto;
+ border-radius:50%;border:clamp(28px,4vw,55px) solid var(--ring,#ffdf00);
+ background:var(--disc,#20c1ee);bottom:-43%;left:1%;z-index:0;
+}
+#heroSlider .reference-hero-disc{
+ position:absolute;width:68%;aspect-ratio:1;border-radius:50%;
+ background:color-mix(in srgb,var(--disc,#19bdf1) 84%,white);left:14%;bottom:-30%;z-index:0;
+}
+#heroSlider .reference-hero-phone{
+ position:absolute;width:clamp(225px,24vw,345px);height:111%;
+ left:43%;transform:translateX(-50%);
+ top:10%;z-index:3;background:#1a171c;
+ padding:6px;border-radius:42px;
+ border:3px solid #454044;
+ box-shadow:0 12px 26px #24140c30;
+}
+#heroSlider .reference-hero-screen{
+ display:flex;flex-direction:column;overflow:hidden;width:100%;height:100%;
+ background:#fff9f8;border-radius:34px;padding:13px 9px;
+ direction:rtl;position:relative;
+}
+#heroSlider .reference-phone-status{height:33px;display:flex;align-items:flex-start;justify-content:space-between;padding:3px 6px;direction:ltr;color:#2a262a;font:700 12px Arial,sans-serif;position:relative}
+#heroSlider .reference-phone-notch{position:absolute;width:37%;height:17px;background:#161418;border-radius:20px;left:31.5%;top:-5px}
+#heroSlider .reference-phone-top{display:flex;justify-content:space-between;align-items:center;font-size:12px;padding:6px 9px;color:#4d2733}
+#heroSlider .reference-phone-top strong{font-weight:900}
+#heroSlider .reference-phone-search{font-size:10px;background:#f0e9e7;color:#938789;border-radius:9px;padding:11px 9px;margin:5px 3px 11px}
+#heroSlider .reference-phone-feature{height:35%;background:#ffe7de;display:flex;align-items:center;justify-content:center;position:relative;border-radius:12px;overflow:hidden;flex-shrink:0}
+#heroSlider .reference-phone-feature img{height:100%;width:75%;object-fit:contain}
+#heroSlider .reference-phone-feature strong{position:absolute;bottom:10px;right:8px;font-size:12px;color:#702c42;background:#ffffffcf;padding:4px 7px;border-radius:6px}
+#heroSlider .reference-phone-caption{font-size:13px;font-weight:900;padding:10px 4px;color:#3f262a}
+#heroSlider .reference-phone-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:6px}
+#heroSlider .reference-phone-grid span{height:71px;background:#fff;border-radius:9px;display:grid;place-items:center}
+#heroSlider .reference-phone-grid img{width:100%;height:100%;object-fit:contain}
+#heroSlider .reference-phone-navbar{margin-top:auto;border-top:1px solid #eae0df;display:flex;justify-content:space-around;padding:10px}
+#heroSlider .reference-phone-navbar i{width:18px;height:6px;border-radius:4px;background:#d4c9c7}
+#heroSlider .reference-food-float{
+ display:block;position:absolute;z-index:4;
+ width:clamp(100px,11vw,170px);height:auto;aspect-ratio:1;object-fit:contain;
+ filter:drop-shadow(0 10px 9px #44321a2c);pointer-events:none;
+ animation:referenceFloat 5s ease-in-out infinite;
+}
+#heroSlider .reference-float-one{right:2%;top:20%;animation-delay:-1.4s;transform:rotate(-12deg)}
+#heroSlider .reference-float-two{left:1%;top:31%;animation-delay:-3s;transform:rotate(7deg)}
+#heroSlider .reference-float-three{left:66%;bottom:5%;animation-delay:-2s;transform:rotate(7deg)}
+@keyframes referenceFloat{0%,100%{translate:0 0}50%{translate:0 -10px}}
+
+#heroSlider .discovery-visual{position:absolute!important;top:0!important;bottom:0!important;inset-inline-end:0!important;inset-inline-start:auto!important;width:52%!important;height:100%!important;display:block!important;opacity:1!important;overflow:hidden!important;z-index:2!important;background:transparent!important;pointer-events:none}
+#heroSlider .reference-hero-art{position:absolute!important;inset:0!important;overflow:hidden!important}
+#heroSlider .reference-hero-phone{width:clamp(245px,21vw,360px)!important}
+#heroSlider .reference-food-float{width:clamp(90px,10vw,155px)!important;max-width:30%!important}
+#heroSlider .reference-hero-ring{width:min(92%,650px)!important}
+#heroSlider .hero-slide .discovery-copy{position:relative!important;z-index:4!important;width:50%!important}
+#heroSlider .hero-slide .discovery-copy h1{font-size:clamp(29px,3.5vw,52px)!important}
+#heroSlider .hero-slide .discovery-copy p{font-size:clamp(12px,1.15vw,16px)!important}
+#heroSlider .hero-slide .discovery-actions{display:flex!important;flex-wrap:wrap!important;gap:9px!important}
+#heroSlider .hero-slide .discover-btn{border:0!important;background:#ffda29!important;color:#2a292c!important;border-radius:12px!important}
+#heroSlider .hero-slide .discover-outline{border:0!important;border-radius:12px!important;background:#fff7!important}
+.product-card .card-name-line{min-height:35px!important}
+.product-card .card-price-line{margin-top:auto!important}
+.product-card .card-body{gap:8px!important}
+.product-card .card-title{line-height:1.45!important;display:block!important}
+.product-card .card-favorite-toggle svg{width:15px!important;height:15px!important}
+.product-card .card-favorite-toggle[aria-pressed="true"] svg{fill:#b63255!important;stroke:#b63255!important}
+.product-card .card-favorite-toggle:not([aria-pressed="true"]){color:#e4e4e7!important;background:transparent!important}
+.product-card .add-button{background:transparent!important;border:0!important;color:#642438!important}
+@media(max-width:780px){
+ #heroSlider .hero-slide .discovery-copy{width:58%!important;padding:20px 13px!important;padding-bottom:32px!important}
+ #heroSlider .hero-slide .discovery-copy h1{font-size:clamp(23px,3.9vw,32px)!important}
+ #heroSlider .hero-slide .discovery-copy p{font-size:11px!important;line-height:1.6!important}
+ #heroSlider .discovery-visual{width:48%!important;opacity:.85!important}
+ #heroSlider .reference-hero-phone{width:205px!important}
+ #heroSlider .reference-food-float{width:80px!important}
+ .product-card .card-body{gap:6px!important}
+}
+@media(max-width:520px){
+ #heroSlider .hero-slide .discovery-copy{width:61%!important;padding:16px 10px!important}
+ #heroSlider .hero-slide .discovery-copy h1{font-size:clamp(19px,5.2vw,25px)!important}
+ #heroSlider .hero-slide .discovery-copy p{font-size:10px!important}
+ #heroSlider .discovery-visual{width:42%!important;opacity:.8!important}
+ #heroSlider .reference-hero-phone{width:135px!important}
+ #heroSlider .reference-food-float{width:56px!important}
+}
+@media(prefers-reduced-motion:reduce){#heroSlider .reference-food-float{animation:none!important}}
 </style></head>
 <body>
 <header class="site-header"><div class="wrap header-inner">
@@ -1590,7 +1680,19 @@ function removeCart(index){state.cart.splice(index,1);save();updateCounts();if(c
 function toggleFavorite(id){const i=state.favorites.indexOf(id);if(i<0)state.favorites.push(id);else state.favorites.splice(i,1);save();updateCounts();if(currentPath()==='/favorites'){render();return}document.querySelectorAll('[data-fav="'+id+'"]').forEach(b=>{const selected=state.favorites.includes(id);b.setAttribute('aria-pressed',String(selected));b.setAttribute('aria-label',selected?'إزالة من المفضلة':'إضافة للمفضلة')});notify(i<0?'أضيف للمفضلة':'أزيل من المفضلة')}
 function sectionHeading(title,desc='',extra=''){return '<div class="panel-head"><div><h2>'+title+'</h2>'+(desc?'<p>'+desc+'</p>':'')+'</div>'+extra+'</div>'}
 const MARKET_HEART="<svg viewBox=\"0 0 24 24\" width=\"16\" height=\"16\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.8\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M20.8 4.6a5.4 5.4 0 0 0-7.6 0L12 5.8l-1.2-1.2a5.4 5.4 0 0 0-7.6 7.6L12 21l8.8-8.8a5.4 5.4 0 0 0 0-7.6Z\"/></svg>",MARKET_CART="<svg viewBox=\"0 0 24 24\" width=\"21\" height=\"21\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.8\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M3 4h2l2 9.7a2 2 0 0 0 2 1.6h8.5a2 2 0 0 0 2-1.6L21 7H6\"/><circle cx=\"10\" cy=\"20\" r=\"1\"/><circle cx=\"17\" cy=\"20\" r=\"1\"/><path d=\"M12 9h6m-3-3v6\"/></svg>";
-function card(p){const f=state.favorites.includes(p.id),n=escapeHtml(p.name);return '<article class="product-card"><div class="product-card-image-wrap"><button type="button" class="card-photo" data-product="'+p.id+'" aria-label="تفاصيل '+n+'">'+imgTag(p,'',false)+'</button>'+(p.demo?'<span class="demo-sticker">تجريبي</span>':'')+'</div><div class="card-body"><div class="card-name-line"><h3><button type="button" class="card-title" data-product="'+p.id+'">'+n+'</button></h3><button type="button" class="card-favorite-toggle" data-fav="'+p.id+'" aria-pressed="'+f+'" aria-label="'+(f?'إزالة من المفضلة: ':'إضافة للمفضلة: ')+n+'">'+MARKET_HEART+'</button></div><div class="card-price-line"><span class="card-price">'+money(p.price)+'</span><button class="add-button" type="button" data-card-add="'+p.id+'" aria-label="أضف '+n+' إلى السلة">'+MARKET_CART+'</button></div></div></article>'}
+function card(p){
+ const available=p.available!==false;
+ const name=escapeHtml(p.name);
+ const price=escapeHtml(money(p.price));
+ const details=name+'، '+price+(p.demo?'، عرض تجريبي':'')+(available?'':'، غير متوفر');
+ const saved=state.favorites.includes(p.id);
+ return '<article class="product-card"><div class="product-card-image-wrap">'+
+  '<button type="button" class="card-photo" data-product="'+p.id+'" aria-label="تفاصيل '+details+'" title="'+details+'">'+imgTag(p,'',false)+'</button></div>'+
+  '<div class="card-body"><div class="card-name-line"><h3><button type="button" class="card-title" data-product="'+p.id+'">'+name+'</button></h3>'+
+  '<button type="button" class="card-favorite-toggle" data-fav="'+p.id+'" aria-pressed="'+saved+'" aria-label="'+(saved?'إزالة ':'إضافة ')+name+(saved?' من المفضلة':' إلى المفضلة')+'" title="'+(saved?'إزالة من المفضلة':'إضافة إلى المفضلة')+'">'+MARKET_HEART+'</button></div>'+
+  '<div class="card-price-line"><div class="card-copy"><span class="card-price">'+price+'</span>'+(available?'':'<span class="card-stock">غير متوفر</span>')+'</div>'+
+  '<button type="button" class="add-button" '+(available?'data-card-add="'+p.id+'" aria-label="أضف '+name+' إلى السلة"':'disabled aria-label="'+name+' غير متوفر"')+'>'+MARKET_CART+'</button></div></div></article>';
+}
 function cartContent(){if(!state.cart.length)return '<div class="cart-empty"><div class="cart-icon">🛍️</div><strong>سلتك تنتظر طلبك</strong><p>اختر وجباتك المفضلة، ثم راجع تفاصيل الطلب هنا.</p><button class="outlined" data-go="/menu">تصفح المنتجات</button></div>';return '<div class="cart-lines">'+state.cart.map((l,i)=>{const p=productById(l.id);return '<div class="cart-line">'+imgTag(p)+'<div class="cart-line-info"><strong>'+p.name+'</strong><small>'+(l.note?'ملاحظة: '+escapeHtml(l.note):'بدون ملاحظات')+'</small><div class="cart-line-row"><strong>'+money(p.price*l.qty)+'</strong><div class="stepper"><button data-dec="'+i+'" aria-label="تقليل">−</button><span>'+l.qty+'</span><button data-inc="'+i+'" aria-label="زيادة">+</button></div></div></div></div>'}).join('')+'</div>'}
 function sideCart(){return '<aside class="side-cart" id="cartArea"><div class="cart-head"><h2>🛍️ سلة مشترياتك</h2>'+(count()?'<button data-clear>إفراغ السلة</button>':'')+'</div>'+cartContent()+'<div class="cart-footer"><div class="total-row"><span>الإجمالي التجريبي</span><span>'+money(total())+'</span></div><button class="solid-action full" data-go="/cart" '+(!count()?'disabled':'')+'>راجع طلبك ←</button><p>الأسعار توضيحية؛ لا يشمل الإجمالي رسوم توصيل أو ضرائب إضافية غير معتمدة.</p></div></aside>'}
 function renderCartArea(){const box=el('cartArea');if(box)box.outerHTML=sideCart()}
@@ -1603,25 +1705,29 @@ const HERO_SLIDES=[{"style":"main","kicker":"🛒 كل احتياجات البي
 function heroAction(label,path,category,primary){return '<button type="button" class="'+(primary?'discover-btn':'discover-outline')+'" '+(category?'data-category="'+category+'"':'data-go="'+path+'"')+'>'+label+' ←</button>'}
 
 const HERO_DISPLAY_PHOTOS={"main":["photo-1578916171728-46686eac8d58","photo-1542838132-92c53300491e","photo-1550583724-b2692b85b150"],"produce":["photo-1542838132-92c53300491e","photo-1490645935967-10de6ba17061","photo-1519996529931-28324d1a630e"],"dairy":["photo-1550583724-b2692b85b150","photo-1488477181946-6428a0291777","photo-1563636619-e9143da7973b"],"meat":["photo-1607623814075-e51df1bdc82f","photo-1544025162-d76694265947","photo-1558030006-450675393462"],"frozen":["photo-1504674900247-0877df9cc836","photo-1547592180-85f173990554","photo-1562967914-608f82629710"],"bakery":["photo-1509440159596-0249088772ff","photo-1608198093002-ad4e005484df","photo-1549931319-a545dcf3bc73"],"drinks":["photo-1544145945-f90425340c7e","photo-1600271886742-f049cd451bba","photo-1536935338788846bb9981813"],"pantry":["photo-1586201375761-83865001e31c","photo-1547592180-85f173990554","photo-1509440159596-0249088772ff"],"canned":["photo-1474979266404-7eaacbcd87c5","photo-1586201375761-83865001e31c","photo-1490645935967-10de6ba17061"],"snacks":["photo-1598373182133-52452f7691ef","photo-1578985545062-69928b1d9587","photo-1488477181946-6428a0291777"],"cleaning":["photo-1583947215259-38e31be8751f","photo-1608571423902-eed4a5ad8108","photo-1585421514738-01798e348b17"],"care":["photo-1596462502278-27bfdc403348","photo-1556228578-0d85b1a4d571","photo-1608248543803-ba4f8c70ae0b"],"offers":["photo-1607082348824-0a96f2a4b9da","photo-1578916171728-46686eac8d58","photo-1542838132-92c53300491e"]};
+
 function heroCategoryArt(slide){
  const set=HERO_DISPLAY_PHOTOS[slide.style]||HERO_DISPLAY_PHOTOS.main;
- const photo=(id,w)=>'https://images.unsplash.com/'+id+'?auto=format&fit=crop&w='+w+'&q=82';
- const groupName=slide.category||slide.short||'تسوق الآن';
- return '<div class="hero-showcase" aria-hidden="true">'+
- '<span class="showcase-halo"></span><span class="showcase-ring"></span>'+
- '<div class="showcase-phone"><div class="showcase-phone-screen">'+
- '<div class="showcase-phone-status"><span>9:41</span><span class="phone-camera"></span><span>▂ ▰</span></div>'+
- '<div class="showcase-phone-head"><span>سوق التجزئة</span><span>◈</span></div>'+
- '<div class="showcase-phone-search">ابحث عن منتجاتك <span>⌕</span></div>'+
- '<div class="showcase-phone-cover market-phone-cover"><img src="'+slide.image+'" alt="" loading="lazy" decoding="async" onerror="this.hidden=true"><span class="market-phone-cover-title">'+groupName+'</span></div>'+
- '<div class="showcase-phone-caption">اختيارات '+groupName+'</div>'+
- '<div class="showcase-phone-tiles market-phone-tiles">'+set.map(id=>'<img src="'+photo(id,300)+'" alt="" loading="lazy" decoding="async" onerror="this.hidden=true">').join('')+'</div>'+
- '<div class="showcase-phone-nav"><i></i><i></i><i></i></div></div></div>'+
- '<div class="showcase-float showcase-float-one"><img src="'+photo(set[0],420)+'" alt="" loading="lazy" decoding="async" onerror="this.hidden=true"></div>'+
- '<div class="showcase-float showcase-float-two"><img src="'+photo(set[1],420)+'" alt="" loading="lazy" decoding="async" onerror="this.hidden=true"></div>'+
- '<div class="showcase-float showcase-float-three"><img src="'+photo(set[2],420)+'" alt="" loading="lazy" decoding="async" onerror="this.hidden=true"></div></div>';
+ const categoryByStyle={main:'الخضار والفواكه',produce:'الخضار والفواكه',dairy:'الألبان والأجبان',meat:'اللحوم والدواجن',frozen:'المجمدات',bakery:'المخبوزات',drinks:'المياه والمشروبات',pantry:'الأرز والمكرونة والبقوليات',canned:'الزيوت والمعلبات',snacks:'الحلويات والتسالي',cleaning:'المنظفات المنزلية',care:'العناية الشخصية',offers:'العروض والباقات'};
+ const art=(id,key)=>((window.SUPERMARKET_CATEGORY_IMAGES||{})[key]||('https://images.unsplash.com/'+id+'?auto=format&fit=crop&w=580&q=82'));
+ const group=categoryByStyle[slide.style]||slide.short||'المنتجات';
+ const primary=art(set[0],group),second=art(set[1]),third=art(set[2]);
+ return '<div class="reference-hero-art" aria-hidden="true">'+
+ '<div class="reference-hero-ring"></div><div class="reference-hero-disc"></div>'+
+ '<div class="reference-hero-phone"><div class="reference-hero-screen">'+
+ '<div class="reference-phone-status"><span>9:41</span><span class="reference-phone-notch"></span><span>◖ ▰</span></div>'+
+ '<div class="reference-phone-top"><strong>سوق التجزئة</strong><span>⌕</span></div>'+
+ '<div class="reference-phone-search">ابحث عن منتجك ⌕</div>'+
+ '<div class="reference-phone-feature"><img src="'+primary+'" alt="" loading="lazy"><strong>'+slide.short+'</strong></div>'+
+ '<div class="reference-phone-caption">كل احتياجاتك في مكان واحد</div>'+
+ '<div class="reference-phone-grid">'+[primary,second,third,primary].map(src=>'<span><img src="'+src+'" alt="" loading="lazy"></span>').join('')+'</div>'+
+ '<div class="reference-phone-navbar"><i></i><i></i><i></i><i></i></div>'+
+ '</div></div>'+
+ '<img class="reference-food-float reference-float-one" src="'+primary+'" alt="" loading="lazy">'+
+ '<img class="reference-food-float reference-float-two" src="'+second+'" alt="" loading="lazy">'+
+ '<img class="reference-food-float reference-float-three" src="'+third+'" alt="" loading="lazy">'+
+ '</div>';
 }
-
 function homeBanner(){return '<section class="hero-slider" id="heroSlider" aria-label="بنرات سوق التجزئة المتحركة" aria-roledescription="عرض شرائح"><div class="hero-track" id="heroTrack">'+HERO_SLIDES.map((x,i)=>'<article class="discovery-hero hero-slide hero-'+x.style+'" aria-label="البنر '+(i+1)+' من '+HERO_SLIDES.length+'" aria-hidden="'+(i!==0)+'"><div class="discovery-copy"><span class="discovery-kicker">'+x.kicker+'</span><h1>'+x.title+'<br><em>'+x.em+'</em></h1><p>'+x.desc+'</p><div class="discovery-actions">'+heroAction(x.primary,x.path,x.category,true)+heroAction(x.secondary,x.secondaryPath,x.secondaryCategory,false)+'</div><div class="discovery-labels"><span>✦ تجربة تصفح تجريبية</span><span>✦ خيارات متنوعة</span></div></div><div class="discovery-visual">'+heroCategoryArt(x)+'</div></article>').join('')+'</div><div class="hero-dots" role="group" aria-label="اختيار البنر">'+HERO_SLIDES.map((_,i)=>'<button type="button" data-hero-index="'+i+'" class="'+(i===0?'active':'')+'" aria-label="عرض البنر '+(i+1)+'" aria-current="'+(i===0)+'"></button>').join('')+'</div><span class="hero-index" id="heroIndex">1 / '+HERO_SLIDES.length+'</span></section>'}
 
 function featureCategories(){
