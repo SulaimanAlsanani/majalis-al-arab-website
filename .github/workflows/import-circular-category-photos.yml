@@ -1,0 +1,45 @@
+name: Publish user-selected circular category images
+on:
+  push:
+    branches: [feature/restaurant-real-category-photos-20261121]
+    paths: ['.github/workflows/import-circular-category-photos.yml']
+permissions:
+  contents: write
+jobs:
+  import-photos:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@v4
+      - name: Download user-provided plate images
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p premium-store/assets/categories
+          curl --fail --location --silent --show-error --retry 3 --max-time 90 "https://media.canva.com/v2/image-resize/format:PNG/height:128/quality:100/uri:ifs%3A%2F%2FM%2F52231e91-b4cc-43ee-b5a7-967c7cc53301/watermark:F/width:128?csig=AAAAAAAAAAAAAAAAAAAAACpBHu6dyBvfEHO7eS9w4WaPJA_eeGP_UXhikVhWD4b0&exp=1795249198&osig=AAAAAAAAAAAAAAAAAAAAAIDEcNkg0N94H2FW-CLm_TgYySXEu9ecPubIiJMsuNds&signer=media-rpc&token=AAIAAU0AJDUyMjMxZTkxLWI0Y2MtNDNlZS1iNWE3LTk2N2M3Y2M1MzMwMQAAAAABof0w07CDPPhU2JLvzvwnQQYRuLzRHnIwrY7sgWbiFWujOLEwMA&x-canva-quality=thumbnail" -o premium-store/assets/categories/breakfast.png
+          file premium-store/assets/categories/breakfast.png | grep -q 'PNG image'
+          curl --fail --location --silent --show-error --retry 3 --max-time 90 "https://media.canva.com/v2/image-resize/format:PNG/height:200/quality:100/uri:ifs%3A%2F%2FM%2F1c6898f7-813d-4b7c-8f2c-542090dd1b45/watermark:F/width:200?csig=AAAAAAAAAAAAAAAAAAAAAJIYOI3ubevcUS5m7TsJYb-4MANrAPJDtG_F8cJjsPyu&exp=1795248970&osig=AAAAAAAAAAAAAAAAAAAAAKivRa1qbyiGCrzq5pu4-tiT7wILNYdmCzK8G4gPCefT&signer=media-rpc&token=AAIAAU0AJDFjNjg5OGY3LTgxM2QtNGI3Yy04ZjJjLTU0MjA5MGRkMWI0NQAAAAABof0tWRBo-U171AwJVvWtBQf0Kr4jZmWCCn-YNWk7O6Q9MraLGg&x-canva-quality=thumbnail" -o premium-store/assets/categories/areeka-masoob.png
+          file premium-store/assets/categories/areeka-masoob.png | grep -q 'PNG image'
+          curl --fail --location --silent --show-error --retry 3 --max-time 90 "https://media.canva.com/v2/image-resize/format:PNG/height:128/quality:100/uri:ifs%3A%2F%2FM%2F269bb3ec-f34e-4883-a31b-b08ccd304fe6/watermark:F/width:128?csig=AAAAAAAAAAAAAAAAAAAAACIk2IC7L95XkdJ8G2VeBbLASumipiKGNAddO9H1LUUC&exp=1795249904&osig=AAAAAAAAAAAAAAAAAAAAAETFrCRT25WCrX6jMeOXXvtPsHBMXCs3xiNxVILU-9_8&signer=media-rpc&token=AAIAAU0AJDI2OWJiM2VjLWYzNGUtNDg4My1hMzFiLWIwOGNjZDMwNGZlNgAAAAABof07mYD96BfCL17zH65ZTpwyghXyWTzF3rECdVnIFlYWTn1j-w&x-canva-quality=thumbnail" -o premium-store/assets/categories/grills.png
+          file premium-store/assets/categories/grills.png | grep -q 'PNG image'
+          curl --fail --location --silent --show-error --retry 3 --max-time 90 "https://media.canva.com/v2/image-resize/format:PNG/height:128/quality:100/uri:ifs%3A%2F%2FM%2F7995cbf8-95fc-419c-8010-18448646fa7a/watermark:F/width:128?csig=AAAAAAAAAAAAAAAAAAAAAG74nYvd1s4RixeRqfKaiP2ar6RocGo1HixU7FfL29Fa&exp=1795248602&osig=AAAAAAAAAAAAAAAAAAAAANKkpG465QU9P8q09-n6HMh4QSz9vjdxjl2VN7Yb0r1c&signer=media-rpc&token=AAIAAU0AJDc5OTVjYmY4LTk1ZmMtNDE5Yy04MDEwLTE4NDQ4NjQ2ZmE3YQAAAAABof0nu5DxK9cfK5usSSSDTAh6ZOwg_eFk6161NZ1zWRHyBaG0Gg&x-canva-quality=thumbnail" -o premium-store/assets/categories/sandwiches.png
+          file premium-store/assets/categories/sandwiches.png | grep -q 'PNG image'
+          curl --fail --location --silent --show-error --retry 3 --max-time 90 "https://media.canva.com/v2/image-resize/format:PNG/height:128/quality:100/uri:ifs%3A%2F%2FM%2F3ac04b63-8bd1-4397-a987-31b4888fcf23/watermark:F/width:128?csig=AAAAAAAAAAAAAAAAAAAAAEDGk_UU7abIp8I5koXqzzkMgPtey1Lw48B15THUSD4Q&exp=1795248684&osig=AAAAAAAAAAAAAAAAAAAAACW6dwRntoTjs262s7evarLqMHIltlARJZJnv3S8ib0B&signer=media-rpc&token=AAIAAU0AJDNhYzA0YjYzLThiZDEtNDM5Ny1hOTg3LTMxYjQ4ODhmY2YyMwAAAAABof0o--Autyuifv7Gvi3T8ahVn_t8mInT2r9ly3PX6nsn4y6oDA&x-canva-quality=thumbnail" -o premium-store/assets/categories/salads.png
+          file premium-store/assets/categories/salads.png | grep -q 'PNG image'
+          curl --fail --location --silent --show-error --retry 3 --max-time 90 "https://media.canva.com/v2/image-resize/format:PNG/height:128/quality:100/uri:ifs%3A%2F%2FM%2F7d0c1a53-eb2c-44fc-af17-586a9c8b7b9b/watermark:F/width:128?csig=AAAAAAAAAAAAAAAAAAAAABL-gCLnAg5CR25x383j7ztIGx-zbc0pQbI225HIzv_8&exp=1795249206&osig=AAAAAAAAAAAAAAAAAAAAAEcI2sgeKMZ4e_ocpqoqEAnpHDVtiYNZtR8c5yZMqK-3&signer=media-rpc&token=AAIAAU0AJDdkMGMxYTUzLWViMmMtNDRmYy1hZjE3LTU4NmE5YzhiN2I5YgAAAAABof0w8vCI5V-W77C-0UJ75jy1-yD0rYMfaC9jO0fogJMTGvFH5A&x-canva-quality=thumbnail" -o premium-store/assets/categories/desserts.png
+          file premium-store/assets/categories/desserts.png | grep -q 'PNG image'
+          curl --fail --location --silent --show-error --retry 3 --max-time 90 "https://media.canva.com/v2/image-resize/format:PNG/height:128/quality:100/uri:ifs%3A%2F%2FM%2Fa5460e98-e2e6-49ae-b55a-c4ec8f1793c0/watermark:F/width:128?csig=AAAAAAAAAAAAAAAAAAAAAE9_YVQVrc7uTaUkdbuBBI5XOqO3VRQMlaNtLsp_gpVH&exp=1795250614&osig=AAAAAAAAAAAAAAAAAAAAAI6N9kOT1-Ei2Yseah7kKKEus-wdCLZkb1qtQ42uUids&signer=media-rpc&token=AAIAAU0AJGE1NDYwZTk4LWUyZTYtNDlhZS1iNTVhLWM0ZWM4ZjE3OTNjMAAAAAABof1GbvDyElcdwv_D4Hr0905mjVhyFyB_keaNCMSYOyP87NpbOQ&x-canva-quality=thumbnail" -o premium-store/assets/categories/coffee.png
+          file premium-store/assets/categories/coffee.png | grep -q 'PNG image'
+          curl --fail --location --silent --show-error --retry 3 --max-time 90 "https://media.canva.com/v2/image-resize/format:PNG/height:128/quality:100/uri:ifs%3A%2F%2FM%2F020c7fd4-0251-40e5-8545-c2f4581c0cac/watermark:F/width:128?csig=AAAAAAAAAAAAAAAAAAAAAPOSH3IFu7iyYeJVEuo9UmqYHIG9cnuaUgPucsIQQcVM&exp=1795247831&osig=AAAAAAAAAAAAAAAAAAAAANAfDd0l1mHqTA41jj3thRYQVCjFtdjnraXmGpe2v8BL&signer=media-rpc&token=AAIAAU0AJDAyMGM3ZmQ0LTAyNTEtNDBlNS04NTQ1LWMyZjQ1ODFjMGNhYwAAAAABof0b99i9xApDfnd5VAx7iG12dOhMO9wc4J8K-Spx4WRecdqfZA&x-canva-quality=thumbnail" -o premium-store/assets/categories/drinks.png
+          file premium-store/assets/categories/drinks.png | grep -q 'PNG image'
+          curl --fail --location --silent --show-error --retry 3 --max-time 90 "https://media.canva.com/v2/image-resize/format:PNG/height:128/quality:100/uri:ifs%3A%2F%2FM%2Fbca889f2-ce19-4f10-8dd3-755bdfa019f4/watermark:F/width:128?csig=AAAAAAAAAAAAAAAAAAAAADjFLs33a5ba5IFB1LSO59l-PG-6fnFJfDohVSc1bq4E&exp=1795248337&osig=AAAAAAAAAAAAAAAAAAAAACCf24kPkbQEXTkx9NwrEeHX7_rKdZawstCvZQYn4I1G&signer=media-rpc&token=AAIAAU0AJGJjYTg4OWYyLWNlMTktNGYxMC04ZGQzLTc1NWJkZmEwMTlmNAAAAAABof0jsGiMIrmazFn7E_8MGYtHXaIGofKzxkzWLl5QD8UwfsOHzQ&x-canva-quality=thumbnail" -o premium-store/assets/categories/appetizers.png
+          file premium-store/assets/categories/appetizers.png | grep -q 'PNG image'
+          curl --fail --location --silent --show-error --retry 3 --max-time 90 "https://media.canva.com/v2/image-resize/format:PNG/height:128/quality:100/uri:ifs%3A%2F%2FM%2F19268444-aa90-4f2b-9f49-6f09f414aa52/watermark:F/width:128?csig=AAAAAAAAAAAAAAAAAAAAAN4thhlrypHbAVI7R91_vTdsYwsPTPT48B9sDj7Bsaoz&exp=1795249491&osig=AAAAAAAAAAAAAAAAAAAAAO5hmG3cwk5hPmO9efZuF0eOfj_El6jPV94LpqvwLtrm&signer=media-rpc&token=AAIAAU0AJDE5MjY4NDQ0LWFhOTAtNGYyYi05ZjQ5LTZmMDlmNDE0YWE1MgAAAAABof01TDhRNrOK0cp2BNDvkjeRxnMajTEI2JGcu_SUXmSXnn_fjw&x-canva-quality=thumbnail" -o premium-store/assets/categories/family-meals.png
+          file premium-store/assets/categories/family-meals.png | grep -q 'PNG image'
+      - name: Commit category image replacements
+        shell: bash
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -f premium-store/assets/categories
+          git diff --cached --quiet || (git commit -m "assets: replace restaurant category plates with provided images" && git push)
