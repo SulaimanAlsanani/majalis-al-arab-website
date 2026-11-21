@@ -3185,8 +3185,11 @@ body:has(#heroSlider) .reference-top-actions{gap:0!important}
 .product-rail .product-card{flex-basis:calc((100% + var(--meal-gap))/var(--meal-columns) - var(--meal-gap))}
 .product-grid{grid-template-columns:repeat(var(--meal-columns),minmax(0,1fr))}
 .recs .product-grid{--meal-columns:3}
-.product-card{display:flex;flex-direction:column;border-radius:14px!important;box-shadow:none!important}
-.product-card:hover{transform:none;box-shadow:0 4px 14px #1018280d!important}
+.product-card{
+ display:flex;flex-direction:column;border-radius:14px!important;
+ border-color:#e9e3de!important;box-shadow:none!important;
+}
+.product-card:hover{transform:none;border-color:#d9cec7!important;box-shadow:0 5px 16px #34211d10!important}
 .product-card .card-photo{aspect-ratio:16/9}
 .product-card .card-photo img{position:absolute;inset:0;height:100%!important}
 .product-card .card-photo .product-photo-illustrative{
@@ -3199,20 +3202,33 @@ body:has(#heroSlider) .reference-top-actions{gap:0!important}
  padding:2px 6px;border-radius:5px;background:#fffffff2;color:#574b47;font-size:11px;
 }
 .card-photo:has(.product-photo-illustrative) .card-photo-caption{display:block}
-.product-card .card-body{flex:1;gap:4px;padding:9px 10px 10px!important}
-.card-heading{display:flex;align-items:center;gap:4px;min-height:34px}
-.product-card .card-title{flex:1;min-width:0;font-size:clamp(14px,1.12vw,16px);overflow-wrap:anywhere}
+.product-card .card-body{flex:1;gap:9px;padding:12px!important}
+.card-heading{margin:0;min-block-size:2.9em;font-size:clamp(14px,1.19vw,17px)}
+.product-card .card-title{
+ font-size:inherit;font-weight:700!important;color:#2f2622!important;overflow-wrap:anywhere;
+}
+.product-card .card-bottom{
+ display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:center;
+ gap:6px;padding-block-start:9px;border-block-start:1px solid #eee8e3;
+}
+.card-actions{display:flex;align-items:center;gap:5px}
 .product-card .card-fav{
- position:static;flex:0 0 34px;width:34px;height:34px;line-height:1;
- background:transparent!important;box-shadow:none!important;color:#62646b;
+ position:static;width:34px;height:36px;line-height:1;
+ border:1px solid #e8dfd9;border-radius:9px;
+ background:#fff!important;box-shadow:none!important;color:#725954;
 }
-.product-card .card-fav:hover{background:#f7f3ef!important;color:#7e253a}
-.product-card .card-price{font-size:15px}
+.product-card .card-fav:hover,.product-card .card-fav.saved{
+ background:#fbf2f1!important;border-color:#ead5d6;color:#7d293b!important;
+}
+.product-card .card-price{
+ font-size:clamp(14px,1.28vw,18px);font-variant-numeric:tabular-nums;
+ color:#432e2b!important;white-space:normal;overflow-wrap:anywhere;line-height:1.25;
+}
 .product-card .add-button{
- min-width:37px;min-height:37px;padding:0 8px;line-height:1;
- background:#f7efe4!important;color:#7e253a!important;border-radius:9px!important;font-size:22px;
+ min-width:36px;min-height:36px;padding:0;line-height:1;
+ background:#78283a!important;color:#fff!important;border-radius:9px!important;font-size:23px;
 }
-.product-card .add-button:not(:disabled):hover{background:#eddfd1!important}
+.product-card .add-button:not(:disabled):hover{background:#60202e!important}
 .product-card .add-button:disabled{background:#edeef0!important;color:#646b74!important}
 @media(max-width:1150px){
  .product-rail,.product-grid{--meal-columns:4}
@@ -3222,6 +3238,8 @@ body:has(#heroSlider) .reference-top-actions{gap:0!important}
 }
 @media(max-width:780px){
  .product-rail,.product-grid,.recs .product-grid{--meal-columns:2;--meal-gap:9px}
+ .product-card .card-body{padding:9px!important}
+ .card-actions{gap:4px}
  .product-card .add-button{min-width:44px;min-height:44px}
 }
 </style></head>
@@ -3363,10 +3381,10 @@ function card(p){
  return '<article class="product-card"><div class="product-card-image-wrap">'+
  '<button type="button" class="card-photo" data-product="'+p.id+'" aria-label="تفاصيل '+name+'">'+imgTag(p,'',false)+
  '<span class="card-photo-caption" aria-hidden="true">صورة توضيحية</span></button>'+status+'</div>'+
- '<div class="card-body"><div class="card-heading"><button type="button" class="card-title" data-product="'+p.id+'">'+name+'</button>'+
- '<button type="button" class="card-fav '+(f?'saved':'')+'" data-fav="'+p.id+'" aria-label="'+(f?'إزالة من المفضلة':'إضافة للمفضلة')+'" aria-pressed="'+f+'">'+(f?'♥':'♡')+'</button></div>'+
- '<div class="card-bottom"><span class="card-price">'+money(p.price)+'</span><button type="button" class="add-button" '+
- (available?'data-card-add="'+p.id+'" aria-label="أضف '+name+' إلى السلة"':'disabled aria-label="الصنف غير متوفر"')+'>'+(available?'+':'×')+'</button></div></div></article>';
+ '<div class="card-body"><h3 class="card-heading"><button type="button" class="card-title" data-product="'+p.id+'">'+name+'</button></h3>'+
+ '<div class="card-bottom"><span class="card-price">'+money(p.price)+'</span><div class="card-actions">'+
+ '<button type="button" class="card-fav '+(f?'saved':'')+'" data-fav="'+p.id+'" aria-label="حفظ '+name+' في المفضلة" aria-pressed="'+f+'">'+(f?'♥':'♡')+'</button>'+
+ '<button type="button" class="add-button" '+(available?'data-card-add="'+p.id+'" aria-label="أضف '+name+' إلى السلة"':'disabled aria-label="الصنف غير متوفر"')+'>'+(available?'+':'×')+'</button></div></div></div></article>';
 }
 function cartContent(){if(!state.cart.length)return '<div class="cart-empty"><div class="cart-icon">🛍️</div><strong>سلتك تنتظر طلبك</strong><p>اختر وجباتك المفضلة، ثم راجع تفاصيل الطلب هنا.</p><button class="outlined" data-go="/menu">تصفح الأطباق</button></div>';return '<div class="cart-lines">'+state.cart.map((l,i)=>{const p=productById(l.id);return '<div class="cart-line">'+imgTag(p)+'<div class="cart-line-info"><strong>'+p.name+'</strong><small>'+(l.note?'ملاحظة: '+escapeHtml(l.note):'بدون ملاحظات')+'</small><div class="cart-line-row"><strong>'+money(p.price*l.qty)+'</strong><div class="stepper"><button data-dec="'+i+'" aria-label="تقليل">−</button><span>'+l.qty+'</span><button data-inc="'+i+'" aria-label="زيادة">+</button></div></div></div></div>'}).join('')+'</div>'}
 function sideCart(){return '<aside class="side-cart" id="cartArea"><div class="cart-head"><h2>🛍️ سلة مشترياتك</h2>'+(count()?'<button data-clear>إفراغ السلة</button>':'')+'</div>'+cartContent()+'<div class="cart-footer"><div class="total-row"><span>الإجمالي التجريبي</span><span>'+money(total())+'</span></div><button class="solid-action full" data-go="/cart" '+(!count()?'disabled':'')+'>راجع طلبك ←</button><p>الأسعار توضيحية؛ لا يشمل الإجمالي رسوم توصيل أو ضرائب إضافية غير معتمدة.</p></div></aside>'}
