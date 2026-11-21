@@ -3484,6 +3484,26 @@ body:has(#heroSlider) .site-header .header-cart.header-cart-icon:hover{backgroun
  .product-card .card-favorite-toggle{flex-basis:27px!important;width:27px!important;height:27px!important;min-width:27px!important}
  .product-card .card-name-line,.product-card .card-price-line{gap:4px!important}
 }
+
+/* Subtle pastel favorite-heart palette for product cards. */
+.product-card .card-favorite-toggle{
+ color:#BDB5BB!important;
+ background:transparent!important;
+}
+.product-card .card-favorite-toggle:hover{
+ color:#B78699!important;
+ background:#FCF9FA!important;
+ transform:none!important;
+}
+.product-card .card-favorite-toggle[aria-pressed="true"]{
+ color:#C68FA4!important;
+ background:transparent!important;
+ border-color:transparent!important;
+}
+.product-card .card-favorite-toggle[aria-pressed="true"] svg{
+ fill:#EACBD7!important;
+ stroke:#C68FA4!important;
+}
 </style></head>
 <body>
 <header class="site-header"><div class="wrap header-inner">
