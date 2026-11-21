@@ -1128,6 +1128,17 @@ body{background:#F6F9F5}
 @media(max-width:780px){#heroSlider .hero-slide .showcase-phone{width:175px;top:11%}#heroSlider .hero-slide .showcase-float{border-radius:18px}}
 @media(max-width:520px){#heroSlider .hero-slide .showcase-phone{width:150px;top:14%}#heroSlider .hero-slide .discovery-visual{opacity:.4!important}#heroSlider .hero-slide .showcase-float{border-radius:14px}}
 
+
+/* Real generated category photos: all 12 categories, without emoji icons. */
+.first-fold-categories .feature-category-grid{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:12px}
+.first-fold-categories .feature-category{min-height:137px;padding:14px 8px 12px;gap:9px;background:#fff;border-radius:17px}
+.first-fold-categories .feature-category-icon{display:flex;align-items:center;justify-content:center;width:100%;height:90px;border:0;border-radius:10px;background:#fff;overflow:hidden}
+.first-fold-categories .feature-category-icon img{display:block;width:100%;height:100%;max-height:90px;object-fit:contain;object-position:center;background:#fff}
+.first-fold-categories .feature-category strong{font-size:12px;line-height:1.5;text-align:center;white-space:normal}
+@media(max-width:1000px){.first-fold-categories .feature-category-grid{grid-template-columns:repeat(4,minmax(0,1fr))}}
+@media(max-width:620px){.first-fold-categories .feature-category-grid{grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}.first-fold-categories .feature-category-icon{height:76px}.first-fold-categories .feature-category-icon img{max-height:76px}.first-fold-categories .feature-category{min-height:121px;padding:10px 6px}.first-fold-categories .feature-category strong{font-size:11px}}
+@media(max-width:370px){.first-fold-categories .feature-category-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+
 </style></head>
 <body>
 <header class="site-header"><div class="wrap header-inner">
@@ -1140,6 +1151,9 @@ body{background:#F6F9F5}
 <footer class="site-footer"><div class="wrap footer-inner"><div><strong>سوق التجزئة</strong><p>أطباق وجلسات على ذوقك. هذه معاينة تصميمية للمتجر الإلكتروني.</p></div><div class="footer-links"><a href="#/menu">المنتجات</a><a href="#/offers">العروض</a><a href="#/favorites">المفضلة</a><a href="#/orders">الطلبات</a><a href="#/account">حسابي</a><a href="#/help">مركز المساعدة</a><a href="#/help" target="_blank" rel="noopener noreferrer">مساعدة المتجر التجريبي</a><p>جميع المنتجات والأسعار والصور تحتاج اعتماد المتجر قبل الإطلاق.</p></div></div></footer>
 <nav class="mobile-bottom" aria-label="التنقل على الجوال"><button data-route="/" id="mHome"><span>⌂</span>الرئيسية</button><button data-route="/menu" id="mMenu"><span>☷</span>المنتجات</button><button data-route="/offers" id="mOffers"><span>٪</span>العروض</button><button data-route="/orders" id="mOrders"><span>▤</span>طلباتي</button><button data-route="/account" id="mAccount"><span>♙</span>حسابي</button><button data-route="/cart" id="mCart"><span>🛒</span>السلة <span class="number" id="mobileCount">0</span></button></nav>
 <div class="toast" id="toast" hidden role="status" aria-live="polite"></div><button id="scrollTop" type="button" class="scroll-top" aria-label="العودة إلى أعلى الصفحة" hidden>↑</button>
+<script src="./assets/category-images-a.js"></script>
+<script src="./assets/category-images-b.js"></script>
+<script src="./assets/category-images-c.js"></script>
 <script>
 const CATEGORIES=["الخضار والفواكه","الألبان والأجبان","اللحوم والدواجن","المجمدات","المخبوزات","المياه والمشروبات","الأرز والمكرونة والبقوليات","الزيوت والمعلبات","الحلويات والتسالي","المنظفات المنزلية","العناية الشخصية","العروض والباقات"];
 const PHOTO={"produce":"photo-1542838132-92c53300491e","dairy":"photo-1550583724-b2692b85b150","meat":"photo-1607623814075-e51df1bdc82f","frozen":"photo-1504674900247-0877df9cc836","bakery":"photo-1509440159596-0249088772ff","drinks":"photo-1544145945-f90425340c7e","pantry":"photo-1586201375761-83865001e31c","canned":"photo-1474979266404-7eaacbcd87c5","snacks":"photo-1598373182133-52452f7691ef","cleaning":"photo-1583947215259-38e31be8751f","care":"photo-1596462502278-27bfdc403348","offers":"photo-1607082348824-0a96f2a4b9da"};
@@ -1215,7 +1229,26 @@ function heroCategoryArt(slide){
 
 function homeBanner(){return '<section class="hero-slider" id="heroSlider" aria-label="بنرات سوق التجزئة المتحركة" aria-roledescription="عرض شرائح"><div class="hero-track" id="heroTrack">'+HERO_SLIDES.map((x,i)=>'<article class="discovery-hero hero-slide hero-'+x.style+'" aria-label="البنر '+(i+1)+' من '+HERO_SLIDES.length+'" aria-hidden="'+(i!==0)+'"><div class="discovery-copy"><span class="discovery-kicker">'+x.kicker+'</span><h1>'+x.title+'<br><em>'+x.em+'</em></h1><p>'+x.desc+'</p><div class="discovery-actions">'+heroAction(x.primary,x.path,x.category,true)+heroAction(x.secondary,x.secondaryPath,x.secondaryCategory,false)+'</div><div class="discovery-labels"><span>✦ تجربة تصفح تجريبية</span><span>✦ خيارات متنوعة</span></div></div><div class="discovery-visual">'+heroCategoryArt(x)+'</div></article>').join('')+'</div><button type="button" class="hero-arrow hero-next" data-hero-move="1" aria-label="البنر التالي">❮</button><button type="button" class="hero-arrow hero-prev" data-hero-move="-1" aria-label="البنر السابق">❯</button><div class="hero-dots" role="group" aria-label="اختيار البنر">'+HERO_SLIDES.map((_,i)=>'<button type="button" data-hero-index="'+i+'" class="'+(i===0?'active':'')+'" aria-label="عرض البنر '+(i+1)+'" aria-current="'+(i===0)+'"></button>').join('')+'</div><span class="hero-index" id="heroIndex">1 / '+HERO_SLIDES.length+'</span></section>'}
 
-function featureCategories(){const featured=[["🥬","خضار وفواكه","الخضار والفواكه"],["🥛","ألبان وأجبان","الألبان والأجبان"],["🥩","لحوم ودواجن","اللحوم والدواجن"],["🧊","مجمدات","المجمدات"],["🥖","مخبوزات","المخبوزات"],["🥤","مشروبات","المياه والمشروبات"],["🍚","أرز وبقوليات","الأرز والمكرونة والبقوليات"],["🫒","زيوت ومعلبات","الزيوت والمعلبات"],["🍫","تسالي وحلويات","الحلويات والتسالي"],["🧽","منظفات","المنظفات المنزلية"]];return '<section class="first-fold-categories" aria-label="أقسام السوبرماركت"><div class="home-section-head"><div><span>تسوق حسب القسم</span><h2>كل احتياجاتك في مكان واحد</h2></div><button data-go="/menu">كل الأقسام ←</button></div><div class="feature-category-grid">'+featured.map(([icon,label,category])=>'<button class="feature-category" data-category="'+category+'"><span class="feature-category-icon">'+icon+'</span><strong>'+label+'</strong></button>').join('')+'</div></section>'}
+function featureCategories(){
+const featured=[
+['خضار وفواكه','الخضار والفواكه','produce'],
+['ألبان وأجبان','الألبان والأجبان','dairy'],
+['لحوم ودواجن','اللحوم والدواجن','meat'],
+['مجمدات','المجمدات','frozen'],
+['مخبوزات','المخبوزات','bakery'],
+['مشروبات','المياه والمشروبات','drinks'],
+['أرز وبقوليات','الأرز والمكرونة والبقوليات','pantry'],
+['زيوت ومعلبات','الزيوت والمعلبات','canned'],
+['تسالي وحلويات','الحلويات والتسالي','snacks'],
+['منظفات','المنظفات المنزلية','cleaning'],
+['عناية شخصية','العناية الشخصية','care'],
+['عروض وباقات','العروض والباقات','offers']
+];
+return '<section class="first-fold-categories" aria-label="أقسام السوبرماركت"><div class="home-section-head"><div><span>تسوق حسب القسم</span><h2>كل احتياجاتك في مكان واحد</h2></div><button data-go="/menu">كل الأقسام ←</button></div><div class="feature-category-grid">'+featured.map(([label,category,style])=>{
+const photo=(window.SUPERMARKET_CATEGORY_IMAGES&&window.SUPERMARKET_CATEGORY_IMAGES[category])||('https://images.unsplash.com/'+PHOTO[style]+'?auto=format&fit=crop&w=260&q=75');
+return '<button class="feature-category" data-category="'+category+'"><span class="feature-category-icon"><img src="'+photo+'" alt="" loading="lazy" decoding="async"></span><strong>'+label+'</strong></button>';
+}).join('')+'</div></section>';
+}
 function promotionalBanners(){return '<div class="promo-two"><button class="promo-box promo-red" data-go="/offers"><span>باقات للمعاينة</span><h3>احتياجات الأسبوع<br>بكل سهولة</h3><p>تسوّق مجموعات المنتجات المنزلية التجريبية</p><b>تصفح الباقات ←</b><i>🛒</i></button><button class="promo-box promo-midnight" data-category="المنظفات المنزلية"><span>مستلزمات البيت</span><h3>كل شيء للمنزل<br>بمكان واحد</h3><p>منظفات وعناية وأساسيّات يومية</p><b>اكتشف الأقسام ←</b><i>🏠</i></button></div>'}
 function productShowcase(title,description,ids,more,key){const rows=ids.map(productById).filter(Boolean);const sid='home-carousel-'+key;return '<section class="home-showcase horizontal-showcase" aria-label="'+title+'"><div class="home-section-head"><div><span>'+description+'</span><h2>'+title+'</h2></div><div class="showcase-head-actions"><div class="showcase-arrows" aria-label="التنقل بين منتجات '+title+'"><button type="button" data-slide-dir="-1" data-slide-track="'+sid+'" aria-label="المنتجات السابقة" title="السابق">→</button><button type="button" data-slide-dir="1" data-slide-track="'+sid+'" aria-label="المنتجات التالية" title="التالي">←</button></div><button data-go="'+(more||'/menu')+'">عرض الكل ←</button></div></div><div class="product-rail" id="'+sid+'" data-auto-rail tabindex="0" aria-label="منتجات '+title+' — مرر أفقيًا">'+rows.map(card).join('')+'</div><div class="showcase-foot"><small>مرّر أفقيًا أو استخدم الأسهم • انتقال تلقائي كل 3 ثوانٍ</small><span class="showcase-counter" id="counter-'+sid+'" aria-live="off">1 / '+rows.length+'</span></div></section>'}
 function homeTrustStrip(){return '<div class="home-trust-strip"><div><span>🥬</span><strong>أقسام متنوعة</strong><small>تشكيلة تجريبية من احتياجات البيت</small></div><div><span>🛒</span><strong>سلة واضحة</strong><small>عدّل الكميات وأضف الملاحظات</small></div><div><span>🔎</span><strong>بحث سريع</strong><small>اعثر على المنتج أو القسم بسهولة</small></div><div><span>📦</span><strong>خطوة للتشغيل</strong><small>يتطلب الإطلاق ربط المخزون والدفع</small></div></div>'}
