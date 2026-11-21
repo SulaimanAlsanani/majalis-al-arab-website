@@ -192,3 +192,44 @@ document.addEventListener("click", (event) => {
 });
 
 renderCart();
+
+/* Accessible category-driven restaurant banner carousel */
+(() => {
+ const slides = selectAll("[data-hero-slide]");
+ const dots = selectAll("[data-hero-go]");
+ const hero = select(".majalis-hero-slider");
+ if (!hero || !slides.length) return;
+ let active = 0;
+ let timer;
+ const show = (index) => {
+   active = (index + slides.length) % slides.length;
+   slides.forEach((slide,i) => {
+     slide.classList.toggle("is-active",i===active);
+     slide.setAttribute("aria-hidden",String(i!==active));
+     slide.querySelectorAll("a").forEach(a=>{a.tabIndex=i===active?0:-1;});
+   });
+   dots.forEach((dot,i)=>dot.setAttribute("aria-current",String(i===active)));
+ };
+ const restart = () => {
+   window.clearInterval(timer);
+   if (!window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+     timer=window.setInterval(()=>{if(!document.hidden)show(active+1);},5500);
+   }
+ };
+ select("[data-hero-prev]").addEventListener("click",()=>{show(active-1);restart();});
+ select("[data-hero-next]").addEventListener("click",()=>{show(active+1);restart();});
+ dots.forEach((dot,i)=>dot.addEventListener("click",()=>{show(i);restart();}));
+ const filterTo = (category) => {
+   selectedCategory=category;
+   select("#preview-search input").value="";
+   applyFilters();
+   select("#majalis-menu").scrollIntoView({behavior:"smooth",block:"start"});
+ };
+ selectAll("[data-category-tile]").forEach(tile=>tile.addEventListener("click",()=>filterTo(tile.dataset.categoryTile)));
+ selectAll("[data-hero-category]").forEach(link=>link.addEventListener("click",()=>filterTo(link.dataset.heroCategory)));
+ hero.addEventListener("mouseenter",()=>window.clearInterval(timer));
+ hero.addEventListener("mouseleave",restart);
+ hero.addEventListener("focusin",()=>window.clearInterval(timer));
+ hero.addEventListener("focusout",e=>{if(!hero.contains(e.relatedTarget))restart();});
+ show(0);restart();
+})();
