@@ -791,3 +791,51 @@ button { cursor: pointer; }
     border-radius: 50% 50% 0 0;
     border-block-end: 0;
 }
+
+/* Restaurant storefront: compact header, visual categories and responsive hero carousel */
+.majalis-top-inner { min-height: 59px; }
+.majalis-trial-bar { font-size: .75rem; padding-block: 3px; }
+.majalis-bag { position: relative; width: 42px; min-width: 42px; height: 42px; padding: 5px; display: grid; place-items: center; }
+.majalis-bag-label { display:none; }
+.majalis-cart-count { position:absolute; inset-block-start: -2px; inset-inline-start: -3px; }
+.majalis-catalog { font-family: "DIN Next Arabic", "DINNextLTArabic", "Tajawal", "Arial", sans-serif; }
+.majalis-hero-slider { position:relative; height:clamp(370px, 39vw, 540px); min-height:0; overflow:hidden; }
+.majalis-slides, .majalis-hero-slide { position:absolute; inset:0; }
+.majalis-hero-slide { opacity:0; visibility:hidden; transition: opacity .45s ease, visibility .45s ease; display:flex; align-items:center; }
+.majalis-hero-slide.is-active { opacity:1; visibility:visible; z-index:1; }
+.majalis-hero-slide > img { position:absolute; inset:0; width:100%; height:100%; object-fit:cover; object-position:center; }
+.majalis-hero-slide::before { content:""; position:absolute; inset:0; background:linear-gradient(270deg,rgba(12,11,9,.94),rgba(12,11,9,.65) 44%,rgba(12,11,9,.16)); z-index:1; }
+.majalis-hero-slide .majalis-hero-inner { position:relative; z-index:2; padding-block:35px 66px; }
+.majalis-hero-slide h1,.majalis-hero-slide h2 { font-size:clamp(2.3rem,4.2vw,4.4rem); line-height:1.2; max-width:650px; margin-block:12px; }
+.majalis-hero-slide p { font-size:clamp(1rem,1.5vw,1.3rem); max-width:480px; }
+.majalis-hero-controls { position:absolute; bottom:18px; left:50%; transform:translateX(-50%); z-index:4; display:flex; justify-content:center; align-items:center; gap:13px; }
+.majalis-hero-controls > button { background:rgba(15,13,11,.65); color:#fff; border:1px solid rgba(255,255,255,.4); border-radius:50%; width:34px; height:34px; font-size:23px; line-height:1; }
+.majalis-hero-dots { display:flex; gap:7px; align-items:center; }
+.majalis-hero-dots button { width:8px; height:8px; border-radius:50%; border:0; background:#fff8; padding:0; }
+.majalis-hero-dots button[aria-current="true"] { background:var(--ml-gold); width:22px; border-radius:12px; }
+.majalis-category-section { padding-block:22px 7px; }
+.majalis-category-heading { display:flex; align-items:center; justify-content:space-between; gap:12px; margin-bottom:13px; }
+.majalis-category-heading h2 { margin:0; font-size:clamp(1.3rem,2vw,1.7rem); }
+.majalis-category-heading a { color:var(--ml-gold); font-size:.95rem; text-decoration:none; }
+.majalis-category-grid { display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:12px; }
+.majalis-category-tile { display:flex; align-items:center; text-align:start; gap:12px; min-width:0; padding:8px; background:var(--ml-surface); color:var(--ml-cream); border:1px solid var(--ml-border); border-radius:12px; }
+.majalis-category-tile img { display:block; width:76px; height:68px; object-fit:cover; border-radius:8px; flex:none; }
+.majalis-category-tile > span { font-weight:700; font-size:1rem; }
+.majalis-category-tile:hover,.majalis-category-tile:focus-visible { border-color:var(--ml-gold); }
+.majalis-menu { padding-top:24px; }
+@media(max-width:740px) {
+ .majalis-top-inner { min-height:52px; }
+ .majalis-hero-slider { height:clamp(340px, 75vw, 440px); min-height:0; }
+ .majalis-hero-slide { align-items:end; }
+ .majalis-hero-slide::before { background:linear-gradient(0deg,rgba(12,11,9,.96),rgba(12,11,9,.60) 55%,rgba(12,11,9,.06)); }
+ .majalis-hero-slide .majalis-hero-inner { padding-block:20px 62px; }
+ .majalis-hero-slide h1,.majalis-hero-slide h2 { font-size:clamp(2rem,7vw,3rem); }
+ .majalis-hero-slide p { margin-block:8px 12px; }
+ .majalis-category-grid { grid-template-columns:repeat(4,minmax(150px,1fr)); overflow-x:auto; padding-bottom:6px; }
+ .majalis-category-tile { flex-direction:column; align-items:stretch; gap:7px; padding:7px; }
+ .majalis-category-tile img { width:100%; height:91px; }
+ .majalis-category-tile > span { font-size:.9rem; }
+ .majalis-category-section { padding-block:15px 0; }
+ .majalis-menu { padding-top:22px; }
+}
+@media(prefers-reduced-motion:reduce) { .majalis-hero-slide {transition:none;} }
