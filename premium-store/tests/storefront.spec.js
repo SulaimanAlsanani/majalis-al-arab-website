@@ -21,8 +21,9 @@ test('meal cards show the full-width photo above the product details and control
   await expect(first.locator('.card-title')).toBeVisible();
   await expect(first.locator('.card-price')).toContainText('ر.س');
   await expect(first.locator('.card-fav svg')).toBeVisible();
-  await expect(first.locator('.add-button svg')).toBeVisible();
-  await expect(first.locator('.add-button')).toContainText('أضف للسلة');
+  await expect(first.locator('.add-button .card-cart-plus')).toBeVisible();
+  await expect(first.locator('.add-button')).toHaveAccessibleName(/أضف .* إلى السلة/);
+  await expect(first.locator('.add-button')).toHaveText('');
   const dimensions = await photo.evaluate(node => {
     const image = node.getBoundingClientRect();
     const card = node.closest('.product-card');

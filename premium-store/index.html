@@ -3193,7 +3193,7 @@ body:has(#heroSlider) .reference-top-actions{gap:0!important}
 .product-card .product-card-image-wrap{border-radius:inherit}
 .product-card .card-photo{aspect-ratio:16/9}
 .product-card .card-photo img{position:absolute;inset:0;height:100%!important}
-.product-card .card-photo .product-photo-illustrative{background:#eaddcf!important}
+.product-card .card-photo .product-photo-illustrative{background:#f7f7f7!important}
 .detail-image img.product-photo-illustrative{object-fit:contain;background:#f7f2eb}
 .product-card .card-photo:focus-visible{outline-offset:-4px}
 .product-card .card-body{
@@ -3201,47 +3201,38 @@ body:has(#heroSlider) .reference-top-actions{gap:0!important}
  padding:7px 9px 10px!important;container-type:inline-size;
 }
 .card-heading{
- display:grid;grid-template-columns:auto minmax(0,1fr) auto;
- align-items:center;gap:6px;min-height:40px;
+ display:grid;grid-template-columns:minmax(0,1fr) auto;
+ align-items:center;gap:8px;min-height:40px;
 }
 .card-heading h3{margin:0;min-width:0}
-.card-dish{width:clamp(17px,11cqi,26px);height:auto;color:#671824}
 .product-card .card-title{
  color:#58111d!important;font-size:clamp(13px,9cqi,19px);font-weight:800!important;
  line-height:1.3!important;overflow-wrap:anywhere;
 }
+.card-stock{display:block;margin-block-start:3px;color:#6a5559;font-size:11px;font-weight:500}
 .product-card .card-fav{
  position:relative;inset:auto;width:34px;height:34px;padding:0;
- margin-inline-start:4px;border:0;color:#761a2b!important;
- background:#f8eee6!important;box-shadow:none!important;
+ border:0;color:#761a2b!important;background:transparent!important;box-shadow:none!important;
 }
-.product-card .card-fav::before{
- content:"";position:absolute;inset-inline-start:-6px;inset-block-start:28%;
- width:1px;height:44%;background:#d4a774;pointer-events:none;
-}
-.product-card .card-fav:hover,.product-card .card-fav.saved{background:#f3e1d7!important}
+.product-card .card-fav:hover,.product-card .card-fav.saved{color:#9f2033!important}
 .product-card .card-fav.saved svg{fill:currentColor}
-.product-card .card-fav svg{width:18px;height:18px}
+.product-card .card-fav svg{width:20px;height:20px}
 .product-card .card-bottom{
- display:grid;grid-template-columns:minmax(0,1.55fr) minmax(0,1fr);
- gap:6px;align-items:stretch;margin-top:auto;
+ display:flex;justify-content:space-between;align-items:center;gap:8px;margin-top:auto;
 }
 .product-card .card-price{
- display:grid;place-items:center;padding:5px 4px;border-radius:999px;
- background:#faf0e2;color:#64141d!important;text-align:center;
- font-size:clamp(11px,8.4cqi,17px);font-weight:800!important;
+ color:#64141d!important;text-align:end;font-size:clamp(13px,9cqi,18px);font-weight:800!important;
  font-variant-numeric:tabular-nums;line-height:1.15;white-space:normal;overflow-wrap:anywhere;
 }
 .product-card .add-button{
- display:flex;align-items:center;justify-content:center;gap:4px;min-width:0;min-height:41px;
- padding:5px 4px;color:#fff!important;border-radius:999px!important;
+ display:grid;place-items:center;flex:none;width:44px;height:44px;min-width:0;min-height:0;
+ padding:0;color:#fff!important;border-radius:12px!important;
  background:linear-gradient(145deg,#9f2033,#630d1b)!important;
- font-size:clamp(10px,7.5cqi,14px);font-weight:800;line-height:1.1;
 }
 .product-card .add-button:not(:disabled):hover{background:#670e1d!important}
-.product-card .add-button:disabled{background:#eee8e4!important;color:#625552!important}
+.product-card .add-button:disabled{background:#eee!important;color:#625552!important}
 .product-card .add-button:disabled .card-cart-plus{display:none}
-.product-card .add-button svg{flex:none;width:clamp(14px,11cqi,23px);height:auto}
+.product-card .add-button svg{width:25px;height:22px}
 .product-card .card-fav:focus-visible,.product-card .add-button:focus-visible{
  outline:2px solid #6f1927;outline-offset:2px;
 }
@@ -3254,7 +3245,6 @@ body:has(#heroSlider) .reference-top-actions{gap:0!important}
 @media(max-width:780px){
  .product-rail,.product-grid,.recs .product-grid{--meal-columns:2;--meal-gap:9px}
  .product-card .card-body{padding:6px 7px 8px!important}
- .product-card .add-button{min-height:44px}
 }
 </style></head>
 <body>
@@ -3390,7 +3380,6 @@ function toggleFavorite(id){const i=state.favorites.indexOf(id);if(i<0)state.fav
 function sectionHeading(title,desc='',extra=''){return '<div class="panel-head"><div><h2>'+title+'</h2>'+(desc?'<p>'+desc+'</p>':'')+'</div>'+extra+'</div>'}
 const CARD_HEART='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M20.6 5.5a5.2 5.2 0 0 0-7.4 0L12 6.7l-1.2-1.2a5.2 5.2 0 1 0-7.4 7.4l1.2 1.2L12 21l7.4-6.9 1.2-1.2a5.2 5.2 0 0 0 0-7.4Z"/></svg>';
 const CARD_CART='<svg viewBox="0 0 28 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M2 4.5h3.5l3.2 11.8h12l1.3-5M6.3 7.7h10.4"/><circle cx="10.2" cy="20.5" r="1.6" fill="currentColor" stroke="none"/><circle cx="19.5" cy="20.5" r="1.6" fill="currentColor" stroke="none"/><g class="card-cart-plus"><circle cx="22.5" cy="5.8" r="4.3" fill="currentColor" stroke="none"/><path d="M22.5 3.8v4m-2-2h4" stroke="#792821" stroke-width="1.25"/></g></svg>';
-const CARD_DISH='<svg class="card-dish" viewBox="0 0 26 25" fill="none" stroke="currentColor" stroke-width="1.35" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M3 20a10 10 0 0 1 20 0M11.8 10a1.2 1.2 0 0 1 2.4 0M2 20h22a1 1 0 0 1 0 2H2a1 1 0 0 1 0-2Z"/><path d="M9.4 8.5c1.8-2-1.7-2.1 0-4M13 7c1.8-2.1-1.7-2.1 0-4.7m3.6 6.2c1.8-2-1.7-2.1 0-4" stroke="#b77742"/></svg>';
 function card(p){
  const f=state.favorites.includes(p.id),available=p.available!==false;
  const name=escapeHtml(p.name);
@@ -3398,9 +3387,9 @@ function card(p){
  const details=name+'، '+price+(p.demo?'، عرض تجريبي':'')+(available?'':'، غير متوفر');
  return '<article class="product-card"><div class="product-card-image-wrap">'+
  '<button type="button" class="card-photo" data-product="'+p.id+'" aria-label="تفاصيل '+details+'" title="'+details+'">'+imgTag(p,'',false)+'</button></div>'+
- '<div class="card-body"><div class="card-heading">'+CARD_DISH+'<h3><button type="button" class="card-title" data-product="'+p.id+'">'+name+'</button></h3>'+
+ '<div class="card-body"><div class="card-heading"><h3><button type="button" class="card-title" data-product="'+p.id+'">'+name+'</button>'+(available?'':'<span class="card-stock">غير متوفر</span>')+'</h3>'+
  '<button type="button" class="card-fav '+(f?'saved':'')+'" data-fav="'+p.id+'" aria-label="حفظ '+name+' في المفضلة" aria-pressed="'+f+'">'+CARD_HEART+'</button></div>'+
- '<div class="card-bottom"><button type="button" class="add-button" '+(available?'data-card-add="'+p.id+'" aria-label="أضف '+name+' إلى السلة"':'disabled aria-label="'+name+' غير متوفر"')+'>'+CARD_CART+'<span>'+(available?'أضف للسلة':'غير متوفر')+'</span></button>'+
+ '<div class="card-bottom"><button type="button" class="add-button" '+(available?'data-card-add="'+p.id+'" aria-label="أضف '+name+' إلى السلة"':'disabled aria-label="'+name+' غير متوفر"')+'>'+CARD_CART+'</button>'+
  '<span class="card-price">'+price+'</span></div></div></article>';
 }
 function cartContent(){if(!state.cart.length)return '<div class="cart-empty"><div class="cart-icon">🛍️</div><strong>سلتك تنتظر طلبك</strong><p>اختر وجباتك المفضلة، ثم راجع تفاصيل الطلب هنا.</p><button class="outlined" data-go="/menu">تصفح الأطباق</button></div>';return '<div class="cart-lines">'+state.cart.map((l,i)=>{const p=productById(l.id);return '<div class="cart-line">'+imgTag(p)+'<div class="cart-line-info"><strong>'+p.name+'</strong><small>'+(l.note?'ملاحظة: '+escapeHtml(l.note):'بدون ملاحظات')+'</small><div class="cart-line-row"><strong>'+money(p.price*l.qty)+'</strong><div class="stepper"><button data-dec="'+i+'" aria-label="تقليل">−</button><span>'+l.qty+'</span><button data-inc="'+i+'" aria-label="زيادة">+</button></div></div></div></div>'}).join('')+'</div>'}
