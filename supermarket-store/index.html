@@ -1336,24 +1336,37 @@ function retailPromo(kind){
 }
 function renderHome(){
  const byCategory=(name,n=10)=>PRODUCTS.filter(p=>p.category===name).slice(0,n).map(p=>p.id);
- el('app').innerHTML=homeBanner()+featureCategories()+
+ el('app').innerHTML=
+ homeBanner()+
+ featureCategories()+
  retailPromo('fresh')+
- '<section class="home-content-group home-discover-group">'+homeSectionIntro('اختيارات يومية','الطازج والألبان','تشكيلة تجريبية من أقسام المنزل الأساسية.')+
+ '<section class="home-content-group home-discover-group" aria-label="المنتجات الطازجة والألبان واللحوم">'+
+ homeSectionIntro('ابدأ بالمهم','الطازج واحتياجات الثلاجة','خضار وفواكه وألبان ولحوم ومجمدات في مكان واحد.','/menu')+
  productShowcase('الخضار والفواكه','اختيارات طازجة متنوعة',byCategory('الخضار والفواكه'),'/menu','produce')+
  productShowcase('الألبان والأجبان','حليب وزبادي وأجبان',byCategory('الألبان والأجبان'),'/menu','dairy')+
- productShowcase('اللحوم والدواجن','أساسيات المنتجات',byCategory('اللحوم والدواجن'),'/menu','meat')+'</section>'+retailPromo('pantry')+
- '<section class="home-content-group home-offers-group">'+homeSectionIntro('تسوّق أكثر','عروض وباقات متنوعة','عروض تجريبية لا تعكس تخفيضات فعلية.','/offers')+promotionalBanners()+
- productShowcase('باقات تسوق','مجموعات للتجربة',byCategory('العروض والباقات'),'/offers','offers')+'</section>'+homeExperiences()+retailPromo('drinks')+
- '<section class="home-content-group home-taste-group">'+homeSectionIntro('المطبخ والضيافة','أساسيات كل بيت','الأرز والمشروبات والمخبوزات والتسالي.')+
+ productShowcase('اللحوم والدواجن','تشكيلة اللحوم والدواجن',byCategory('اللحوم والدواجن'),'/menu','meat')+
+ productShowcase('المجمدات','منتجات مجمدة متنوعة',byCategory('المجمدات'),'/menu','frozen')+'</section>'+
+ retailPromo('pantry')+
+ '<section class="home-content-group home-pantry-group" aria-label="أساسيات المطبخ والمخبوزات">'+
+ homeSectionIntro('لمطبخك','المؤونة والمخبوزات','احتياجات الطبخ والخبز اليومية.','/menu')+
  productShowcase('الأرز والمكرونة والبقوليات','أساسيات مؤونة المنزل',byCategory('الأرز والمكرونة والبقوليات'),'/menu','pantry')+
+ productShowcase('المخبوزات','توست وخبز ومخبوزات',byCategory('المخبوزات'),'/menu','bakery')+'</section>'+
+ retailPromo('drinks')+
+ '<section class="home-content-group home-taste-group" aria-label="المشروبات والحلويات والتسالي">'+
+ homeSectionIntro('للضيافة والراحة','المشروبات والتسالي','كل ما يكمّل ضيافتك وأوقاتك الحلوة.','/menu')+
  productShowcase('المياه والمشروبات','المياه والعصائر والشاي',byCategory('المياه والمشروبات'),'/menu','drinks')+
- productShowcase('المخبوزات','توست وخبز ومخبوزات',byCategory('المخبوزات'),'/menu','bakery')+
- productShowcase('الحلويات والتسالي','حلويات ومكسرات متنوعة',byCategory('الحلويات والتسالي'),'/menu','snacks')+'</section>'+retailPromo('home')+
- '<section class="home-content-group home-explore-group">'+homeSectionIntro('لمنزلك','التنظيف والعناية','تسوق مستلزمات المنزل والعناية اليومية.')+
+ productShowcase('الحلويات والتسالي','حلويات ومكسرات متنوعة',byCategory('الحلويات والتسالي'),'/menu','snacks')+'</section>'+
+ '<section class="home-content-group home-offers-group" aria-label="العروض وباقات التسوق">'+
+ homeSectionIntro('للتسوّق الذكي','العروض وباقات التسوق','باقات وعروض للمعاينة، وليست خصومات فعلية معتمدة.','/offers')+
+ promotionalBanners()+
+ productShowcase('باقات تسوق','مجموعات للتجربة',byCategory('العروض والباقات'),'/offers','offers')+'</section>'+
+ retailPromo('home')+
+ '<section class="home-content-group home-explore-group" aria-label="التنظيف والعناية">'+
+ homeSectionIntro('كل ما للبيت','التنظيف والعناية الشخصية','مستلزمات يومية لتكمل مشترياتك.','/menu')+
  productShowcase('المنظفات المنزلية','حلول النظافة اليومية',byCategory('المنظفات المنزلية'),'/menu','cleaning')+
- productShowcase('العناية الشخصية','احتياجات العناية اليومية',byCategory('العناية الشخصية'),'/menu','care')+
- productShowcase('المجمدات','منتجات مجمدة متنوعة',byCategory('المجمدات'),'/menu','frozen')+
- recentShowcase()+'</section>'+
+ productShowcase('العناية الشخصية','احتياجات العناية اليومية',byCategory('العناية الشخصية'),'/menu','care')+'</section>'+
+ homeExperiences()+
+ '<section class="home-content-group home-recent-group" aria-label="منتجات شاهدتها مؤخرًا">'+recentShowcase()+'</section>'+
  homeTrustStrip()+homeFinalActions()+homepageDisclosure();
 }
 function retailIntroBanner(){return '<section class="hs-restaurant-intro" aria-label="متجر السوبرماركت"><div class="hs-restaurant-intro-logo">م</div><div class="hs-restaurant-intro-info"><span class="hs-restaurant-intro-eyebrow">متجر السوبرماركت والهايبرماركت</span><h2>كل احتياجات البيت، على ذوقك</h2><div class="hs-restaurant-intro-tags"><span>🥬 خضار وفواكه</span><span>🛒 منتجات يومية</span><span>📦 احتياجات المنزل</span><span class="hs-restaurant-intro-demo">نسخة استعراضية — الطلب والدفع غير مفعلين</span></div></div><button class="hs-restaurant-intro-action" type="button" data-go="/favorites">♡ أصنافي المفضلة ←</button></section>'}
