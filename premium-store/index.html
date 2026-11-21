@@ -909,6 +909,35 @@ body:has(#heroSlider) .page{padding-top:7px}
  .site-footer{margin-top:23px}
 }
 
+
+/* Unified category and meal card surface from user swatch (#FBF9F9).
+   Preserve existing layout, text, prices, controls, and responsiveness. */
+:root{--store-card-surface:#FBF9F9}
+.first-fold-categories .feature-category{
+  --category-wash:var(--store-card-surface)!important;
+  --category-border:#F0EBED!important;
+  background:var(--store-card-surface)!important;
+  border-color:#F0EBED!important;
+  box-shadow:0 3px 13px #231b2608;
+}
+.first-fold-categories .feature-category-icon{
+  background:transparent!important;
+}
+.product-card{
+  background:var(--store-card-surface)!important;
+  border-color:#F0EBED!important;
+}
+.product-card .card-photo,
+.product-card .card-photo img{
+  background:var(--store-card-surface)!important;
+}
+.product-card .card-photo img{
+  object-fit:contain!important;
+}
+.product-card .card-body{
+  background:var(--store-card-surface)!important;
+}
+
 </style></head>
 <body>
 <header class="site-header"><div class="wrap header-inner">
