@@ -1,0 +1,44 @@
+name: Restaurant Storefront UI Audit
+on:
+  push:
+    branches:
+      - feature/restaurant-real-category-photos-20261121
+    paths:
+      - 'premium-store/**'
+      - '.github/workflows/restaurant-ui-audit-v2.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  browser-test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 18
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Install Playwright
+        run: npm install --no-save @playwright/test
+      - name: Install Chromium and required system libraries
+        run: npx playwright install --with-deps chromium
+      - name: Start local static server
+        run: |
+          python3 -m http.server 8765 --bind 127.0.0.1 --directory premium-store >/tmp/majalis-storefront-http.log 2>&1 &
+          echo $! > /tmp/majalis-storefront-http.pid
+          for i in {1..20}; do
+            if curl --fail --silent http://127.0.0.1:8765/ >/dev/null; then break; fi
+            sleep 1
+          done
+      - name: Run desktop and mobile browser tests
+        run: npx playwright test --config premium-store/tests/playwright.config.cjs
+      - name: Upload audit traces and screenshots
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: restaurant-storefront-audit
+          path: |
+            test-results/
+            playwright-report/
+            /tmp/majalis-storefront-http.log
+          if-no-files-found: ignore
