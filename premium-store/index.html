@@ -1064,6 +1064,17 @@ body:has(#heroSlider) .page{padding-top:7px}
  #heroSlider .showcase-float-three{width:86px}
 }
 
+
+/* Only the sandwiches banner: a prominent, readable sandwich photo inside the phone. */
+#heroSlider .hero-sandwiches .sandwich-phone-cover{position:relative;height:43%;margin:0 9px;border-radius:11px;overflow:hidden}
+#heroSlider .hero-sandwiches .sandwich-phone-cover img{width:100%;height:100%;object-fit:cover;object-position:center;display:block}
+#heroSlider .hero-sandwiches .sandwich-phone-cover:after{content:"";position:absolute;inset:0;background:linear-gradient(0deg,#2A170CCB 0%,#2A170C10 62%);pointer-events:none}
+#heroSlider .hero-sandwiches .sandwich-cover-info{position:absolute;z-index:2;inset-inline:10px;bottom:10px;display:flex;flex-direction:column;gap:3px;color:#fff;text-align:start}
+#heroSlider .hero-sandwiches .sandwich-cover-info strong{font-size:13px}
+#heroSlider .hero-sandwiches .sandwich-cover-info small{font-size:9px}
+#heroSlider .hero-sandwiches .sandwich-phone-tiles{grid-template-columns:repeat(3,minmax(0,1fr));gap:5px}
+#heroSlider .hero-sandwiches .sandwich-phone-tiles img{height:65px;min-width:0}
+
 </style></head>
 <body>
 <header class="site-header"><div class="wrap header-inner">
@@ -1175,6 +1186,26 @@ const HERO_DISPLAY_PHOTOS={"main":["photo-1544025162-d76694265947","photo-155390
 function heroCategoryArt(slide){
  const set=HERO_DISPLAY_PHOTOS[slide.style]||HERO_DISPLAY_PHOTOS.main;
  const photo=(id,w)=>'https://images.unsplash.com/'+id+'?auto=format&fit=crop&w='+w+'&q=82';
+ if(slide.style==='sandwiches'){
+  const hero=photo('photo-1568901346375-23c9450c58cd',820);
+  const tiles=['photo-1568901346375-23c9450c58cd','photo-1553909489-cd47e0ef937f','photo-1528735602780-2552fd46c7af'];
+  return '<div class="hero-showcase sandwich-showcase" aria-hidden="true">'+
+   '<span class="showcase-halo"></span><span class="showcase-ring"></span>'+
+   '<div class="showcase-phone"><div class="showcase-phone-screen">'+
+    '<div class="showcase-phone-status"><span>9:41</span><span class="phone-camera"></span><span>▂ ▰</span></div>'+
+    '<div class="showcase-phone-head"><span>مجالس العرب</span><span>✦</span></div>'+
+    '<div class="showcase-phone-search">ابحث في قائمة الطعام <span>⌕</span></div>'+
+    '<div class="showcase-phone-cover sandwich-phone-cover"><img src="'+hero+'" alt="" loading="lazy" decoding="async"><span class="sandwich-cover-info"><strong>سندويتشات شهية</strong><small>خيارات طازجة ومميزة</small></span></div>'+
+    '<div class="showcase-phone-caption">اختر سندويتشك المفضل</div>'+
+    '<div class="showcase-phone-tiles sandwich-phone-tiles">'+tiles.map(id=>'<img src="'+photo(id,360)+'" alt="" loading="lazy" decoding="async">').join('')+'</div>'+
+    '<div class="showcase-phone-nav"><i></i><i></i><i></i></div>'+
+   '</div></div>'+
+   '<div class="showcase-float showcase-float-one"><img src="'+photo(tiles[1],420)+'" alt="" loading="lazy" decoding="async"></div>'+
+   '<div class="showcase-float showcase-float-two"><img src="'+photo(tiles[0],420)+'" alt="" loading="lazy" decoding="async"></div>'+
+   '<div class="showcase-float showcase-float-three"><img src="'+photo(tiles[2],420)+'" alt="" loading="lazy" decoding="async"></div>'+
+  '</div>';
+ }
+
  return '<div class="hero-showcase" aria-hidden="true">'+
   '<span class="showcase-halo"></span><span class="showcase-ring"></span>'+
   '<div class="showcase-phone"><div class="showcase-phone-screen">'+
