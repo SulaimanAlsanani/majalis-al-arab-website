@@ -1260,6 +1260,121 @@ button:focus-visible,a:focus-visible,input:focus-visible,textarea:focus-visible,
  .first-fold-categories .feature-category-grid{grid-template-columns:repeat(2,minmax(0,1fr))!important}
 }
 @media(prefers-reduced-motion:reduce){.first-fold-categories .feature-category{transition:none!important}.first-fold-categories .feature-category:hover{transform:none!important}}
+
+/* Supermarket category grid — rectangular pale tiles per approved screenshot, never circles. */
+.first-fold-categories .feature-category-grid{
+ display:grid!important;
+ grid-template-columns:repeat(9,minmax(0,1fr))!important;
+ column-gap:clamp(10px,1vw,18px)!important;
+ row-gap:clamp(18px,2.2vw,30px)!important;
+ align-items:start!important;
+}
+.first-fold-categories .feature-category,
+.first-fold-categories .feature-category:nth-child(n){
+ display:flex!important;
+ flex-direction:column!important;
+ align-items:stretch!important;
+ justify-content:flex-start!important;
+ min-height:0!important;
+ min-width:0!important;
+ padding:0!important;
+ gap:9px!important;
+ border:0!important;
+ border-radius:0!important;
+ background:transparent!important;
+ box-shadow:none!important;
+ transform:none!important;
+ text-align:center!important;
+}
+.first-fold-categories .feature-category:hover,
+.first-fold-categories .feature-category:nth-child(n):hover{
+ background:transparent!important;
+ box-shadow:none!important;
+ transform:none!important;
+}
+.first-fold-categories .feature-category-icon,
+.first-fold-categories .feature-category:nth-child(n) .feature-category-icon{
+ display:flex!important;
+ align-items:center!important;
+ justify-content:center!important;
+ box-sizing:border-box!important;
+ width:100%!important;
+ height:auto!important;
+ min-width:0!important;
+ max-width:none!important;
+ max-height:none!important;
+ aspect-ratio:1/1!important;
+ padding:clamp(9px,1.1vw,16px)!important;
+ border:0!important;
+ border-radius:18px!important;
+ background:#FAF8F8!important;
+ box-shadow:none!important;
+ overflow:hidden!important;
+ transition:background-color .18s ease!important;
+}
+.first-fold-categories .feature-category:hover .feature-category-icon{
+ background:#F5F2F2!important;
+}
+.first-fold-categories .feature-category-icon img,
+.first-fold-categories .feature-category:nth-child(n) .feature-category-icon img{
+ display:block!important;
+ position:static!important;
+ width:100%!important;
+ height:100%!important;
+ max-width:100%!important;
+ max-height:100%!important;
+ object-fit:contain!important;
+ object-position:center!important;
+ border:0!important;
+ border-radius:0!important;
+ background:transparent!important;
+ transform:none!important;
+ filter:none!important;
+}
+.first-fold-categories .feature-category strong,
+.first-fold-categories .feature-category:nth-child(n) strong{
+ display:block!important;
+ width:100%!important;
+ color:#514B4B!important;
+ font-size:clamp(11px,.95vw,14px)!important;
+ font-weight:500!important;
+ line-height:1.55!important;
+ min-height:2.7em!important;
+ text-align:center!important;
+ white-space:normal!important;
+ text-wrap:balance!important;
+}
+@media(max-width:1350px){
+ .first-fold-categories .feature-category-grid{
+  grid-template-columns:repeat(6,minmax(0,1fr))!important;
+ }
+}
+@media(max-width:900px){
+ .first-fold-categories .feature-category-grid{
+  grid-template-columns:repeat(4,minmax(0,1fr))!important;
+ }
+}
+@media(max-width:620px){
+ .first-fold-categories .feature-category-grid{
+  grid-template-columns:repeat(3,minmax(0,1fr))!important;
+  column-gap:9px!important;row-gap:17px!important;
+ }
+ .first-fold-categories .feature-category,
+ .first-fold-categories .feature-category:nth-child(n){padding:0!important;gap:7px!important}
+ .first-fold-categories .feature-category-icon,
+ .first-fold-categories .feature-category:nth-child(n) .feature-category-icon{
+  border-radius:13px!important;padding:9px!important;
+  width:100%!important;height:auto!important;
+ }
+ .first-fold-categories .feature-category strong{
+  font-size:11px!important;line-height:1.4!important;
+ }
+}
+@media(max-width:370px){
+ .first-fold-categories .feature-category-grid{
+  grid-template-columns:repeat(2,minmax(0,1fr))!important;
+ }
+}
 </style></head>
 <body>
 <header class="site-header"><div class="wrap header-inner">
