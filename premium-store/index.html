@@ -2842,6 +2842,37 @@ body:has(#heroSlider) .header-inner .brand.brand-official{
 @media(max-width:780px){.site-header .brand-official-seal{width:40px!important;height:40px!important;min-width:40px!important}}
 @media(max-width:520px){.site-header .brand-official-seal{width:37px!important;height:37px!important;min-width:37px!important}}
 @media(max-width:420px){.site-header .brand-official-seal{width:34px!important;height:34px!important;min-width:34px!important}}
+
+/* Refine the first category headline and reclaim whitespace under the hero. */
+#heroSlider.hero-slider{
+ margin-bottom:10px!important;
+}
+.first-fold-categories{
+ padding-top:0!important;
+ margin-top:0!important;
+}
+.first-fold-categories .home-section-head{
+ margin-top:0!important;
+ margin-bottom:10px!important;
+ padding-top:0!important;
+ align-items:center!important;
+}
+.first-fold-categories .home-section-head h2{
+ font-size:clamp(23px,2.15vw,33px)!important;
+ line-height:1.33!important;
+ font-weight:850!important;
+ margin:0!important;
+ letter-spacing:-.025em!important;
+}
+@media(max-width:780px){
+ #heroSlider.hero-slider{margin-bottom:9px!important}
+ .first-fold-categories .home-section-head h2{font-size:clamp(20px,3.4vw,26px)!important}
+}
+@media(max-width:520px){
+ #heroSlider.hero-slider{margin-bottom:6px!important}
+ .first-fold-categories .home-section-head{margin-bottom:8px!important}
+ .first-fold-categories .home-section-head h2{font-size:clamp(17px,4.45vw,21px)!important;line-height:1.4!important}
+}
 </style></head>
 <body>
 <header class="site-header"><div class="wrap header-inner">
@@ -3045,7 +3076,7 @@ function heroCategoryArt(slide){
 function homeBanner(){return '<section class="hero-slider" id="heroSlider" aria-label="بنرات مجالس العرب المتحركة" aria-roledescription="عرض شرائح"><div class="hero-track" id="heroTrack">'+HERO_SLIDES.map((x,i)=>'<article class="discovery-hero hero-slide hero-'+x.style+'" aria-label="البنر '+(i+1)+' من '+HERO_SLIDES.length+'" aria-hidden="'+(i!==0)+'"><div class="discovery-copy"><span class="discovery-kicker">'+x.kicker+'</span><h1>'+x.title+'<br><em>'+x.em+'</em></h1><p>'+x.desc+'</p><div class="discovery-actions">'+heroAction(x.primary,x.path,x.category,true)+heroAction(x.secondary,x.secondaryPath,x.secondaryCategory,false)+'</div><div class="discovery-labels"><span>✦ تجربة تصفح تجريبية</span><span>✦ خيارات متنوعة</span></div></div><div class="discovery-visual">'+heroCategoryArt(x)+'</div></article>').join('')+'</div><div class="hero-dots" role="group" aria-label="اختيار البنر">'+HERO_SLIDES.map((_,i)=>'<button type="button" data-hero-index="'+i+'" class="'+(i===0?'active':'')+'" aria-label="عرض البنر '+(i+1)+'" aria-current="'+(i===0)+'"></button>').join('')+'</div><span class="hero-index" id="heroIndex">1 / '+HERO_SLIDES.length+'</span></section>'}
 
 const CATEGORY_PLATE_IMAGES={"الفطور والعشاء":"assets/categories/breakfast.png","العريكة والمعصوب":"assets/categories/areeka-masoob.png","المشويات والأطباق الرئيسية":"assets/categories/grills.png","السندويتشات":"assets/categories/sandwiches.png","الإيدامات والسلطات":"assets/categories/salads.png","الحلا":"assets/categories/desserts.png","القهوة المختصة":"assets/categories/coffee.png","المشروبات":"assets/categories/drinks.png","المقبلات":"assets/categories/appetizers.png","الوجبات العائلية":"assets/categories/family-meals.png","العروض التجريبية":"assets/categories/family-meals.png"};
-function featureCategories(){const featured=[['🍳','فطور','الفطور والعشاء'],['🍯','عريكة ومعصوب','العريكة والمعصوب'],['🍗','مشويات','المشويات والأطباق الرئيسية'],['🥪','سندويتشات','السندويتشات'],['🥗','سلطات','الإيدامات والسلطات'],['🍰','حلويات','الحلا'],['☕','قهوة','القهوة المختصة'],['🥤','مشروبات','المشروبات'],['🍟','مقبلات','المقبلات'],['🎁','وجبات عائلية','الوجبات العائلية']];return '<section class="first-fold-categories" aria-label="أقسام قائمة الطعام"><div class="home-section-head"><div><span>تصفّح حسب المزاج</span><h2>وش حاب تطلب اليوم؟</h2></div><button data-go="/menu">كل الأقسام ←</button></div><div class="feature-category-grid">'+featured.map(([icon,label,category])=>'<button type="button" class="feature-category" data-category="'+category+'"><span class="feature-category-icon feature-category-photo"><img src="'+CATEGORY_PLATE_IMAGES[category]+'" alt="طبق '+label+'" loading="lazy" decoding="async" onerror="this.onerror=null;this.remove();"><span class="category-photo-fallback" aria-hidden="true">'+icon+'</span></span><strong>'+label+'</strong></button>').join('')+'</div></section>'}
+function featureCategories(){const featured=[['🍳','فطور','الفطور والعشاء'],['🍯','عريكة ومعصوب','العريكة والمعصوب'],['🍗','مشويات','المشويات والأطباق الرئيسية'],['🥪','سندويتشات','السندويتشات'],['🥗','سلطات','الإيدامات والسلطات'],['🍰','حلويات','الحلا'],['☕','قهوة','القهوة المختصة'],['🥤','مشروبات','المشروبات'],['🍟','مقبلات','المقبلات'],['🎁','وجبات عائلية','الوجبات العائلية']];return '<section class="first-fold-categories" aria-label="أقسام قائمة الطعام"><div class="home-section-head"><div><span>تصفّح حسب المزاج</span><h2>وش خاطرك فيه؟ طلبك يبدأ من هنا</h2></div><button data-go="/menu">كل الأقسام ←</button></div><div class="feature-category-grid">'+featured.map(([icon,label,category])=>'<button type="button" class="feature-category" data-category="'+category+'"><span class="feature-category-icon feature-category-photo"><img src="'+CATEGORY_PLATE_IMAGES[category]+'" alt="طبق '+label+'" loading="lazy" decoding="async" onerror="this.onerror=null;this.remove();"><span class="category-photo-fallback" aria-hidden="true">'+icon+'</span></span><strong>'+label+'</strong></button>').join('')+'</div></section>'}
 function menuQrBanner(){
  return '<section class="menu-qr-banner" aria-label="تصفح متجر مجالس العرب بسهولة">'+
    '<div class="menu-banner-brand"><span class="menu-banner-mark" aria-hidden="true">م</span><strong>مجالس العرب</strong><small>مطاعم • ديوانية • جلسات</small></div>'+
