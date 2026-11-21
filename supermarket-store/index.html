@@ -1384,6 +1384,109 @@ button:focus-visible,a:focus-visible,input:focus-visible,textarea:focus-visible,
   row-gap:clamp(19px,2vw,29px)!important;
  }
 }
+
+/* Restaurant-parity campaign system. Category tiles and all their image rules are not touched. */
+.majalis-promo.retail-campaign{
+ --tint:#fff9f1;--accent:#987447;
+ direction:rtl!important;display:grid!important;grid-template-columns:minmax(0,1fr) 43%!important;
+ position:relative!important;isolation:isolate;overflow:hidden!important;
+ background:var(--tint)!important;border:0!important;
+ border-radius:24px!important;min-height:clamp(220px,20vw,285px)!important;
+ margin:clamp(12px,2vw,25px) 0 clamp(21px,3vw,39px)!important;
+ box-shadow:0 7px 24px #44302c0b!important;
+}
+.majalis-promo.retail-campaign.pantry{--tint:#fff5f3;--accent:#9a5f58}
+.majalis-promo.retail-campaign.drinks{--tint:#f9f4f8;--accent:#875f85}
+.majalis-promo.retail-campaign.home{--tint:#f3f8fc;--accent:#527f9b}
+.majalis-promo.retail-campaign:before{content:"";position:absolute;z-index:-1;left:-8%;top:-60%;width:55%;aspect-ratio:1;background:#ffffff80;border-radius:50%}
+.majalis-promo.retail-campaign .majalis-promo-copy{
+ display:flex!important;flex-direction:column!important;align-items:flex-start!important;justify-content:center!important;
+ gap:10px!important;padding:clamp(22px,3vw,44px)!important;min-width:0!important;text-align:right!important;
+}
+.majalis-promo.retail-campaign .majalis-promo-copy>span{color:var(--accent)!important;font-size:12px!important;font-weight:750!important}
+.majalis-promo.retail-campaign .majalis-promo-copy h2{margin:0!important;color:#302d31!important;font-size:clamp(23px,2.45vw,35px)!important;line-height:1.33!important;font-weight:800!important}
+.majalis-promo.retail-campaign .majalis-promo-copy p{margin:0!important;color:#6b6670!important;font-size:clamp(12px,1.03vw,15px)!important;line-height:1.75!important;max-width:390px!important}
+.majalis-promo.retail-campaign .majalis-promo-copy button{
+ margin-top:7px!important;min-height:42px!important;background:#fff!important;border:0!important;
+ border-radius:999px!important;padding:11px 20px!important;color:var(--accent)!important;
+ font-size:12px!important;font-weight:800!important;cursor:pointer!important;
+}
+.majalis-promo.retail-campaign .majalis-promo-copy button:hover{box-shadow:0 3px 13px #00000009!important}
+.majalis-promo.retail-campaign .majalis-promo-art{position:relative!important;min-height:clamp(220px,20vw,285px)!important;overflow:hidden!important}
+.majalis-promo.retail-campaign .majalis-promo-circle{
+ position:absolute!important;left:7%!important;top:50%!important;transform:translateY(-50%)!important;
+ width:84%!important;aspect-ratio:1!important;background:color-mix(in srgb,var(--accent),white 93%)!important;
+ border:0!important;border-radius:50%!important;
+}
+.majalis-promo.retail-campaign .majalis-promo-photo{
+ position:absolute!important;left:5%!important;bottom:-2%!important;width:68%!important;height:89%!important;
+ object-fit:contain!important;filter:drop-shadow(0 12px 12px #3e2d221b)!important;
+}
+.majalis-promo.retail-campaign .majalis-promo-photo.second{
+ display:block!important;left:auto!important;right:2%!important;bottom:4%!important;
+ width:38%!important;height:61%!important;
+}
+.majalis-promo.retail-campaign .majalis-promo-phone{display:none!important}
+.majalis-promo.retail-campaign.fresh .majalis-promo-phone{
+ display:flex!important;position:absolute!important;left:45%!important;top:9%!important;height:85%!important;
+ width:26%!important;max-width:118px!important;min-width:73px!important;
+ background:#fff!important;border:5px solid #3a3539!important;border-radius:21px!important;
+ transform:rotate(-9deg)!important;box-shadow:0 12px 27px #382e341f!important;
+ overflow:hidden!important;padding:17px 5px 6px!important;
+ flex-direction:column!important;gap:4px!important;align-items:center!important;justify-content:flex-start!important;
+}
+.majalis-promo.retail-campaign .majalis-promo-phone strong{font-size:10px!important;color:#3a343a!important;line-height:1.1!important}
+.majalis-promo.retail-campaign .majalis-promo-phone small{font-size:8px!important;color:#777!important}
+.majalis-promo.retail-campaign .majalis-promo-phone img{display:block!important;width:100%!important;min-height:0!important;flex:1!important;object-fit:contain!important}
+.majalis-promo.retail-campaign.fresh .majalis-promo-photo.second{display:none!important}
+/* Hero banner matches the restaurant's layout, while retaining supermarket hero content. */
+#heroSlider.hero-slider{
+ height:420px!important;min-height:0!important;max-height:none!important;
+ border:0!important;border-radius:24px!important;
+ box-shadow:0 12px 29px #36221f0b!important;overflow:hidden!important;
+ margin-bottom:clamp(12px,2vw,23px)!important;
+}
+#heroSlider .hero-track{height:100%!important}
+#heroSlider .hero-slide.discovery-hero{height:100%!important;min-height:0!important;grid-template-columns:1.35fr .65fr!important}
+#heroSlider .hero-slide .discovery-copy{height:100%!important;min-width:0!important}
+#heroSlider .hero-slide .discovery-copy h1{letter-spacing:-.025em!important;line-height:1.27!important}
+#heroSlider .hero-slide .discovery-copy p{line-height:1.72!important}
+#heroSlider .hero-dots{z-index:9!important;bottom:15px!important;max-width:min(88%,670px)!important;overflow-x:auto!important;scrollbar-width:none!important;gap:6px!important}
+#heroSlider .hero-dots::-webkit-scrollbar{display:none}
+#heroSlider .hero-index{z-index:9!important}
+#heroSlider .hero-arrow{display:none!important}
+.home-experience-section{margin:clamp(16px,2vw,28px) 0 clamp(25px,3.5vw,45px)!important;padding-top:clamp(20px,2.5vw,33px)!important}
+.home-offers-group .promo-two{margin:12px 0 26px!important;gap:clamp(12px,1.5vw,23px)!important}
+.home-offers-group .promo-box{border-radius:24px!important;box-shadow:none!important}
+@media(max-width:1100px){
+ #heroSlider.hero-slider{height:420px!important}
+}
+@media(max-width:780px){
+ #heroSlider.hero-slider{height:355px!important;border-radius:19px!important}
+ #heroSlider .hero-slide.discovery-hero{display:block!important}
+ #heroSlider .hero-slide .discovery-copy{padding:clamp(19px,3.8vw,34px)!important;padding-bottom:40px!important}
+ #heroSlider .hero-slide .discovery-visual{display:block!important;position:absolute!important;inset-inline-start:60%!important;width:40%!important;opacity:.5!important;pointer-events:none!important}
+ .majalis-promo.retail-campaign{grid-template-columns:minmax(0,1fr) 39%!important;min-height:185px!important;border-radius:17px!important}
+ .majalis-promo.retail-campaign .majalis-promo-copy{padding:18px 14px!important;gap:7px!important}
+ .majalis-promo.retail-campaign .majalis-promo-copy h2{font-size:clamp(18px,3.8vw,25px)!important}
+ .majalis-promo.retail-campaign .majalis-promo-copy p{font-size:11px!important}
+ .majalis-promo.retail-campaign .majalis-promo-art{min-height:185px!important}
+ .majalis-promo.retail-campaign .majalis-promo-photo{width:90%!important;height:80%!important;left:0!important}
+ .majalis-promo.retail-campaign .majalis-promo-photo.second{width:43%!important;height:45%!important;right:-4%!important;bottom:1%!important}
+ .majalis-promo.retail-campaign.fresh .majalis-promo-phone{left:53%!important;width:34%!important;height:75%!important;top:13%!important;border-width:3px!important;border-radius:13px!important;padding:10px 4px!important}
+}
+@media(max-width:520px){
+ #heroSlider.hero-slider{height:330px!important}
+ #heroSlider .hero-slide .discovery-visual{opacity:.28!important}
+ #heroSlider .hero-slide .discovery-copy h1{font-size:clamp(24px,5vw,31px)!important}
+ .majalis-promo.retail-campaign{min-height:165px!important}
+ .majalis-promo.retail-campaign .majalis-promo-copy{padding:12px!important}
+ .majalis-promo.retail-campaign .majalis-promo-copy h2{font-size:17px!important}
+ .majalis-promo.retail-campaign .majalis-promo-copy p{font-size:10px!important}
+ .majalis-promo.retail-campaign .majalis-promo-copy button{padding:7px 12px!important;min-height:34px!important;font-size:10px!important}
+ .majalis-promo.retail-campaign .majalis-promo-art{min-height:165px!important}
+}
+@media(prefers-reduced-motion:reduce){.majalis-promo.retail-campaign,.majalis-promo.retail-campaign *{transition:none!important}}
 </style></head>
 <body>
 <header class="site-header"><div class="wrap header-inner">
@@ -1473,7 +1576,7 @@ function heroCategoryArt(slide){
  '<div class="showcase-float showcase-float-three"><img src="'+photo(set[2],420)+'" alt="" loading="lazy" decoding="async" onerror="this.hidden=true"></div></div>';
 }
 
-function homeBanner(){return '<section class="hero-slider" id="heroSlider" aria-label="بنرات سوق التجزئة المتحركة" aria-roledescription="عرض شرائح"><div class="hero-track" id="heroTrack">'+HERO_SLIDES.map((x,i)=>'<article class="discovery-hero hero-slide hero-'+x.style+'" aria-label="البنر '+(i+1)+' من '+HERO_SLIDES.length+'" aria-hidden="'+(i!==0)+'"><div class="discovery-copy"><span class="discovery-kicker">'+x.kicker+'</span><h1>'+x.title+'<br><em>'+x.em+'</em></h1><p>'+x.desc+'</p><div class="discovery-actions">'+heroAction(x.primary,x.path,x.category,true)+heroAction(x.secondary,x.secondaryPath,x.secondaryCategory,false)+'</div><div class="discovery-labels"><span>✦ تجربة تصفح تجريبية</span><span>✦ خيارات متنوعة</span></div></div><div class="discovery-visual">'+heroCategoryArt(x)+'</div></article>').join('')+'</div><button type="button" class="hero-arrow hero-next" data-hero-move="1" aria-label="البنر التالي">❮</button><button type="button" class="hero-arrow hero-prev" data-hero-move="-1" aria-label="البنر السابق">❯</button><div class="hero-dots" role="group" aria-label="اختيار البنر">'+HERO_SLIDES.map((_,i)=>'<button type="button" data-hero-index="'+i+'" class="'+(i===0?'active':'')+'" aria-label="عرض البنر '+(i+1)+'" aria-current="'+(i===0)+'"></button>').join('')+'</div><span class="hero-index" id="heroIndex">1 / '+HERO_SLIDES.length+'</span></section>'}
+function homeBanner(){return '<section class="hero-slider" id="heroSlider" aria-label="بنرات سوق التجزئة المتحركة" aria-roledescription="عرض شرائح"><div class="hero-track" id="heroTrack">'+HERO_SLIDES.map((x,i)=>'<article class="discovery-hero hero-slide hero-'+x.style+'" aria-label="البنر '+(i+1)+' من '+HERO_SLIDES.length+'" aria-hidden="'+(i!==0)+'"><div class="discovery-copy"><span class="discovery-kicker">'+x.kicker+'</span><h1>'+x.title+'<br><em>'+x.em+'</em></h1><p>'+x.desc+'</p><div class="discovery-actions">'+heroAction(x.primary,x.path,x.category,true)+heroAction(x.secondary,x.secondaryPath,x.secondaryCategory,false)+'</div><div class="discovery-labels"><span>✦ تجربة تصفح تجريبية</span><span>✦ خيارات متنوعة</span></div></div><div class="discovery-visual">'+heroCategoryArt(x)+'</div></article>').join('')+'</div><div class="hero-dots" role="group" aria-label="اختيار البنر">'+HERO_SLIDES.map((_,i)=>'<button type="button" data-hero-index="'+i+'" class="'+(i===0?'active':'')+'" aria-label="عرض البنر '+(i+1)+'" aria-current="'+(i===0)+'"></button>').join('')+'</div><span class="hero-index" id="heroIndex">1 / '+HERO_SLIDES.length+'</span></section>'}
 
 function featureCategories(){
 const featured=[
@@ -1522,18 +1625,28 @@ function homeFinalActions(){return '<section class="home-actions" aria-label="ت
 function homeSectionIntro(kicker,title,desc,more='/menu'){return '<div class="homepage-group-heading"><div><span>'+kicker+'</span><h2>'+title+'</h2><p>'+desc+'</p></div><button type="button" data-go="'+more+'">استكشف المزيد ←</button></div>'}
 function homeExperiences(){return '<section class="home-experience-section" aria-label="تسوق حسب احتياجك">'+homeSectionIntro('مشترياتك اليومية','تسوّق بطريقتك','أقسام عملية للوصول السريع إلى احتياجات المنزل.')+'<div class="home-experience-grid"><button type="button" class="home-experience-card experience-private" data-category="الخضار والفواكه"><span class="experience-icon">🥬</span><span class="experience-label">المنتجات الطازجة</span><strong>طازج للبيت</strong><small>خضار وفواكه من أصناف المعاينة</small><b>تصفح القسم ←</b></button><button type="button" class="home-experience-card experience-matches" data-category="الأرز والمكرونة والبقوليات"><span class="experience-icon">🍚</span><span class="experience-label">مؤونة المطبخ</span><strong>أساسيات كل يوم</strong><small>أرز ومكرونة وبقوليات وأكثر</small><b>تصفح القسم ←</b></button><button type="button" class="home-experience-card experience-games" data-category="المنظفات المنزلية"><span class="experience-icon">🧽</span><span class="experience-label">العناية بالمنزل</span><strong>مستلزمات بيتك</strong><small>منظفات وأدوات الاستخدام اليومي</small><b>تصفح القسم ←</b></button></div></section>'}
 
-function retailPromo(k){const props={fresh:['fresh','من السوق للبيت','طازج كل يوم','الخضار والفواكه الطازجة','الخضار والفواكه'],pantry:['pantry','أساسيات المطبخ','مؤونة البيت','كل ما تحتاجه من أرز ومخبوزات','الأرز والمكرونة والبقوليات'],drinks:['drinks','وقت الضيافة','مشروبات وتسالي','اختيارات يومية متنوعة','المياه والمشروبات'],home:['home','كل ما للبيت','نظافة وعناية','مستلزمات المنزل اليومية','المنظفات المنزلية']}[k];if(!props)return '';return '<section class="retail-promo retail-promo-'+props[0]+'"><div><span>'+props[1]+'</span><h2>'+props[2]+'</h2><p>'+props[3]+'</p><button data-category="'+props[4]+'">تصفح القسم ←</button></div><div class="retail-promo-symbol" aria-hidden="true"><img src="'+((window.SUPERMARKET_CATEGORY_IMAGES||{})[props[4]]||('https://images.unsplash.com/'+PHOTO[{fresh:'produce',pantry:'pantry',drinks:'drinks',home:'cleaning'}[k]]+'?auto=format&fit=crop&w=680&q=80'))+'" alt="" loading="lazy"></div></section>'}
+/* Shared distributed promotional banner layout used by the restaurant storefront. */
+function retailPromo(kind){
+ const p={
+ fresh:['fresh','من السوق للبيت','طازج كل يوم','الخضار والفواكه الطازجة','تصفح الطازج','الخضار والفواكه','produce','dairy'],
+ pantry:['pantry','أساسيات المطبخ','مؤونة البيت','كل ما تحتاجه من أرز ومخبوزات','تصفح المؤونة','الأرز والمكرونة والبقوليات','pantry','bakery'],
+ drinks:['drinks','وقت الضيافة','مشروبات وتسالي','اختيارات يومية متنوعة','تصفح المشروبات','المياه والمشروبات','drinks','snacks'],
+ home:['home','كل ما للبيت','نظافة وعناية','مستلزمات المنزل اليومية','تصفح المنزل','المنظفات المنزلية','cleaning','care']
+ }[kind];if(!p)return '';
+ const names={produce:'الخضار والفواكه',dairy:'الألبان والأجبان',pantry:'الأرز والمكرونة والبقوليات',bakery:'المخبوزات',drinks:'المياه والمشروبات',snacks:'الحلويات والتسالي',cleaning:'المنظفات المنزلية',care:'العناية الشخصية'};
+ const photo=key=>(window.SUPERMARKET_CATEGORY_IMAGES&&window.SUPERMARKET_CATEGORY_IMAGES[names[key]])||('https://images.unsplash.com/'+PHOTO[key]+'?auto=format&fit=crop&w=680&q=80');
+ return '<section class="majalis-promo retail-campaign '+p[0]+'" aria-label="'+p[2]+'"><div class="majalis-promo-copy"><span>'+p[1]+'</span><h2>'+p[2]+'</h2><p>'+p[3]+'</p><button type="button" data-category="'+p[5]+'">'+p[4]+' ←</button></div><div class="majalis-promo-art" aria-hidden="true"><div class="majalis-promo-circle"></div><img class="majalis-promo-photo" src="'+photo(p[6])+'" alt="" loading="lazy"><div class="majalis-promo-phone"><strong>سوق التجزئة</strong><small>ابحث عن منتجك</small><img src="'+photo(p[7])+'" alt="" loading="lazy"></div><img class="majalis-promo-photo second" src="'+photo(p[7])+'" alt="" loading="lazy"></div></section>';
+}
 function renderHome(){
  const byCategory=(name,n=10)=>PRODUCTS.filter(p=>p.category===name).slice(0,n).map(p=>p.id);
  el('app').innerHTML=homeBanner()+featureCategories()+
- '<section class="home-start-hint"><span>✦ اختر قسمك المفضل، أو تصفّح جميع منتجات السوبرماركت مباشرة.</span><button type="button" data-go="/menu">جميع المنتجات ←</button></section>'+
- homeExperiences()+retailPromo('fresh')+
+ retailPromo('fresh')+
  '<section class="home-content-group home-discover-group">'+homeSectionIntro('اختيارات يومية','الطازج والألبان','تشكيلة تجريبية من أقسام المنزل الأساسية.')+
  productShowcase('الخضار والفواكه','اختيارات طازجة متنوعة',byCategory('الخضار والفواكه'),'/menu','produce')+
  productShowcase('الألبان والأجبان','حليب وزبادي وأجبان',byCategory('الألبان والأجبان'),'/menu','dairy')+
  productShowcase('اللحوم والدواجن','أساسيات المنتجات',byCategory('اللحوم والدواجن'),'/menu','meat')+'</section>'+retailPromo('pantry')+
  '<section class="home-content-group home-offers-group">'+homeSectionIntro('تسوّق أكثر','عروض وباقات متنوعة','عروض تجريبية لا تعكس تخفيضات فعلية.','/offers')+promotionalBanners()+
- productShowcase('باقات تسوق','مجموعات للتجربة',byCategory('العروض والباقات'),'/offers','offers')+'</section>'+retailPromo('drinks')+
+ productShowcase('باقات تسوق','مجموعات للتجربة',byCategory('العروض والباقات'),'/offers','offers')+'</section>'+homeExperiences()+retailPromo('drinks')+
  '<section class="home-content-group home-taste-group">'+homeSectionIntro('المطبخ والضيافة','أساسيات كل بيت','الأرز والمشروبات والمخبوزات والتسالي.')+
  productShowcase('الأرز والمكرونة والبقوليات','أساسيات مؤونة المنزل',byCategory('الأرز والمكرونة والبقوليات'),'/menu','pantry')+
  productShowcase('المياه والمشروبات','المياه والعصائر والشاي',byCategory('المياه والمشروبات'),'/menu','drinks')+
