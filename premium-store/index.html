@@ -1646,6 +1646,7 @@ function renderHome(){
  const newChoices=productShowcase('خيارات تستحق التجربة','أصناف إضافية تجريبية وليست منتجات أُطلقت حديثًا',[29,32,37,44,52,64,76,82,93,110,120],'/menu','new');
  const evening=productShowcase('لجلسة المساء','حلا وقهوة ومشروبات مناسبة للجلسة',[23,24,25,26,27,28,61,63,65,100,101,102],'/menu','evening');
  el('app').innerHTML=
+  homeBanner()+
   featureCategories()+
   menuQrBanner()+
   '<section class="home-start-hint" aria-label="تصفح خيارات المتجر"><span>✦ اختر قسمك المفضل، أو تصفّح المنتجات والجلسات مباشرة.</span><button type="button" data-go="/menu">قائمة الطعام كاملة ←</button></section>'+
