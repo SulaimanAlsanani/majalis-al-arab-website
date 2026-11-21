@@ -3544,6 +3544,69 @@ body:has(#heroSlider) .site-header .header-cart.header-cart-icon:hover{backgroun
  .product-card .card-name-line .card-favorite-toggle{flex-basis:23px!important;min-width:23px!important;width:23px!important;height:23px!important}
  .product-card .card-name-line .card-favorite-toggle svg{width:14px!important;height:14px!important}
 }
+
+/* Refined UI/UX design system — home banners deliberately preserved */
+:root{--ui-bg:#fffefd;--ui-text:#29282e;--ui-muted:#696b72;--ui-line:#edeae8;--ui-soft:#f8f8f8;--ui-yellow:#ffda29;--ui-red:#b63255;--ui-focus:#7754a1;--ui-card-radius:18px;--ui-banner-radius:24px}
+body{background:var(--ui-bg);color:var(--ui-text);overflow-x:hidden}
+body:has(#heroSlider) .page{padding-top:clamp(10px,1.4vw,18px)!important}
+.site-header{background:#fff!important;border-bottom:1px solid #efeded!important;box-shadow:0 3px 18px #2b20230b!important}
+.site-header .header-cart.header-cart-icon,body:has(#heroSlider) .site-header .header-cart.header-cart-icon{background:var(--ui-yellow)!important;border-color:var(--ui-yellow)!important;color:#222!important}
+.site-header .header-favorites-icon{background:#fff!important;border-color:#eceaea!important}
+#heroSlider.hero-slider{border-radius:var(--ui-banner-radius)!important;border:1px solid #f0ecea!important;box-shadow:0 12px 29px #36221f0b!important;overflow:hidden!important;margin-bottom:clamp(12px,2vw,23px)!important}
+#heroSlider .discovery-copy h1{line-height:1.28!important;letter-spacing:-.025em!important}
+#heroSlider .discovery-copy p{line-height:1.72!important}
+#heroSlider .hero-dots{display:flex!important;justify-content:center!important;gap:6px!important;max-width:min(88%,670px)!important;margin-inline:auto!important;overflow-x:auto!important;scrollbar-width:none!important;padding:6px 2px!important}
+#heroSlider .hero-dots::-webkit-scrollbar{display:none}
+#heroSlider .hero-dots button{flex:0 0 auto!important}
+.first-fold-categories{margin-block:clamp(9px,1.4vw,18px) clamp(20px,2.7vw,34px)!important}
+.first-fold-categories .feature-category-grid{gap:clamp(7px,1.1vw,15px)!important}
+.first-fold-categories .feature-category{border-radius:var(--ui-card-radius)!important;transition:transform .2s ease!important}
+.first-fold-categories .feature-category:hover{transform:translateY(-2px)!important}
+.home-content-group{margin:0!important;padding:clamp(16px,2.4vw,31px) 0!important;border-top:1px solid #f1efed!important}
+.home-content-group>.home-showcase{margin:0 0 clamp(20px,2.6vw,36px)!important}
+.home-content-group>.home-showcase:last-child{margin-bottom:0!important}
+.home-section-head,.homepage-group-heading{align-items:end!important;gap:clamp(9px,1.4vw,17px)!important;margin-bottom:clamp(11px,1.7vw,20px)!important}
+.home-section-head h2,.homepage-group-heading h2{font-size:clamp(20px,2vw,28px)!important;line-height:1.42!important;color:var(--ui-text)!important;letter-spacing:-.02em!important}
+.home-section-head span,.homepage-group-heading p,.homepage-group-heading>div>span{color:var(--ui-muted)!important;line-height:1.7!important}
+.showcase-head-actions>button,.homepage-group-heading>button{border-radius:999px!important;background:#fff!important;border:1px solid var(--ui-line)!important;color:#49454a!important;min-height:37px!important;padding:8px 15px!important;white-space:nowrap!important}
+.showcase-head-actions>button:hover,.homepage-group-heading>button:hover{background:#fff8ed!important;border-color:#ebdbb9!important}
+.product-card{border:1px solid var(--ui-line)!important;border-radius:var(--ui-card-radius)!important;box-shadow:0 2px 9px #1c14120a!important;transition:border-color .2s ease,box-shadow .2s ease!important}
+.product-card:hover{border-color:#ddd7d4!important;box-shadow:0 8px 23px #1c141216!important}
+.product-card .product-card-image-wrap{border-radius:12px!important;overflow:hidden}
+.product-card .card-photo{background:var(--ui-soft)!important}
+.product-card .card-photo img{object-fit:contain!important}
+.product-card .card-body{gap:8px!important}
+.product-card .card-name-line{min-height:34px!important}
+.product-card .card-title{color:#343139!important;font-weight:700!important;line-height:1.45!important}
+.product-card .card-price{color:#29282d!important;font-weight:750!important}
+.product-card .card-name-line .card-favorite-toggle{flex:0 0 26px!important;width:26px!important;min-width:26px!important;height:30px!important}
+.product-card .card-name-line .card-favorite-toggle svg{width:15px!important;height:15px!important}
+.product-card .card-favorite-toggle:not([aria-pressed="true"]){color:#e4e4e7!important;background:transparent!important}
+.product-card .card-favorite-toggle[aria-pressed="true"] svg{fill:var(--ui-red)!important;stroke:var(--ui-red)!important}
+.product-card .add-button{color:#642438!important}
+.product-card .add-button:not(:disabled):hover{color:var(--ui-red)!important;background:#fdf6f8!important}
+.majalis-promo{margin:clamp(12px,2vw,25px) 0 clamp(21px,3vw,39px)!important;border-radius:var(--ui-banner-radius)!important;box-shadow:0 7px 24px #44302c0b!important;min-height:clamp(220px,20vw,285px)!important}
+.majalis-promo-copy{gap:10px!important;padding:clamp(22px,3vw,44px)!important}
+.majalis-promo-copy h2{font-size:clamp(23px,2.45vw,35px)!important;line-height:1.33!important}
+.majalis-promo-copy p{max-width:390px!important}
+.majalis-promo-copy button{border-radius:999px!important;background:#fff!important;padding:11px 20px!important;min-height:42px!important}
+.majalis-promo-art{min-height:clamp(220px,20vw,285px)!important}
+.majalis-promo:not(.breakfast) .majalis-promo-phone{display:none!important}
+.majalis-promo:not(.breakfast) .majalis-promo-photo{width:68%!important;height:89%!important;left:5%!important;bottom:-2%!important}
+.majalis-promo:not(.breakfast) .majalis-promo-photo.second{display:block!important;width:38%!important;height:61%!important;left:auto!important;right:2%!important;bottom:4%!important}
+.majalis-promo.coffee .majalis-promo-photo{left:24%!important;width:67%!important}
+.majalis-promo.coffee .majalis-promo-photo.second{right:40%!important;width:36%!important}
+.home-experience-section{margin:clamp(16px,2vw,28px) 0 clamp(25px,3.5vw,45px)!important;padding-top:clamp(20px,2.5vw,33px)!important;border-top:1px solid #f1efed!important}
+.home-experience-grid{gap:clamp(10px,1.4vw,18px)!important}
+.home-experience-card,.home-offers-group .promo-box{border-radius:var(--ui-banner-radius)!important}
+.home-offers-group .promo-two{gap:clamp(9px,1.4vw,17px)!important}
+.home-trust-strip{margin:clamp(22px,3vw,36px) 0!important}
+.home-trust-strip>div{border-radius:var(--ui-card-radius)!important;background:#fff!important;border:1px solid var(--ui-line)!important;box-shadow:none!important}
+.home-actions{border-radius:var(--ui-banner-radius)!important;margin-block:clamp(17px,3vw,36px)!important}
+button:focus-visible,a:focus-visible,[tabindex]:focus-visible{outline:3px solid var(--ui-focus)!important;outline-offset:3px!important}
+@media(max-width:780px){.majalis-promo{min-height:185px!important;grid-template-columns:minmax(0,1fr) 39%!important}.majalis-promo-copy{padding:18px 14px!important;gap:7px!important}.majalis-promo-copy h2{font-size:clamp(18px,3.8vw,25px)!important}.majalis-promo-copy p{font-size:11px!important}.majalis-promo-art{min-height:185px!important}.majalis-promo:not(.breakfast) .majalis-promo-photo{width:90%!important;height:80%!important;left:0!important}.majalis-promo:not(.breakfast) .majalis-promo-photo.second{width:43%!important;height:45%!important;right:-4%!important;bottom:1%!important}.home-content-group{padding:21px 0!important}.home-section-head h2,.homepage-group-heading h2{font-size:clamp(18px,4vw,23px)!important}.product-card .card-name-line{min-height:32px!important}.product-card .card-body{gap:6px!important}}
+@media(max-width:420px){.majalis-promo{min-height:165px!important;border-radius:16px!important}.majalis-promo-copy{padding:12px!important}.majalis-promo-copy h2{font-size:17px!important}.majalis-promo-copy p{font-size:10px!important}.majalis-promo-copy button{font-size:10px!important;padding:7px 12px!important;min-height:34px!important}.majalis-promo-art{min-height:165px!important}.home-section-head,.homepage-group-heading{align-items:flex-start!important}.home-content-group{padding:18px 0!important}.product-card .card-name-line{min-height:30px!important}}
+@media(prefers-reduced-motion:reduce){.product-card,.feature-category,.majalis-promo,.home-experience-card{transition:none!important;animation:none!important}.product-card:hover,.first-fold-categories .feature-category:hover{transform:none!important}}
 </style></head>
 <body>
 <header class="site-header"><div class="wrap header-inner">
@@ -3825,7 +3888,7 @@ function menuQrBanner(){
  '</section>';
 }
 function promotionalBanners(){return '<div class="promo-two"><button class="promo-box promo-red" data-go="/offers"><span>لفترة تجريبية</span><h3>العروض تجمع<br>اللمة الحلوة</h3><p>باقات المشاركة وخيارات متنوعة للتجربة</p><b>استكشف العروض ←</b><i>✦</i></button><button class="promo-box promo-midnight" data-go="/seating"><span>للمّة مذاق آخر</span><h3>جلسات وتفاصيل<br>على كيفك</h3><p>استفسر عن الجلسات والمباريات والبلايستيشن</p><b>اكتشف الجلسات ←</b><i>☕</i></button></div>'}
-function productShowcase(title,description,ids,more,key){const rows=ids.map(productById).filter(Boolean);const sid='home-carousel-'+key;return '<section class="home-showcase horizontal-showcase" aria-label="'+title+'"><div class="home-section-head"><div><span>'+description+'</span><h2>'+title+'</h2></div><div class="showcase-head-actions"><div class="showcase-arrows" aria-label="التنقل بين منتجات '+title+'"><button type="button" data-slide-dir="-1" data-slide-track="'+sid+'" aria-label="المنتجات السابقة" title="السابق">→</button><button type="button" data-slide-dir="1" data-slide-track="'+sid+'" aria-label="المنتجات التالية" title="التالي">←</button></div><button data-go="'+(more||'/menu')+'">عرض الكل ←</button></div></div><div class="product-rail" id="'+sid+'" tabindex="0" aria-label="منتجات '+title+' — مرر أفقيًا">'+rows.map(card).join('')+'</div></section>'}
+function productShowcase(title,description,ids,more,key){const rows=ids.map(productById).filter(Boolean);const sid='home-carousel-'+key;const cat={breakfast:'الفطور والعشاء',south:'العريكة والمعصوب',family:'الوجبات العائلية',sweet:'الحلا',coffee:'القهوة المختصة'}[key];const viewAll=cat?'data-category="'+cat+'"':''+viewAll+'';return '<section class="home-showcase horizontal-showcase" aria-label="'+title+'"><div class="home-section-head"><div><span>'+description+'</span><h2>'+title+'</h2></div><div class="showcase-head-actions"><div class="showcase-arrows" aria-label="التنقل بين منتجات '+title+'"><button type="button" data-slide-dir="-1" data-slide-track="'+sid+'" aria-label="المنتجات السابقة" title="السابق">→</button><button type="button" data-slide-dir="1" data-slide-track="'+sid+'" aria-label="المنتجات التالية" title="التالي">←</button></div><button data-go="'+(more||'/menu')+'">عرض الكل ←</button></div></div><div class="product-rail" id="'+sid+'" tabindex="0" aria-label="منتجات '+title+' — مرر أفقيًا">'+rows.map(card).join('')+'</div></section>'}
 function homeTrustStrip(){return '<div class="home-trust-strip"><div><span>☕</span><strong>نكهة أصيلة</strong><small>من أطباق نعرفها ونحبها</small></div><div><span>🥗</span><strong>اختيارات كثيرة</strong><small>كتالوج تجريبي غني ومتنوّع</small></div><div><span>🛍️</span><strong>طلبك بطريقتك</strong><small>ملاحظات وكميات وسلة واضحة</small></div><div><span>💬</span><strong>نسمع لك</strong><small>استفسارات الجلسات مباشرة</small></div></div>'}
 
 /* Editorial campaign blocks use native CSS ornaments instead of misleading food photography */
@@ -3914,22 +3977,24 @@ function renderHome(){
  const breakfast=productShowcase('فطور على الأصول','شكشوكة وفول وكبدة وخيارات تفتح النفس',byCategory('الفطور والعشاء'),'/menu','breakfast');
  const southern=productShowcase('نكهات الجنوب','العريكة والمعصوب والفتة',byCategory('العريكة والمعصوب'),'/menu','south');
  const sharing=productShowcase('للجلسات واللّمّة','أطباق مشاركة ووجبات عائلية تجريبية',byCategory('الوجبات العائلية').concat(byCategory('المشويات والأطباق الرئيسية',8)),'/menu','family');
- const curated=productShowcase('مختارات نقترحها لك','اختيارات تجريبية للعرض وليست ترتيبًا فعليًا للمبيعات',[1,8,12,18,24,27,2,16,21,26,42,55],'/menu','popular');
+
  const sweets=productShowcase('وقت الحلا','حلويات تكمّل الوجبة',byCategory('الحلا'),'/menu','sweet');
  const coffee=productShowcase('قهوة ومشروبات','من القهوة المختصة للمشروبات المتنوعة',byCategory('القهوة المختصة').concat(byCategory('المشروبات',8)),'/menu','coffee');
  const newChoices=productShowcase('خيارات تستحق التجربة','أصناف إضافية تجريبية وليست منتجات أُطلقت حديثًا',[29,32,37,44,52,64,76,82,93,110,120],'/menu','new');
- const evening=productShowcase('لجلسة المساء','حلا وقهوة ومشروبات مناسبة للجلسة',[23,24,25,26,27,28,61,63,65,100,101,102],'/menu','evening');
+
  el('app').innerHTML=
-  homeBanner()+
-  featureCategories()+
-  homeExperiences()+distributedPromo('breakfast')+
-  '<section class="home-content-group home-discover-group" aria-label="أقسام الفطور والأطباق الجنوبية">'+
-  breakfast+southern+'</section>'+distributedPromo('grills')+
-  '<section class="home-content-group home-offers-group" aria-label="العروض وخيارات المشاركة">'+homeSectionIntro('للّمة والأصحاب','العروض ووجبات المشاركة','اكتشف الأفكار والعروض التجريبية دون اعتبارها أسعارًا أو عروضًا معتمدة.','/offers')+
-  promotionalBanners()+sharing+'</section>'+distributedPromo('coffee')+
-  '<section class="home-content-group home-taste-group" aria-label="الحلا والقهوة">'+homeSectionIntro('نكمل جلستك','الحلا والقهوة والمشروبات','كل ما يكمّل الجلسة في مكان واحد.')+sweets+coffee+'</section>'+distributedPromo('family')+
-  '<section class="home-content-group home-explore-group" aria-label="استكشف مزيدًا من المنتجات">'+homeSectionIntro('اكتشف أكثر','خيارات إضافية من قائمتنا','أصناف متنوعة تستحق التصفح.', '/menu')+newChoices+recentShowcase()+'</section>'+
-  homeTrustStrip()+homeFinalActions()+homepageDisclosure();
+ homeBanner()+
+ featureCategories()+
+ distributedPromo('breakfast')+
+ '<section class="home-content-group home-discover-group" aria-label="الفطور ونكهات الجنوب">'+breakfast+southern+'</section>'+
+ distributedPromo('grills')+
+ '<section class="home-content-group home-offers-group" aria-label="العروض ووجبات المشاركة">'+homeSectionIntro('للأهل والأصحاب','وجبات المشاركة والعروض','اختيارات تناسب اللمّة، وعروض تجريبية قابلة للاستكشاف.','/offers')+promotionalBanners()+sharing+'</section>'+
+ homeExperiences()+
+ distributedPromo('coffee')+
+ '<section class="home-content-group home-taste-group" aria-label="الحلا والقهوة">'+homeSectionIntro('نكمل جلستك','الحلا والقهوة','اختيارات تخلي الجلسة أحلى.')+sweets+coffee+'</section>'+
+ distributedPromo('family')+
+ '<section class="home-content-group home-explore-group" aria-label="مزيد من الخيارات">'+homeSectionIntro('تصفح على راحتك','خيارات إضافية','اكتشف أصنافًا مختلفة من القائمة.','/menu')+newChoices+recentShowcase()+'</section>'+
+ homeTrustStrip()+homeFinalActions()+homepageDisclosure();
 }
 function renderMenu(){el('app').innerHTML=serviceModeBanner()+quickNav()+'<div class="shop-layout"><section class="catalog-panel" id="catalog">'+catalog()+'</section>'+sideCart()+'</div>'}
 function renderDetail(id){const p=productById(id);if(!p){route('/');return}rememberViewed(id);const related=PRODUCTS.filter(x=>x.id!==p.id&&x.category===p.category).slice(0,3);const crumb='<button class="back-link" data-back>→ العودة إلى قائمة الطعام</button>';el('app').innerHTML=crumb+'<article class="detail-route"><div class="detail-layout"><div class="detail-image">'+imgTag(p)+'</div><div class="detail-info"><span class="eyebrow">'+p.category+(p.demo?' · صنف تجريبي':'')+'</span><h1>'+p.name+'</h1><div class="detail-price-row"><div class="amount">'+money(p.price)+'</div><button type="button" class="detail-favorite" data-fav="'+p.id+'" aria-label="حفظ '+escapeHtml(p.name)+' في المفضلة" aria-pressed="'+state.favorites.includes(p.id)+'">'+CARD_HEART+'</button></div><p class="detail-description">اختر الكمية المناسبة وسجّل ملاحظات التحضير إن رغبت. لا تتوفر بيانات مؤكدة عن المكونات والحساسية والسعرات حتى استكمال ربط القائمة.'+(p.demo?' هذا الصنف وسعره افتراضيان لغرض المعاينة فقط.':'')+'</p><div class="option-box"><h3>الأحجام والتخصيص</h3>'+availableSizes(p)+'</div><label class="field-label" for="itemNote">ملاحظات للمطبخ (اختياري)</label><textarea class="note-input" maxlength="250" id="itemNote" placeholder="مثال: بدون فلفل — يخضع لتأكيد المطعم"></textarea><div class="detail-controls"><div class="stepper"><button id="qtyMinus" aria-label="تقليل الكمية">−</button><span id="selectedQty">1</span><button id="qtyPlus" aria-label="زيادة الكمية">+</button></div><button class="solid-action" id="addSelected" '+(p.available===false?'disabled aria-disabled="true"':'')+'>'+(p.available===false?'غير متوفر':'أضف للسلة')+' · <span id="selectedTotal">'+money(p.price)+'</span></button></div></div></div></article>'+(related.length?'<section class="recs"><h2>أصناف قد تعجبك</h2><div class="product-grid">'+related.map(card).join('')+'</div></section>':'');state.quantity=1;state.note='';state.currentProduct=id;state.origin='/menu'}
@@ -3962,7 +4027,7 @@ function requestGeolocation(){if(!navigator.geolocation){const x=el('checkoutFee
 
 function commonPageHead(kicker,title,description){return '<div class="interior-heading"><span>'+kicker+'</span><h1>'+title+'</h1><p>'+description+'</p></div>'}
 function renderOffers(){const discounts=PRODUCTS.filter(x=>x.category==='العروض التجريبية');const family=PRODUCTS.filter(x=>x.category==='الوجبات العائلية');el('app').innerHTML=commonPageHead('العروض والباقات','على مزاجك… واللّمة أحلى','عروض وأصناف افتراضية لا تمثل خصومات أو أسعارًا فعلية للمطعم.')+'<div class="offers-masthead"><div><span>✦ عروض للتجربة</span><h2>اختيارات تكمل<br>كل سفرة</h2><p>وجبات مشاركة، فطور، قهوة وحلا — شاهد الخيارات داخل الكتالوج التجريبي.</p></div><div class="offers-big-icon">٪</div></div><div class="home-section-head"><div><span>باقات تجريبية</span><h2>عروض متنوعة</h2></div></div><div class="product-grid">'+discounts.map(card).join('')+'</div><div class="home-section-head"><div><span>للأهل والأصحاب</span><h2>وجبات عائلية</h2></div></div><div class="product-grid">'+family.map(card).join('')+'</div>'}
-function renderFavorites(){const rows=PRODUCTS.filter(x=>state.favorites.includes(x.id));el('app').innerHTML=commonPageHead('اختياراتك المحبوبة','المفضلة ♡','احفظ الأصناف التي تعجبك لتعود إليها بسهولة. تُخزّن اختياراتك محليًا في المتصفح.')+(rows.length?'<div class="product-grid">'+rows.map(card).join('')+'</div>':'<div class="empty-large"><span>♡</span><h2>ما حفظت أصناف للمفضلة بعد</h2><p>اضغط القلب على صورة أي وجبة لحفظها هنا.</p><button class="solid-action" data-go="/menu">تصفّح المنيو ←</button></div>')}
+function renderFavorites(){const rows=PRODUCTS.filter(x=>state.favorites.includes(x.id));el('app').innerHTML=commonPageHead('اختياراتك المحبوبة','المفضلة ♡','احفظ الأصناف التي تعجبك لتعود إليها بسهولة. تُخزّن اختياراتك محليًا في المتصفح.')+(rows.length?'<div class="product-grid">'+rows.map(card).join('')+'</div>':'<div class="empty-large"><span>♡</span><h2>ما حفظت أصناف للمفضلة بعد</h2><p>اضغط القلب بجانب اسم أي وجبة لحفظها هنا.</p><button class="solid-action" data-go="/menu">تصفّح المنيو ←</button></div>')}
 function renderOrders(){el('app').innerHTML=commonPageHead('ملف الطلبات','طلباتي','هذه واجهة تجريبية لسجل الطلبات. لا يوجد نظام طلبات مرتبط أو عمليات شراء سابقة.')+'<div class="orders-tabs"><button class="active" type="button" data-order-tab="active">الطلبات الحالية</button><button type="button" data-order-tab="previous">الطلبات السابقة</button></div><div id="orderTabBody" class="empty-large"><span>▤</span><h2>لا توجد طلبات حالية</h2><p>عند ربط المتجر بأودو، ستظهر الطلبات الحقيقية وحالات تجهيزها واستلامها من هنا.</p><button class="solid-action" data-go="/menu">استكشف الأصناف ←</button></div><section class="tracking-demo"><div><span>كيف ستكون متابعة طلبك؟</span><h2>كل مرحلة… واضحة لك</h2><p>هذا التسلسل وصف للواجهة المستقبلية، وليس تتبعًا حقيقيًا.</p></div><div class="track-steps"><span>✓ استلام الطلب</span><span>◌ تأكيد المطعم</span><span>◌ قيد التحضير</span><span>◌ في الطريق</span><span>◌ تم التسليم</span></div></section>'}
 function renderAccount(){el('app').innerHTML=commonPageHead('منطقة العميل','حسابي','ملف شخصي تجريبي؛ تسجيل الدخول وإدارة العناوين الفعلية يتطلبان ربط الهوية والطلبات بأودو.')+'<section class="account-top"><div class="account-avatar">م</div><div><h2>مرحبًا بك في مجالس العرب</h2><p>ابدأ بالتصفح، واحفظ مفضلاتك، وراجع سلتك في أي وقت.</p></div><button class="account-login" id="accountLogin">تسجيل الدخول قريبًا</button></section><div class="account-nav-grid">'+[['♡','المفضلة','اختياراتك المحفوظة','/favorites'],['▤','طلباتي','سجل الطلبات والحالات','/orders'],['⌖','عناويني','عناوين التوصيل بعد التفعيل','/addresses'],['⚑','العروض','العروض والمجموعات التجريبية','/offers'],['☏','المساعدة','الأسئلة وطرق التواصل','/help'],['☕','الجلسات','الاستفسار عن التوفر','/seating']].map(([ico,name,desc,href])=>'<button class="account-nav-card" data-go="'+href+'"><span>'+ico+'</span><div><strong>'+name+'</strong><small>'+desc+'</small></div><b>‹</b></button>').join('')+'</div>'}
 function renderAddresses(){el('app').innerHTML=commonPageHead('بيانات التوصيل','عناويني','العنوان الوطني لا يمكن استرجاعه من رقم الجوال وحده دون تكامل رسمي وتحقق من المستخدم.')+'<section class="addresses-panel"><div class="address-illustration">⌖</div><h2>عناوينك محفوظة هنا بعد تسجيل الدخول</h2><p>في النسخة الفعلية ستتمكن من اختيار عنوان موثّق ومشاركته بعد موافقتك. لم نربط حاليًا خدمة العنوان الوطني أو حسابات العملاء.</p><button class="solid-action" data-go="/checkout">انتقل إلى واجهة الدفع التجريبية</button></section>'}
