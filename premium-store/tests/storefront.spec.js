@@ -56,11 +56,36 @@ test('manual banner navigation moves the active banner', async ({page}) => {
   await expect(slides.nth(1)).toHaveAttribute('aria-hidden','false');
 });
 
-test('no horizontal page overflow on common viewports', async ({page}) => {
-  await page.goto('/');
-  const widths=await page.evaluate(()=>({
-    viewport:document.documentElement.clientWidth,
-    document:document.documentElement.scrollWidth
-  }));
-  expect(widths.document).toBeLessThanOrEqual(widths.viewport+2);
+test('no horizontal page overflow across storefront routes and viewport widths', async ({page}) => {
+  const paths=['/','/#/menu','/#/offers','/#/seating','/#/product/1','/#/cart','/#/account','/#/help'];
+  const sizes=test.info().project.name.includes('mobile')
+    ? [320,360,390,430,520]
+    : [768,900,1024,1280,1440,1920];
+  for(const width of sizes){
+    await page.setViewportSize({width,height:900});
+    for(const route of paths){
+      await page.goto(route);
+      await expect(page.locator('#app')).toBeVisible();
+      const measured=await page.evaluate(()=>{
+        const viewport=document.documentElement.clientWidth;
+        const documentWidth=document.documentElement.scrollWidth;
+        const offenders=[...document.body.querySelectorAll('*')]
+          .filter(el=>{
+            const s=getComputedStyle(el);
+            if(s.position==='fixed'||s.display==='none'||s.visibility==='hidden')return false;
+            const r=el.getBoundingClientRect();
+            // Ignore intentional contained horizontal category and product scroll rails.
+            if(el.closest('.product-rail,.quick-nav,.hs-catalog-entry-actions'))return false;
+            return r.width>0&&(r.left < -3 || r.right>viewport+3);
+          })
+          .slice(0,8).map(el=>({tag:el.tagName,cls:String(el.className).slice(0,85)}));
+        return {viewport,documentWidth,offenders};
+      });
+      expect(measured.documentWidth,'Overflow at '+route+' / '+width+': '+JSON.stringify(measured.offenders)).toBeLessThanOrEqual(measured.viewport+2);
+      const main=await page.locator('#app').boundingBox();
+      expect(main,'Main content clipped at '+route+' / '+width).not.toBeNull();
+      expect(main.x,'Main content shifted outside left at '+route+' / '+width).toBeGreaterThanOrEqual(-2);
+      expect(main.x+main.width,'Main content shifted outside right at '+route+' / '+width).toBeLessThanOrEqual(width+2);
+    }
+  }
 });
