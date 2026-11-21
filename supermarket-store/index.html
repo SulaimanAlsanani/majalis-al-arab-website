@@ -946,27 +946,166 @@ body{background:#F6F9F5}
 .product-card:hover{border-color:#92CAAC}
 .home-content-group.home-offers-group{background:#F2F9F0}
 
-/* 13 real category photos mapped to their own supermarket hero slides */
-#heroSlider .hero-slide{isolation:isolate;overflow:hidden;background:linear-gradient(115deg,#0E5843,#1A805F)}
-#heroSlider .hero-slide .discovery-visual{display:block!important;position:absolute;inset:0;z-index:0;width:100%;height:100%;pointer-events:none;overflow:hidden}
-#heroSlider .hero-slide .category-hero-photo{display:block;width:100%;height:100%;object-fit:cover;object-position:center;transform:scaleX(-1);opacity:.94;filter:saturate(1.09)}
-#heroSlider .hero-slide .hero-image-tint{display:block;position:absolute;inset:0;background:linear-gradient(270deg,rgba(8,69,51,.98) 0%,rgba(8,69,51,.96) 22%,rgba(8,69,51,.8) 40%,rgba(8,69,51,.28) 61%,rgba(8,69,51,.03) 100%);}
-#heroSlider .hero-slide .discovery-copy{position:relative;z-index:2}
-#heroSlider .hero-slide .discovery-kicker{background:#fff2;border:1px solid #fff5;color:#FFF8DF}
-#heroSlider .hero-slide .discovery-copy h1,#heroSlider .hero-slide .discovery-copy h1 em{color:#fff;text-shadow:0 2px 12px #08291C22}
-#heroSlider .hero-slide .discovery-copy p{color:#ECF9F0}
-#heroSlider .hero-slide .discover-btn{background:#fff;color:#0D6547;border-color:#fff}
-#heroSlider .hero-slide .discover-btn:hover{background:#EFF8E9}
-#heroSlider .hero-slide .discover-outline{border-color:#FFFFFFA0;color:#fff;background:#092E2338}
-#heroSlider .hero-slide .discovery-labels{color:#D4EEDD}
+/* Reference-inspired editorial hero: pale backgrounds, bold right-side copy,
+   colorful rings, a mini storefront phone, and natural product photography.
+   Subject stays left for RTL and right for LTR. */
+#heroSlider .hero-slide{
+ position:relative!important;display:block!important;isolation:isolate;overflow:hidden;
+ --bg:#FFFDF6;--ring:#FFD900;--disc:#21BBF1;--ink:#5C2B18;--hot:#EF229D;
+ background:var(--bg)!important;color:var(--ink)!important;
+}
+#heroSlider .hero-slide.hero-main{--bg:#FAFCF8;--ring:#76A783;--disc:#E6BE76;--ink:#234E3A;--hot:#C96B4A}
+#heroSlider .hero-slide.hero-produce{--bg:#FAFFF7;--ring:#A6D88B;--disc:#F2C77C;--ink:#315F34;--hot:#D77B51}
+#heroSlider .hero-slide.hero-dairy{--bg:#FBFCFF;--ring:#B9D9F1;--disc:#F1DDAC;--ink:#35506A;--hot:#C17B93}
+#heroSlider .hero-slide.hero-meat{--bg:#FFFBF8;--ring:#DDA3A0;--disc:#E5BC9A;--ink:#653C3C;--hot:#B76258}
+#heroSlider .hero-slide.hero-frozen{--bg:#F8FCFF;--ring:#A8D6EE;--disc:#B3BCCF;--ink:#315875;--hot:#8C79B0}
+#heroSlider .hero-slide.hero-bakery{--bg:#FFFDF8;--ring:#E4B77C;--disc:#F4DDA6;--ink:#63472A;--hot:#C17A42}
+#heroSlider .hero-slide.hero-drinks{--bg:#F8FDFF;--ring:#9AD4DA;--disc:#E1D9A8;--ink:#235C66;--hot:#D57C72}
+#heroSlider .hero-slide.hero-pantry{--bg:#FFFCF7;--ring:#D6BE83;--disc:#AFC794;--ink:#554A30;--hot:#B57B46}
+#heroSlider .hero-slide.hero-canned{--bg:#FCFDF6;--ring:#C7C996;--disc:#D4AB75;--ink:#585734;--hot:#A87150}
+#heroSlider .hero-slide.hero-snacks{--bg:#FFFAFD;--ring:#E5B6D6;--disc:#F4CC91;--ink:#6A3F60;--hot:#C56D92}
+#heroSlider .hero-slide.hero-cleaning{--bg:#F8FEFC;--ring:#9BCFC5;--disc:#B5D9EA;--ink:#32675C;--hot:#628BAA}
+#heroSlider .hero-slide.hero-care{--bg:#FFFAFC;--ring:#E5B9CF;--disc:#C5C2E5;--ink:#68475B;--hot:#B36E92}
+#heroSlider .hero-slide.hero-offers{--bg:#FFFBF7;--ring:#E8B97B;--disc:#D3A1C6;--ink:#66432F;--hot:#C16B78}
+#heroSlider .hero-slide::before,#heroSlider .hero-slide::after{display:none!important}
+#heroSlider .hero-slide .discovery-copy{
+ position:relative!important;z-index:4!important;width:55%!important;height:100%!important;
+ padding:clamp(22px,2.8vw,46px) clamp(34px,5.3vw,85px)!important;
+ display:flex!important;flex-direction:column!important;align-items:flex-start!important;justify-content:center!important;
+ text-align:start!important;color:var(--ink)!important;
+}
+#heroSlider .hero-slide .discovery-kicker{
+ display:inline-flex;border:0!important;padding:0!important;background:none!important;
+ color:var(--ink)!important;font-weight:750!important;font-size:clamp(10px,1vw,13px)!important;
+ letter-spacing:0!important;
+}
+#heroSlider .hero-slide .discovery-copy h1{
+ color:var(--ink)!important;text-shadow:none!important;
+ font-size:clamp(28px,3.35vw,52px)!important;line-height:1.29!important;
+ letter-spacing:-.035em!important;font-weight:900!important;margin:13px 0 12px!important;
+}
+#heroSlider .hero-slide .discovery-copy h1 em{
+ display:inline-block;color:#fff!important;background:var(--hot)!important;padding:.01em .18em .08em!important;
+ border-radius:11px!important;box-decoration-break:clone;-webkit-box-decoration-break:clone;
+ text-shadow:none!important;
+}
+#heroSlider .hero-slide .discovery-copy p{
+ max-width:550px!important;color:var(--ink)!important;
+ font-size:clamp(11px,1.1vw,14px)!important;line-height:1.8!important;
+ margin:0 0 17px!important;text-shadow:none!important;
+}
+#heroSlider .hero-slide .discovery-actions{gap:9px!important}
+#heroSlider .hero-slide .discover-btn{
+ color:#fff!important;background:var(--ink)!important;border-color:var(--ink)!important;
+ border-radius:12px!important;padding:11px 20px!important;box-shadow:none!important;
+}
+#heroSlider .hero-slide .discover-btn:hover{background:var(--hot)!important;border-color:var(--hot)!important}
+#heroSlider .hero-slide .discover-outline{
+ color:var(--ink)!important;background:transparent!important;
+ border:1px solid color-mix(in srgb,var(--ink) 34%,transparent)!important;
+ border-radius:12px!important;padding:11px 18px!important;
+}
+#heroSlider .hero-slide .discover-outline:hover{background:color-mix(in srgb,var(--ring) 18%,transparent)!important}
+#heroSlider .hero-slide .discovery-labels{color:var(--ink)!important;opacity:.62!important;margin-top:13px!important}
+#heroSlider .hero-slide .discovery-visual{
+ display:block!important;position:absolute!important;inset-block:0!important;
+ inset-inline-end:0!important;inset-inline-start:auto!important;
+ width:49%!important;height:100%!important;min-height:0!important;
+ background:transparent!important;z-index:2!important;overflow:hidden!important;
+ pointer-events:none;
+}
+#heroSlider .hero-showcase{position:absolute;inset:0;isolation:isolate}
+#heroSlider .showcase-halo,#heroSlider .showcase-ring{
+ position:absolute;z-index:0;width:86%;aspect-ratio:1/1;border-radius:50%;
+ left:50%;top:67%;transform:translate(-50%,-50%);
+}
+#heroSlider .showcase-halo{background:var(--ring)}
+#heroSlider .showcase-ring{width:67%;background:var(--disc);top:70%;z-index:1}
+#heroSlider .showcase-phone{
+ position:absolute;z-index:4;width:clamp(180px,18.2vw,260px);height:117%;
+ left:50%;top:11%;transform:translateX(-50%);
+ padding:8px;border-radius:37px;border:4px solid #161318;
+ background:linear-gradient(120deg,#25212A,#080808 60%,#454148);
+ box-shadow:0 17px 33px #211A1733,0 0 0 2px #88888855;
+}
+#heroSlider .showcase-phone-screen{
+ height:100%;width:100%;overflow:hidden;background:#FFFAF8;
+ border-radius:26px;position:relative;display:flex;flex-direction:column;
+ direction:rtl;color:#3D2A25;
+}
+#heroSlider .showcase-phone-status{
+ height:31px;padding:7px 12px 0;display:flex;align-items:flex-start;
+ justify-content:space-between;direction:ltr;color:#121015;font:700 11px Arial,sans-serif;
+}
+#heroSlider .phone-camera{display:block;background:#0D0C12;border-radius:22px;width:56px;height:15px;margin-top:-1px}
+#heroSlider .showcase-phone-head{
+ display:flex;justify-content:space-between;align-items:center;
+ padding:5px 14px 8px;font-size:12px;font-weight:850;color:#4C302B;
+}
+#heroSlider .showcase-phone-search{
+ height:27px;background:#F2E7E5;border-radius:7px;margin:0 10px 9px;
+ padding:6px 9px;font-size:9px;display:flex;justify-content:space-between;align-items:center;
+ color:#81716D;
+}
+#heroSlider .showcase-phone-cover{height:34%;overflow:hidden;margin:0 9px;border-radius:11px;flex-shrink:0}
+#heroSlider .showcase-phone-cover img{display:block;width:100%;height:100%;object-fit:cover}
+#heroSlider .showcase-phone-caption{font-size:12px;font-weight:800;margin:12px 12px 9px;line-height:1.4}
+#heroSlider .showcase-phone-tiles{display:grid;grid-template-columns:1fr 1fr;gap:7px;margin:0 11px}
+#heroSlider .showcase-phone-tiles img{width:100%;height:84px;object-fit:cover;border-radius:9px;background:#F6EBE5}
+#heroSlider .showcase-phone-nav{
+ display:flex;gap:12px;justify-content:center;margin-top:auto;margin-bottom:15px;
+}
+#heroSlider .showcase-phone-nav i{display:block;width:20px;height:4px;border-radius:10px;background:#E2CFCD}
+#heroSlider .showcase-float{
+ position:absolute;z-index:5;overflow:hidden;border-radius:50%;
+ background:#fff;box-shadow:0 9px 18px #51301A25;border:5px solid var(--bg);
+ width:clamp(76px,8.3vw,124px);aspect-ratio:1/1;
+}
+#heroSlider .showcase-float img{width:100%;height:100%;object-fit:cover;display:block}
+#heroSlider .showcase-float-one{left:1%;top:14%;transform:rotate(-13deg)}
+#heroSlider .showcase-float-two{right:1%;top:31%;transform:rotate(11deg);width:clamp(82px,9vw,137px)}
+#heroSlider .showcase-float-three{left:5%;bottom:8%;transform:rotate(8deg);width:clamp(85px,9.2vw,139px)}
+/* In LTR the logical inline-end positioning automatically mirrors the showcase. */
+@media(max-width:1000px){
+ #heroSlider .hero-slide .discovery-copy{width:59%!important;padding-inline:42px!important}
+ #heroSlider .hero-slide .discovery-visual{width:44%!important}
+ #heroSlider .showcase-phone{width:200px}
+ #heroSlider .showcase-float{width:86px}
+ #heroSlider .showcase-float-two{width:94px}
+ #heroSlider .showcase-float-three{width:99px}
+}
 @media(max-width:780px){
- #heroSlider .hero-slide .category-hero-photo{object-position:center}
- #heroSlider .hero-slide .hero-image-tint{background:linear-gradient(270deg,rgba(8,69,51,.97) 0%,rgba(8,69,51,.92) 45%,rgba(8,69,51,.4) 72%,rgba(8,69,51,.16) 100%)}
+ #heroSlider .hero-slide .discovery-copy{width:69%!important;padding-inline:40px!important}
+ #heroSlider .hero-slide .discovery-copy h1{font-size:clamp(24px,4vw,34px)!important}
+ #heroSlider .hero-slide .discovery-visual{display:block!important;width:40%!important;opacity:.72}
+ #heroSlider .showcase-phone{width:166px;left:59%;top:16%}
+ #heroSlider .showcase-float-one{left:-7%;top:19%}
+ #heroSlider .showcase-float-two{right:-12%}
+ #heroSlider .showcase-float-three{left:0}
 }
 @media(max-width:520px){
- #heroSlider .hero-slide .category-hero-photo{opacity:.65}
- #heroSlider .hero-slide .hero-image-tint{background:linear-gradient(270deg,rgba(8,69,51,.96),rgba(8,69,51,.78) 67%,rgba(8,69,51,.45))}
+ #heroSlider .hero-slide .discovery-copy{width:83%!important;padding:17px 30px 27px!important}
+ #heroSlider .hero-slide .discovery-kicker{font-size:10px!important}
+ #heroSlider .hero-slide .discovery-copy h1{font-size:clamp(22px,6.1vw,29px)!important;margin:8px 0!important}
+ #heroSlider .hero-slide .discovery-copy p{font-size:10px!important;line-height:1.55!important;margin-bottom:9px!important}
+ #heroSlider .hero-slide .discover-btn,#heroSlider .hero-slide .discover-outline{padding:8px 10px!important;font-size:10px!important}
+ #heroSlider .hero-slide .discovery-labels{display:none!important}
+ #heroSlider .hero-slide .discovery-visual{display:block!important;width:40%!important;opacity:.34}
+ #heroSlider .showcase-phone{width:148px;left:72%;top:14%}
+ #heroSlider .showcase-float{width:73px;border-width:3px}
+ #heroSlider .showcase-float-two{width:79px}
+ #heroSlider .showcase-float-three{width:86px}
 }
+
+
+
+#heroSlider .hero-slide .market-phone-cover{position:relative;height:43%;margin:0 9px;border-radius:11px;overflow:hidden;background:var(--ring)}
+#heroSlider .hero-slide .market-phone-cover img{display:block;width:100%;height:100%;object-fit:cover}
+#heroSlider .hero-slide .market-phone-cover:after{content:"";position:absolute;inset:0;background:linear-gradient(to top,rgba(19,35,25,.76),transparent 72%)}
+#heroSlider .hero-slide .market-phone-cover-title{position:absolute;z-index:2;inset-inline:10px;bottom:9px;color:#fff;font-size:12px;font-weight:800;text-align:start;text-shadow:0 1px 4px #1117}
+#heroSlider .hero-slide .market-phone-tiles{grid-template-columns:repeat(3,minmax(0,1fr));gap:5px}
+#heroSlider .hero-slide .market-phone-tiles img{height:66px;min-width:0}
+#heroSlider .hero-slide .showcase-float{background:var(--ring)}
 
 </style></head>
 <body>
@@ -1032,7 +1171,28 @@ function hero(){return '<div class="crumbs"><span>الرئيسية</span><span>�
 function collectionStrip(){return '<div class="collection-strip"><button data-category="الفطور والعشاء"><span class="collection-icon">🍳</span><strong>فطور على كيفك</strong><small>وجبات صباحية متنوعة</small></button><button data-category="العريكة والمعصوب"><span class="collection-icon">🍯</span><strong>نكهة الجنوب</strong><small>العريكة والمعصوب والفتة</small></button><button data-category="المشويات والأطباق الرئيسية"><span class="collection-icon">🍗</span><strong>وجبات مشبعة</strong><small>أطباق رئيسية تجريبية</small></button><button data-category="الحلا"><span class="collection-icon">🍰</span><strong>وقت الحلا</strong><small>كيك وحلويات متنوعة</small></button><button data-category="المشروبات"><span class="collection-icon">🥤</span><strong>مشروباتك المفضلة</strong><small>شاي وعصائر وقهوة</small></button><button data-category="العروض التجريبية"><span class="collection-icon">✨</span><strong>مجموعات وعروض</strong><small>عروض افتراضية للعرض فقط</small></button></div>'}
 const HERO_SLIDES=[{"style":"main","kicker":"🛒 كل احتياجات البيت","title":"تسوّق بسهولة","em":"من مكان واحد","desc":"خضار، ألبان، مواد غذائية ومنتجات منزلية ضمن متجر تجريبي.","primary":"تسوق الآن","path":"/menu","secondary":"جميع الأقسام","secondaryPath":"/menu","symbol":"/offers","short":"سوق التجزئة","art":"🛒","image":"https://images.unsplash.com/photo-1578916171728-46686eac8d58?auto=format&fit=crop&w=1600&q=82"},{"style":"produce","kicker":"🥬 خضار وفواكه","title":"طازج كل يوم","em":"لاختيار أفضل","desc":"اكتشف الخضار والفواكه مع خيارات متنوعة.","primary":"تصفح الطازج","category":"الخضار والفواكه","secondary":"جميع الأقسام","secondaryPath":"/menu","symbol":"🥬","short":"سوق التجزئة","art":"تسوق الطازج","image":"https://images.unsplash.com/photo-1542838132-92c53300491e?auto=format&fit=crop&w=1600&q=82"},{"style":"dairy","kicker":"🥛 الألبان والأجبان","title":"أساسيات يومك","em":"دائمًا جاهزة","desc":"حليب، أجبان وزبادي من قائمة العرض.","primary":"تصفح الألبان","category":"الألبان والأجبان","secondary":"جميع الأقسام","secondaryPath":"/menu","symbol":"🥛","short":"سوق التجزئة","art":"أساسيات البيت","image":"https://images.unsplash.com/photo-1550583724-b2692b85b150?auto=format&fit=crop&w=1600&q=82"},{"style":"meat","kicker":"🥩 اللحوم والدواجن","title":"وجبات الأسبوع","em":"تبدأ من هنا","desc":"تشكيلة عرض من اللحوم والدواجن.","primary":"اكتشف القسم","category":"اللحوم والدواجن","secondary":"جميع الأقسام","secondaryPath":"/menu","symbol":"🥩","short":"سوق التجزئة","art":"اختيارات متنوعة","image":"https://images.unsplash.com/photo-1607623814075-e51df1bdc82f?auto=format&fit=crop&w=1600&q=82"},{"style":"frozen","kicker":"🧊 المجمدات","title":"أصناف عملية","em":"لوقت أقل","desc":"خضار ومخبوزات ومجمدات متنوعة.","primary":"شاهد المجمدات","category":"المجمدات","secondary":"جميع الأقسام","secondaryPath":"/menu","symbol":"❄️","short":"سوق التجزئة","art":"جهز مطبخك","image":"https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&w=1600&q=82"},{"style":"bakery","kicker":"🥖 المخبوزات","title":"خبز ومخبوزات","em":"لأي وقت","desc":"اختيارات يومية متنوعة من المخبوزات.","primary":"تصفح المخبوزات","category":"المخبوزات","secondary":"جميع الأقسام","secondaryPath":"/menu","symbol":"🥖","short":"سوق التجزئة","art":"كل صباح","image":"https://images.unsplash.com/photo-1509440159596-0249088772ff?auto=format&fit=crop&w=1600&q=82"},{"style":"drinks","kicker":"🥤 المشروبات","title":"مشروبات وقهوة","em":"على ذوقك","desc":"مياه وعصائر وشاي وقهوة من القائمة.","primary":"تصفح المشروبات","category":"المياه والمشروبات","secondary":"جميع الأقسام","secondaryPath":"/menu","symbol":"🥤","short":"سوق التجزئة","art":"اختيارات تنعش","image":"https://images.unsplash.com/photo-1544145945-f90425340c7e?auto=format&fit=crop&w=1600&q=82"},{"style":"pantry","kicker":"🍚 أساسيات المطبخ","title":"خزانة بيتك","em":"مكتملة","desc":"أرز ومكرونة وبقوليات ودقيق وأكثر.","primary":"تسوق الأساسيات","category":"الأرز والمكرونة والبقوليات","secondary":"جميع الأقسام","secondaryPath":"/menu","symbol":"🍚","short":"سوق التجزئة","art":"مؤونة البيت","image":"https://images.unsplash.com/photo-1586201375761-83865001e31c?auto=format&fit=crop&w=1600&q=82"},{"style":"canned","kicker":"🫒 الزيوت والمعلبات","title":"اختيارات عملية","em":"للمطبخ","desc":"معلبات وزيوت وصلصات ضمن كتالوج العرض.","primary":"استكشف الأصناف","category":"الزيوت والمعلبات","secondary":"جميع الأقسام","secondaryPath":"/menu","symbol":"🫒","short":"سوق التجزئة","art":"مطبخ متكامل","image":"https://images.unsplash.com/photo-1474979266404-7eaacbcd87c5?auto=format&fit=crop&w=1600&q=82"},{"style":"snacks","kicker":"🍫 تسالي وحلويات","title":"وقت الاستراحة","em":"له طعم","desc":"شوكولاتة وبسكويت ومكسرات متنوعة.","primary":"شاهد التسالي","category":"الحلويات والتسالي","secondary":"جميع الأقسام","secondaryPath":"/menu","symbol":"🍫","short":"سوق التجزئة","art":"اختياراتك","image":"https://images.unsplash.com/photo-1598373182133-52452f7691ef?auto=format&fit=crop&w=1600&q=82"},{"style":"cleaning","kicker":"🧽 منظفات المنزل","title":"نظافة البيت","em":"أسهل","desc":"مستلزمات الغسيل والتنظيف والمطبخ.","primary":"تصفح المنظفات","category":"المنظفات المنزلية","secondary":"جميع الأقسام","secondaryPath":"/menu","symbol":"🧽","short":"سوق التجزئة","art":"راحة بيتك","image":"https://images.unsplash.com/photo-1583947215259-38e31be8751f?auto=format&fit=crop&w=1600&q=82"},{"style":"care","kicker":"🧴 العناية الشخصية","title":"عناية يومية","em":"على كيفك","desc":"منتجات الاستحمام والعناية الشخصية.","primary":"تصفح العناية","category":"العناية الشخصية","secondary":"جميع الأقسام","secondaryPath":"/menu","symbol":"🧴","short":"سوق التجزئة","art":"تسوق يومك","image":"https://images.unsplash.com/photo-1596462502278-27bfdc403348?auto=format&fit=crop&w=1600&q=82"},{"style":"offers","kicker":"🏷️ الباقات والعروض","title":"وفر في وقتك","em":"واختر باقتك","desc":"باقات تجريبية للمعاينة؛ ليست خصومات معتمدة.","primary":"استعرض الباقات","path":"/offers","secondary":"جميع الأقسام","secondaryPath":"/menu","symbol":"🏷️","short":"سوق التجزئة","art":"مشتريات منظمة","image":"https://images.unsplash.com/photo-1607082348824-0a96f2a4b9da?auto=format&fit=crop&w=1600&q=82"}];
 function heroAction(label,path,category,primary){return '<button type="button" class="'+(primary?'discover-btn':'discover-outline')+'" '+(category?'data-category="'+category+'"':'data-go="'+path+'"')+'>'+label+' ←</button>'}
-function homeBanner(){return '<section class="hero-slider" id="heroSlider" aria-label="بنرات سوق التجزئة المتحركة" aria-roledescription="عرض شرائح"><div class="hero-track" id="heroTrack">'+HERO_SLIDES.map((x,i)=>'<article class="discovery-hero hero-slide hero-'+x.style+'" aria-label="البنر '+(i+1)+' من '+HERO_SLIDES.length+'" aria-hidden="'+(i!==0)+'"><div class="discovery-copy"><span class="discovery-kicker">'+x.kicker+'</span><h1>'+x.title+'<br><em>'+x.em+'</em></h1><p>'+x.desc+'</p><div class="discovery-actions">'+heroAction(x.primary,x.path,x.category,true)+heroAction(x.secondary,x.secondaryPath,x.secondaryCategory,false)+'</div><div class="discovery-labels"><span>✦ تجربة تصفح تجريبية</span><span>✦ خيارات متنوعة</span></div></div><div class="discovery-visual"><img class="category-hero-photo" src="'+x.image+'" alt="'+x.kicker.replace(/^[^\p{L}]+/u,'')+'" loading="'+(i===0?'eager':'lazy')+'" decoding="async"><span class="hero-image-tint" aria-hidden="true"></span></div></article>').join('')+'</div><button type="button" class="hero-arrow hero-next" data-hero-move="1" aria-label="البنر التالي">❮</button><button type="button" class="hero-arrow hero-prev" data-hero-move="-1" aria-label="البنر السابق">❯</button><div class="hero-dots" role="group" aria-label="اختيار البنر">'+HERO_SLIDES.map((_,i)=>'<button type="button" data-hero-index="'+i+'" class="'+(i===0?'active':'')+'" aria-label="عرض البنر '+(i+1)+'" aria-current="'+(i===0)+'"></button>').join('')+'</div><span class="hero-index" id="heroIndex">1 / '+HERO_SLIDES.length+'</span></section>'}
+
+const HERO_DISPLAY_PHOTOS={"main":["photo-1578916171728-46686eac8d58","photo-1542838132-92c53300491e","photo-1550583724-b2692b85b150"],"produce":["photo-1542838132-92c53300491e","photo-1490645935967-10de6ba17061","photo-1519996529931-28324d1a630e"],"dairy":["photo-1550583724-b2692b85b150","photo-1488477181946-6428a0291777","photo-1563636619-e9143da7973b"],"meat":["photo-1607623814075-e51df1bdc82f","photo-1544025162-d76694265947","photo-1558030006-450675393462"],"frozen":["photo-1504674900247-0877df9cc836","photo-1547592180-85f173990554","photo-1562967914-608f82629710"],"bakery":["photo-1509440159596-0249088772ff","photo-1608198093002-ad4e005484df","photo-1549931319-a545dcf3bc73"],"drinks":["photo-1544145945-f90425340c7e","photo-1600271886742-f049cd451bba","photo-1536935338788846bb9981813"],"pantry":["photo-1586201375761-83865001e31c","photo-1547592180-85f173990554","photo-1509440159596-0249088772ff"],"canned":["photo-1474979266404-7eaacbcd87c5","photo-1586201375761-83865001e31c","photo-1490645935967-10de6ba17061"],"snacks":["photo-1598373182133-52452f7691ef","photo-1578985545062-69928b1d9587","photo-1488477181946-6428a0291777"],"cleaning":["photo-1583947215259-38e31be8751f","photo-1608571423902-eed4a5ad8108","photo-1585421514738-01798e348b17"],"care":["photo-1596462502278-27bfdc403348","photo-1556228578-0d85b1a4d571","photo-1608248543803-ba4f8c70ae0b"],"offers":["photo-1607082348824-0a96f2a4b9da","photo-1578916171728-46686eac8d58","photo-1542838132-92c53300491e"]};
+function heroCategoryArt(slide){
+ const set=HERO_DISPLAY_PHOTOS[slide.style]||HERO_DISPLAY_PHOTOS.main;
+ const photo=(id,w)=>'https://images.unsplash.com/'+id+'?auto=format&fit=crop&w='+w+'&q=82';
+ const groupName=slide.category||slide.short||'تسوق الآن';
+ return '<div class="hero-showcase" aria-hidden="true">'+
+ '<span class="showcase-halo"></span><span class="showcase-ring"></span>'+
+ '<div class="showcase-phone"><div class="showcase-phone-screen">'+
+ '<div class="showcase-phone-status"><span>9:41</span><span class="phone-camera"></span><span>▂ ▰</span></div>'+
+ '<div class="showcase-phone-head"><span>سوق التجزئة</span><span>◈</span></div>'+
+ '<div class="showcase-phone-search">ابحث عن منتجاتك <span>⌕</span></div>'+
+ '<div class="showcase-phone-cover market-phone-cover"><img src="'+slide.image+'" alt="" loading="lazy" decoding="async"><span class="market-phone-cover-title">'+groupName+'</span></div>'+
+ '<div class="showcase-phone-caption">اختيارات '+groupName+'</div>'+
+ '<div class="showcase-phone-tiles market-phone-tiles">'+set.map(id=>'<img src="'+photo(id,300)+'" alt="" loading="lazy" decoding="async">').join('')+'</div>'+
+ '<div class="showcase-phone-nav"><i></i><i></i><i></i></div></div></div>'+
+ '<div class="showcase-float showcase-float-one"><img src="'+photo(set[0],420)+'" alt="" loading="lazy" decoding="async"></div>'+
+ '<div class="showcase-float showcase-float-two"><img src="'+photo(set[1],420)+'" alt="" loading="lazy" decoding="async"></div>'+
+ '<div class="showcase-float showcase-float-three"><img src="'+photo(set[2],420)+'" alt="" loading="lazy" decoding="async"></div></div>';
+}
+
+function homeBanner(){return '<section class="hero-slider" id="heroSlider" aria-label="بنرات سوق التجزئة المتحركة" aria-roledescription="عرض شرائح"><div class="hero-track" id="heroTrack">'+HERO_SLIDES.map((x,i)=>'<article class="discovery-hero hero-slide hero-'+x.style+'" aria-label="البنر '+(i+1)+' من '+HERO_SLIDES.length+'" aria-hidden="'+(i!==0)+'"><div class="discovery-copy"><span class="discovery-kicker">'+x.kicker+'</span><h1>'+x.title+'<br><em>'+x.em+'</em></h1><p>'+x.desc+'</p><div class="discovery-actions">'+heroAction(x.primary,x.path,x.category,true)+heroAction(x.secondary,x.secondaryPath,x.secondaryCategory,false)+'</div><div class="discovery-labels"><span>✦ تجربة تصفح تجريبية</span><span>✦ خيارات متنوعة</span></div></div><div class="discovery-visual">'+heroCategoryArt(x)+'</div></article>').join('')+'</div><button type="button" class="hero-arrow hero-next" data-hero-move="1" aria-label="البنر التالي">❮</button><button type="button" class="hero-arrow hero-prev" data-hero-move="-1" aria-label="البنر السابق">❯</button><div class="hero-dots" role="group" aria-label="اختيار البنر">'+HERO_SLIDES.map((_,i)=>'<button type="button" data-hero-index="'+i+'" class="'+(i===0?'active':'')+'" aria-label="عرض البنر '+(i+1)+'" aria-current="'+(i===0)+'"></button>').join('')+'</div><span class="hero-index" id="heroIndex">1 / '+HERO_SLIDES.length+'</span></section>'}
 
 function featureCategories(){const featured=[["🥬","خضار وفواكه","الخضار والفواكه"],["🥛","ألبان وأجبان","الألبان والأجبان"],["🥩","لحوم ودواجن","اللحوم والدواجن"],["🧊","مجمدات","المجمدات"],["🥖","مخبوزات","المخبوزات"],["🥤","مشروبات","المياه والمشروبات"],["🍚","أرز وبقوليات","الأرز والمكرونة والبقوليات"],["🫒","زيوت ومعلبات","الزيوت والمعلبات"],["🍫","تسالي وحلويات","الحلويات والتسالي"],["🧽","منظفات","المنظفات المنزلية"]];return '<section class="first-fold-categories" aria-label="أقسام السوبرماركت"><div class="home-section-head"><div><span>تسوق حسب القسم</span><h2>كل احتياجاتك في مكان واحد</h2></div><button data-go="/menu">كل الأقسام ←</button></div><div class="feature-category-grid">'+featured.map(([icon,label,category])=>'<button class="feature-category" data-category="'+category+'"><span class="feature-category-icon">'+icon+'</span><strong>'+label+'</strong></button>').join('')+'</div></section>'}
 function promotionalBanners(){return '<div class="promo-two"><button class="promo-box promo-red" data-go="/offers"><span>باقات للمعاينة</span><h3>احتياجات الأسبوع<br>بكل سهولة</h3><p>تسوّق مجموعات المنتجات المنزلية التجريبية</p><b>تصفح الباقات ←</b><i>🛒</i></button><button class="promo-box promo-midnight" data-category="المنظفات المنزلية"><span>مستلزمات البيت</span><h3>كل شيء للمنزل<br>بمكان واحد</h3><p>منظفات وعناية وأساسيّات يومية</p><b>اكتشف الأقسام ←</b><i>🏠</i></button></div>'}
