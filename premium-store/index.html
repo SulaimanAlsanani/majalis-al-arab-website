@@ -240,14 +240,11 @@ body{font-family:"DIN Next Arabic","DIN Next LT Arabic","Tajawal","IBM Plex Sans
 .product-rail .product-card{flex:0 0 clamp(178px,18vw,225px);min-width:0;scroll-snap-align:start}
 .product-rail .card-photo img{height:145px}.product-rail .card-body{padding:12px}.product-rail .card-title{font-size:13px}
 .product-rail:focus-visible{outline:2px solid #CB3148;border-radius:10px}
-.showcase-foot{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:0 2px}
-.showcase-foot small{font-size:10px;color:#798592}
-.showcase-counter{font-size:11px;color:#b3273c;background:#fff3f4;padding:5px 9px;border-radius:99px;white-space:nowrap}
 .home-trust-strip>div{border-color:#E9E5E4}
 .feature-category:hover{border-color:#E93E56}.journey-grid button:hover{border-color:#EA5269}
 .home-final-cta{background:linear-gradient(105deg,#252F43,#405C72)}
 @media(max-width:780px){.editorial-banner{margin:22px 0 11px}.product-rail .product-card{flex-basis:180px}.product-rail .card-photo img{height:130px}.showcase-arrows button{width:34px;height:34px;font-size:19px}}
-@media(max-width:520px){.product-rail .product-card{flex-basis:158px}.product-rail{gap:10px}.product-rail .card-photo img{height:118px}.showcase-head-actions{gap:5px}.showcase-head-actions>button{font-size:10px;padding:7px}.showcase-arrows{gap:4px}.showcase-arrows button{width:30px;height:30px;font-size:18px}.horizontal-showcase .home-section-head h2{font-size:20px}.showcase-foot small{font-size:9px}.editorial-copy h2{font-size:26px}}
+@media(max-width:520px){.product-rail .product-card{flex-basis:158px}.product-rail{gap:10px}.product-rail .card-photo img{height:118px}.showcase-head-actions{gap:5px}.showcase-head-actions>button{font-size:10px;padding:7px}.showcase-arrows{gap:4px}.showcase-arrows button{width:30px;height:30px;font-size:18px}.horizontal-showcase .home-section-head h2{font-size:20px}.editorial-copy h2{font-size:26px}}
 @media(prefers-reduced-motion:reduce){.product-rail{scroll-behavior:auto}}
 
 /* Primary brand from reference swatch: #B22345, subtly blended red */
@@ -263,7 +260,6 @@ body{background:var(--brand-bg);color:var(--ink)}
 .quick-nav button.active,.orders-tabs button.active{background:#B22345;border-color:#B22345}
 .home-section-head button,.menu-heading button,.showcase-arrows button{color:#B22345}
 .showcase-arrows button:hover{background:#B22345;color:#fff;border-color:#B22345}
-.showcase-counter{color:#B22345;background:#F9E7EC}
 .product-rail{scroll-behavior:smooth;overflow-x:auto;overflow-y:hidden;scroll-snap-type:x proximity;overscroll-behavior-x:contain;scrollbar-color:#DCA5B2 #F7F4F5}
 .product-rail .product-card{scroll-snap-align:start}
 .card-fav.saved{color:#B22345}.basket-banner{background:linear-gradient(110deg,#353D4C,#703A50)}.checkout-title{background:linear-gradient(110deg,#343D4B,#804357)}
@@ -3184,10 +3180,13 @@ body:has(#heroSlider) .reference-top-actions{gap:0!important}
 }
 
 /* Meal cards shared by the home rails, menu, offers and favorites. */
-.product-rail,.product-grid{gap:12px}
-.product-rail .product-card{flex-basis:calc((100% - 36px)/4)}
-.catalog-panel .product-grid{grid-template-columns:repeat(4,minmax(0,1fr))}
-.product-card{display:flex;flex-direction:column}
+.product-rail,.product-grid{--meal-columns:5;--meal-gap:12px;gap:var(--meal-gap)}
+.product-rail{scroll-snap-type:x mandatory;scroll-padding-inline:2px}
+.product-rail .product-card{flex-basis:calc((100% + var(--meal-gap))/var(--meal-columns) - var(--meal-gap))}
+.product-grid{grid-template-columns:repeat(var(--meal-columns),minmax(0,1fr))}
+.recs .product-grid{--meal-columns:3}
+.product-card{display:flex;flex-direction:column;border-radius:14px!important;box-shadow:none!important}
+.product-card:hover{transform:none;box-shadow:0 4px 14px #1018280d!important}
 .product-card .card-photo{aspect-ratio:16/9}
 .product-card .card-photo img{position:absolute;inset:0;height:100%!important}
 .product-card .card-photo .product-photo-illustrative{
@@ -3197,33 +3196,32 @@ body:has(#heroSlider) .reference-top-actions{gap:0!important}
 .product-card .card-photo:focus-visible{outline-offset:-4px}
 .card-photo-caption{
  display:none;position:absolute;inset-block-end:8px;inset-inline-end:8px;
- padding:2px 6px;border-radius:5px;background:#fff;color:#574b47;font-size:11px;
+ padding:2px 6px;border-radius:5px;background:#fffffff2;color:#574b47;font-size:11px;
 }
 .card-photo:has(.product-photo-illustrative) .card-photo-caption{display:block}
-.product-card-logo{
- position:absolute;inset-block-end:8px;inset-inline-start:8px;
- width:clamp(33px,3.7vw,53px);aspect-ratio:1;padding:4px;
- border-radius:10px;background:#fff;box-shadow:0 1px 7px #18111125;pointer-events:none;
+.product-card .card-body{flex:1;gap:4px;padding:9px 10px 10px!important}
+.card-heading{display:flex;align-items:center;gap:4px;min-height:34px}
+.product-card .card-title{flex:1;min-width:0;font-size:clamp(14px,1.12vw,16px);overflow-wrap:anywhere}
+.product-card .card-fav{
+ position:static;flex:0 0 34px;width:34px;height:34px;line-height:1;
+ background:transparent!important;box-shadow:none!important;color:#62646b;
 }
-.product-card-logo img{display:block;width:100%;height:100%;object-fit:contain}
-.product-card .card-body{flex:1;gap:7px}
-.product-card .card-title{font-size:clamp(14px,1.2vw,17px)}
+.product-card .card-fav:hover{background:#f7f3ef!important;color:#7e253a}
+.product-card .card-price{font-size:15px}
 .product-card .add-button{
- min-width:40px;min-height:40px;padding:0 8px;line-height:1;
- background:#f7efe4!important;color:#7e253a!important;font-size:23px;
+ min-width:37px;min-height:37px;padding:0 8px;line-height:1;
+ background:#f7efe4!important;color:#7e253a!important;border-radius:9px!important;font-size:22px;
 }
 .product-card .add-button:not(:disabled):hover{background:#eddfd1!important}
 .product-card .add-button:disabled{background:#edeef0!important;color:#646b74!important}
-@media(max-width:1240px){
- .catalog-panel .product-grid{grid-template-columns:repeat(3,minmax(0,1fr))}
+@media(max-width:1150px){
+ .product-rail,.product-grid{--meal-columns:4}
 }
-@media(max-width:1000px){
- .product-rail .product-card{flex-basis:calc((100% - 24px)/3)}
+@media(max-width:900px){
+ .product-rail,.product-grid{--meal-columns:3}
 }
 @media(max-width:780px){
- .product-rail,.product-grid{gap:9px}
- .product-rail .product-card{flex-basis:calc((100% - 9px)/2)}
- .catalog-panel .product-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+ .product-rail,.product-grid,.recs .product-grid{--meal-columns:2;--meal-gap:9px}
  .product-card .add-button{min-width:44px;min-height:44px}
 }
 </style></head>
@@ -3364,10 +3362,9 @@ function card(p){
  const status=!available?'<span class="product-availability sold-out">غير متوفر</span>':(p.demo?'<span class="demo-sticker">تجريبي</span>':'');
  return '<article class="product-card"><div class="product-card-image-wrap">'+
  '<button type="button" class="card-photo" data-product="'+p.id+'" aria-label="تفاصيل '+name+'">'+imgTag(p,'',false)+
- '<span class="card-photo-caption" aria-hidden="true">صورة توضيحية</span></button>'+status+
- '<span class="product-card-logo" aria-hidden="true"><img src="assets/brand/majalis-logo-official-transparent.png" alt="" width="48" height="48" loading="lazy" decoding="async"></span>'+
+ '<span class="card-photo-caption" aria-hidden="true">صورة توضيحية</span></button>'+status+'</div>'+
+ '<div class="card-body"><div class="card-heading"><button type="button" class="card-title" data-product="'+p.id+'">'+name+'</button>'+
  '<button type="button" class="card-fav '+(f?'saved':'')+'" data-fav="'+p.id+'" aria-label="'+(f?'إزالة من المفضلة':'إضافة للمفضلة')+'" aria-pressed="'+f+'">'+(f?'♥':'♡')+'</button></div>'+
- '<div class="card-body"><button type="button" class="card-title" data-product="'+p.id+'">'+name+'</button>'+
  '<div class="card-bottom"><span class="card-price">'+money(p.price)+'</span><button type="button" class="add-button" '+
  (available?'data-card-add="'+p.id+'" aria-label="أضف '+name+' إلى السلة"':'disabled aria-label="الصنف غير متوفر"')+'>'+(available?'+':'×')+'</button></div></div></article>';
 }
@@ -3480,7 +3477,7 @@ function menuQrBanner(){
  '</section>';
 }
 function promotionalBanners(){return '<div class="promo-two"><button class="promo-box promo-red" data-go="/offers"><span>لفترة تجريبية</span><h3>العروض تجمع<br>اللمة الحلوة</h3><p>باقات المشاركة وخيارات متنوعة للتجربة</p><b>استكشف العروض ←</b><i>✦</i></button><button class="promo-box promo-midnight" data-go="/seating"><span>للمّة مذاق آخر</span><h3>جلسات وتفاصيل<br>على كيفك</h3><p>استفسر عن الجلسات والمباريات والبلايستيشن</p><b>اكتشف الجلسات ←</b><i>☕</i></button></div>'}
-function productShowcase(title,description,ids,more,key){const rows=ids.map(productById).filter(Boolean);const sid='home-carousel-'+key;return '<section class="home-showcase horizontal-showcase" aria-label="'+title+'"><div class="home-section-head"><div><span>'+description+'</span><h2>'+title+'</h2></div><div class="showcase-head-actions"><div class="showcase-arrows" aria-label="التنقل بين منتجات '+title+'"><button type="button" data-slide-dir="-1" data-slide-track="'+sid+'" aria-label="المنتجات السابقة" title="السابق">→</button><button type="button" data-slide-dir="1" data-slide-track="'+sid+'" aria-label="المنتجات التالية" title="التالي">←</button></div><button data-go="'+(more||'/menu')+'">عرض الكل ←</button></div></div><div class="product-rail" id="'+sid+'" data-auto-rail tabindex="0" aria-label="منتجات '+title+' — مرر أفقيًا">'+rows.map(card).join('')+'</div><div class="showcase-foot"><small>مرّر أفقيًا أو استخدم الأسهم • انتقال تلقائي كل 3 ثوانٍ</small><span class="showcase-counter" id="counter-'+sid+'" aria-live="off">1 / '+rows.length+'</span></div></section>'}
+function productShowcase(title,description,ids,more,key){const rows=ids.map(productById).filter(Boolean);const sid='home-carousel-'+key;return '<section class="home-showcase horizontal-showcase" aria-label="'+title+'"><div class="home-section-head"><div><span>'+description+'</span><h2>'+title+'</h2></div><div class="showcase-head-actions"><div class="showcase-arrows" aria-label="التنقل بين منتجات '+title+'"><button type="button" data-slide-dir="-1" data-slide-track="'+sid+'" aria-label="المنتجات السابقة" title="السابق">→</button><button type="button" data-slide-dir="1" data-slide-track="'+sid+'" aria-label="المنتجات التالية" title="التالي">←</button></div><button data-go="'+(more||'/menu')+'">عرض الكل ←</button></div></div><div class="product-rail" id="'+sid+'" tabindex="0" aria-label="منتجات '+title+' — مرر أفقيًا">'+rows.map(card).join('')+'</div></section>'}
 function homeTrustStrip(){return '<div class="home-trust-strip"><div><span>☕</span><strong>نكهة أصيلة</strong><small>من أطباق نعرفها ونحبها</small></div><div><span>🥗</span><strong>اختيارات كثيرة</strong><small>كتالوج تجريبي غني ومتنوّع</small></div><div><span>🛍️</span><strong>طلبك بطريقتك</strong><small>ملاحظات وكميات وسلة واضحة</small></div><div><span>💬</span><strong>نسمع لك</strong><small>استفسارات الجلسات مباشرة</small></div></div>'}
 
 /* Editorial campaign blocks use native CSS ornaments instead of misleading food photography */
@@ -3620,15 +3617,23 @@ function setHeroSlide(index,manual=false){const track=el('heroTrack');if(!track)
 function stopHeroSlider(){if(heroTimer!==null){clearInterval(heroTimer);heroTimer=null}}
 function startHeroSlider(){stopHeroSlider();heroActive=0;heroPauseUntil=0;const hero=el('heroSlider');if(!hero)return;setHeroSlide(0);if(window.matchMedia?.('(prefers-reduced-motion: reduce)').matches)return;hero.addEventListener('pointerenter',()=>hero.dataset.hovered='1');hero.addEventListener('pointerleave',()=>hero.dataset.hovered='0');hero.addEventListener('focusin',()=>hero.dataset.focused='1');hero.addEventListener('focusout',e=>{if(!hero.contains(e.relatedTarget))hero.dataset.focused='0'});hero.addEventListener('touchstart',()=>{heroPauseUntil=Date.now()+9500},{passive:true});heroTimer=setInterval(()=>{if(document.hidden||hero.dataset.hovered==='1'||hero.dataset.focused==='1'||Date.now()<heroPauseUntil)return;setHeroSlide(heroActive+1)},5000)}
 
-const carouselPositions=new Map();
-let carouselTimer=null,carouselPauseUntil=0;
-function carouselElements(id){const rail=el(id);return rail&&rail.querySelectorAll?{rail,cards:[...rail.querySelectorAll('.product-card')]}:null}
-function slideHomeRail(id,delta,manual=false){const entry=carouselElements(id);if(!entry||entry.cards.length<2)return;const {rail,cards}=entry;const maxScroll=Math.max(0,rail.scrollWidth-rail.clientWidth);if(maxScroll<1)return;const gap=parseFloat(window.getComputedStyle?.(rail).gap)||13;const step=(cards[0].getBoundingClientRect?.().width||cards[0].offsetWidth||200)+gap;const maxIndex=Math.max(0,Math.ceil(maxScroll/step));const current=carouselPositions.get(id)||0;const next=(current+delta+maxIndex+1)%(maxIndex+1);carouselPositions.set(id,next);if(manual)carouselPauseUntil=Date.now()+9000;const offset=Math.min(maxScroll,next*step);const behavior=window.matchMedia?.('(prefers-reduced-motion: reduce)').matches?'instant':'smooth';rail.scrollTo({left:-offset,behavior});const counter=el('counter-'+id);if(counter)counter.textContent=(next+1)+' / '+(maxIndex+1)}
-function stopHomeCarousel(){if(carouselTimer!==null){clearInterval(carouselTimer);carouselTimer=null}}
-function startHomeCarousel(){stopHomeCarousel();carouselPositions.clear();if(window.matchMedia?.('(prefers-reduced-motion: reduce)').matches)return;const rails=[...document.querySelectorAll('[data-auto-rail]')];rails.forEach(rail=>{carouselPositions.set(rail.id,0);rail.addEventListener('pointerenter',()=>{rail.dataset.hovered='true'});rail.addEventListener('pointerleave',()=>{rail.dataset.hovered='false'});rail.addEventListener('focusin',()=>{rail.dataset.focused='true'});rail.addEventListener('focusout',()=>{rail.dataset.focused='false'});rail.addEventListener('pointerdown',()=>{carouselPauseUntil=Date.now()+9000});rail.addEventListener('touchstart',()=>{carouselPauseUntil=Date.now()+9000},{passive:true});rail.addEventListener('wheel',()=>{carouselPauseUntil=Date.now()+9000},{passive:true})});if(!rails.length)return;carouselTimer=setInterval(()=>{if(document.hidden||Date.now()<carouselPauseUntil)return;for(const rail of rails){if(!rail.isConnected||rail.dataset.hovered==='true'||rail.dataset.focused==='true')continue;slideHomeRail(rail.id,1)}},3000)}
+function slideHomeRail(id,delta){
+ const rail=el(id);
+ const first=rail?.querySelector('.product-card');
+ if(!first)return;
+ const maxScroll=rail.scrollWidth-rail.clientWidth;
+ if(maxScroll<1)return;
+ const step=first.getBoundingClientRect().width+parseFloat(getComputedStyle(rail).columnGap);
+ const last=Math.ceil(maxScroll/step);
+ const offset=-rail.scrollLeft;
+ const current=offset>=maxScroll-1?last:Math.round(offset/step);
+ const next=(current+delta+last+1)%(last+1);
+ const behavior=window.matchMedia('(prefers-reduced-motion: reduce)').matches?'instant':'smooth';
+ rail.scrollTo({left:-Math.min(maxScroll,next*step),behavior});
+}
 
-function render(){stopHomeCarousel();stopHeroSlider();const path=currentPath();const m=path.match(/^\/product\/(\d+)$/);if(m)renderDetail(Number(m[1]));else if(path==='/cart')renderCart();else if(path==='/checkout')checkoutPage();else if(path==='/seating')renderSeating();else if(path==='/menu')renderMenu();else if(path==='/offers')renderOffers();else if(path==='/favorites')renderFavorites();else if(path==='/orders')renderOrders();else if(path==='/account')renderAccount();else if(path==='/addresses')renderAddresses();else if(path==='/help')renderHelp();else renderHome();if(path==='/'){startHomeCarousel();startHeroSlider()}updateCounts();el('globalSearch').value=state.query;document.querySelectorAll('.mobile-bottom button').forEach(b=>b.classList.toggle('active',b.dataset.route===path));window.scrollTo({top:0,behavior:'instant'})}
-document.addEventListener('click',e=>{const heroMove=e.target.closest('[data-hero-move]');if(heroMove){setHeroSlide(heroActive+Number(heroMove.dataset.heroMove),true);return}const heroDot=e.target.closest('[data-hero-index]');if(heroDot){setHeroSlide(Number(heroDot.dataset.heroIndex),true);return}const slideBtn=e.target.closest('[data-slide-dir]');if(slideBtn){slideHomeRail(slideBtn.dataset.slideTrack,Number(slideBtn.dataset.slideDir),true);return}if(e.target.closest('[data-search-all]')){el('searchSuggestions').hidden=true;route('/menu');return}
+function render(){stopHeroSlider();const path=currentPath();const m=path.match(/^\/product\/(\d+)$/);if(m)renderDetail(Number(m[1]));else if(path==='/cart')renderCart();else if(path==='/checkout')checkoutPage();else if(path==='/seating')renderSeating();else if(path==='/menu')renderMenu();else if(path==='/offers')renderOffers();else if(path==='/favorites')renderFavorites();else if(path==='/orders')renderOrders();else if(path==='/account')renderAccount();else if(path==='/addresses')renderAddresses();else if(path==='/help')renderHelp();else renderHome();if(path==='/')startHeroSlider();updateCounts();el('globalSearch').value=state.query;document.querySelectorAll('.mobile-bottom button').forEach(b=>b.classList.toggle('active',b.dataset.route===path));window.scrollTo({top:0,behavior:'instant'})}
+document.addEventListener('click',e=>{const heroMove=e.target.closest('[data-hero-move]');if(heroMove){setHeroSlide(heroActive+Number(heroMove.dataset.heroMove),true);return}const heroDot=e.target.closest('[data-hero-index]');if(heroDot){setHeroSlide(Number(heroDot.dataset.heroIndex),true);return}const slideBtn=e.target.closest('[data-slide-dir]');if(slideBtn){slideHomeRail(slideBtn.dataset.slideTrack,Number(slideBtn.dataset.slideDir));return}if(e.target.closest('[data-search-all]')){el('searchSuggestions').hidden=true;route('/menu');return}
 if(e.target.closest('#goCheckout,#goCheckoutMobile')){route('/checkout');return}
 const payMode=e.target.closest('[data-checkout-mode]');if(payMode){state.fulfillment=payMode.dataset.checkoutMode;checkoutPage();return}
 if(e.target.closest('#nationalAddressRequest')){requestAddressIntegration();return}
