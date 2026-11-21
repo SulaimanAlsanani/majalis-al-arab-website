@@ -1809,6 +1809,103 @@ body:has(#heroSlider) .page{padding-top:0!important}
  .reference-top-lang{display:none}
  .reference-top-cta{padding:8px 10px}
 }
+
+/* Header - 40% reduction in vertical space and key components (75px -> 45px). */
+body:has(#heroSlider) .site-header>.header-inner.wrap{
+ min-height:45px!important;height:45px!important;
+ gap:10.8px!important;padding:4px 14.4px!important;
+}
+body:has(#heroSlider) .header-inner .brand{gap:5px!important}
+body:has(#heroSlider) .header-inner .brand-icon{
+ width:27px!important;height:27px!important;min-width:27px!important;
+ font-size:17px!important;border-radius:8px!important;
+}
+body:has(#heroSlider) .header-inner .brand-spark{font-size:8px!important}
+body:has(#heroSlider) .header-inner .brand-name strong{font-size:12px!important;line-height:1.2!important}
+body:has(#heroSlider) .header-inner .brand-name small{font-size:7px!important;line-height:1!important}
+body:has(#heroSlider) .reference-top-actions{gap:10.8px!important}
+body:has(#heroSlider) .reference-top-lang{
+ gap:5px!important;font-size:10px!important;padding:6px 9px!important;border-radius:6px!important;
+}
+body:has(#heroSlider) .reference-top-cta{
+ font-size:10px!important;padding:7px 15px!important;border-radius:7px!important;min-height:29px!important;
+}
+body:has(#heroSlider) .header-cart.header-cart-icon{
+ width:29px!important;height:29px!important;min-width:29px!important;flex:0 0 29px!important;border-radius:9px!important;
+}
+body:has(#heroSlider) .header-cart.header-cart-icon svg{width:15px!important;height:15px!important}
+body:has(#heroSlider) .header-cart.header-cart-icon .cart-count{font-size:9px!important;min-width:14px!important;height:14px!important}
+/* Scale the hero contents down without removing banners, reducing carousel height or changing slide identities. */
+#heroSlider .hero-slide .discovery-copy{
+ padding:clamp(20px,2.6vw,42px) clamp(20px,3vw,50px)!important;
+}
+#heroSlider .hero-slide .discovery-kicker{
+ font-size:clamp(11px,.9vw,13px)!important;margin-bottom:10px!important;
+}
+#heroSlider .hero-slide .discovery-copy h1{
+ font-size:clamp(29px,2.8vw,48px)!important;
+ line-height:1.28!important;margin:0 0 13px!important;
+}
+#heroSlider .hero-slide .discovery-copy h1 em{border-radius:9px!important}
+#heroSlider .hero-slide .discovery-copy p{
+ font-size:clamp(12px,.92vw,14px)!important;
+ line-height:1.7!important;margin:0 0 13px!important;
+ max-width:490px!important;
+}
+#heroSlider .hero-slide .discovery-actions{gap:7px!important}
+#heroSlider .hero-slide .discover-btn{
+ font-size:11px!important;padding:10px 19px!important;border-radius:9px!important;
+}
+#heroSlider .hero-slide .discover-outline{
+ font-size:11px!important;padding:9px 14px!important;border-radius:9px!important;
+}
+#heroSlider .hero-slide .discovery-labels{font-size:10px!important;margin-top:9px!important}
+#heroSlider .reference-hero-phone{
+ width:clamp(185px,19.5vw,275px)!important;
+ height:95%!important;top:15%!important;
+}
+#heroSlider .reference-food-float{width:clamp(80px,8.5vw,135px)!important}
+#heroSlider .reference-phone-status{font-size:10px!important;height:29px!important}
+#heroSlider .reference-phone-top{font-size:10px!important}
+#heroSlider .reference-phone-search{font-size:9px!important;padding:9px!important}
+#heroSlider .reference-phone-caption{font-size:11px!important}
+#heroSlider .reference-phone-grid span{height:56px!important}
+#heroSlider .reference-hero-ring{width:min(83%,520px)!important;border-width:clamp(24px,3.2vw,43px)!important;bottom:-36%!important}
+#heroSlider .reference-hero-disc{width:62%!important}
+@media(max-width:780px){
+ body:has(#heroSlider) .site-header>.header-inner.wrap{
+   min-height:40px!important;height:40px!important;padding:3px 9px!important;gap:7px!important;
+ }
+ body:has(#heroSlider) .header-inner .brand-icon{width:24px!important;height:24px!important;min-width:24px!important;font-size:15px!important}
+ body:has(#heroSlider) .header-inner .brand-name strong{font-size:10px!important}
+ body:has(#heroSlider) .reference-top-actions{gap:5px!important}
+ body:has(#heroSlider) .reference-top-cta{font-size:9px!important;padding:5px 8px!important;min-height:25px!important}
+ body:has(#heroSlider) .reference-top-lang{font-size:9px!important;padding:5px 6px!important}
+ body:has(#heroSlider) .header-cart.header-cart-icon{width:26px!important;height:26px!important;min-width:26px!important;flex-basis:26px!important}
+ #heroSlider .hero-slide .discovery-copy{padding:16px 14px!important}
+ #heroSlider .hero-slide .discovery-copy h1{font-size:clamp(23px,3.1vw,28px)!important}
+ #heroSlider .hero-slide .discovery-copy p{font-size:10px!important}
+ #heroSlider .reference-hero-phone{width:175px!important;height:91%!important;top:19%!important}
+ #heroSlider .reference-food-float{width:82px!important}
+}
+@media(max-width:520px){
+ body:has(#heroSlider) .site-header>.header-inner.wrap{min-height:40px!important;height:40px!important}
+ body:has(#heroSlider) .header-inner .brand-name small{display:none!important}
+ #heroSlider .hero-slide .discovery-copy{padding:12px 11px!important}
+ #heroSlider .hero-slide .discovery-kicker{font-size:9px!important;margin-bottom:7px!important}
+ #heroSlider .hero-slide .discovery-copy h1{font-size:clamp(20px,5.2vw,25px)!important;margin-bottom:8px!important}
+ #heroSlider .hero-slide .discovery-copy p{font-size:9px!important;line-height:1.6!important;margin-bottom:7px!important}
+ #heroSlider .hero-slide .discover-btn,#heroSlider .hero-slide .discover-outline{
+   font-size:9px!important;padding:7px 8px!important;
+ }
+ #heroSlider .reference-hero-phone{width:128px!important;height:85%!important;top:24%!important}
+ #heroSlider .reference-food-float{width:55px!important}
+ #heroSlider .reference-phone-status{font-size:7px!important;height:20px!important}
+ #heroSlider .reference-phone-top{font-size:8px!important}
+ #heroSlider .reference-phone-search{font-size:7px!important;padding:5px!important}
+ #heroSlider .reference-phone-caption{font-size:8px!important}
+ #heroSlider .reference-phone-grid span{height:36px!important}
+}
 </style></head>
 <body>
 <header class="site-header"><div class="wrap header-inner">
