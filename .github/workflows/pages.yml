@@ -4,6 +4,7 @@ on:
     branches: [main]
     paths:
       - '*.html'
+      - 'restaurant-store/**'
       - 'assets/**'
       - 'scripts/check_site.py'
       - 'scripts/check_quality.py'
@@ -62,6 +63,8 @@ jobs:
           mkdir -p dist/assets
           cp -- ./*.html robots.txt sitemap.xml .nojekyll dist/
           cp -R assets/. dist/assets/
+          cp -R restaurant-store dist/restaurant-store
+          test -s dist/restaurant-store/index.html
           test -s dist/index.html
           test -s dist/assets/styles.css
           test -s dist/assets/signature.js
