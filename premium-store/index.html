@@ -3395,6 +3395,57 @@ body:has(#heroSlider) .reference-top-actions{gap:0!important}
 .majalis-promo-phone img{display:block;width:100%;height:54%;object-fit:contain;background:#faf9f7;border-radius:6px}
 @media(max-width:780px){.majalis-promo{grid-template-columns:minmax(0,1fr) 40%;min-height:190px;margin:17px 0 22px;border-radius:17px}.majalis-promo-copy{padding:18px 13px;gap:7px}.majalis-promo-copy h2{font-size:clamp(17px,3.8vw,26px)}.majalis-promo-copy p{font-size:11px}.majalis-promo-art{min-height:190px}.majalis-promo-photo{width:86%;height:72%}.majalis-promo-photo.second{display:none}.majalis-promo-phone{left:53%;width:34%;height:75%;top:13%;border-width:3px;border-radius:13px;padding:10px 3px 3px;min-width:48px}.majalis-promo-phone strong{font-size:6px}.majalis-promo-phone small{font-size:5px;margin:3px 0}}
 @media(max-width:420px){.majalis-promo{grid-template-columns:minmax(0,1fr) 36%;min-height:157px}.majalis-promo-copy{padding:13px 10px}.majalis-promo-copy h2{font-size:17px}.majalis-promo-copy p{font-size:10px}.majalis-promo-copy button{padding:7px 10px;font-size:10px;margin-top:2px}.majalis-promo-art{min-height:157px}.majalis-promo-phone{min-width:43px}}
+
+/* Lightweight direct favorites: adjacent header badge and meal-photo control. */
+.site-header .header-favorites-icon,
+body:has(#heroSlider) .site-header .header-favorites-icon{
+  display:inline-flex!important;position:relative!important;isolation:isolate;
+  align-items:center!important;justify-content:center!important;
+  flex:0 0 42px!important;width:42px!important;height:42px!important;
+  min-width:42px!important;padding:0!important;margin:0!important;
+  color:#27292e!important;background:#fff!important;
+  border:1px solid #efebeb!important;border-radius:11px!important;
+  cursor:pointer;box-shadow:none!important;overflow:visible!important;
+}
+.site-header .header-favorites-icon>svg{width:20px!important;height:20px!important;stroke-width:1.65}
+.site-header .header-favorites-icon:hover{background:#fff8fa!important;color:#a62e4b!important}
+.site-header .header-favorites-icon .favorites-count{
+  position:absolute!important;top:-8px!important;inset-inline-end:-9px!important;
+  display:inline-flex!important;align-items:center!important;justify-content:center!important;
+  box-sizing:border-box!important;min-width:20px!important;height:20px!important;
+  padding:0 5px!important;border-radius:999px!important;background:#252a32!important;
+  color:#fff!important;border:1px solid #fff!important;font-size:11px!important;
+  font-weight:800!important;line-height:1!important;font-variant-numeric:tabular-nums;
+  z-index:3!important;
+}
+.product-card .product-card-image-wrap{position:relative!important;overflow:hidden!important}
+.product-card .card-favorite-toggle{
+  position:absolute!important;z-index:5!important;top:12px!important;inset-inline-end:11px!important;
+  display:grid!important;place-items:center!important;width:32px!important;height:32px!important;
+  border:1px solid #eeecee!important;border-radius:50%!important;
+  padding:0!important;background:#ffffffed!important;box-shadow:none!important;
+  color:#73737b!important;cursor:pointer;transition:color .18s,background .18s,transform .18s!important;
+}
+.product-card .card-favorite-toggle svg{width:17px!important;height:17px!important;fill:none}
+.product-card .card-favorite-toggle:hover{color:#ac405c!important;transform:scale(1.06)!important}
+.product-card .card-favorite-toggle[aria-pressed="true"]{color:#b63255!important;background:#fff8fa!important;border-color:#f0dbe2!important}
+.product-card .card-favorite-toggle[aria-pressed="true"] svg{fill:#b63255!important;stroke:#b63255!important}
+.site-header .header-favorites-icon:focus-visible,.product-card .card-favorite-toggle:focus-visible{outline:2px solid #b63255!important;outline-offset:2px!important}
+@media(max-width:700px){
+ .site-header .header-favorites-icon,body:has(#heroSlider) .site-header .header-favorites-icon{
+  flex:0 0 34px!important;width:34px!important;min-width:34px!important;height:34px!important;
+ }
+ .site-header .header-favorites-icon>svg{width:18px!important;height:18px!important}
+ .site-header .header-favorites-icon .favorites-count{min-width:17px!important;height:17px!important;font-size:9px!important;top:-6px!important;inset-inline-end:-6px!important}
+ .product-card .card-favorite-toggle{top:9px!important;inset-inline-end:9px!important;width:29px!important;height:29px!important}
+ .product-card .card-favorite-toggle svg{width:16px!important;height:16px!important}
+}
+@media(max-width:420px){
+ .site-header .header-favorites-icon,body:has(#heroSlider) .site-header .header-favorites-icon{
+  flex:0 0 28px!important;width:28px!important;min-width:28px!important;height:28px!important;
+ }
+ .site-header .header-favorites-icon>svg{width:16px!important;height:16px!important}
+}
 </style></head>
 <body>
 <header class="site-header"><div class="wrap header-inner">
@@ -3410,6 +3461,7 @@ body:has(#heroSlider) .reference-top-actions{gap:0!important}
   </div>
  </details>
 </div>
+<button id="headerFavorites" class="header-favorites-icon" type="button" aria-label="فتح أصنافي المفضلة، 0 أصناف" title="المفضلة"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M20.6 5.5a5.2 5.2 0 0 0-7.4 0L12 6.7l-1.2-1.2a5.2 5.2 0 1 0-7.4 7.4l1.2 1.2L12 21l7.4-6.9 1.2-1.2a5.2 5.2 0 0 0 0-7.4Z"/></svg><span class="favorites-count" id="headerFavoritesCount">0</span></button>
 <button id="headerCart" class="cart-button header-cart header-cart-icon" type="button" aria-label="فتح سلة المشتريات" title="السلة"><svg viewBox="0 0 24 24" width="21" height="21" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M3 4h2l2.2 10.1a2 2 0 0 0 2 1.6h8.9a2 2 0 0 0 2-1.6L22 7H6"/><circle cx="10" cy="20" r="1"/><circle cx="18" cy="20" r="1"/></svg><span class="cart-count" id="headerCount">0</span></button>
 <details class="header-site-menu" id="headerSiteMenu">
  <summary class="header-site-menu-trigger" aria-label="فتح قائمة الموقع" title="القائمة">
@@ -3505,6 +3557,10 @@ function total(){return state.cart.reduce((s,l)=>s+(PRODUCTS.find(p=>p.id===l.id
 function updateCounts(){
  el('headerCount').textContent=count();
  el('mobileCount').textContent=count();
+ const favoritesCount=el('headerFavoritesCount');
+ if(favoritesCount)favoritesCount.textContent=state.favorites.length;
+ const favoritesLink=el('headerFavorites');
+ if(favoritesLink)favoritesLink.setAttribute('aria-label','فتح أصنافي المفضلة، '+state.favorites.length+' أصناف');
  const float=el('floatingOrder');
  if(float){
    float.hidden=!count();
@@ -3527,12 +3583,24 @@ function changeCart(index,delta){const l=state.cart[index];if(!l)return;l.qty+=d
 function removeCart(index){state.cart.splice(index,1);save();updateCounts();if(currentPath()==='/cart')refreshCartPage();else render()}
 function toggleFavorite(button){
  const id=Number(button.dataset.fav);
+ if(!Number.isInteger(id)||!productById(id))return;
  const index=state.favorites.indexOf(id);
  const added=index<0;
  if(added)state.favorites.push(id);
  else state.favorites.splice(index,1);
  save();
- button.setAttribute('aria-pressed',String(added));
+ document.querySelectorAll('[data-fav="'+id+'"]').forEach(control=>{
+  control.setAttribute('aria-pressed',String(added));
+  control.setAttribute('aria-label',(added?'إزالة ':'إضافة ')+productById(id).name+(added?' من المفضلة':' إلى المفضلة'));
+  control.title=added?'إزالة من المفضلة':'إضافة إلى المفضلة';
+ });
+ updateCounts();
+ if(currentPath()==='/favorites'&&!added){
+  const card=button.closest('.product-card');
+  if(card)card.remove();
+  if(!document.querySelector('.product-grid .product-card'))renderFavorites();
+ }
+ notify(added?'تمت إضافة الصنف إلى المفضلة':'تمت إزالة الصنف من المفضلة');
 }
 function sectionHeading(title,desc='',extra=''){return '<div class="panel-head"><div><h2>'+title+'</h2>'+(desc?'<p>'+desc+'</p>':'')+'</div>'+extra+'</div>'}
 const CARD_HEART='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M20.6 5.5a5.2 5.2 0 0 0-7.4 0L12 6.7l-1.2-1.2a5.2 5.2 0 1 0-7.4 7.4l1.2 1.2L12 21l7.4-6.9 1.2-1.2a5.2 5.2 0 0 0 0-7.4Z"/></svg>';
@@ -3543,7 +3611,8 @@ function card(p){
  const price=escapeHtml(money(p.price));
  const details=name+'، '+price+(p.demo?'، عرض تجريبي':'')+(available?'':'، غير متوفر');
  return '<article class="product-card"><div class="product-card-image-wrap">'+
- '<button type="button" class="card-photo" data-product="'+p.id+'" aria-label="تفاصيل '+details+'" title="'+details+'">'+imgTag(p,'',false)+'</button></div>'+
+ '<button type="button" class="card-photo" data-product="'+p.id+'" aria-label="تفاصيل '+details+'" title="'+details+'">'+imgTag(p,'',false)+'</button>'+
+  '<button type="button" class="card-favorite-toggle" data-fav="'+p.id+'" aria-pressed="'+state.favorites.includes(p.id)+'" aria-label="'+(state.favorites.includes(p.id)?'إزالة ':'إضافة ')+name+(state.favorites.includes(p.id)?' من المفضلة':' إلى المفضلة')+'" title="'+(state.favorites.includes(p.id)?'إزالة من المفضلة':'إضافة إلى المفضلة')+'">'+CARD_HEART+'</button></div>'+
  '<div class="card-body"><div class="card-copy"><h3><button type="button" class="card-title" data-product="'+p.id+'">'+name+'</button></h3>'+
  '<span class="card-price">'+price+'</span>'+(available?'':'<span class="card-stock">غير متوفر</span>')+'</div>'+
  '<button type="button" class="add-button" '+(available?'data-card-add="'+p.id+'" aria-label="أضف '+name+' إلى السلة"':'disabled aria-label="'+name+' غير متوفر"')+'>'+CARD_ADD+'</button></div></article>';
@@ -3794,7 +3863,7 @@ function requestGeolocation(){if(!navigator.geolocation){const x=el('checkoutFee
 
 function commonPageHead(kicker,title,description){return '<div class="interior-heading"><span>'+kicker+'</span><h1>'+title+'</h1><p>'+description+'</p></div>'}
 function renderOffers(){const discounts=PRODUCTS.filter(x=>x.category==='العروض التجريبية');const family=PRODUCTS.filter(x=>x.category==='الوجبات العائلية');el('app').innerHTML=commonPageHead('العروض والباقات','على مزاجك… واللّمة أحلى','عروض وأصناف افتراضية لا تمثل خصومات أو أسعارًا فعلية للمطعم.')+'<div class="offers-masthead"><div><span>✦ عروض للتجربة</span><h2>اختيارات تكمل<br>كل سفرة</h2><p>وجبات مشاركة، فطور، قهوة وحلا — شاهد الخيارات داخل الكتالوج التجريبي.</p></div><div class="offers-big-icon">٪</div></div><div class="home-section-head"><div><span>باقات تجريبية</span><h2>عروض متنوعة</h2></div></div><div class="product-grid">'+discounts.map(card).join('')+'</div><div class="home-section-head"><div><span>للأهل والأصحاب</span><h2>وجبات عائلية</h2></div></div><div class="product-grid">'+family.map(card).join('')+'</div>'}
-function renderFavorites(){const rows=PRODUCTS.filter(x=>state.favorites.includes(x.id));el('app').innerHTML=commonPageHead('اختياراتك المحبوبة','المفضلة ♡','احفظ الأصناف التي تعجبك لتعود إليها بسهولة. تُخزّن اختياراتك محليًا في المتصفح.')+(rows.length?'<div class="product-grid">'+rows.map(card).join('')+'</div>':'<div class="empty-large"><span>♡</span><h2>ما حفظت أصناف للمفضلة بعد</h2><p>افتح تفاصيل المنتج واضغط القلب لحفظه هنا.</p><button class="solid-action" data-go="/menu">تصفّح المنيو ←</button></div>')}
+function renderFavorites(){const rows=PRODUCTS.filter(x=>state.favorites.includes(x.id));el('app').innerHTML=commonPageHead('اختياراتك المحبوبة','المفضلة ♡','احفظ الأصناف التي تعجبك لتعود إليها بسهولة. تُخزّن اختياراتك محليًا في المتصفح.')+(rows.length?'<div class="product-grid">'+rows.map(card).join('')+'</div>':'<div class="empty-large"><span>♡</span><h2>ما حفظت أصناف للمفضلة بعد</h2><p>اضغط القلب على صورة أي وجبة لحفظها هنا.</p><button class="solid-action" data-go="/menu">تصفّح المنيو ←</button></div>')}
 function renderOrders(){el('app').innerHTML=commonPageHead('ملف الطلبات','طلباتي','هذه واجهة تجريبية لسجل الطلبات. لا يوجد نظام طلبات مرتبط أو عمليات شراء سابقة.')+'<div class="orders-tabs"><button class="active" type="button" data-order-tab="active">الطلبات الحالية</button><button type="button" data-order-tab="previous">الطلبات السابقة</button></div><div id="orderTabBody" class="empty-large"><span>▤</span><h2>لا توجد طلبات حالية</h2><p>عند ربط المتجر بأودو، ستظهر الطلبات الحقيقية وحالات تجهيزها واستلامها من هنا.</p><button class="solid-action" data-go="/menu">استكشف الأصناف ←</button></div><section class="tracking-demo"><div><span>كيف ستكون متابعة طلبك؟</span><h2>كل مرحلة… واضحة لك</h2><p>هذا التسلسل وصف للواجهة المستقبلية، وليس تتبعًا حقيقيًا.</p></div><div class="track-steps"><span>✓ استلام الطلب</span><span>◌ تأكيد المطعم</span><span>◌ قيد التحضير</span><span>◌ في الطريق</span><span>◌ تم التسليم</span></div></section>'}
 function renderAccount(){el('app').innerHTML=commonPageHead('منطقة العميل','حسابي','ملف شخصي تجريبي؛ تسجيل الدخول وإدارة العناوين الفعلية يتطلبان ربط الهوية والطلبات بأودو.')+'<section class="account-top"><div class="account-avatar">م</div><div><h2>مرحبًا بك في مجالس العرب</h2><p>ابدأ بالتصفح، واحفظ مفضلاتك، وراجع سلتك في أي وقت.</p></div><button class="account-login" id="accountLogin">تسجيل الدخول قريبًا</button></section><div class="account-nav-grid">'+[['♡','المفضلة','اختياراتك المحفوظة','/favorites'],['▤','طلباتي','سجل الطلبات والحالات','/orders'],['⌖','عناويني','عناوين التوصيل بعد التفعيل','/addresses'],['⚑','العروض','العروض والمجموعات التجريبية','/offers'],['☏','المساعدة','الأسئلة وطرق التواصل','/help'],['☕','الجلسات','الاستفسار عن التوفر','/seating']].map(([ico,name,desc,href])=>'<button class="account-nav-card" data-go="'+href+'"><span>'+ico+'</span><div><strong>'+name+'</strong><small>'+desc+'</small></div><b>‹</b></button>').join('')+'</div>'}
 function renderAddresses(){el('app').innerHTML=commonPageHead('بيانات التوصيل','عناويني','العنوان الوطني لا يمكن استرجاعه من رقم الجوال وحده دون تكامل رسمي وتحقق من المستخدم.')+'<section class="addresses-panel"><div class="address-illustration">⌖</div><h2>عناوينك محفوظة هنا بعد تسجيل الدخول</h2><p>في النسخة الفعلية ستتمكن من اختيار عنوان موثّق ومشاركته بعد موافقتك. لم نربط حاليًا خدمة العنوان الوطني أو حسابات العملاء.</p><button class="solid-action" data-go="/checkout">انتقل إلى واجهة الدفع التجريبية</button></section>'}
@@ -3869,6 +3938,7 @@ document.addEventListener('input',e=>{if(e.target.id==='checkoutPhone'){state.cu
 document.addEventListener('change',e=>{if(e.target.id==='sortSelect'){state.sort=e.target.value;render()}if(e.target.id==='priceFilter'){state.priceFilter=e.target.value;render()}if(e.target.id==='demoFilter'){state.demoFilter=e.target.value;render()}});
 el('globalSearch').addEventListener('input',e=>{state.query=e.target.value.trim();state.category='الكل';updateSuggestions();if(currentPath()==='/menu'){const panel=el('catalog');if(panel)panel.innerHTML=catalog()}});
 el('headerCart').onclick=()=>route('/cart');
+el('headerFavorites').onclick=()=>route('/favorites');
 const siteMenu=el('headerSiteMenu');
 siteMenu.addEventListener('click',e=>{if(e.target.closest('.header-site-menu-panel a'))siteMenu.open=false});
 document.addEventListener('click',e=>{if(!siteMenu.contains(e.target))siteMenu.open=false});
