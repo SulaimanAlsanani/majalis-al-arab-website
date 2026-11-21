@@ -1375,6 +1375,15 @@ button:focus-visible,a:focus-visible,input:focus-visible,textarea:focus-visible,
   grid-template-columns:repeat(2,minmax(0,1fr))!important;
  }
 }
+
+/* 16 balanced supermarket tiles: eight in each desktop row, no change to imagery or card shape. */
+@media(min-width:1001px){
+ .first-fold-categories .feature-category-grid{
+  grid-template-columns:repeat(8,minmax(0,1fr))!important;
+  column-gap:clamp(10px,1.15vw,17px)!important;
+  row-gap:clamp(19px,2vw,29px)!important;
+ }
+}
 </style></head>
 <body>
 <header class="site-header"><div class="wrap header-inner">
@@ -1479,7 +1488,12 @@ const featured=[
 ['تسالي وحلويات','الحلويات والتسالي','snacks'],
 ['منظفات','المنظفات المنزلية','cleaning'],
 ['عناية شخصية','العناية الشخصية','care'],
-['عروض وباقات','العروض والباقات','offers']
+['عروض وباقات','العروض والباقات','offers'],
+/* Additional shopping shortcuts; each points to an existing, functional catalog category. */
+['مستلزمات الفطور','المخبوزات','bakery'],
+['الصلصات والمعلبات','الزيوت والمعلبات','canned'],
+['وجبات خفيفة','الحلويات والتسالي','snacks'],
+['العناية بالمنزل','المنظفات المنزلية','cleaning']
 ];
 return '<section class="first-fold-categories" aria-label="أقسام السوبرماركت"><div class="home-section-head"><div><span>تسوق حسب القسم</span><h2>كل احتياجاتك في مكان واحد</h2></div><button data-go="/menu">كل الأقسام ←</button></div><div class="feature-category-grid">'+featured.map(([label,category,style])=>{
 const photo=(window.SUPERMARKET_CATEGORY_IMAGES&&window.SUPERMARKET_CATEGORY_IMAGES[category])||('https://images.unsplash.com/'+PHOTO[style]+'?auto=format&fit=crop&w=260&q=75');
