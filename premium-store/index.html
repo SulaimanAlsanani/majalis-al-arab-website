@@ -2439,6 +2439,107 @@ body:has(#heroSlider) .header-cart.header-cart-icon svg{width:21px!important;hei
  border-radius:50%!important;
  background:transparent!important;
 }
+
+/* 2026-11-21 — responsive overflow repair.
+   Root cause: 100vw + left:50% + translateX(-50%) inside RTL padded .wrap,
+   and min-content widths across grids. Fix layout, not just hide the scrollbar. */
+html{width:100%;max-width:100%;overflow-x:clip}
+body{width:100%;max-width:100%;min-width:0;overflow-x:clip}
+*,*::before,*::after{box-sizing:border-box}
+.wrap,.page,#app,.site-header,.footer-inner{min-width:0;max-width:100%}
+#app.page{width:100%;max-width:min(1320px,100%)!important;margin-inline:auto!important}
+#heroSlider.hero-slider{
+ width:100%!important;max-width:100%!important;min-width:0!important;
+ left:auto!important;right:auto!important;
+ inset-inline:0!important;transform:none!important;
+ margin-inline:0!important;
+}
+#heroSlider .hero-track,#heroSlider .hero-slide{min-width:0!important;max-width:100%!important}
+#heroSlider .hero-slide .discovery-copy{min-width:0!important;max-width:100%!important;overflow-wrap:break-word}
+#heroSlider .hero-slide .discovery-copy h1,
+#heroSlider .hero-slide .discovery-copy p{min-width:0;max-width:100%!important;overflow-wrap:anywhere}
+#heroSlider .hero-slide .discovery-visual{min-width:0!important}
+#heroSlider .reference-hero-art{max-width:100%;overflow:hidden!important}
+#heroSlider .reference-food-float{max-width:45%!important}
+body:has(#heroSlider) .site-header>.header-inner.wrap{max-width:min(1320px,100%)!important;min-width:0!important}
+body:has(#heroSlider) .header-inner .search-shell,
+body:has(#heroSlider) .header-inner .search-shell input{min-width:0!important;width:100%!important}
+body:has(#heroSlider) .header-inner .brand{min-width:0!important}
+.first-fold-categories,.home-content-group,.home-showcase,.horizontal-showcase,
+.home-experience-section,.hs-order-hub,.menu-qr-banner,
+.shop-layout,.basket-grid,.checkout-layout,.detail-layout,
+.catalog-panel,.catalog-toolbar,.product-grid,
+.home-experience-grid,.hs-order-options{min-width:0;max-width:100%}
+.menu-qr-banner{width:100%!important;min-width:0!important;grid-template-columns:minmax(0,.7fr) minmax(0,1.8fr) minmax(0,.9fr) minmax(0,1.65fr)!important}
+.menu-qr-banner>*{min-width:0!important}
+.menu-banner-media{min-width:0!important}
+.product-rail,.quick-nav{max-width:100%;min-width:0;overscroll-behavior-x:contain}
+.product-grid>*,.home-experience-grid>*,.hs-order-options>*{min-width:0}
+.mobile-bottom{width:100%!important;max-width:100%!important;min-width:0!important;inset-inline:0!important}
+.mobile-bottom button{min-width:0!important;flex:1 1 0!important;overflow-wrap:anywhere;text-align:center}
+.hs-floating-order{max-width:calc(100vw - 24px)!important}
+@media(max-width:1100px){
+ .menu-qr-banner{grid-template-columns:130px minmax(0,1.5fr) minmax(0,.8fr) minmax(0,1.1fr)!important}
+}
+@media(max-width:900px){
+ .menu-qr-banner{grid-template-columns:minmax(0,1fr) minmax(0,1fr)!important;
+  grid-template-areas:"message brand" "cta media"!important;
+  padding:14px!important;gap:10px!important}
+ .menu-banner-message{grid-area:message!important}
+ .menu-banner-brand{grid-area:brand!important}
+ .menu-banner-cta{grid-area:cta!important}
+ .menu-banner-media{grid-area:media!important;border-radius:14px!important;min-height:100px!important}
+ .menu-banner-phone{display:none!important}
+ .shop-layout,.basket-grid,.checkout-layout{grid-template-columns:minmax(0,1fr)!important}
+ .shop-layout>* ,.basket-grid>*,.checkout-layout>*{min-width:0!important}
+}
+@media(max-width:780px){
+ #heroSlider.hero-slider{height:420px!important}
+ #heroSlider .hero-slide .discovery-copy{width:57%!important;padding:16px 12px!important}
+ #heroSlider .hero-slide .discovery-visual{width:43%!important}
+ #heroSlider .hero-slide .discovery-copy h1{font-size:clamp(21px,3.8vw,30px)!important}
+ #heroSlider .reference-hero-phone{width:min(190px,78%)!important;left:50%!important}
+ #heroSlider .reference-food-float{width:clamp(45px,10vw,75px)!important}
+ .first-fold-categories .feature-category-grid{max-width:100%!important}
+ .home-section-head,.homepage-group-heading{min-width:0;max-width:100%;flex-wrap:wrap}
+ .home-section-head>div,.homepage-group-heading>div{min-width:0}
+ .mobile-bottom{gap:0!important;padding-inline:2px!important}
+ .mobile-bottom button{font-size:10px!important;padding-inline:1px!important}
+ .mobile-bottom button .number{font-size:9px!important}
+}
+@media(max-width:520px){
+ body:has(#heroSlider) .site-header>.header-inner.wrap{
+  display:grid!important;grid-template-columns:minmax(0,auto) minmax(0,1fr) 36px!important;
+  width:100%!important;gap:6px!important;padding:7px 9px!important;
+ }
+ body:has(#heroSlider) .header-inner .brand-name strong{font-size:11px!important}
+ body:has(#heroSlider) .header-inner .search-shell{min-width:0!important}
+ #heroSlider.hero-slider{height:355px!important}
+ #heroSlider .hero-slide .discovery-copy{width:60%!important;padding:12px 10px!important}
+ #heroSlider .hero-slide .discovery-visual{width:40%!important}
+ #heroSlider .hero-slide .discovery-copy h1{font-size:clamp(17px,5vw,24px)!important}
+ #heroSlider .hero-slide .discovery-copy p{font-size:10px!important;line-height:1.5!important}
+ #heroSlider .hero-slide .discover-btn,#heroSlider .hero-slide .discover-outline{font-size:9px!important;padding:7px 8px!important;min-height:32px!important}
+ #heroSlider .reference-hero-phone{width:min(135px,88%)!important;left:50%!important}
+ #heroSlider .reference-food-float{width:clamp(38px,10vw,55px)!important}
+ .product-grid{grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:9px!important}
+ .menu-qr-banner{grid-template-columns:minmax(0,1fr) minmax(0,104px)!important}
+ .menu-banner-message h2{font-size:clamp(15px,4vw,19px)!important}
+ .menu-banner-brand strong{font-size:11px!important}
+ .menu-banner-qr img{max-width:60px!important;max-height:60px!important}
+ .mobile-bottom button{font-size:9px!important}
+}
+@media(max-width:360px){
+ body:has(#heroSlider) .header-inner .brand-name{display:none!important}
+ body:has(#heroSlider) .site-header>.header-inner.wrap{grid-template-columns:30px minmax(0,1fr) 34px!important}
+ #heroSlider.hero-slider{height:330px!important}
+ #heroSlider .hero-slide .discovery-copy{width:62%!important;padding:10px 8px!important}
+ #heroSlider .hero-slide .discovery-visual{width:38%!important}
+ #heroSlider .hero-slide .discovery-copy h1{font-size:17px!important}
+ #heroSlider .hero-slide .discovery-copy p{font-size:9px!important}
+ .menu-qr-banner{grid-template-columns:minmax(0,1fr) 90px!important}
+ .mobile-bottom button{font-size:8px!important}
+}
 </style></head>
 <body>
 <header class="site-header"><div class="wrap header-inner">
