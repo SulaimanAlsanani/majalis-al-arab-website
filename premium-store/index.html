@@ -3993,6 +3993,17 @@ body :not(#__borderless_reset_a):not(#__borderless_reset_b):not(#__borderless_re
  .story-banner.story-experiences .story-floating-third{left:36%!important;top:8%!important;width:27%!important;height:40%!important}
  .story-banner.story-experiences .story-bottom-caption{left:48%!important;bottom:7%!important;padding:5px 7px!important;font-size:8px!important}
 }
+
+/* Experiences visual refinement: move seating inwards and keep the card uncluttered. */
+.story-banner.story-experiences .story-floating-main{left:3%!important;right:auto!important;bottom:2%!important;transform:rotate(-1deg)!important;object-position:center bottom!important}
+.story-banner.story-experiences .story-bottom-caption,
+.story-banner.story-experiences .story-section-number{display:none!important}
+@media(max-width:720px){
+ .story-banner.story-experiences .story-floating-main{left:4%!important;width:38%!important;height:63%!important}
+}
+@media(max-width:420px){
+ .story-banner.story-experiences .story-floating-main{left:5%!important;width:37%!important;height:60%!important}
+}
 </style></head>
 <body>
 <header class="site-header"><div class="wrap header-inner">
@@ -4453,12 +4464,12 @@ function storyBanner(kind){
  const assets=STORY_ART_SETS[kind];
  const src=(name)=>kind==='experiences'?'assets/experiences/'+name+'.png':'assets/categories/'+name+'.png';
  return '<section class="story-banner story-'+kind+' story-'+x.tone+' story-'+x.layout+'" aria-label="'+escapeHtml(x.title)+'">'+
- '<div class="story-copy"><span class="story-kicker">'+escapeHtml(x.kicker)+'</span><span class="story-section-number" aria-label="البنر '+sequence+' من 11">'+sequence+' <small>/ 11</small></span><h2>'+escapeHtml(x.title)+'</h2><p>'+escapeHtml(x.desc)+'</p><button type="button" '+action+'>'+escapeHtml(x.cta)+' <span class="story-cta-arrow" aria-hidden="true">←</span></button><span class="story-editorial-signature" aria-hidden="true"><i></i><span>مجالس العرب</span></span></div>'+
+ '<div class="story-copy"><span class="story-kicker">'+escapeHtml(x.kicker)+'</span>'+(kind==='experiences'?'':'<span class="story-section-number" aria-label="البنر '+sequence+' من 11">'+sequence+' <small>/ 11</small></span>')+'<h2>'+escapeHtml(x.title)+'</h2><p>'+escapeHtml(x.desc)+'</p><button type="button" '+action+'>'+escapeHtml(x.cta)+' <span class="story-cta-arrow" aria-hidden="true">←</span></button><span class="story-editorial-signature" aria-hidden="true"><i></i><span>مجالس العرب</span></span></div>'+
  '<div class="story-visual" aria-hidden="true"><div class="story-hero-halo"></div><div class="story-hero-disc"></div>'+
  '<div class="story-soft-glow"></div><div class="story-atmosphere-band"></div><div class="story-contour story-contour-one"></div><div class="story-contour story-contour-two"></div><div class="story-ambient-arc"></div><div class="story-ambient-dots"></div><div class="story-visual-rail"></div><div class="story-geometry story-geometry-a"></div><div class="story-geometry story-geometry-b"></div><div class="story-geometry story-geometry-c"></div><div class="story-product-plate"></div><div class="story-spark story-spark-one"></div><div class="story-spark story-spark-two"></div><div class="story-mini-badge"><span class="story-badge-mark" aria-hidden="true">✦</span> '+(x.contact?'تجارب مجالس العرب':'من قائمة مجالس العرب')+'</div>'+
  '<img class="story-floating story-floating-main" src="'+src(assets[0])+'" alt="" loading="lazy" decoding="async">'+
  '<img class="story-floating story-floating-second" src="'+src(assets[1])+'" alt="" loading="lazy" decoding="async">'+
- '<img class="story-floating story-floating-third" src="'+src(assets[2])+'" alt="" loading="lazy" decoding="async"><div class="story-bottom-caption">'+escapeHtml(detail)+'</div></div></section>';
+ '<img class="story-floating story-floating-third" src="'+src(assets[2])+'" alt="" loading="lazy" decoding="async">'+(kind==='experiences'?'':'<div class="story-bottom-caption">'+escapeHtml(detail)+'</div>')+'</div></section>';
 }
 function renderHome(){
  const byCategory=(name,n=14)=>PRODUCTS.filter(p=>p.category===name&&p.available!==false).slice(0,n).map(p=>p.id);
