@@ -3814,54 +3814,43 @@ body :not(#__borderless_reset_a):not(#__borderless_reset_b):not(#__borderless_re
 @media(max-width:400px){.story-banner,.story-banner.story-split,.story-banner.story-compact{grid-template-columns:minmax(0,1fr) 37%;min-height:170px}.story-banner .story-visual,.story-banner.story-compact .story-visual{min-height:170px}.story-banner .story-visual img,.story-banner.story-wide .story-visual img,.story-banner.story-compact .story-visual img{height:155px}.story-banner p{font-size:10px}.story-banner h2{font-size:17px}}
 @media(prefers-reduced-motion:reduce){.story-banner .story-copy button{transition:none;transform:none!important}}
 
-/* Secondary campaigns use the same precise visual language as the main carousel,
-   without copying a main slide: full-bleed softened color, oversized circular disc,
-   layered isolated photographs and an angled phone/storefront mockup. */
-.story-banner{--story-ring:var(--ring);--story-disc:var(--accent);--story-angle:-8deg;min-height:clamp(255px,26vw,365px)!important;grid-template-columns:minmax(0,1fr) 49%!important;background:var(--bg1)!important;box-shadow:none!important;border-radius:clamp(18px,2.4vw,28px)!important}
-.story-banner.story-cinnamon{--story-ring:#EFC06E;--story-disc:#C58B42;--story-angle:7deg}
-.story-banner.story-terracotta{--story-ring:#F7B45D;--story-disc:#E76D44;--story-angle:-7deg}
-.story-banner.story-olive{--story-ring:#FAD967;--story-disc:#82B65D;--story-angle:7deg}
-.story-banner.story-sage{--story-ring:#D0E882;--story-disc:#60B883;--story-angle:-6deg}
-.story-banner.story-amber{--story-ring:#FFD26E;--story-disc:#F39A48;--story-angle:6deg}
-.story-banner.story-plum{--story-ring:#F4C6A2;--story-disc:#DE85B3;--story-angle:-8deg}
-.story-banner.story-rose{--story-ring:#FFB5D3;--story-disc:#D888C3;--story-angle:6deg}
-.story-banner.story-mocha{--story-ring:#E8C096;--story-disc:#9A674C;--story-angle:-7deg}
-.story-banner.story-teal{--story-ring:#A8E9F3;--story-disc:#3CBADC;--story-angle:7deg}
-.story-banner.story-indigo{--story-ring:#A998F7;--story-disc:#4B65DA;--story-angle:-8deg}
-.story-banner .story-copy{padding:clamp(25px,3.4vw,52px)!important;gap:12px!important;position:relative;z-index:5}
-.story-banner .story-copy h2{font-size:clamp(27px,2.9vw,43px)!important;line-height:1.35!important;max-width:660px}
-.story-banner .story-copy p{max-width:490px}
+/* Secondary banners: main-hero art language without the phone. Each keeps an individual muted palette. */
+.story-banner{--story-ring:#D8C2A8;--story-disc:#C9A989;grid-template-columns:minmax(0,1fr) 45%!important;min-height:clamp(255px,26vw,365px)!important;background:linear-gradient(120deg,var(--bg1),var(--bg2))!important;border-radius:clamp(18px,2.4vw,28px)!important;overflow:hidden;isolation:isolate;position:relative}
+.story-banner.story-gold{--story-ring:#D8B486;--story-disc:#C99E6C}
+.story-banner.story-cinnamon{--bg1:#F4EEE7;--bg2:#E5D4C3;--ink:#4B382C;--accent:#806046;--story-ring:#D9B38C;--story-disc:#BE8B63}
+.story-banner.story-terracotta{--bg1:#F3ECE9;--bg2:#E3CFC8;--ink:#4D302D;--accent:#8A5F55;--story-ring:#D8AA9B;--story-disc:#B87C6C}
+.story-banner.story-olive{--bg1:#F1F2EA;--bg2:#DDE2CF;--ink:#38452F;--accent:#6A7351;--story-ring:#BBC79A;--story-disc:#95A46E}
+.story-banner.story-sage{--bg1:#EEF3EE;--bg2:#D7E3D7;--ink:#30493B;--accent:#587161;--story-ring:#B1C8B6;--story-disc:#84A890}
+.story-banner.story-amber{--bg1:#F5F0E7;--bg2:#E8D9BE;--ink:#4B3B28;--accent:#8C7148;--story-ring:#DABD88;--story-disc:#C29B58}
+.story-banner.story-plum{--bg1:#F1EDF3;--bg2:#DED2E4;--ink:#49394D;--accent:#6D5A77;--story-ring:#C1AACF;--story-disc:#9D81B0}
+.story-banner.story-rose{--bg1:#F5EDEF;--bg2:#E7D3D8;--ink:#4C343C;--accent:#8A6670;--story-ring:#D9B1BC;--story-disc:#BE8798}
+.story-banner.story-mocha{--bg1:#F1ECE7;--bg2:#DDCBBE;--ink:#47372F;--accent:#775E4E;--story-ring:#C9A992;--story-disc:#A37A60}
+.story-banner.story-teal{--bg1:#EDF3F3;--bg2:#D4E2E2;--ink:#314B4C;--accent:#547172;--story-ring:#AAC5C6;--story-disc:#7EA6A8}
+.story-banner.story-indigo{--bg1:#EEF0F5;--bg2:#D7DCE7;--ink:#363E52;--accent:#5E697F;--story-ring:#AFB8CF;--story-disc:#7D89A8}
+.story-banner .story-copy{z-index:5;position:relative;padding:clamp(25px,3.4vw,52px)!important;gap:11px!important}
+.story-banner .story-copy h2{font-size:clamp(27px,2.9vw,43px)!important;line-height:1.35!important;color:var(--ink)!important}
+.story-banner .story-copy p{color:var(--ink)!important;opacity:.83}
+.story-banner .story-kicker{color:var(--accent)!important}
+.story-banner .story-copy button{background:#FFFFFFD9!important;color:var(--accent)!important;box-shadow:0 8px 22px #00000010}
 .story-banner .story-visual{position:relative!important;display:block!important;min-height:clamp(255px,26vw,365px)!important;height:100%!important;overflow:hidden!important;isolation:isolate}
-.story-banner .story-hero-halo,.story-banner .story-hero-disc{position:absolute;border-radius:50%;aspect-ratio:1;pointer-events:none}
-.story-banner .story-hero-halo{width:91%;bottom:-43%;left:1%;border:clamp(28px,4vw,57px) solid var(--story-ring);background:var(--story-disc);opacity:.95;z-index:0}
-.story-banner .story-hero-disc{width:66%;left:15%;bottom:-30%;background:color-mix(in srgb,var(--story-disc),white 19%);z-index:0}
-.story-banner .story-hero-phone{position:absolute;z-index:3;left:43%;top:8%;transform:translateX(-50%) rotate(var(--story-angle));width:clamp(152px,16vw,230px);height:110%;padding:6px;border-radius:33px;background:#17171C;border:3px solid #504B50;box-shadow:0 16px 28px #16141C37}
-.story-banner .story-hero-screen{height:100%;width:100%;background:#FFFAF8;border-radius:26px;overflow:hidden;display:flex;flex-direction:column;color:#382D35;direction:rtl;padding:7px}
-.story-banner .story-phone-status{display:flex;justify-content:space-between;align-items:center;direction:ltr;font:700 10px Arial,sans-serif;height:22px;position:relative}
-.story-banner .story-phone-notch{position:absolute;width:31%;height:11px;top:-6px;left:34%;background:#16141A;border-radius:0 0 10px 10px}
-.story-banner .story-phone-head{display:flex;justify-content:space-between;padding:5px 7px;font-size:10px}
-.story-banner .story-phone-search{background:#F0E8E5;border-radius:6px;font-size:9px;color:#6C6266;padding:8px;margin:5px 3px}
-.story-banner .story-phone-cover{height:33%;background:#F5EBE4;border-radius:11px;overflow:hidden;display:grid;place-items:center}
-.story-banner .story-phone-cover img{height:100%;width:100%;object-fit:contain}
-.story-banner .story-phone-label{font-size:10px;font-weight:850;margin:8px 4px 5px;color:#4F3943}
-.story-banner .story-phone-thumbs{display:grid;grid-template-columns:1fr 1fr;gap:6px}
-.story-banner .story-phone-thumbs img{background:#F2E8E5;border-radius:8px;width:100%;height:46px;object-fit:contain}
-.story-banner .story-phone-bottom{display:flex;justify-content:space-around;margin-top:auto;padding:9px}
-.story-banner .story-phone-bottom span{width:19px;height:4px;border-radius:8px;background:#C5B9BC}
-.story-banner .story-floating{position:absolute;z-index:4;object-fit:contain;filter:drop-shadow(0 11px 13px #241E202E);pointer-events:none;max-width:none}
-.story-banner .story-floating-main{left:0%;bottom:0%;width:42%;height:62%;transform:rotate(-5deg)}
-.story-banner .story-floating-second{right:0%;bottom:6%;width:35%;height:50%;transform:rotate(9deg)}
-.story-banner .story-floating-third{left:3%;top:2%;width:25%;height:28%;transform:rotate(11deg)}
-.story-banner.story-split .story-floating-main,.story-banner.story-compact .story-floating-main{left:1%;bottom:4%;width:38%;height:54%;transform:rotate(7deg)}
-.story-banner.story-split .story-floating-second{right:1%;bottom:2%;width:38%;height:55%;transform:rotate(-9deg)}
-.story-banner.story-compact .story-floating-third{left:0;top:8%;width:32%;height:30%}
-.story-banner.story-family .story-floating-main{width:48%;height:66%;left:-2%}
-.story-banner.story-dessert .story-floating-second{width:39%;height:55%}
-.story-banner.story-experiences .story-floating-main{left:-2%;width:39%;height:68%;bottom:0}
-.story-banner.story-experiences .story-floating-second{width:32%;height:59%;right:0%;bottom:0}
-.story-banner.story-experiences .story-floating-third{width:26%;height:31%;left:2%;top:0}
-@media(max-width:720px){.story-banner,.story-banner.story-split,.story-banner.story-compact{grid-template-columns:minmax(0,1fr) 44%!important;min-height:215px!important}.story-banner .story-visual{min-height:215px!important}.story-banner .story-copy{padding:19px 13px!important;gap:8px!important}.story-banner .story-copy h2{font-size:clamp(18px,4.2vw,27px)!important}.story-banner .story-hero-phone{width:clamp(105px,22vw,155px);border-radius:23px;padding:4px}.story-banner .story-hero-screen{border-radius:17px;padding:4px}.story-banner .story-phone-head{font-size:8px}.story-banner .story-phone-search{font-size:7px;padding:5px}.story-banner .story-phone-label{font-size:7px}.story-banner .story-phone-thumbs img{height:27px}.story-banner .story-phone-status{height:13px;font-size:7px}.story-banner .story-hero-halo{border-width:25px}}
-@media(max-width:420px){.story-banner,.story-banner.story-split,.story-banner.story-compact{min-height:180px!important}.story-banner .story-visual{min-height:180px!important}.story-banner .story-hero-phone{width:104px}.story-banner .story-phone-thumbs img{height:22px}.story-banner .story-copy h2{font-size:17px!important}.story-banner .story-copy p{font-size:10px}.story-banner .story-hero-halo{border-width:20px}}
+.story-banner .story-hero-halo,.story-banner .story-hero-disc,.story-banner .story-soft-glow{position:absolute;border-radius:50%;aspect-ratio:1}
+.story-banner .story-hero-halo{z-index:0;width:91%;bottom:-39%;left:3%;border:clamp(25px,3.4vw,46px) solid var(--story-ring);background:transparent;opacity:.78}
+.story-banner .story-hero-disc{z-index:0;width:62%;bottom:-22%;left:19%;background:color-mix(in srgb,var(--story-disc),white 24%);opacity:.68}
+.story-banner .story-soft-glow{z-index:1;width:36%;top:8%;right:10%;background:#FFFFFF77;filter:blur(22px)}
+.story-banner .story-mini-badge{position:absolute;z-index:4;top:21px;left:20px;background:#FFFFFFD9;color:var(--accent);border-radius:999px;padding:8px 13px;font-size:11px;font-weight:800;box-shadow:0 6px 16px #1F1A1811}
+.story-banner .story-floating{position:absolute;z-index:3;object-fit:contain;filter:drop-shadow(0 12px 15px #241E2024);pointer-events:none;max-width:none}
+.story-banner .story-floating-main{left:0%;bottom:0%;width:51%;height:78%;transform:rotate(-5deg)}
+.story-banner .story-floating-second{right:0%;bottom:4%;width:39%;height:59%;transform:rotate(8deg)}
+.story-banner .story-floating-third{left:29%;top:3%;width:29%;height:34%;transform:rotate(7deg)}
+.story-banner.story-split .story-floating-main{left:3%;width:47%;transform:rotate(6deg)}
+.story-banner.story-compact .story-floating-main{left:1%;width:46%;transform:rotate(-6deg)}
+.story-banner.story-split .story-floating-second{right:0%;width:40%;transform:rotate(-7deg)}
+.story-banner.story-family .story-floating-main{width:55%}
+.story-banner.story-dessert .story-floating-second{width:42%}
+.story-banner.story-experiences .story-floating-main{left:-1%;width:45%;height:74%}
+.story-banner.story-experiences .story-floating-second{right:0%;width:36%;height:65%}
+@media(max-width:720px){.story-banner,.story-banner.story-split,.story-banner.story-compact{grid-template-columns:minmax(0,1fr) 42%!important;min-height:210px!important}.story-banner .story-visual{min-height:210px!important}.story-banner .story-copy{padding:19px 13px!important;gap:8px!important}.story-banner .story-copy h2{font-size:clamp(18px,4.2vw,27px)!important}.story-banner .story-mini-badge{top:10px;left:8px;font-size:9px;padding:5px 8px}.story-banner .story-hero-halo{border-width:22px}.story-banner .story-floating-main{width:57%;height:70%}.story-banner .story-floating-third{width:30%}}
+@media(max-width:420px){.story-banner,.story-banner.story-split,.story-banner.story-compact{min-height:176px!important}.story-banner .story-visual{min-height:176px!important}.story-banner .story-copy h2{font-size:17px!important}.story-banner .story-copy p{font-size:10px}.story-banner .story-hero-halo{border-width:18px}}
 </style></head>
 <body>
 <header class="site-header"><div class="wrap header-inner">
@@ -4322,7 +4311,7 @@ function storyBanner(kind){
  return '<section class="story-banner story-'+kind+' story-'+x.tone+' story-'+x.layout+'" aria-label="'+escapeHtml(x.title)+'">'+
  '<div class="story-copy"><span class="story-kicker">'+escapeHtml(x.kicker)+'</span><h2>'+escapeHtml(x.title)+'</h2><p>'+escapeHtml(x.desc)+'</p><button type="button" '+action+'>'+escapeHtml(x.cta)+' <span aria-hidden="true">←</span></button></div>'+
  '<div class="story-visual" aria-hidden="true"><div class="story-hero-halo"></div><div class="story-hero-disc"></div>'+
- '<div class="story-hero-phone"><div class="story-hero-screen"><div class="story-phone-status"><span>9:41</span><span class="story-phone-notch"></span><span>▰</span></div><div class="story-phone-head"><strong>مجالس العرب</strong><span>⌕</span></div><div class="story-phone-search">وش تشتهي اليوم؟</div><div class="story-phone-cover"><img src="'+src(assets[0])+'" alt="" loading="lazy"></div><div class="story-phone-label">'+escapeHtml(x.kicker)+'</div><div class="story-phone-thumbs"><img src="'+src(assets[1])+'" alt="" loading="lazy"><img src="'+src(assets[2])+'" alt="" loading="lazy"></div><div class="story-phone-bottom"><span></span><span></span><span></span></div></div></div>'+
+ '<div class="story-soft-glow"></div><div class="story-mini-badge">'+escapeHtml(x.kicker)+'</div>'+
  '<img class="story-floating story-floating-main" src="'+src(assets[0])+'" alt="" loading="lazy" decoding="async">'+
  '<img class="story-floating story-floating-second" src="'+src(assets[1])+'" alt="" loading="lazy" decoding="async">'+
  '<img class="story-floating story-floating-third" src="'+src(assets[2])+'" alt="" loading="lazy" decoding="async"></div></section>';
