@@ -3953,6 +3953,46 @@ body :not(#__borderless_reset_a):not(#__borderless_reset_b):not(#__borderless_re
 .story-banner.story-rose .story-bottom-caption,.story-banner.story-indigo .story-bottom-caption{background:#FFFFFFB8}
 @media(max-width:720px){.story-banner .story-bottom-caption{font-size:9px;bottom:9px;right:9px;padding:5px 8px}.story-banner .story-contour-one{opacity:.25}.story-banner .story-contour-two{opacity:.25}.story-banner .story-atmosphere-band{opacity:.55}}
 @media(max-width:420px){.story-banner .story-bottom-caption{font-size:8px;bottom:7px;right:5px;padding:5px 7px}.story-banner .story-contour-two{display:none}}
+
+/* Experiences banner only: explicit subject-aware arrangement.
+   Asset order: 1=Arabian seating, 2=footballer, 3=PlayStation console. */
+.story-banner.story-experiences .story-visual{isolation:isolate!important;overflow:hidden!important}
+.story-banner.story-experiences .story-floating-main{
+ left:-3%!important;right:auto!important;top:auto!important;bottom:2%!important;
+ width:39%!important;height:70%!important;z-index:4!important;
+ transform:rotate(-2deg)!important;object-position:left bottom!important;
+}
+.story-banner.story-experiences .story-floating-second{
+ left:auto!important;right:-1%!important;top:auto!important;bottom:5%!important;
+ width:39%!important;height:64%!important;z-index:6!important;
+ transform:none!important;object-position:right bottom!important;
+}
+.story-banner.story-experiences .story-floating-third{
+ left:36%!important;right:auto!important;top:5%!important;bottom:auto!important;
+ width:29%!important;height:48%!important;z-index:5!important;
+ transform:rotate(-3deg)!important;object-position:center center!important;
+}
+.story-banner.story-experiences .story-bottom-caption{
+ left:46%!important;right:auto!important;bottom:9%!important;top:auto!important;
+ transform:translateX(-50%)!important;z-index:8!important;
+ white-space:nowrap!important;background:#FFFFFFE4!important;
+ box-shadow:0 6px 15px #19182514!important;
+}
+.story-banner.story-experiences .story-mini-badge{z-index:8!important}
+.story-banner.story-experiences .story-hero-halo{left:-4%!important;bottom:-34%!important;width:86%!important;opacity:.48!important}
+.story-banner.story-experiences .story-hero-disc{left:15%!important;bottom:-19%!important;width:58%!important;opacity:.54!important}
+@media(max-width:720px){
+ .story-banner.story-experiences .story-floating-main{left:-4%!important;width:38%!important;height:63%!important;bottom:3%!important}
+ .story-banner.story-experiences .story-floating-second{right:-2%!important;width:38%!important;height:60%!important;bottom:6%!important}
+ .story-banner.story-experiences .story-floating-third{left:36%!important;top:8%!important;width:27%!important;height:43%!important}
+ .story-banner.story-experiences .story-bottom-caption{left:47%!important;bottom:8%!important;padding:6px 9px!important;font-size:9px!important}
+}
+@media(max-width:420px){
+ .story-banner.story-experiences .story-floating-main{left:-4%!important;width:37%!important;height:60%!important}
+ .story-banner.story-experiences .story-floating-second{right:-3%!important;width:37%!important;height:55%!important}
+ .story-banner.story-experiences .story-floating-third{left:36%!important;top:8%!important;width:27%!important;height:40%!important}
+ .story-banner.story-experiences .story-bottom-caption{left:48%!important;bottom:7%!important;padding:5px 7px!important;font-size:8px!important}
+}
 </style></head>
 <body>
 <header class="site-header"><div class="wrap header-inner">
