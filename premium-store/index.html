@@ -3916,6 +3916,28 @@ body :not(#__borderless_reset_a):not(#__borderless_reset_b):not(#__borderless_re
 .story-banner .story-copy button{background:#FFFFFFED!important;box-shadow:0 8px 20px #28201C22!important}
 @media(max-width:720px){.story-banner .story-section-number{font-size:16px;top:10px;inset-inline-end:12px}.story-banner .story-section-number small{font-size:9px}.story-banner .story-mini-badge{font-size:9px!important;padding:7px 9px!important}.story-banner .story-geometry-a{box-shadow:inset 0 0 0 2px var(--story-shape-color),0 0 0 6px color-mix(in srgb,var(--story-ring),transparent 75%)!important}}
 @media(max-width:420px){.story-banner .story-section-number{font-size:14px;top:8px}.story-banner .story-mini-badge{font-size:8px!important;padding:6px 7px!important}}
+
+/* Quiet atmosphere: fills open areas without adding more cards, words or visual noise. */
+.story-banner{
+ background:
+  radial-gradient(ellipse 54% 92% at 91% 78%,color-mix(in srgb,var(--story-ring),transparent 62%) 0%,transparent 73%),
+  linear-gradient(115deg,var(--bg1) 0%,color-mix(in srgb,var(--bg1),var(--bg2) 55%) 48%,var(--bg2) 100%)!important;
+}
+.story-banner .story-visual{background:radial-gradient(circle at 56% 56%,#FFFFFF3A 0%,transparent 59%)!important}
+.story-banner .story-ambient-arc{position:absolute;pointer-events:none;z-index:1;width:78%;aspect-ratio:1;right:-25%;top:-50%;border-radius:50%;background:radial-gradient(circle,transparent 65%,color-mix(in srgb,var(--accent),transparent 84%) 65.5%,color-mix(in srgb,var(--accent),transparent 84%) 66.2%,transparent 67%);opacity:.7}
+.story-banner .story-ambient-dots{position:absolute;pointer-events:none;z-index:1;width:32%;height:23%;left:4%;top:25%;background-image:radial-gradient(circle,color-mix(in srgb,var(--accent),transparent 76%) 1px,transparent 1.5px);background-size:17px 17px;mask-image:linear-gradient(90deg,transparent,black 35%,transparent 100%);-webkit-mask-image:linear-gradient(90deg,transparent,black 35%,transparent 100%);opacity:.46}
+.story-banner .story-product-plate{width:86%!important;left:3%!important;bottom:-21%!important;opacity:.74!important}
+.story-banner .story-geometry-a{opacity:.29!important;box-shadow:inset 0 0 0 1px var(--story-shape-color),0 0 0 9px color-mix(in srgb,var(--story-ring),transparent 88%)!important}
+.story-banner .story-geometry-b{opacity:.27!important;box-shadow:inset 0 0 0 1px var(--story-shape-color)!important}
+.story-banner .story-geometry-c{opacity:.25!important;height:1px!important}
+.story-banner .story-spark{opacity:.32!important}
+.story-banner .story-hero-halo{opacity:.6!important}
+.story-banner .story-mini-badge{background:#FFFFFFC9!important;box-shadow:0 5px 14px #30271E0D!important}
+.story-banner .story-floating-main{filter:drop-shadow(0 12px 15px #241E201C)!important}
+.story-banner .story-floating-second,.story-banner .story-floating-third{filter:drop-shadow(0 9px 12px #241E2017)!important}
+.story-banner .story-editorial-signature{opacity:.65!important}
+@media(max-width:720px){.story-banner .story-ambient-dots{background-size:13px 13px;width:25%;opacity:.3}.story-banner .story-ambient-arc{right:-33%;top:-32%;width:88%}.story-banner .story-product-plate{bottom:-16%!important}}
+@media(max-width:420px){.story-banner .story-ambient-dots{display:none}.story-banner .story-geometry-b{opacity:.16!important}}
 </style></head>
 <body>
 <header class="site-header"><div class="wrap header-inner">
@@ -4377,7 +4399,7 @@ function storyBanner(kind){
  return '<section class="story-banner story-'+kind+' story-'+x.tone+' story-'+x.layout+'" aria-label="'+escapeHtml(x.title)+'">'+
  '<div class="story-copy"><span class="story-kicker">'+escapeHtml(x.kicker)+'</span><span class="story-section-number" aria-label="البنر '+sequence+' من 11">'+sequence+' <small>/ 11</small></span><h2>'+escapeHtml(x.title)+'</h2><p>'+escapeHtml(x.desc)+'</p><button type="button" '+action+'>'+escapeHtml(x.cta)+' <span class="story-cta-arrow" aria-hidden="true">←</span></button><span class="story-editorial-signature" aria-hidden="true"><i></i><span>مجالس العرب</span></span></div>'+
  '<div class="story-visual" aria-hidden="true"><div class="story-hero-halo"></div><div class="story-hero-disc"></div>'+
- '<div class="story-soft-glow"></div><div class="story-visual-rail"></div><div class="story-geometry story-geometry-a"></div><div class="story-geometry story-geometry-b"></div><div class="story-geometry story-geometry-c"></div><div class="story-product-plate"></div><div class="story-spark story-spark-one"></div><div class="story-spark story-spark-two"></div><div class="story-mini-badge"><span class="story-badge-mark" aria-hidden="true">✦</span> '+(x.contact?'تجارب مجالس العرب':'من قائمة مجالس العرب')+'</div>'+
+ '<div class="story-soft-glow"></div><div class="story-ambient-arc"></div><div class="story-ambient-dots"></div><div class="story-visual-rail"></div><div class="story-geometry story-geometry-a"></div><div class="story-geometry story-geometry-b"></div><div class="story-geometry story-geometry-c"></div><div class="story-product-plate"></div><div class="story-spark story-spark-one"></div><div class="story-spark story-spark-two"></div><div class="story-mini-badge"><span class="story-badge-mark" aria-hidden="true">✦</span> '+(x.contact?'تجارب مجالس العرب':'من قائمة مجالس العرب')+'</div>'+
  '<img class="story-floating story-floating-main" src="'+src(assets[0])+'" alt="" loading="lazy" decoding="async">'+
  '<img class="story-floating story-floating-second" src="'+src(assets[1])+'" alt="" loading="lazy" decoding="async">'+
  '<img class="story-floating story-floating-third" src="'+src(assets[2])+'" alt="" loading="lazy" decoding="async"></div></section>';
