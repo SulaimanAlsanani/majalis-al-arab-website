@@ -3837,10 +3837,12 @@ function normalizeFavorites(raw,products=PRODUCTS){
  const allowed=new Set(products.map(p=>p.id));
  return Array.isArray(raw)?[...new Set(raw.filter(id=>Number.isInteger(id)&&allowed.has(id)))].slice(0,500):[];
 }
-state.cart=normalizeSavedCart(safeGet(STORAGE,[]));
+const initialCatalogMark=String(safeGet(CATALOG_MARK_KEY,'preview')||'preview');
+let catalogLoading=Boolean(window.MajalisApi?.config?.enabled&&window.MajalisApi.config.catalogEnabled);
+state.cart=initialCatalogMark.startsWith('odoo:')?[]:normalizeSavedCart(safeGet(STORAGE,[]));
 state.generalNote=String(safeGet('majalis_basket_general_note_v1','')||'').slice(0,500);
 try{const c=JSON.parse(sessionStorage.getItem('majalis_preview_customer_v1')||'{}');if(c&&typeof c==='object')for(const k of Object.keys(state.customer))state.customer[k]=String(c[k]||'').slice(0,120)}catch{}
-state.favorites=normalizeFavorites(safeGet(FAV_KEY,[]));
+state.favorites=initialCatalogMark.startsWith('odoo:')?[]:normalizeFavorites(safeGet(FAV_KEY,[]));
 function save(){try{localStorage.setItem(STORAGE,JSON.stringify(state.cart));localStorage.setItem(FAV_KEY,JSON.stringify(state.favorites));localStorage.setItem('majalis_basket_general_note_v1',JSON.stringify(state.generalNote||''))}catch{}}
 function money(n){return Number(n).toLocaleString('ar-SA')+' ر.س'}
 const PREVIEW_PRODUCT_PHOTOS={
@@ -3894,6 +3896,7 @@ function searchSuggestionMarkup(q){if(!q)return '';const list=PRODUCTS.filter(p=
 function updateSuggestions(){const panel=el('searchSuggestions'),q=el('globalSearch')?.value.trim()||'';panel.hidden=!q;panel.innerHTML=q?searchSuggestionMarkup(q):''}
 
 function addItem(id,qty=1,note=''){
+ if(catalogLoading){notify('جارٍ التحقق من كتالوج Odoo، أعد المحاولة بعد اكتمال التحميل');return false}
  const p=productById(id);if(!p)return false;
  if(p.available===false){notify('هذا الصنف غير متوفر حاليًا');return false}
  const requested=Number(qty);
@@ -4128,20 +4131,22 @@ async function bootstrapApprovedCatalog(){
   const previousMark=String(safeGet(CATALOG_MARK_KEY,'preview')||'preview');
   PRODUCTS=response.items;approvedCatalog=true;
   const changed=previousMark!==mark;
-  state.cart=changed?[]:normalizeSavedCart(state.cart,PRODUCTS);
-  state.favorites=changed?[]:normalizeFavorites(state.favorites,PRODUCTS);
+  state.cart=changed?[]:normalizeSavedCart(safeGet(STORAGE,[]),PRODUCTS);
+  state.favorites=changed?[]:normalizeFavorites(safeGet(FAV_KEY,[]),PRODUCTS);
   if(changed){
    state.generalNote='';
    state.checkout={coords:null,addressText:''};
   }
   try{localStorage.setItem(CATALOG_MARK_KEY,JSON.stringify(mark))}catch{}
+  catalogLoading=false;
   save();render();
   notify(changed?'تم تحديث الكتالوج؛ أُفرغت السلة لمنع اختلاف المنتجات والأسعار':'تم تحميل كتالوج Odoo المعتمد');
  }catch(err){
   console.warn('Odoo catalog unavailable, preview retained:',err.message);
   const notice=el('catalogGatewayNotice');
   if(notice)notice.textContent='تعذر الاتصال بـ Odoo، البيانات المعروضة تجريبية فقط.';
- }
+ }finally{catalogLoading=false}
+
 }
 const SIZE_LABELS=['صغير','وسط','كبير'];
 function sizeVariants(p){
@@ -4314,7 +4319,8 @@ const scrollBtn=el('scrollTop');scrollBtn.onclick=()=>window.scrollTo({top:0,beh
 document.addEventListener('keydown',e=>{if((e.key==='/'&&!e.ctrlKey&&!e.altKey&&!e.metaKey)||(e.key.toLowerCase()==='k'&&(e.ctrlKey||e.metaKey))){const t=e.target;if(t instanceof HTMLElement&&(t.closest('input,textarea,select,[contenteditable="true"]')))return;e.preventDefault();if(currentPath()!=='/menu'){route('/menu');requestAnimationFrame(()=>el('catalogSearch')?.focus())}else el('catalogSearch')?.focus()}});
 window.addEventListener('storage',event=>{
  if(![STORAGE,FAV_KEY,'majalis_basket_general_note_v1'].includes(event.key))return;
- state.cart=normalizeSavedCart(safeGet(STORAGE,[]));
+ if(catalogLoading)return;
+ state.cart=approvedCatalog?normalizeSavedCart(safeGet(STORAGE,[]),PRODUCTS):initialCatalogMark.startsWith('odoo:')?[]:normalizeSavedCart(safeGet(STORAGE,[]));
  state.favorites=normalizeFavorites(safeGet(FAV_KEY,[]));
  state.generalNote=String(safeGet('majalis_basket_general_note_v1','')||'').slice(0,500);
  if(currentPath()==='/checkout'&&!state.cart.length){route('/cart');return}
