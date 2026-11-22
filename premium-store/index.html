@@ -3816,7 +3816,7 @@ const SEATING=[
 {name:'السوني والبلايستيشن',description:'جلسات الألعاب مع الأصحاب. تواصل للتأكد من الأجهزة المتاحة.',local:'assets/playstation-gaming.webp',msg:'أود الاستفسار عن جلسات البلايستيشن'},
 {name:'مشاهدة المباريات',description:'أجواء مشاهدة كرة القدم، والتوفر حسب جدول المباريات.',local:'assets/match-viewing.svg',msg:'أود الاستفسار عن جلسات مشاهدة المباريات'}
 ];
-const STORAGE='majalis_delivery_preview_cart_v2', FAV_KEY='majalis_delivery_preview_favorites_v1';
+const STORAGE='majalis_delivery_preview_cart_v2', FAV_KEY='majalis_delivery_preview_favorites_v1', CATALOG_MARK_KEY='majalis_active_catalog_revision_v1';
 const state={checkout:{coords:null,addressText:''},category:'الكل',query:'',sort:'default',priceFilter:'all',demoFilter:'all',quantity:1,note:'',cart:[],favorites:[],fulfillment:'pickup',generalNote:'',customer:{name:'',phone:'',city:'',district:'',street:'',building:'',unit:'',landmark:'',pickupBranch:''},origin:'/',searchMode:false};
 const el=id=>document.getElementById(id);
 function safeGet(key,fallback){try{const v=JSON.parse(localStorage.getItem(key));return v??fallback}catch{return fallback}}
@@ -4120,10 +4120,23 @@ async function bootstrapApprovedCatalog(){
  try{
   const response=await window.MajalisApi.fetchCatalog();
   if(!response?.items?.length)return;
+  // Never carry preview line items into Odoo by matching numerical IDs alone.
+  // A backend revision change also invalidates all prior quotes and local prices.
+  const revision=String(response.revision||'').trim();
+  if(!revision)throw new Error('CATALOG_REVISION_REQUIRED');
+  const mark='odoo:'+revision;
+  const previousMark=String(safeGet(CATALOG_MARK_KEY,'preview')||'preview');
   PRODUCTS=response.items;approvedCatalog=true;
-  state.cart=normalizeSavedCart(state.cart,PRODUCTS);
-  state.favorites=normalizeFavorites(state.favorites,PRODUCTS);
-  save();render();notify('تم تحميل كتالوج Odoo المعتمد');
+  const changed=previousMark!==mark;
+  state.cart=changed?[]:normalizeSavedCart(state.cart,PRODUCTS);
+  state.favorites=changed?[]:normalizeFavorites(state.favorites,PRODUCTS);
+  if(changed){
+   state.generalNote='';
+   state.checkout={coords:null,addressText:''};
+  }
+  try{localStorage.setItem(CATALOG_MARK_KEY,JSON.stringify(mark))}catch{}
+  save();render();
+  notify(changed?'تم تحديث الكتالوج؛ أُفرغت السلة لمنع اختلاف المنتجات والأسعار':'تم تحميل كتالوج Odoo المعتمد');
  }catch(err){
   console.warn('Odoo catalog unavailable, preview retained:',err.message);
   const notice=el('catalogGatewayNotice');
