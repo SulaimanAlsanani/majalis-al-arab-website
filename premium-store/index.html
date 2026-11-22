@@ -3780,6 +3780,39 @@ body :not(#__borderless_reset_a):not(#__borderless_reset_b):not(#__borderless_re
 .home-experience-card>strong{color:#292B32!important}
 .home-experience-card .experience-label,.home-experience-card small{color:#535B65!important}
 .home-experience-card:hover{filter:brightness(.985)!important}
+
+/* 11 uniquely art-directed editorial banners. Primary slider and category tiles untouched. */
+.story-banner{--bg1:#F6E7D4;--bg2:#E6C7A4;--ink:#493323;--accent:#765235;--ring:#D9B180;display:grid;grid-template-columns:minmax(0,1fr) minmax(240px,39%);direction:rtl;align-items:center;min-height:245px;position:relative;isolation:isolate;overflow:hidden;background:linear-gradient(117deg,var(--bg1),var(--bg2));border-radius:clamp(19px,2.5vw,30px);margin:28px 0 13px;color:var(--ink)}
+.story-banner.story-cinnamon{--bg1:#EEE0CF;--bg2:#D4B294;--ink:#513725;--accent:#75523A;--ring:#B98C65}
+.story-banner.story-terracotta{--bg1:#F0DCD5;--bg2:#D6A18C;--ink:#542F27;--accent:#874B40;--ring:#C37F69}
+.story-banner.story-olive{--bg1:#E8E9D5;--bg2:#CDD2A1;--ink:#414B29;--accent:#5E6B3D;--ring:#9DAD73}
+.story-banner.story-sage{--bg1:#E0ECE1;--bg2:#B8D4C0;--ink:#2D4E3E;--accent:#447961;--ring:#8DB9A0}
+.story-banner.story-amber{--bg1:#F4E7CF;--bg2:#E7CB93;--ink:#554025;--accent:#926A38;--ring:#CFAB69}
+.story-banner.story-plum{--bg1:#EAE1EC;--bg2:#CBB6D3;--ink:#49354E;--accent:#77537F;--ring:#B28ABF}
+.story-banner.story-rose{--bg1:#F3E1E5;--bg2:#E4BDCA;--ink:#5C3444;--accent:#945B71;--ring:#D39BAE}
+.story-banner.story-mocha{--bg1:#E8DFD5;--bg2:#C7AD95;--ink:#4E382B;--accent:#775441;--ring:#AC8665}
+.story-banner.story-teal{--bg1:#DCECED;--bg2:#AFD2D2;--ink:#284D53;--accent:#437B82;--ring:#87B9BE}
+.story-banner.story-indigo{--bg1:#E5E6F0;--bg2:#BCC4D9;--ink:#303C5B;--accent:#53668E;--ring:#9DAAC8}
+.story-banner .story-copy{z-index:2;padding:clamp(22px,3.2vw,42px);display:flex;flex-direction:column;align-items:flex-start;gap:10px;max-width:670px}
+.story-banner .story-kicker{font-size:12px;font-weight:750;color:var(--accent);letter-spacing:.03em}
+.story-banner h2{margin:0;font-size:clamp(23px,2.6vw,38px);line-height:1.38;font-weight:850;letter-spacing:-.025em;color:var(--ink)}
+.story-banner p{margin:0;line-height:1.8;font-size:clamp(12px,1.05vw,15px);color:var(--ink);opacity:.84;max-width:460px}
+.story-banner .story-copy button{border:0;border-radius:999px;background:#FFFFFFC9;box-shadow:0 6px 18px #1A1C2914;color:var(--accent);font:inherit;font-size:12px;font-weight:800;padding:11px 19px;margin-top:8px;min-height:43px;cursor:pointer}
+.story-banner .story-copy button:hover{background:#fff;transform:translateY(-1px)}
+.story-banner .story-visual{position:relative;align-self:stretch;min-height:245px;display:flex;align-items:center;justify-content:center}
+.story-banner .story-orbit{position:absolute;width:min(76%,230px);aspect-ratio:1;border-radius:50%;background:color-mix(in srgb,var(--ring),white 46%);opacity:.65}
+.story-banner .story-visual img{z-index:1;width:min(95%,370px);height:230px;object-fit:contain;filter:drop-shadow(0 14px 12px #34251C23);transform:translateY(6px)}
+.story-banner.story-compact{min-height:205px;grid-template-columns:minmax(0,1fr) 32%}
+.story-banner.story-compact .story-visual{min-height:205px}
+.story-banner.story-compact .story-visual img{height:200px;width:min(92%,260px)}
+.story-banner.story-split{grid-template-columns:minmax(0,1fr) 46%}
+.story-banner.story-split .story-copy{padding-inline:clamp(23px,4vw,58px)}
+.story-banner.story-wide .story-visual img{height:255px}
+.story-banner+.home-showcase,.story-banner+.home-content-group,.story-banner+.home-experience-section{margin-top:15px!important}
+.story-banner+.home-showcase .home-section-head{padding-top:4px}
+@media(max-width:720px){.story-banner,.story-banner.story-split,.story-banner.story-compact{grid-template-columns:minmax(0,1fr) 39%;min-height:190px;margin:20px 0 10px}.story-banner .story-copy,.story-banner.story-split .story-copy{padding:17px 15px;gap:7px}.story-banner h2{font-size:clamp(18px,4vw,25px)}.story-banner p{font-size:11px;line-height:1.6}.story-banner .story-kicker{font-size:10px}.story-banner .story-copy button{min-height:36px;padding:7px 12px;font-size:11px;margin-top:2px}.story-banner .story-visual,.story-banner.story-compact .story-visual{min-height:190px}.story-banner .story-visual img,.story-banner.story-wide .story-visual img,.story-banner.story-compact .story-visual img{height:175px;width:100%}}
+@media(max-width:400px){.story-banner,.story-banner.story-split,.story-banner.story-compact{grid-template-columns:minmax(0,1fr) 37%;min-height:170px}.story-banner .story-visual,.story-banner.story-compact .story-visual{min-height:170px}.story-banner .story-visual img,.story-banner.story-wide .story-visual img,.story-banner.story-compact .story-visual img{height:155px}.story-banner p{font-size:10px}.story-banner h2{font-size:17px}}
+@media(prefers-reduced-motion:reduce){.story-banner .story-copy button{transition:none;transform:none!important}}
 </style></head>
 <body>
 <header class="site-header"><div class="wrap header-inner">
@@ -4203,29 +4236,56 @@ function distributedPromo(kind){
  };const p=all[kind];if(!p)return '';const img=name=>'assets/categories/'+name+'.png';
  return '<section class="majalis-promo '+p[0]+'" aria-label="'+p[2]+'"><div class="majalis-promo-copy"><span>'+p[1]+'</span><h2>'+p[2]+'</h2><p>'+p[3]+'</p><button type="button" data-category="'+p[5]+'">'+p[4]+' ←</button></div><div class="majalis-promo-art" aria-hidden="true"><div class="majalis-promo-circle"></div><img class="majalis-promo-photo" src="'+img(p[6])+'" loading="lazy" alt=""><div class="majalis-promo-phone"><strong>مجالس العرب</strong><small>ابحث عن صنفك</small><img src="'+img(p[7])+'" loading="lazy" alt=""></div><img class="majalis-promo-photo second" src="'+img(p[7])+'" loading="lazy" alt=""></div></section>';
 }
-function homeSectionLinks(){return '<nav class="home-section-links" aria-label="التنقل السريع بين أقسام الصفحة"><span class="home-section-links-label">اكتشف أكثر</span><button type="button" data-home-jump="home-breakfast">الفطور ونكهات الجنوب</button><button type="button" data-home-jump="home-experiences">الجلسات والتجارب</button><button type="button" data-home-jump="home-coffee">القهوة والحلا</button></nav>'}
+function homeSectionLinks(){return '<nav class="home-section-links" aria-label="التنقل السريع بين أقسام الصفحة"><span class="home-section-links-label">اكتشف أكثر</span><button type="button" data-home-jump="home-breakfast">الفطور</button><button type="button" data-home-jump="home-coffee">القهوة</button><button type="button" data-home-jump="home-experiences">الجلسات والتجارب</button></nav>'}
+const HOME_STORY_BANNERS={
+ breakfast:{kicker:'بداية اليوم',title:'صباحك يبدأ من هنا',desc:'فول وشكشوكة وكبدة وبيض… تنوّع في اختيارات الفطور.',cta:'تصفح الفطور',category:'الفطور والعشاء',image:'assets/categories/breakfast.png',tone:'gold',layout:'wide',alt:'طبق فطور من قائمة مجالس العرب'},
+ southern:{kicker:'من مطبخ الجنوب',title:'العريكة والمعصوب… حكاية طعم',desc:'نكهات القشطة والعسل والتمر لمحبي الأطباق الجنوبية.',cta:'اكتشف نكهات الجنوب',category:'العريكة والمعصوب',image:'assets/categories/areeka-masoob.png',tone:'cinnamon',layout:'split',alt:'طبق عريكة ومعصوب'},
+ grills:{kicker:'وجبتك الرئيسية',title:'المشويات لها وقتها',desc:'خيارات المشويات والأطباق الرئيسية على ذوقك.',cta:'تصفح الأطباق',category:'المشويات والأطباق الرئيسية',image:'assets/categories/grills.png',tone:'terracotta',layout:'wide',alt:'طبق مشويات'},
+ sandwiches:{kicker:'خفيفة ومشبعة',title:'لقمة سهلة… ومذاق كبير',desc:'ساندويتشات ورولات تناسب وجبتك السريعة.',cta:'شاهد الساندويتشات',category:'السندويتشات',image:'assets/categories/sandwiches.png',tone:'olive',layout:'compact',alt:'ساندويتشات متنوعة'},
+ salads:{kicker:'اختيار متوازن',title:'ألوان طازجة على سفرتك',desc:'سلطات وإيدامات تكمل طبقك الرئيسي.',cta:'تصفح السلطات',category:'الإيدامات والسلطات',image:'assets/categories/salads.png',tone:'sage',layout:'split',alt:'طبق سلطات وخضروات'},
+ appetizers:{kicker:'قبل الطبق الرئيسي',title:'ابدأها بمقبلات تحبها',desc:'إضافات وأطباق جانبية تناسب كل سفرة.',cta:'اكتشف المقبلات',category:'المقبلات',image:'assets/categories/appetizers.png',tone:'amber',layout:'compact',alt:'طبق مقبلات'},
+ family:{kicker:'للأهل والأصحاب',title:'اللمة تكمل مع أطباق المشاركة',desc:'خيارات عائلية تجريبية تتسع لاختيارات أكثر.',cta:'تصفح الوجبات العائلية',category:'الوجبات العائلية',image:'assets/categories/family-meals.png',tone:'plum',layout:'wide',alt:'وجبة عائلية متنوعة'},
+ dessert:{kicker:'وقت الحلا',title:'خلّ نهاية الوجبة أحلى',desc:'كيك وبان كيك وكريب وخيارات حلوة.',cta:'تصفح الحلويات',category:'الحلا',image:'assets/categories/desserts.png',tone:'rose',layout:'split',alt:'حلويات متنوعة'},
+ coffee:{kicker:'فنجان ومزاج',title:'للقهوة وقت يستاهل',desc:'من القهوة العربية إلى خيارات القهوة المختصة.',cta:'اكتشف القهوة',category:'القهوة المختصة',image:'assets/categories/coffee.png',tone:'mocha',layout:'compact',alt:'فنجان قهوة'},
+ drinks:{kicker:'شي ينعش',title:'اختَر مشروبك على مزاجك',desc:'مشروبات باردة وساخنة تكمل جلستك.',cta:'تصفح المشروبات',category:'المشروبات',image:'assets/categories/drinks.png',tone:'teal',layout:'wide',alt:'مشروبات منعشة'},
+ experiences:{kicker:'مساحات وتجارب',title:'مو بس مطعم… مجالس تجمعنا',desc:'جلسات خاصة ومشاهدة المباريات والبلايستيشن؛ التوفر يؤكد مع الفرع.',cta:'استفسر عن الجلسات',contact:true,image:'assets/experiences/sessions.png',tone:'indigo',layout:'split',alt:'جلسة عربية مع القهوة والضيافة'}
+};
+function storyBanner(kind){
+ const x=HOME_STORY_BANNERS[kind];if(!x)return '';
+ const action=x.contact?'data-contact-seating':'data-category="'+escapeHtml(x.category)+'"';
+ return '<section class="story-banner story-'+kind+' story-'+x.tone+' story-'+x.layout+'" aria-label="'+escapeHtml(x.title)+'">'+
+ '<div class="story-copy"><span class="story-kicker">'+escapeHtml(x.kicker)+'</span><h2>'+escapeHtml(x.title)+'</h2><p>'+escapeHtml(x.desc)+'</p><button type="button" '+action+'>'+escapeHtml(x.cta)+' <span aria-hidden="true">←</span></button></div>'+
+ '<div class="story-visual"><span class="story-orbit" aria-hidden="true"></span><img src="'+x.image+'" alt="'+escapeHtml(x.alt)+'" loading="lazy" decoding="async" width="450" height="300"></div></section>';
+}
 function renderHome(){
- const byCategory=(name,n=14)=>PRODUCTS.filter(p=>p.category===name).slice(0,n).map(p=>p.id);
- const breakfast=productShowcase('فطور على الأصول','شكشوكة وفول وكبدة وخيارات تفتح النفس',byCategory('الفطور والعشاء'),'/menu','breakfast');
- const southern=productShowcase('نكهات الجنوب','العريكة والمعصوب والفتة',byCategory('العريكة والمعصوب'),'/menu','south');
-
- const sweets=productShowcase('وقت الحلا','حلويات تكمّل الوجبة',byCategory('الحلا'),'/menu','sweet');
- const coffee=productShowcase('قهوة ومشروبات','من القهوة المختصة للمشروبات المتنوعة',byCategory('القهوة المختصة').concat(byCategory('المشروبات',8)),'/menu','coffee');
- const suggestedIds=PRODUCTS.filter(p=>p.available!==false).filter(p=>!p.demo).slice(0,12).map(p=>p.id);
- const newChoices=productShowcase('خيارات تستحق التجربة','اختيارات متنوعة من قائمة الطعام'+(approvedCatalog?'':' للمعاينة'),suggestedIds,'/menu','new');
-
+ const byCategory=(name,n=14)=>PRODUCTS.filter(p=>p.category===name&&p.available!==false).slice(0,n).map(p=>p.id);
+ const group=(name,title,desc,key,n=14)=>productShowcase(title,desc,byCategory(name,n),'/menu',key);
  el('app').innerHTML=
  homeBanner()+
  featureCategories()+
- homeExperiences()+
  homeSectionLinks()+
- distributedPromo('breakfast')+
- '<section id="home-breakfast" tabindex="-1" class="home-content-group home-discover-group" aria-label="الفطور ونكهات الجنوب">'+breakfast+southern+'</section>'+
- distributedPromo('grills')+
- distributedPromo('coffee')+
- '<section id="home-coffee" tabindex="-1" class="home-content-group home-taste-group" aria-label="الحلا والقهوة">'+homeSectionIntro('نكمل جلستك','الحلا والقهوة','اختيارات تخلي الجلسة أحلى.')+sweets+coffee+'</section>'+
- distributedPromo('family')+
- '<section class="home-content-group home-explore-group" aria-label="مزيد من الخيارات">'+homeSectionIntro('تصفح على راحتك','خيارات إضافية','اكتشف أصنافًا مختلفة من القائمة.','/menu')+newChoices+recentShowcase()+'</section>'+
+ storyBanner('breakfast')+
+ '<section id="home-breakfast" tabindex="-1" class="home-content-group home-discover-group">'+group('الفطور والعشاء','فطور على الأصول','أصناف صباحية تناسب يومك','breakfast')+'</section>'+
+ storyBanner('southern')+
+ group('العريكة والمعصوب','نكهات الجنوب','العريكة والمعصوب والفتة','south')+
+ storyBanner('grills')+
+ group('المشويات والأطباق الرئيسية','أطباق رئيسية ومشويات','أطباق للغداء والعشاء','grills')+
+ storyBanner('sandwiches')+
+ group('السندويتشات','سندويتشات ورولات','خيارات سهلة وسريعة','sandwiches')+
+ storyBanner('salads')+
+ group('الإيدامات والسلطات','سلطات وإيدامات','أطباق خفيفة ومكملات للسفرة','salads')+
+ storyBanner('appetizers')+
+ group('المقبلات','مقبلات تكمل الطلب','خيارات لبدء السفرة','appetizers')+
+ storyBanner('family')+
+ group('الوجبات العائلية','للجلسات واللمة','أطباق مشاركة وعائلية تجريبية','family')+
+ storyBanner('dessert')+
+ group('الحلا','وقت الحلا','حلويات تكمل الوجبة','sweet')+
+ storyBanner('coffee')+
+ '<section id="home-coffee" tabindex="-1" class="home-content-group home-taste-group">'+group('القهوة المختصة','قهوة ومزاج','اختيارات محبي القهوة','coffee')+'</section>'+
+ storyBanner('drinks')+
+ group('المشروبات','المشروبات','خيارات باردة وساخنة','drinks')+
+ storyBanner('experiences')+
+ homeExperiences()+
  homeTrustStrip()+homeFinalActions()+homepageDisclosure();
 }
 function renderMenu(){el('app').innerHTML=serviceModeBanner()+quickNav()+'<div class="shop-layout"><section class="catalog-panel" id="catalog">'+catalog()+'</section>'+sideCart()+'</div>'}
