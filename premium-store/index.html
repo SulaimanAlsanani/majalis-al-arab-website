@@ -3872,6 +3872,29 @@ body :not(#__borderless_reset_a):not(#__borderless_reset_b):not(#__borderless_re
 .story-banner .story-mini-badge{z-index:4}
 @media(max-width:720px){.story-banner .story-geometry-a{width:34%;top:14%}.story-banner .story-geometry-b{width:19%;right:3%}.story-banner .story-geometry-c{opacity:.22}}
 @media(prefers-reduced-motion:reduce){.story-banner .story-geometry{animation:none!important}}
+
+/* Delicate product-stage, editorial signature and purposeful interaction for section campaigns. */
+.story-banner .story-product-plate{position:absolute;z-index:1;left:5%;bottom:-25%;width:83%;aspect-ratio:1.25;border-radius:50%;background:radial-gradient(ellipse at 55% 36%,#FFFFFFAA 0%,#FFFFFF51 28%,transparent 66%);transform:rotate(-12deg);pointer-events:none}
+.story-banner .story-spark{position:absolute;z-index:2;width:6px;height:6px;border-radius:50%;background:color-mix(in srgb,var(--accent),white 38%);box-shadow:0 0 0 5px color-mix(in srgb,var(--story-ring),transparent 83%);opacity:.66;pointer-events:none}
+.story-banner .story-spark-one{top:33%;right:17%}
+.story-banner .story-spark-two{bottom:24%;left:24%;width:4px;height:4px;opacity:.46}
+.story-banner.story-plum .story-spark-one,.story-banner.story-rose .story-spark-one{right:26%;top:25%}
+.story-banner.story-teal .story-spark-one,.story-banner.story-indigo .story-spark-one{right:10%;top:42%}
+.story-banner .story-mini-badge{display:inline-flex!important;align-items:center;gap:6px;letter-spacing:0!important;background:color-mix(in srgb,var(--bg1),white 25%)!important;backdrop-filter:blur(7px);-webkit-backdrop-filter:blur(7px);border:1px solid #FFFFFF80!important;box-shadow:0 4px 15px #241B1310!important}
+.story-banner .story-badge-mark{font-size:10px;color:var(--accent)}
+.story-banner .story-editorial-signature{display:flex;align-items:center;gap:9px;margin-top:3px;font-size:10px;font-weight:650;color:var(--accent);opacity:.64;pointer-events:none}
+.story-banner .story-editorial-signature i{display:block;width:29px;height:1px;background:currentColor;opacity:.7}
+.story-banner .story-copy button{display:inline-flex!important;align-items:center;justify-content:center;gap:11px;transition:background-color .22s ease,box-shadow .22s ease,transform .22s ease!important}
+.story-banner .story-cta-arrow{display:inline-block;transition:transform .22s ease}
+@media(hover:hover) and (prefers-reduced-motion:no-preference){
+ .story-banner:hover .story-floating-main{filter:drop-shadow(0 15px 16px #241E2029)}
+ .story-banner .story-mini-badge{transition:background-color .22s ease}
+ .story-banner:hover .story-mini-badge{background:#FFFFFFE4!important}
+ .story-banner .story-copy button:hover{transform:translateY(-2px);box-shadow:0 10px 22px #1715171B!important}
+ .story-banner .story-copy button:hover .story-cta-arrow{transform:translateX(-3px)}
+}
+@media(max-width:720px){.story-banner .story-mini-badge{max-width:96%;white-space:nowrap;font-size:9px!important}.story-banner .story-editorial-signature{font-size:9px;margin-top:0}.story-banner .story-editorial-signature i{width:20px}.story-banner .story-product-plate{left:0;width:95%;bottom:-16%}.story-banner .story-spark-two{display:none}}
+@media(max-width:420px){.story-banner .story-mini-badge{font-size:8px!important;gap:3px;padding:5px 7px!important}.story-banner .story-editorial-signature{display:none}}
 </style></head>
 <body>
 <header class="site-header"><div class="wrap header-inner">
@@ -4330,9 +4353,9 @@ function storyBanner(kind){
  const assets=STORY_ART_SETS[kind];
  const src=(name)=>kind==='experiences'?'assets/experiences/'+name+'.png':'assets/categories/'+name+'.png';
  return '<section class="story-banner story-'+kind+' story-'+x.tone+' story-'+x.layout+'" aria-label="'+escapeHtml(x.title)+'">'+
- '<div class="story-copy"><span class="story-kicker">'+escapeHtml(x.kicker)+'</span><h2>'+escapeHtml(x.title)+'</h2><p>'+escapeHtml(x.desc)+'</p><button type="button" '+action+'>'+escapeHtml(x.cta)+' <span aria-hidden="true">←</span></button></div>'+
+ '<div class="story-copy"><span class="story-kicker">'+escapeHtml(x.kicker)+'</span><h2>'+escapeHtml(x.title)+'</h2><p>'+escapeHtml(x.desc)+'</p><button type="button" '+action+'>'+escapeHtml(x.cta)+' <span class="story-cta-arrow" aria-hidden="true">←</span></button><span class="story-editorial-signature" aria-hidden="true"><i></i><span>مجالس العرب</span></span></div>'+
  '<div class="story-visual" aria-hidden="true"><div class="story-hero-halo"></div><div class="story-hero-disc"></div>'+
- '<div class="story-soft-glow"></div><div class="story-geometry story-geometry-a"></div><div class="story-geometry story-geometry-b"></div><div class="story-geometry story-geometry-c"></div><div class="story-mini-badge">'+escapeHtml(x.kicker)+'</div>'+
+ '<div class="story-soft-glow"></div><div class="story-geometry story-geometry-a"></div><div class="story-geometry story-geometry-b"></div><div class="story-geometry story-geometry-c"></div><div class="story-product-plate"></div><div class="story-spark story-spark-one"></div><div class="story-spark story-spark-two"></div><div class="story-mini-badge"><span class="story-badge-mark" aria-hidden="true">✦</span> '+(x.contact?'تجارب مجالس العرب':'من قائمة مجالس العرب')+'</div>'+
  '<img class="story-floating story-floating-main" src="'+src(assets[0])+'" alt="" loading="lazy" decoding="async">'+
  '<img class="story-floating story-floating-second" src="'+src(assets[1])+'" alt="" loading="lazy" decoding="async">'+
  '<img class="story-floating story-floating-third" src="'+src(assets[2])+'" alt="" loading="lazy" decoding="async"></div></section>';
