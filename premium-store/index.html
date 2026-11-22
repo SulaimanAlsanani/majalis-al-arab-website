@@ -3820,10 +3820,27 @@ const STORAGE='majalis_delivery_preview_cart_v2', FAV_KEY='majalis_delivery_prev
 const state={checkout:{coords:null,addressText:''},category:'الكل',query:'',sort:'default',priceFilter:'all',demoFilter:'all',quantity:1,note:'',cart:[],favorites:[],fulfillment:'pickup',generalNote:'',customer:{name:'',phone:'',city:'',district:'',street:'',building:'',unit:'',landmark:'',pickupBranch:''},origin:'/',searchMode:false};
 const el=id=>document.getElementById(id);
 function safeGet(key,fallback){try{const v=JSON.parse(localStorage.getItem(key));return v??fallback}catch{return fallback}}
-state.cart=safeGet(STORAGE,[]).filter(x=>x&&Number.isInteger(x.id)&&PRODUCTS.some(p=>p.id===x.id)&&Number.isInteger(x.qty)&&x.qty>0&&x.qty<=99).map(x=>({id:x.id,qty:x.qty,note:String(x.note||'').slice(0,250)}));
+function normalizeSavedCart(raw,products=PRODUCTS){
+ if(!Array.isArray(raw))return [];
+ const allowed=new Set(products.filter(p=>p.available!==false).map(p=>p.id));
+ const lines=[];const indexes=new Map();
+ for(const candidate of raw.slice(0,500)){
+  if(!candidate||!Number.isInteger(candidate.id)||!allowed.has(candidate.id)||!Number.isInteger(candidate.qty)||candidate.qty<1||candidate.qty>99)continue;
+  const note=String(candidate.note||'').trim().slice(0,250);
+  const key=JSON.stringify([candidate.id,note]);
+  if(indexes.has(key)){const prior=lines[indexes.get(key)];prior.qty=Math.min(99,prior.qty+candidate.qty)}
+  else{indexes.set(key,lines.length);lines.push({id:candidate.id,qty:candidate.qty,note})}
+ }
+ return lines;
+}
+function normalizeFavorites(raw,products=PRODUCTS){
+ const allowed=new Set(products.map(p=>p.id));
+ return Array.isArray(raw)?[...new Set(raw.filter(id=>Number.isInteger(id)&&allowed.has(id)))].slice(0,500):[];
+}
+state.cart=normalizeSavedCart(safeGet(STORAGE,[]));
 state.generalNote=String(safeGet('majalis_basket_general_note_v1','')||'').slice(0,500);
 try{const c=JSON.parse(sessionStorage.getItem('majalis_preview_customer_v1')||'{}');if(c&&typeof c==='object')for(const k of Object.keys(state.customer))state.customer[k]=String(c[k]||'').slice(0,120)}catch{}
-state.favorites=safeGet(FAV_KEY,[]).filter(n=>Number.isInteger(n)&&PRODUCTS.some(p=>p.id===n));
+state.favorites=normalizeFavorites(safeGet(FAV_KEY,[]));
 function save(){try{localStorage.setItem(STORAGE,JSON.stringify(state.cart));localStorage.setItem(FAV_KEY,JSON.stringify(state.favorites));localStorage.setItem('majalis_basket_general_note_v1',JSON.stringify(state.generalNote||''))}catch{}}
 function money(n){return Number(n).toLocaleString('ar-SA')+' ر.س'}
 const PREVIEW_PRODUCT_PHOTOS={
@@ -3849,7 +3866,7 @@ function photoError(e){
  delete t.dataset.fallbackAlt;
 }
 document.addEventListener('error',photoError,true);
-function currentPath(){const h=decodeURIComponent(location.hash.slice(1));return h.startsWith('/')?h:'/'}
+function currentPath(){let h='/';try{h=decodeURIComponent(location.hash.slice(1))}catch{return '/'}return h.startsWith('/')?h:'/'}
 function route(path){if(currentPath()===path){render();return}location.hash='#'+path}
 function count(){return state.cart.reduce((s,l)=>s+l.qty,0)}
 function total(){return state.cart.reduce((s,l)=>s+(PRODUCTS.find(p=>p.id===l.id)?.price||0)*l.qty,0)}
@@ -4104,8 +4121,8 @@ async function bootstrapApprovedCatalog(){
   const response=await window.MajalisApi.fetchCatalog();
   if(!response?.items?.length)return;
   PRODUCTS=response.items;approvedCatalog=true;
-  state.cart=state.cart.filter(x=>PRODUCTS.some(p=>p.id===x.id&&p.available!==false));
-  state.favorites=state.favorites.filter(id=>PRODUCTS.some(p=>p.id===id));
+  state.cart=normalizeSavedCart(state.cart,PRODUCTS);
+  state.favorites=normalizeFavorites(state.favorites,PRODUCTS);
   save();render();notify('تم تحميل كتالوج Odoo المعتمد');
  }catch(err){
   console.warn('Odoo catalog unavailable, preview retained:',err.message);
@@ -4282,6 +4299,14 @@ document.addEventListener('click',e=>{if(!e.target.closest('.search-shell'))el('
 el('globalSearch').addEventListener('keydown',e=>{if(e.key==='Escape')el('searchSuggestions').hidden=true;if(e.key==='Enter'){el('searchSuggestions').hidden=true;route('/menu')}});
 const scrollBtn=el('scrollTop');scrollBtn.onclick=()=>window.scrollTo({top:0,behavior:'smooth'});window.addEventListener('scroll',()=>{scrollBtn.hidden=window.scrollY<650},{passive:true});
 document.addEventListener('keydown',e=>{if((e.key==='/'&&!e.ctrlKey&&!e.altKey&&!e.metaKey)||(e.key.toLowerCase()==='k'&&(e.ctrlKey||e.metaKey))){const t=e.target;if(t instanceof HTMLElement&&(t.closest('input,textarea,select,[contenteditable="true"]')))return;e.preventDefault();if(currentPath()!=='/menu'){route('/menu');requestAnimationFrame(()=>el('catalogSearch')?.focus())}else el('catalogSearch')?.focus()}});
+window.addEventListener('storage',event=>{
+ if(![STORAGE,FAV_KEY,'majalis_basket_general_note_v1'].includes(event.key))return;
+ state.cart=normalizeSavedCart(safeGet(STORAGE,[]));
+ state.favorites=normalizeFavorites(safeGet(FAV_KEY,[]));
+ state.generalNote=String(safeGet('majalis_basket_general_note_v1','')||'').slice(0,500);
+ if(currentPath()==='/checkout'&&!state.cart.length){route('/cart');return}
+ render();
+});
 window.addEventListener('hashchange',render);render();bootstrapApprovedCatalog();
 </script>
 </body></html>
