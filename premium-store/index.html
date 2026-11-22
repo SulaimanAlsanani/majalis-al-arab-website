@@ -4426,6 +4426,8 @@ function renderHome(){
  el('app').innerHTML=
  homeBanner()+
  featureCategories()+
+ storyBanner('experiences')+
+ homeExperiences()+
  homeSectionLinks()+
  storyBanner('breakfast')+
  '<section id="home-breakfast" tabindex="-1" class="home-content-group home-discover-group">'+group('الفطور والعشاء','فطور على الأصول','أصناف صباحية تناسب يومك','breakfast')+'</section>'+
@@ -4447,8 +4449,6 @@ function renderHome(){
  '<section id="home-coffee" tabindex="-1" class="home-content-group home-taste-group">'+group('القهوة المختصة','قهوة ومزاج','اختيارات محبي القهوة','coffee')+'</section>'+
  storyBanner('drinks')+
  group('المشروبات','المشروبات','خيارات باردة وساخنة','drinks')+
- storyBanner('experiences')+
- homeExperiences()+
  homeTrustStrip()+homeFinalActions()+homepageDisclosure();
 }
 function renderMenu(){el('app').innerHTML=serviceModeBanner()+quickNav()+'<div class="shop-layout"><section class="catalog-panel" id="catalog">'+catalog()+'</section>'+sideCart()+'</div>'}
