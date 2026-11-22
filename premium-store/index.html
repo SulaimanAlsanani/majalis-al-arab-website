@@ -3938,6 +3938,21 @@ body :not(#__borderless_reset_a):not(#__borderless_reset_b):not(#__borderless_re
 .story-banner .story-editorial-signature{opacity:.65!important}
 @media(max-width:720px){.story-banner .story-ambient-dots{background-size:13px 13px;width:25%;opacity:.3}.story-banner .story-ambient-arc{right:-33%;top:-32%;width:88%}.story-banner .story-product-plate{bottom:-16%!important}}
 @media(max-width:420px){.story-banner .story-ambient-dots{display:none}.story-banner .story-geometry-b{opacity:.16!important}}
+
+/* Additional deliberate negative-space detailing; no extra cards or distracting animation. */
+.story-banner .story-atmosphere-band{position:absolute;z-index:0;inset:18% -5% auto auto;width:90%;height:56%;border-radius:60% 15% 45% 14%;background:linear-gradient(140deg,#FFFFFF00 0%,#FFFFFF50 47%,#FFFFFF06 100%);transform:rotate(-15deg);pointer-events:none}
+.story-banner .story-contour{position:absolute;z-index:1;aspect-ratio:1;border-radius:50%;pointer-events:none;opacity:.5}
+.story-banner .story-contour-one{left:-22%;top:-33%;width:73%;background:radial-gradient(circle,transparent 62%,color-mix(in srgb,var(--accent),transparent 86%) 62.4%,color-mix(in srgb,var(--accent),transparent 86%) 63.2%,transparent 63.6%,transparent 68%,color-mix(in srgb,var(--accent),transparent 91%) 68.4%,color-mix(in srgb,var(--accent),transparent 91%) 69%,transparent 69.4%)}
+.story-banner .story-contour-two{right:-32%;bottom:-53%;width:88%;background:radial-gradient(circle,transparent 70%,color-mix(in srgb,var(--story-disc),transparent 83%) 70.5%,color-mix(in srgb,var(--story-disc),transparent 83%) 71%,transparent 71.5%)}
+.story-banner .story-bottom-caption{position:absolute;z-index:4;bottom:clamp(15px,2vw,27px);right:clamp(13px,2.2vw,31px);font-size:11px;font-weight:750;color:var(--accent);background:color-mix(in srgb,var(--bg1),white 29%);box-shadow:0 4px 17px #1C1C1D0B;border-radius:999px;padding:8px 14px;letter-spacing:.01em;pointer-events:none}
+.story-banner .story-bottom-caption:before{content:"";display:inline-block;width:5px;height:5px;border-radius:50%;background:var(--accent);vertical-align:middle;margin-left:7px;opacity:.58}
+.story-banner .story-copy{background:radial-gradient(ellipse 55% 65% at 20% 90%,#FFFFFF35,transparent 85%)}
+.story-banner.story-wide .story-atmosphere-band{transform:rotate(-20deg)}
+.story-banner.story-split .story-atmosphere-band{height:68%;top:9%;transform:rotate(13deg)}
+.story-banner.story-compact .story-contour-one{top:-28%;left:-32%;width:83%}
+.story-banner.story-rose .story-bottom-caption,.story-banner.story-indigo .story-bottom-caption{background:#FFFFFFB8}
+@media(max-width:720px){.story-banner .story-bottom-caption{font-size:9px;bottom:9px;right:9px;padding:5px 8px}.story-banner .story-contour-one{opacity:.25}.story-banner .story-contour-two{opacity:.25}.story-banner .story-atmosphere-band{opacity:.55}}
+@media(max-width:420px){.story-banner .story-bottom-caption{font-size:8px;bottom:7px;right:5px;padding:5px 7px}.story-banner .story-contour-two{display:none}}
 </style></head>
 <body>
 <header class="site-header"><div class="wrap header-inner">
@@ -4394,15 +4409,16 @@ function storyBanner(kind){
  const x=HOME_STORY_BANNERS[kind];if(!x)return '';
  const action=x.contact?'data-contact-seating':'data-category="'+escapeHtml(x.category)+'"';
  const sequence=String(Object.keys(HOME_STORY_BANNERS).indexOf(kind)+1).padStart(2,'0');
+ const detail=({breakfast:'مذاق الصباح',southern:'أصالة الجنوب',grills:'من المشاوي',sandwiches:'اختيارات سريعة',salads:'لمسة طازجة',appetizers:'بداية شهية',family:'وقت اللمة',dessert:'لحظة حلا',coffee:'مزاج القهوة',drinks:'انتعاشك',experiences:'تجارب وجلسات'})[kind];
  const assets=STORY_ART_SETS[kind];
  const src=(name)=>kind==='experiences'?'assets/experiences/'+name+'.png':'assets/categories/'+name+'.png';
  return '<section class="story-banner story-'+kind+' story-'+x.tone+' story-'+x.layout+'" aria-label="'+escapeHtml(x.title)+'">'+
  '<div class="story-copy"><span class="story-kicker">'+escapeHtml(x.kicker)+'</span><span class="story-section-number" aria-label="البنر '+sequence+' من 11">'+sequence+' <small>/ 11</small></span><h2>'+escapeHtml(x.title)+'</h2><p>'+escapeHtml(x.desc)+'</p><button type="button" '+action+'>'+escapeHtml(x.cta)+' <span class="story-cta-arrow" aria-hidden="true">←</span></button><span class="story-editorial-signature" aria-hidden="true"><i></i><span>مجالس العرب</span></span></div>'+
  '<div class="story-visual" aria-hidden="true"><div class="story-hero-halo"></div><div class="story-hero-disc"></div>'+
- '<div class="story-soft-glow"></div><div class="story-ambient-arc"></div><div class="story-ambient-dots"></div><div class="story-visual-rail"></div><div class="story-geometry story-geometry-a"></div><div class="story-geometry story-geometry-b"></div><div class="story-geometry story-geometry-c"></div><div class="story-product-plate"></div><div class="story-spark story-spark-one"></div><div class="story-spark story-spark-two"></div><div class="story-mini-badge"><span class="story-badge-mark" aria-hidden="true">✦</span> '+(x.contact?'تجارب مجالس العرب':'من قائمة مجالس العرب')+'</div>'+
+ '<div class="story-soft-glow"></div><div class="story-atmosphere-band"></div><div class="story-contour story-contour-one"></div><div class="story-contour story-contour-two"></div><div class="story-ambient-arc"></div><div class="story-ambient-dots"></div><div class="story-visual-rail"></div><div class="story-geometry story-geometry-a"></div><div class="story-geometry story-geometry-b"></div><div class="story-geometry story-geometry-c"></div><div class="story-product-plate"></div><div class="story-spark story-spark-one"></div><div class="story-spark story-spark-two"></div><div class="story-mini-badge"><span class="story-badge-mark" aria-hidden="true">✦</span> '+(x.contact?'تجارب مجالس العرب':'من قائمة مجالس العرب')+'</div>'+
  '<img class="story-floating story-floating-main" src="'+src(assets[0])+'" alt="" loading="lazy" decoding="async">'+
  '<img class="story-floating story-floating-second" src="'+src(assets[1])+'" alt="" loading="lazy" decoding="async">'+
- '<img class="story-floating story-floating-third" src="'+src(assets[2])+'" alt="" loading="lazy" decoding="async"></div></section>';
+ '<img class="story-floating story-floating-third" src="'+src(assets[2])+'" alt="" loading="lazy" decoding="async"><div class="story-bottom-caption">'+escapeHtml(detail)+'</div></div></section>';
 }
 function renderHome(){
  const byCategory=(name,n=14)=>PRODUCTS.filter(p=>p.category===name&&p.available!==false).slice(0,n).map(p=>p.id);
