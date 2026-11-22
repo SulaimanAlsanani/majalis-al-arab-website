@@ -3813,6 +3813,55 @@ body :not(#__borderless_reset_a):not(#__borderless_reset_b):not(#__borderless_re
 @media(max-width:720px){.story-banner,.story-banner.story-split,.story-banner.story-compact{grid-template-columns:minmax(0,1fr) 39%;min-height:190px;margin:20px 0 10px}.story-banner .story-copy,.story-banner.story-split .story-copy{padding:17px 15px;gap:7px}.story-banner h2{font-size:clamp(18px,4vw,25px)}.story-banner p{font-size:11px;line-height:1.6}.story-banner .story-kicker{font-size:10px}.story-banner .story-copy button{min-height:36px;padding:7px 12px;font-size:11px;margin-top:2px}.story-banner .story-visual,.story-banner.story-compact .story-visual{min-height:190px}.story-banner .story-visual img,.story-banner.story-wide .story-visual img,.story-banner.story-compact .story-visual img{height:175px;width:100%}}
 @media(max-width:400px){.story-banner,.story-banner.story-split,.story-banner.story-compact{grid-template-columns:minmax(0,1fr) 37%;min-height:170px}.story-banner .story-visual,.story-banner.story-compact .story-visual{min-height:170px}.story-banner .story-visual img,.story-banner.story-wide .story-visual img,.story-banner.story-compact .story-visual img{height:155px}.story-banner p{font-size:10px}.story-banner h2{font-size:17px}}
 @media(prefers-reduced-motion:reduce){.story-banner .story-copy button{transition:none;transform:none!important}}
+
+/* Secondary campaigns use the same precise visual language as the main carousel,
+   without copying a main slide: full-bleed softened color, oversized circular disc,
+   layered isolated photographs and an angled phone/storefront mockup. */
+.story-banner{--story-ring:var(--ring);--story-disc:var(--accent);--story-angle:-8deg;min-height:clamp(255px,26vw,365px)!important;grid-template-columns:minmax(0,1fr) 49%!important;background:var(--bg1)!important;box-shadow:none!important;border-radius:clamp(18px,2.4vw,28px)!important}
+.story-banner.story-cinnamon{--story-ring:#EFC06E;--story-disc:#C58B42;--story-angle:7deg}
+.story-banner.story-terracotta{--story-ring:#F7B45D;--story-disc:#E76D44;--story-angle:-7deg}
+.story-banner.story-olive{--story-ring:#FAD967;--story-disc:#82B65D;--story-angle:7deg}
+.story-banner.story-sage{--story-ring:#D0E882;--story-disc:#60B883;--story-angle:-6deg}
+.story-banner.story-amber{--story-ring:#FFD26E;--story-disc:#F39A48;--story-angle:6deg}
+.story-banner.story-plum{--story-ring:#F4C6A2;--story-disc:#DE85B3;--story-angle:-8deg}
+.story-banner.story-rose{--story-ring:#FFB5D3;--story-disc:#D888C3;--story-angle:6deg}
+.story-banner.story-mocha{--story-ring:#E8C096;--story-disc:#9A674C;--story-angle:-7deg}
+.story-banner.story-teal{--story-ring:#A8E9F3;--story-disc:#3CBADC;--story-angle:7deg}
+.story-banner.story-indigo{--story-ring:#A998F7;--story-disc:#4B65DA;--story-angle:-8deg}
+.story-banner .story-copy{padding:clamp(25px,3.4vw,52px)!important;gap:12px!important;position:relative;z-index:5}
+.story-banner .story-copy h2{font-size:clamp(27px,2.9vw,43px)!important;line-height:1.35!important;max-width:660px}
+.story-banner .story-copy p{max-width:490px}
+.story-banner .story-visual{position:relative!important;display:block!important;min-height:clamp(255px,26vw,365px)!important;height:100%!important;overflow:hidden!important;isolation:isolate}
+.story-banner .story-hero-halo,.story-banner .story-hero-disc{position:absolute;border-radius:50%;aspect-ratio:1;pointer-events:none}
+.story-banner .story-hero-halo{width:91%;bottom:-43%;left:1%;border:clamp(28px,4vw,57px) solid var(--story-ring);background:var(--story-disc);opacity:.95;z-index:0}
+.story-banner .story-hero-disc{width:66%;left:15%;bottom:-30%;background:color-mix(in srgb,var(--story-disc),white 19%);z-index:0}
+.story-banner .story-hero-phone{position:absolute;z-index:3;left:43%;top:8%;transform:translateX(-50%) rotate(var(--story-angle));width:clamp(152px,16vw,230px);height:110%;padding:6px;border-radius:33px;background:#17171C;border:3px solid #504B50;box-shadow:0 16px 28px #16141C37}
+.story-banner .story-hero-screen{height:100%;width:100%;background:#FFFAF8;border-radius:26px;overflow:hidden;display:flex;flex-direction:column;color:#382D35;direction:rtl;padding:7px}
+.story-banner .story-phone-status{display:flex;justify-content:space-between;align-items:center;direction:ltr;font:700 10px Arial,sans-serif;height:22px;position:relative}
+.story-banner .story-phone-notch{position:absolute;width:31%;height:11px;top:-6px;left:34%;background:#16141A;border-radius:0 0 10px 10px}
+.story-banner .story-phone-head{display:flex;justify-content:space-between;padding:5px 7px;font-size:10px}
+.story-banner .story-phone-search{background:#F0E8E5;border-radius:6px;font-size:9px;color:#6C6266;padding:8px;margin:5px 3px}
+.story-banner .story-phone-cover{height:33%;background:#F5EBE4;border-radius:11px;overflow:hidden;display:grid;place-items:center}
+.story-banner .story-phone-cover img{height:100%;width:100%;object-fit:contain}
+.story-banner .story-phone-label{font-size:10px;font-weight:850;margin:8px 4px 5px;color:#4F3943}
+.story-banner .story-phone-thumbs{display:grid;grid-template-columns:1fr 1fr;gap:6px}
+.story-banner .story-phone-thumbs img{background:#F2E8E5;border-radius:8px;width:100%;height:46px;object-fit:contain}
+.story-banner .story-phone-bottom{display:flex;justify-content:space-around;margin-top:auto;padding:9px}
+.story-banner .story-phone-bottom span{width:19px;height:4px;border-radius:8px;background:#C5B9BC}
+.story-banner .story-floating{position:absolute;z-index:4;object-fit:contain;filter:drop-shadow(0 11px 13px #241E202E);pointer-events:none;max-width:none}
+.story-banner .story-floating-main{left:0%;bottom:0%;width:42%;height:62%;transform:rotate(-5deg)}
+.story-banner .story-floating-second{right:0%;bottom:6%;width:35%;height:50%;transform:rotate(9deg)}
+.story-banner .story-floating-third{left:3%;top:2%;width:25%;height:28%;transform:rotate(11deg)}
+.story-banner.story-split .story-floating-main,.story-banner.story-compact .story-floating-main{left:1%;bottom:4%;width:38%;height:54%;transform:rotate(7deg)}
+.story-banner.story-split .story-floating-second{right:1%;bottom:2%;width:38%;height:55%;transform:rotate(-9deg)}
+.story-banner.story-compact .story-floating-third{left:0;top:8%;width:32%;height:30%}
+.story-banner.story-family .story-floating-main{width:48%;height:66%;left:-2%}
+.story-banner.story-dessert .story-floating-second{width:39%;height:55%}
+.story-banner.story-experiences .story-floating-main{left:-2%;width:39%;height:68%;bottom:0}
+.story-banner.story-experiences .story-floating-second{width:32%;height:59%;right:0%;bottom:0}
+.story-banner.story-experiences .story-floating-third{width:26%;height:31%;left:2%;top:0}
+@media(max-width:720px){.story-banner,.story-banner.story-split,.story-banner.story-compact{grid-template-columns:minmax(0,1fr) 44%!important;min-height:215px!important}.story-banner .story-visual{min-height:215px!important}.story-banner .story-copy{padding:19px 13px!important;gap:8px!important}.story-banner .story-copy h2{font-size:clamp(18px,4.2vw,27px)!important}.story-banner .story-hero-phone{width:clamp(105px,22vw,155px);border-radius:23px;padding:4px}.story-banner .story-hero-screen{border-radius:17px;padding:4px}.story-banner .story-phone-head{font-size:8px}.story-banner .story-phone-search{font-size:7px;padding:5px}.story-banner .story-phone-label{font-size:7px}.story-banner .story-phone-thumbs img{height:27px}.story-banner .story-phone-status{height:13px;font-size:7px}.story-banner .story-hero-halo{border-width:25px}}
+@media(max-width:420px){.story-banner,.story-banner.story-split,.story-banner.story-compact{min-height:180px!important}.story-banner .story-visual{min-height:180px!important}.story-banner .story-hero-phone{width:104px}.story-banner .story-phone-thumbs img{height:22px}.story-banner .story-copy h2{font-size:17px!important}.story-banner .story-copy p{font-size:10px}.story-banner .story-hero-halo{border-width:20px}}
 </style></head>
 <body>
 <header class="site-header"><div class="wrap header-inner">
@@ -4250,12 +4299,33 @@ const HOME_STORY_BANNERS={
  drinks:{kicker:'شي ينعش',title:'اختَر مشروبك على مزاجك',desc:'مشروبات باردة وساخنة تكمل جلستك.',cta:'تصفح المشروبات',category:'المشروبات',image:'assets/categories/drinks.png',tone:'teal',layout:'wide',alt:'مشروبات منعشة'},
  experiences:{kicker:'بعد الأكل يجي وقت اللمة',title:'أوقات تجمعنا وتكمل يومنا',desc:'جلسات خاصة ومشاهدة المباريات والبلايستيشن؛ التوفر يؤكد مع الفرع.',cta:'استفسر عن الجلسات',contact:true,image:'assets/experiences/sessions.png',tone:'indigo',layout:'split',alt:'جلسة عربية مع القهوة والضيافة'}
 };
+/* Shared art direction with the main hero: circular halo, layered product images and a storefront phone.
+   Each campaign uses its own image grouping, crop, palette and stacking order. */
+const STORY_ART_SETS={
+ breakfast:['breakfast','coffee','appetizers'],
+ southern:['areeka-masoob','desserts','breakfast'],
+ grills:['grills','family-meals','salads'],
+ sandwiches:['sandwiches','drinks','appetizers'],
+ salads:['salads','appetizers','drinks'],
+ appetizers:['appetizers','sandwiches','salads'],
+ family:['family-meals','grills','sandwiches'],
+ dessert:['desserts','coffee','areeka-masoob'],
+ coffee:['coffee','desserts','drinks'],
+ drinks:['drinks','coffee','salads'],
+ experiences:['sessions','matches-player','gaming']
+};
 function storyBanner(kind){
  const x=HOME_STORY_BANNERS[kind];if(!x)return '';
  const action=x.contact?'data-contact-seating':'data-category="'+escapeHtml(x.category)+'"';
+ const assets=STORY_ART_SETS[kind];
+ const src=(name)=>kind==='experiences'?'assets/experiences/'+name+'.png':'assets/categories/'+name+'.png';
  return '<section class="story-banner story-'+kind+' story-'+x.tone+' story-'+x.layout+'" aria-label="'+escapeHtml(x.title)+'">'+
  '<div class="story-copy"><span class="story-kicker">'+escapeHtml(x.kicker)+'</span><h2>'+escapeHtml(x.title)+'</h2><p>'+escapeHtml(x.desc)+'</p><button type="button" '+action+'>'+escapeHtml(x.cta)+' <span aria-hidden="true">←</span></button></div>'+
- '<div class="story-visual"><span class="story-orbit" aria-hidden="true"></span><img src="'+x.image+'" alt="'+escapeHtml(x.alt)+'" loading="lazy" decoding="async" width="450" height="300"></div></section>';
+ '<div class="story-visual" aria-hidden="true"><div class="story-hero-halo"></div><div class="story-hero-disc"></div>'+
+ '<div class="story-hero-phone"><div class="story-hero-screen"><div class="story-phone-status"><span>9:41</span><span class="story-phone-notch"></span><span>▰</span></div><div class="story-phone-head"><strong>مجالس العرب</strong><span>⌕</span></div><div class="story-phone-search">وش تشتهي اليوم؟</div><div class="story-phone-cover"><img src="'+src(assets[0])+'" alt="" loading="lazy"></div><div class="story-phone-label">'+escapeHtml(x.kicker)+'</div><div class="story-phone-thumbs"><img src="'+src(assets[1])+'" alt="" loading="lazy"><img src="'+src(assets[2])+'" alt="" loading="lazy"></div><div class="story-phone-bottom"><span></span><span></span><span></span></div></div></div>'+
+ '<img class="story-floating story-floating-main" src="'+src(assets[0])+'" alt="" loading="lazy" decoding="async">'+
+ '<img class="story-floating story-floating-second" src="'+src(assets[1])+'" alt="" loading="lazy" decoding="async">'+
+ '<img class="story-floating story-floating-third" src="'+src(assets[2])+'" alt="" loading="lazy" decoding="async"></div></section>';
 }
 function renderHome(){
  const byCategory=(name,n=14)=>PRODUCTS.filter(p=>p.category===name&&p.available!==false).slice(0,n).map(p=>p.id);
