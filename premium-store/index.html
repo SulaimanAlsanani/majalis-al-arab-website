@@ -3713,6 +3713,15 @@ body :not(#__borderless_reset_a):not(#__borderless_reset_b):not(#__borderless_re
  .home-section-head,.homepage-group-heading{gap:10px}
 }
 @media(max-width:360px){.product-card .card-title{font-size:11.5px}.product-card .card-price{font-size:12px}.product-grid{gap:8px}}
+
+/* Homepage section navigation: compact, editorial and consistent with yellow/navy identity. */
+.home-section-links{display:flex;align-items:center;flex-wrap:wrap;gap:9px;margin:4px 0 18px;padding:10px 0;scroll-margin-top:105px}
+.home-section-links-label{font-size:12px;font-weight:800;color:#46515b;margin-inline-end:5px;white-space:nowrap}
+.home-section-links button{border:0;border-radius:999px;background:#f4f2f0;color:#33404b;padding:10px 16px;min-height:40px;font-size:12px;font-weight:750;white-space:nowrap;transition:background .2s}
+.home-section-links button:hover,.home-section-links button:focus-visible{background:#ffe8a0;color:#1f2933}
+#home-breakfast,#home-gatherings,#home-coffee,#home-experiences{scroll-margin-top:115px;outline-offset:6px}
+@media(max-width:780px){.home-section-links{flex-wrap:nowrap;overflow-x:auto;scrollbar-width:none;overscroll-behavior-inline:contain;margin:2px -14px 12px;padding:7px 14px 10px}.home-section-links::-webkit-scrollbar{display:none}.home-section-links button{flex:none;font-size:11px;min-height:39px;padding:8px 13px}}
+@media(prefers-reduced-motion:reduce){.home-section-links button{transition:none}}
 </style></head>
 <body>
 <header class="site-header"><div class="wrap header-inner">
@@ -4028,7 +4037,7 @@ function quickOrderHub(){
  '<button type="button" data-go="/seating"><span class="hs-order-service-icon">⌂</span><span><strong>الجلسات</strong><small>اطّلع على خيارات الجلسات</small></span><b aria-hidden="true">←</b></button>'+
  '</div></section>';
 }
-function homeExperiences(){return '<section class="home-experience-section" aria-label="تجارب مجالس العرب">'+homeSectionIntro('مساحات وتجارب','مو بس مطعم… مجالس تجمعنا','الجلسات الخاصة والمباريات والبلايستيشن؛ الاستفسار عن التوفر مباشرة مع الفرع.','/seating')+'<div class="home-experience-grid"><button type="button" class="home-experience-card experience-private" data-go="/seating"><img class="experience-real-photo" src="assets/experiences/sessions.png" alt="جلسة ديوانية مع قهوة عربية وضيافة بخلفية شفافة" loading="lazy" decoding="async" width="240" height="180"><span class="experience-icon">🛋️</span><span class="experience-label">جلسات خاصة</span><strong>جلستك على كيفك</strong><small>استكشف الجلسات والاستفسار عن التوفر</small><b>استفسر عن الجلسات ←</b></button><button type="button" class="home-experience-card experience-matches" data-go="/seating"><img class="experience-real-photo" src="assets/experiences/matches-player.png" alt="لاعب كرة قدم يسدد الكرة فوق قطعة من أرضية الملعب بخلفية شفافة" loading="lazy" decoding="async" width="240" height="180"><span class="experience-icon">⚽</span><span class="experience-label">مشاهدة المباريات</span><strong>للحماس جمهور</strong><small>أجواء متابعة المباريات مع الرفاق</small><b>استكشف الخيارات ←</b></button><button type="button" class="home-experience-card experience-games" data-go="/seating"><img class="experience-real-photo" src="assets/experiences/gaming.png" alt="جهاز ألعاب ووحدة تحكم وسماعة بخلفية شفافة" loading="lazy" decoding="async" width="240" height="180"><span class="experience-icon">🎮</span><span class="experience-label">بلايستيشن</span><strong>المنافسة تحلى</strong><small>استفسر عن الأجهزة والمواعيد</small><b>اطلع على التفاصيل ←</b></button></div></section>'}
+function homeExperiences(){return '<section id="home-experiences" tabindex="-1" class="home-experience-section" aria-label="تجارب مجالس العرب">'+homeSectionIntro('مساحات وتجارب','مو بس مطعم… مجالس تجمعنا','الجلسات الخاصة والمباريات والبلايستيشن؛ الاستفسار عن التوفر مباشرة مع الفرع.','/seating')+'<div class="home-experience-grid"><button type="button" class="home-experience-card experience-private" data-go="/seating"><img class="experience-real-photo" src="assets/experiences/sessions.png" alt="جلسة ديوانية مع قهوة عربية وضيافة بخلفية شفافة" loading="lazy" decoding="async" width="240" height="180"><span class="experience-icon">🛋️</span><span class="experience-label">جلسات خاصة</span><strong>جلستك على كيفك</strong><small>استكشف الجلسات والاستفسار عن التوفر</small><b>استفسر عن الجلسات ←</b></button><button type="button" class="home-experience-card experience-matches" data-go="/seating"><img class="experience-real-photo" src="assets/experiences/matches-player.png" alt="لاعب كرة قدم يسدد الكرة فوق قطعة من أرضية الملعب بخلفية شفافة" loading="lazy" decoding="async" width="240" height="180"><span class="experience-icon">⚽</span><span class="experience-label">مشاهدة المباريات</span><strong>للحماس جمهور</strong><small>أجواء متابعة المباريات مع الرفاق</small><b>استكشف الخيارات ←</b></button><button type="button" class="home-experience-card experience-games" data-go="/seating"><img class="experience-real-photo" src="assets/experiences/gaming.png" alt="جهاز ألعاب ووحدة تحكم وسماعة بخلفية شفافة" loading="lazy" decoding="async" width="240" height="180"><span class="experience-icon">🎮</span><span class="experience-label">بلايستيشن</span><strong>المنافسة تحلى</strong><small>استفسر عن الأجهزة والمواعيد</small><b>اطلع على التفاصيل ←</b></button></div></section>'}
 function serviceModeBanner(){
  return '<section class="hs-restaurant-intro" aria-label="متجر مجالس العرب">'+
  '<div class="hs-restaurant-intro-logo">م</div>'+
@@ -4079,6 +4088,7 @@ function distributedPromo(kind){
  };const p=all[kind];if(!p)return '';const img=name=>'assets/categories/'+name+'.png';
  return '<section class="majalis-promo '+p[0]+'" aria-label="'+p[2]+'"><div class="majalis-promo-copy"><span>'+p[1]+'</span><h2>'+p[2]+'</h2><p>'+p[3]+'</p><button type="button" data-category="'+p[5]+'">'+p[4]+' ←</button></div><div class="majalis-promo-art" aria-hidden="true"><div class="majalis-promo-circle"></div><img class="majalis-promo-photo" src="'+img(p[6])+'" loading="lazy" alt=""><div class="majalis-promo-phone"><strong>مجالس العرب</strong><small>ابحث عن صنفك</small><img src="'+img(p[7])+'" loading="lazy" alt=""></div><img class="majalis-promo-photo second" src="'+img(p[7])+'" loading="lazy" alt=""></div></section>';
 }
+function homeSectionLinks(){return '<nav class="home-section-links" aria-label="التنقل السريع بين أقسام الصفحة"><span class="home-section-links-label">اكتشف أكثر</span><button type="button" data-home-jump="home-breakfast">الفطور ونكهات الجنوب</button><button type="button" data-home-jump="home-gatherings">العروض واللّمّة</button><button type="button" data-home-jump="home-coffee">القهوة والحلا</button><button type="button" data-home-jump="home-experiences">الجلسات والتجارب</button></nav>'}
 function renderHome(){
  const byCategory=(name,n=14)=>PRODUCTS.filter(p=>p.category===name).slice(0,n).map(p=>p.id);
  const breakfast=productShowcase('فطور على الأصول','شكشوكة وفول وكبدة وخيارات تفتح النفس',byCategory('الفطور والعشاء'),'/menu','breakfast');
@@ -4087,18 +4097,20 @@ function renderHome(){
 
  const sweets=productShowcase('وقت الحلا','حلويات تكمّل الوجبة',byCategory('الحلا'),'/menu','sweet');
  const coffee=productShowcase('قهوة ومشروبات','من القهوة المختصة للمشروبات المتنوعة',byCategory('القهوة المختصة').concat(byCategory('المشروبات',8)),'/menu','coffee');
- const newChoices=productShowcase('خيارات تستحق التجربة','أصناف إضافية تجريبية وليست منتجات أُطلقت حديثًا',[29,32,37,44,52,64,76,82,93,110,120],'/menu','new');
+ const suggestedIds=PRODUCTS.filter(p=>p.available!==false).filter(p=>!p.demo).slice(0,12).map(p=>p.id);
+ const newChoices=productShowcase('خيارات تستحق التجربة','اختيارات متنوعة من قائمة الطعام'+(approvedCatalog?'':' للمعاينة'),suggestedIds,'/menu','new');
 
  el('app').innerHTML=
  homeBanner()+
  featureCategories()+
+ homeSectionLinks()+
  distributedPromo('breakfast')+
- '<section class="home-content-group home-discover-group" aria-label="الفطور ونكهات الجنوب">'+breakfast+southern+'</section>'+
+ '<section id="home-breakfast" tabindex="-1" class="home-content-group home-discover-group" aria-label="الفطور ونكهات الجنوب">'+breakfast+southern+'</section>'+
  distributedPromo('grills')+
- '<section class="home-content-group home-offers-group" aria-label="العروض ووجبات المشاركة">'+homeSectionIntro('للأهل والأصحاب','وجبات المشاركة والعروض','اختيارات تناسب اللمّة، وعروض تجريبية قابلة للاستكشاف.','/offers')+promotionalBanners()+sharing+'</section>'+
+ '<section id="home-gatherings" tabindex="-1" class="home-content-group home-offers-group" aria-label="العروض ووجبات المشاركة">'+homeSectionIntro('للأهل والأصحاب','وجبات المشاركة والعروض','اختيارات تناسب اللمّة، وعروض تجريبية قابلة للاستكشاف.','/offers')+promotionalBanners()+sharing+'</section>'+
  homeExperiences()+
  distributedPromo('coffee')+
- '<section class="home-content-group home-taste-group" aria-label="الحلا والقهوة">'+homeSectionIntro('نكمل جلستك','الحلا والقهوة','اختيارات تخلي الجلسة أحلى.')+sweets+coffee+'</section>'+
+ '<section id="home-coffee" tabindex="-1" class="home-content-group home-taste-group" aria-label="الحلا والقهوة">'+homeSectionIntro('نكمل جلستك','الحلا والقهوة','اختيارات تخلي الجلسة أحلى.')+sweets+coffee+'</section>'+
  distributedPromo('family')+
  '<section class="home-content-group home-explore-group" aria-label="مزيد من الخيارات">'+homeSectionIntro('تصفح على راحتك','خيارات إضافية','اكتشف أصنافًا مختلفة من القائمة.','/menu')+newChoices+recentShowcase()+'</section>'+
  homeTrustStrip()+homeFinalActions()+homepageDisclosure();
@@ -4151,9 +4163,10 @@ function slideHomeRail(id,delta){
  const rail=el(id);
  const first=rail?.querySelector('.product-card');
  if(!first)return;
- const maxScroll=rail.scrollWidth-rail.clientWidth;
+ const maxScroll=Math.max(0,rail.scrollWidth-rail.clientWidth);
  if(maxScroll<1)return;
- const step=first.getBoundingClientRect().width+parseFloat(getComputedStyle(rail).columnGap);
+ const gap=parseFloat(getComputedStyle(rail).columnGap)||0;
+ const step=Math.max(1,first.getBoundingClientRect().width+gap);
  const last=Math.ceil(maxScroll/step);
  const offset=-rail.scrollLeft;
  const current=offset>=maxScroll-1?last:Math.round(offset/step);
@@ -4163,7 +4176,7 @@ function slideHomeRail(id,delta){
 }
 
 function render(){stopHeroSlider();const path=currentPath();const m=path.match(/^\/product\/(\d+)$/);if(m)renderDetail(Number(m[1]));else if(path==='/cart')renderCart();else if(path==='/checkout')checkoutPage();else if(path==='/seating')renderSeating();else if(path==='/menu')renderMenu();else if(path==='/offers')renderOffers();else if(path==='/favorites')renderFavorites();else if(path==='/orders')renderOrders();else if(path==='/account')renderAccount();else if(path==='/addresses')renderAddresses();else if(path==='/help')renderHelp();else renderHome();if(path==='/')startHeroSlider();updateCounts();el('globalSearch').value=state.query;document.querySelectorAll('.mobile-bottom button').forEach(b=>b.classList.toggle('active',b.dataset.route===path));window.scrollTo({top:0,behavior:'instant'})}
-document.addEventListener('click',e=>{if(e.target.closest('[data-clear-search]')){state.query='';const input=el('catalogSearch');if(input){input.value='';input.focus()}const results=el('catalogResults');if(results)results.innerHTML=catalogResults(filterProducts());const counter=el('catalogResultCount');if(counter)counter.textContent=filterProducts().length;const clear= document.querySelector('[data-clear-search]');if(clear)clear.hidden=true;return}const heroMove=e.target.closest('[data-hero-move]');if(heroMove){setHeroSlide(heroActive+Number(heroMove.dataset.heroMove),true);return}const heroDot=e.target.closest('[data-hero-index]');if(heroDot){setHeroSlide(Number(heroDot.dataset.heroIndex),true);return}const slideBtn=e.target.closest('[data-slide-dir]');if(slideBtn){slideHomeRail(slideBtn.dataset.slideTrack,Number(slideBtn.dataset.slideDir));return}if(e.target.closest('[data-search-all]')){el('searchSuggestions').hidden=true;route('/menu');return}
+document.addEventListener('click',e=>{const jump=e.target.closest('[data-home-jump]');if(jump){const destination=el(jump.dataset.homeJump);if(destination){const reduced=window.matchMedia('(prefers-reduced-motion: reduce)').matches;destination.scrollIntoView({behavior:reduced?'auto':'smooth',block:'start'});destination.focus({preventScroll:true})}return}if(e.target.closest('[data-clear-search]')){state.query='';const input=el('catalogSearch');if(input){input.value='';input.focus()}const results=el('catalogResults');if(results)results.innerHTML=catalogResults(filterProducts());const counter=el('catalogResultCount');if(counter)counter.textContent=filterProducts().length;const clear= document.querySelector('[data-clear-search]');if(clear)clear.hidden=true;return}const heroMove=e.target.closest('[data-hero-move]');if(heroMove){setHeroSlide(heroActive+Number(heroMove.dataset.heroMove),true);return}const heroDot=e.target.closest('[data-hero-index]');if(heroDot){setHeroSlide(Number(heroDot.dataset.heroIndex),true);return}const slideBtn=e.target.closest('[data-slide-dir]');if(slideBtn){slideHomeRail(slideBtn.dataset.slideTrack,Number(slideBtn.dataset.slideDir));return}if(e.target.closest('[data-search-all]')){el('searchSuggestions').hidden=true;route('/menu');return}
 if(e.target.closest('#goCheckout,#goCheckoutMobile')){route('/checkout');return}
 const payMode=e.target.closest('[data-checkout-mode]');if(payMode){state.fulfillment=payMode.dataset.checkoutMode;checkoutPage();return}
 if(e.target.closest('#nationalAddressRequest')){requestAddressIntegration();return}
