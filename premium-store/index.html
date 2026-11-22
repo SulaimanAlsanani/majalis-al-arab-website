@@ -4168,12 +4168,11 @@ function distributedPromo(kind){
  };const p=all[kind];if(!p)return '';const img=name=>'assets/categories/'+name+'.png';
  return '<section class="majalis-promo '+p[0]+'" aria-label="'+p[2]+'"><div class="majalis-promo-copy"><span>'+p[1]+'</span><h2>'+p[2]+'</h2><p>'+p[3]+'</p><button type="button" data-category="'+p[5]+'">'+p[4]+' ←</button></div><div class="majalis-promo-art" aria-hidden="true"><div class="majalis-promo-circle"></div><img class="majalis-promo-photo" src="'+img(p[6])+'" loading="lazy" alt=""><div class="majalis-promo-phone"><strong>مجالس العرب</strong><small>ابحث عن صنفك</small><img src="'+img(p[7])+'" loading="lazy" alt=""></div><img class="majalis-promo-photo second" src="'+img(p[7])+'" loading="lazy" alt=""></div></section>';
 }
-function homeSectionLinks(){return '<nav class="home-section-links" aria-label="التنقل السريع بين أقسام الصفحة"><span class="home-section-links-label">اكتشف أكثر</span><button type="button" data-home-jump="home-breakfast">الفطور ونكهات الجنوب</button><button type="button" data-home-jump="home-gatherings">العروض واللّمّة</button><button type="button" data-home-jump="home-coffee">القهوة والحلا</button><button type="button" data-home-jump="home-experiences">الجلسات والتجارب</button></nav>'}
+function homeSectionLinks(){return '<nav class="home-section-links" aria-label="التنقل السريع بين أقسام الصفحة"><span class="home-section-links-label">اكتشف أكثر</span><button type="button" data-home-jump="home-breakfast">الفطور ونكهات الجنوب</button><button type="button" data-home-jump="home-experiences">الجلسات والتجارب</button><button type="button" data-home-jump="home-coffee">القهوة والحلا</button></nav>'}
 function renderHome(){
  const byCategory=(name,n=14)=>PRODUCTS.filter(p=>p.category===name).slice(0,n).map(p=>p.id);
  const breakfast=productShowcase('فطور على الأصول','شكشوكة وفول وكبدة وخيارات تفتح النفس',byCategory('الفطور والعشاء'),'/menu','breakfast');
  const southern=productShowcase('نكهات الجنوب','العريكة والمعصوب والفتة',byCategory('العريكة والمعصوب'),'/menu','south');
- const sharing=productShowcase('للجلسات واللّمّة','أطباق مشاركة ووجبات عائلية تجريبية',byCategory('الوجبات العائلية').concat(byCategory('المشويات والأطباق الرئيسية',8)),'/menu','family');
 
  const sweets=productShowcase('وقت الحلا','حلويات تكمّل الوجبة',byCategory('الحلا'),'/menu','sweet');
  const coffee=productShowcase('قهوة ومشروبات','من القهوة المختصة للمشروبات المتنوعة',byCategory('القهوة المختصة').concat(byCategory('المشروبات',8)),'/menu','coffee');
@@ -4187,7 +4186,6 @@ function renderHome(){
  distributedPromo('breakfast')+
  '<section id="home-breakfast" tabindex="-1" class="home-content-group home-discover-group" aria-label="الفطور ونكهات الجنوب">'+breakfast+southern+'</section>'+
  distributedPromo('grills')+
- '<section id="home-gatherings" tabindex="-1" class="home-content-group home-offers-group" aria-label="العروض ووجبات المشاركة">'+homeSectionIntro('للأهل والأصحاب','وجبات المشاركة والعروض','اختيارات تناسب اللمّة، وعروض تجريبية قابلة للاستكشاف.','/offers')+promotionalBanners()+sharing+'</section>'+
  homeExperiences()+
  distributedPromo('coffee')+
  '<section id="home-coffee" tabindex="-1" class="home-content-group home-taste-group" aria-label="الحلا والقهوة">'+homeSectionIntro('نكمل جلستك','الحلا والقهوة','اختيارات تخلي الجلسة أحلى.')+sweets+coffee+'</section>'+
