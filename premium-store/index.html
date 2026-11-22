@@ -3851,6 +3851,27 @@ body :not(#__borderless_reset_a):not(#__borderless_reset_b):not(#__borderless_re
 .story-banner.story-experiences .story-floating-second{right:0%;width:36%;height:65%}
 @media(max-width:720px){.story-banner,.story-banner.story-split,.story-banner.story-compact{grid-template-columns:minmax(0,1fr) 42%!important;min-height:210px!important}.story-banner .story-visual{min-height:210px!important}.story-banner .story-copy{padding:19px 13px!important;gap:8px!important}.story-banner .story-copy h2{font-size:clamp(18px,4.2vw,27px)!important}.story-banner .story-mini-badge{top:10px;left:8px;font-size:9px;padding:5px 8px}.story-banner .story-hero-halo{border-width:22px}.story-banner .story-floating-main{width:57%;height:70%}.story-banner .story-floating-third{width:30%}}
 @media(max-width:420px){.story-banner,.story-banner.story-split,.story-banner.story-compact{min-height:176px!important}.story-banner .story-visual{min-height:176px!important}.story-banner .story-copy h2{font-size:17px!important}.story-banner .story-copy p{font-size:10px}.story-banner .story-hero-halo{border-width:18px}}
+
+/* Elegant editorial geometry across secondary campaign art only. */
+.story-banner .story-geometry{position:absolute;pointer-events:none;z-index:1;opacity:.48;box-sizing:border-box}
+.story-banner .story-geometry-a{width:35%;aspect-ratio:1;border:1.5px solid color-mix(in srgb,var(--accent),white 33%);border-radius:26% 74% 67% 33% / 39% 37% 63% 61%;left:1%;top:11%;transform:rotate(-17deg)}
+.story-banner .story-geometry-b{width:16%;aspect-ratio:1;border:1px solid color-mix(in srgb,var(--accent),white 42%);border-radius:15%;right:6%;top:15%;transform:rotate(35deg);opacity:.32}
+.story-banner .story-geometry-c{width:32%;height:2px;left:13%;bottom:15%;background:linear-gradient(90deg,transparent,color-mix(in srgb,var(--story-disc),white 16%),transparent);transform:rotate(-22deg);opacity:.4}
+.story-banner.story-cinnamon .story-geometry-a,.story-banner.story-mocha .story-geometry-a{border-radius:50% 50% 12% 12%;width:28%;top:15%;transform:rotate(11deg)}
+.story-banner.story-cinnamon .story-geometry-b,.story-banner.story-mocha .story-geometry-b{border-radius:50%;box-shadow:0 0 0 10px color-mix(in srgb,var(--story-ring),transparent 80%);right:8%}
+.story-banner.story-terracotta .story-geometry-a,.story-banner.story-rose .story-geometry-a{border-radius:11%;transform:rotate(45deg);width:28%;left:4%;top:8%}
+.story-banner.story-terracotta .story-geometry-b,.story-banner.story-rose .story-geometry-b{border-radius:50% 10% 50% 10%;transform:rotate(-20deg);width:22%;right:4%}
+.story-banner.story-olive .story-geometry-a,.story-banner.story-sage .story-geometry-a{border-radius:65% 15% 65% 15%;transform:rotate(-30deg);width:30%;left:0}
+.story-banner.story-olive .story-geometry-b,.story-banner.story-sage .story-geometry-b{border-radius:80% 10% 80% 10%;transform:rotate(28deg)}
+.story-banner.story-amber .story-geometry-a,.story-banner.story-gold .story-geometry-a{border-radius:18px 65px 18px 65px;transform:rotate(-19deg);width:31%}
+.story-banner.story-plum .story-geometry-a,.story-banner.story-indigo .story-geometry-a{border-radius:30%;transform:rotate(18deg);width:27%;box-shadow:0 0 0 13px color-mix(in srgb,var(--story-ring),transparent 82%)}
+.story-banner.story-plum .story-geometry-b,.story-banner.story-indigo .story-geometry-b{border-radius:50%;border-style:dashed;transform:rotate(13deg)}
+.story-banner.story-teal .story-geometry-a{border-radius:50%;width:29%;box-shadow:0 0 0 12px color-mix(in srgb,var(--story-ring),transparent 79%)}
+.story-banner.story-teal .story-geometry-b{border-radius:12% 66% 12% 66%;transform:rotate(25deg)}
+.story-banner .story-floating{z-index:3}
+.story-banner .story-mini-badge{z-index:4}
+@media(max-width:720px){.story-banner .story-geometry-a{width:34%;top:14%}.story-banner .story-geometry-b{width:19%;right:3%}.story-banner .story-geometry-c{opacity:.22}}
+@media(prefers-reduced-motion:reduce){.story-banner .story-geometry{animation:none!important}}
 </style></head>
 <body>
 <header class="site-header"><div class="wrap header-inner">
@@ -4311,7 +4332,7 @@ function storyBanner(kind){
  return '<section class="story-banner story-'+kind+' story-'+x.tone+' story-'+x.layout+'" aria-label="'+escapeHtml(x.title)+'">'+
  '<div class="story-copy"><span class="story-kicker">'+escapeHtml(x.kicker)+'</span><h2>'+escapeHtml(x.title)+'</h2><p>'+escapeHtml(x.desc)+'</p><button type="button" '+action+'>'+escapeHtml(x.cta)+' <span aria-hidden="true">←</span></button></div>'+
  '<div class="story-visual" aria-hidden="true"><div class="story-hero-halo"></div><div class="story-hero-disc"></div>'+
- '<div class="story-soft-glow"></div><div class="story-mini-badge">'+escapeHtml(x.kicker)+'</div>'+
+ '<div class="story-soft-glow"></div><div class="story-geometry story-geometry-a"></div><div class="story-geometry story-geometry-b"></div><div class="story-geometry story-geometry-c"></div><div class="story-mini-badge">'+escapeHtml(x.kicker)+'</div>'+
  '<img class="story-floating story-floating-main" src="'+src(assets[0])+'" alt="" loading="lazy" decoding="async">'+
  '<img class="story-floating story-floating-second" src="'+src(assets[1])+'" alt="" loading="lazy" decoding="async">'+
  '<img class="story-floating story-floating-third" src="'+src(assets[2])+'" alt="" loading="lazy" decoding="async"></div></section>';
