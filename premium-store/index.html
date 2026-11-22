@@ -3746,43 +3746,40 @@ body :not(#__borderless_reset_a):not(#__borderless_reset_b):not(#__borderless_re
 @media(max-width:540px){.order-review-head{flex-wrap:wrap}.order-review-item{column-gap:8px}.order-review-totals{padding:12px}}
 .checkout-side>.order-review-items{margin:12px 0;padding:10px 12px}.checkout-side>.order-review-totals{margin:12px 0;padding:12px}.checkout-side>.order-review-items .order-review-item{padding:9px 0}.checkout-side>.order-review-items .order-review-head{align-items:flex-start}.checkout-side>.order-review-totals .order-review-final{flex-wrap:wrap}@media(max-width:540px){.checkout-side>.order-review-items,.checkout-side>.order-review-totals{padding:12px}}
 
-/* Refined low-glare palette for storefront banners: muted warmth and balanced contrast. */
-#heroSlider .hero-slide{
- background:linear-gradient(112deg,var(--banner-base,#E9E2DB),var(--banner-shade,#DFD7CF))!important;
+/* Each homepage banner inherits the distinct palette of a corresponding HERO slide.
+   Source values are the same --bg, --ring, --disc and --ink used in the slider. */
+#heroSlider .hero-slide{background:var(--bg,#FFFBF5)!important}
+/* Source: hero-breakfast (golden honey). */
+.majalis-promo.breakfast{--tint:#FFFBF3;--banner-ring:#FFC85A;--banner-disc:#F48B42;--accent:#66381C}
+/* Source: hero-grills (warm coral). */
+.majalis-promo.grills{--tint:#FFF9F3;--banner-ring:#F7B45D;--banner-disc:#E76D44;--accent:#612D1F}
+/* Source: hero-coffee (coffee and cinnamon). */
+.majalis-promo.coffee{--tint:#FFFBF5;--banner-ring:#E8C096;--banner-disc:#9A674C;--accent:#492D22}
+/* Source: hero-family (rose and soft peach). */
+.majalis-promo.family{--tint:#FFF9F5;--banner-ring:#F4C6A2;--banner-disc:#DE85B3;--accent:#5D3440}
+.majalis-promo{background:linear-gradient(112deg,var(--tint),color-mix(in srgb,var(--banner-ring),var(--tint) 78%))!important}
+.majalis-promo:before{background:color-mix(in srgb,var(--banner-ring),transparent 76%)!important}
+.majalis-promo .majalis-promo-circle{background:color-mix(in srgb,var(--banner-disc),white 82%)!important}
+.majalis-promo-copy h2{color:#292B30!important}
+.majalis-promo-copy p{color:#555B64!important}
+.majalis-promo-copy button{background:#FFFFFFDC!important;color:var(--accent)!important}
+/* Experience cards: three DIFFERENT hero palette sources.
+   Private <- hero-sessions; Matches <- hero-matches; Gaming <- hero-playstation. */
+.home-experience-card.experience-private{
+ --experience-accent:#B78ED5;
+ background:linear-gradient(115deg,#FFF9F4,color-mix(in srgb,#DDB796 28%,#FFF9F4))!important;
 }
-#heroSlider .hero-slide.hero-breakfast,
-#heroSlider .hero-slide.hero-southern,
-#heroSlider .hero-slide.hero-grills,
-#heroSlider .hero-slide.hero-appetizers,
-#heroSlider .hero-slide.hero-sandwiches{--banner-base:#EAE1D5;--banner-shade:#DED1C1;--ring:#C3A77B;--disc:#A98062;--hot:#925F50}
-#heroSlider .hero-slide.hero-salads,
-#heroSlider .hero-slide.hero-matches{--banner-base:#DFE8DF;--banner-shade:#D0DFD4;--ring:#A3B99B;--disc:#668D79;--hot:#567965}
-#heroSlider .hero-slide.hero-family,
-#heroSlider .hero-slide.hero-sessions,
-#heroSlider .hero-slide.hero-dessert{--banner-base:#E9DEDF;--banner-shade:#DCCED3;--ring:#C5A9A8;--disc:#A47A86;--hot:#956575}
-#heroSlider .hero-slide.hero-playstation,
-#heroSlider .hero-slide.hero-coffee{--banner-base:#E4E0E9;--banner-shade:#D7D0E0;--ring:#AFA4C0;--disc:#837597;--hot:#6F668C}
-#heroSlider .hero-slide.hero-drinks,
-#heroSlider .hero-slide.hero-offers{--banner-base:#E0E8E9;--banner-shade:#D1DFE1;--ring:#A3C0C4;--disc:#739CA3;--hot:#597F89}
-#heroSlider .hero-slide .discovery-copy h1 em{background:#AA8878!important;color:#241F1E!important}
-#heroSlider .hero-slide.hero-playstation .discovery-copy h1 em,
-#heroSlider .hero-slide.hero-matches .discovery-copy h1 em,
-#heroSlider .hero-slide.hero-coffee .discovery-copy h1 em{color:#241F1E!important}
-.majalis-promo{--tint:#E6E0DA;--accent:#675C53;background:var(--tint)!important}
-.majalis-promo.breakfast{--tint:#E8DED1;--accent:#765B43}
-.majalis-promo.grills{--tint:#E8DAD6;--accent:#865F59}
-.majalis-promo.coffee{--tint:#E3DCE5;--accent:#735F79}
-.majalis-promo.family{--tint:#DCE5E8;--accent:#536E7B}
-.majalis-promo:before{background:#FFFFFF25!important}
-.majalis-promo-copy h2{color:#292A30!important}
-.majalis-promo-copy p{color:#565A62!important}
-.majalis-promo-copy button{background:#F5F0EA!important;color:#3A3532!important}
-.home-experience-card.experience-private{background:linear-gradient(115deg,#E9DDDF,#E1D4D8)!important}
-.home-experience-card.experience-matches{background:linear-gradient(115deg,#DDE8E0,#D3E0D8)!important}
-.home-experience-card.experience-games{background:linear-gradient(115deg,#E3DEEB,#D9D2E2)!important}
-.home-experience-card>strong{color:#252A32!important}
-.home-experience-card .experience-label,.home-experience-card small{color:#525B66!important}
-.home-experience-card:hover{filter:brightness(.97)!important}
+.home-experience-card.experience-matches{
+ --experience-accent:#24B78B;
+ background:linear-gradient(115deg,#F8FFF9,color-mix(in srgb,#D3EE60 21%,#F8FFF9))!important;
+}
+.home-experience-card.experience-games{
+ --experience-accent:#4B65DA;
+ background:linear-gradient(115deg,#FAF8FF,color-mix(in srgb,#A998F7 29%,#FAF8FF))!important;
+}
+.home-experience-card>strong{color:#292B32!important}
+.home-experience-card .experience-label,.home-experience-card small{color:#535B65!important}
+.home-experience-card:hover{filter:brightness(.985)!important}
 </style></head>
 <body>
 <header class="site-header"><div class="wrap header-inner">
