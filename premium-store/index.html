@@ -4434,6 +4434,60 @@ body :not(#__borderless_reset_a):not(#__borderless_reset_b):not(#__borderless_re
  .story-banner{min-height:165px!important}
  .majalis-promo{min-height:135px!important}
 }
+
+/* Keep full banner descriptions on desktop, simplify campaigns on phones/tablets only. */
+@media (max-width:1024px){
+ #heroSlider .hero-slide .discovery-copy > p,
+ #heroSlider .hero-slide .discovery-labels,
+ .story-banner .story-copy > p,
+ .story-banner .story-editorial-signature,
+ .majalis-promo .majalis-promo-copy > p,
+ .editorial-banner .editorial-copy > p,
+ .promo-box > p,
+ .menu-qr-banner .menu-banner-message > p,
+ .offers-masthead > div > p,
+ .hs-bundle-panel > div:first-child > p{
+   display:none!important;
+ }
+ #heroSlider .hero-slide .discovery-copy,
+ .story-banner .story-copy,
+ .majalis-promo .majalis-promo-copy,
+ .editorial-banner .editorial-copy{
+   justify-content:center!important;
+ }
+ #heroSlider .hero-slide .discovery-copy > h1,
+ .story-banner .story-copy > h2,
+ .majalis-promo .majalis-promo-copy > h2,
+ .editorial-banner .editorial-copy > h2{
+   margin-block:4px 8px!important;
+ }
+ .promo-box > h3{margin-block:5px 9px!important}
+ .menu-qr-banner .menu-banner-message > h2{margin-block:4px!important}
+}
+@media (min-width:601px) and (max-width:1024px){
+ #heroSlider.hero-slider{height:clamp(248px,29vw,305px)!important;max-height:305px!important}
+ .story-banner{min-height:clamp(190px,22vw,235px)!important}
+ .majalis-promo{min-height:170px!important}
+ .editorial-banner{min-height:175px!important}
+ .promo-box{min-height:132px!important}
+ .offers-masthead{min-height:0!important}
+}
+@media (max-width:600px){
+ #heroSlider.hero-slider{height:clamp(180px,51vw,225px)!important;max-height:225px!important}
+ #heroSlider .hero-slide .discovery-copy{gap:3px!important}
+ #heroSlider .hero-slide .discovery-actions{margin-top:4px!important}
+ .story-banner{min-height:clamp(148px,42vw,180px)!important}
+ .story-banner .story-copy{gap:4px!important}
+ .majalis-promo{min-height:clamp(120px,35vw,150px)!important}
+ .editorial-banner .editorial-copy{padding-block:12px!important}
+ .promo-box{min-height:clamp(104px,30vw,132px)!important}
+ .offers-masthead{padding-block:14px!important}
+}
+@media (max-width:360px){
+ #heroSlider.hero-slider{height:180px!important}
+ .story-banner{min-height:148px!important}
+ .majalis-promo{min-height:120px!important}
+}
 </style></head>
 <body>
 <header class="site-header"><div class="wrap header-inner">
