@@ -4588,6 +4588,45 @@ body :not(#__borderless_reset_a):not(#__borderless_reset_b):not(#__borderless_re
    top:90%!important;height:84%!important;
  }
 }
+
+/* Recreate desktop's layered circles behind the phone on tablets and mobiles.
+   Retain the lowered mock phone; remove the 90%-hidden-circle override. */
+@media(max-width:1024px){
+ #app.page #heroSlider .reference-hero-ring{
+   position:absolute!important;
+   width:108%!important;max-width:none!important;
+   height:auto!important;aspect-ratio:1!important;
+   left:-4%!important;right:auto!important;
+   top:auto!important;bottom:-42%!important;
+   transform:none!important;
+   border-width:clamp(13px,3.8vw,36px)!important;
+   border-color:var(--ring,#ffdf00)!important;
+   background:var(--disc,#20c1ee)!important;
+   border-radius:50%!important;
+   z-index:0!important;
+ }
+ #app.page #heroSlider .reference-hero-disc{
+   position:absolute!important;
+   width:72%!important;max-width:none!important;
+   height:auto!important;aspect-ratio:1!important;
+   left:14%!important;right:auto!important;
+   top:auto!important;bottom:-30%!important;
+   transform:none!important;border-radius:50%!important;
+   z-index:1!important;
+ }
+ #app.page #heroSlider .reference-hero-phone{z-index:4!important}
+}
+@media(max-width:600px){
+ #app.page #heroSlider .reference-hero-ring{
+   width:118%!important;max-width:none!important;
+   left:-9%!important;bottom:-40%!important;
+   border-width:clamp(11px,3.5vw,18px)!important;
+ }
+ #app.page #heroSlider .reference-hero-disc{
+   width:76%!important;max-width:none!important;
+   left:12%!important;bottom:-28%!important;
+ }
+}
 </style></head>
 <body>
 <header class="site-header"><div class="wrap header-inner">
