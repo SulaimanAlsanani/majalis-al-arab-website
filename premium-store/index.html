@@ -4547,6 +4547,90 @@ body :not(#__borderless_reset_a):not(#__borderless_reset_b):not(#__borderless_re
   .story-banner{min-height:132px!important}
   .majalis-promo{min-height:108px!important}
 }
+
+/* Preserve the desktop hero's full-width horizontal composition at narrow widths.
+   Scale the same two visual zones instead of converting to a tall/cropped mobile banner. */
+@media(max-width:1024px){
+ #app.page #heroSlider.hero-slider{
+   display:block!important;width:100%!important;max-width:100%!important;
+   min-width:0!important;box-sizing:border-box!important;
+   margin-inline:0!important;overflow:hidden!important;
+   aspect-ratio:auto!important;
+ }
+ #app.page #heroSlider .hero-track{display:flex!important;width:100%!important;height:100%!important;min-width:0!important}
+ #app.page #heroSlider .hero-slide{
+   position:relative!important;display:block!important;
+   flex:0 0 100%!important;width:100%!important;min-width:0!important;
+   height:100%!important;min-height:0!important;overflow:hidden!important;
+ }
+ #app.page #heroSlider .hero-slide .discovery-copy{
+   position:absolute!important;inset-block:0!important;inset-inline-start:0!important;inset-inline-end:auto!important;
+   box-sizing:border-box!important;width:55%!important;max-width:55%!important;
+   min-width:0!important;height:100%!important;display:flex!important;flex-direction:column!important;
+   justify-content:center!important;align-items:flex-start!important;overflow:hidden!important;
+   z-index:5!important;
+ }
+ #app.page #heroSlider .hero-slide .discovery-visual{
+   position:absolute!important;inset-block:0!important;inset-inline-end:0!important;inset-inline-start:auto!important;
+   display:block!important;width:45%!important;max-width:45%!important;
+   min-width:0!important;height:100%!important;min-height:0!important;
+   overflow:hidden!important;opacity:1!important;
+ }
+ #app.page #heroSlider .reference-hero-art{position:absolute!important;inset:0!important;width:100%!important;height:100%!important;overflow:hidden!important}
+ #app.page #heroSlider .reference-hero-phone{
+   box-sizing:border-box!important;width:min(64%,155px)!important;
+   height:87%!important;top:16%!important;left:50%!important;
+   transform:translateX(-50%)!important;
+   max-width:calc(100% - 8px)!important;
+   min-width:0!important;
+ }
+ #app.page #heroSlider .reference-food-float{max-width:32%!important;max-height:45%!important;object-fit:contain!important}
+}
+@media(min-width:601px) and (max-width:1024px){
+ #app.page #heroSlider.hero-slider{height:clamp(230px,29vw,315px)!important;max-height:315px!important}
+ #app.page #heroSlider .hero-slide .discovery-copy{padding:clamp(14px,2vw,25px)!important}
+ #app.page #heroSlider .hero-slide .discovery-copy h1{font-size:clamp(20px,3vw,31px)!important}
+}
+@media(max-width:600px){
+ #app.page #heroSlider.hero-slider{
+   height:clamp(138px,43vw,205px)!important;max-height:205px!important;
+   border-radius:clamp(10px,2.7vw,15px)!important;
+ }
+ #app.page #heroSlider .hero-slide .discovery-copy{
+   width:57%!important;max-width:57%!important;
+   padding:clamp(7px,2vw,13px)!important;gap:2px!important;
+ }
+ #app.page #heroSlider .hero-slide .discovery-visual{width:43%!important;max-width:43%!important}
+ #app.page #heroSlider .hero-slide .discovery-copy h1{
+   font-size:clamp(14px,4vw,21px)!important;
+   line-height:1.19!important;margin:2px 0!important;
+   overflow-wrap:normal!important;word-break:normal!important;
+ }
+ #app.page #heroSlider .hero-slide .discovery-kicker{font-size:clamp(8px,2.2vw,10px)!important}
+ #app.page #heroSlider .reference-hero-phone{
+   width:min(63%,105px)!important;height:83%!important;
+   top:16%!important;left:50%!important;
+   padding:2px!important;border-width:2px!important;
+   border-radius:clamp(11px,2.6vw,17px)!important;
+ }
+ #app.page #heroSlider .reference-hero-screen{box-sizing:border-box!important;padding:3px!important;border-radius:10px!important;overflow:hidden!important}
+ #app.page #heroSlider .reference-phone-status{height:10px!important;font-size:5px!important;padding:0 2px!important}
+ #app.page #heroSlider .reference-phone-notch{height:4px!important}
+ #app.page #heroSlider .reference-phone-top{font-size:6px!important;padding:1px 2px!important}
+ #app.page #heroSlider .reference-phone-search{font-size:5px!important;padding:3px!important;margin:1px 0!important}
+ #app.page #heroSlider .reference-phone-feature{height:28%!important;min-height:0!important;flex-shrink:0!important}
+ #app.page #heroSlider .reference-phone-feature strong{font-size:5px!important;padding:1px 2px!important;bottom:2px!important}
+ #app.page #heroSlider .reference-phone-caption{font-size:6px!important;padding:2px 1px!important}
+ #app.page #heroSlider .reference-phone-grid{gap:2px!important;min-height:0!important}
+ #app.page #heroSlider .reference-phone-grid span{height:clamp(18px,5.1vw,30px)!important}
+ #app.page #heroSlider .reference-phone-navbar{padding:2px!important;margin-top:auto!important}
+ #app.page #heroSlider .reference-food-float{width:clamp(27px,7vw,42px)!important}
+}
+@media(max-width:360px){
+ #app.page #heroSlider.hero-slider{height:clamp(136px,43vw,155px)!important}
+ #app.page #heroSlider .hero-slide .discovery-copy h1{font-size:clamp(13px,3.9vw,15px)!important}
+ #app.page #heroSlider .reference-hero-phone{width:min(62%,90px)!important;height:81%!important}
+}
 </style></head>
 <body>
 <header class="site-header"><div class="wrap header-inner">
