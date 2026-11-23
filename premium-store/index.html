@@ -4072,6 +4072,24 @@ body :not(#__borderless_reset_a):not(#__borderless_reset_b):not(#__borderless_re
 .hs-search-categories{display:flex;gap:6px;flex-wrap:wrap;padding:8px}.hs-search-categories button{padding:7px 10px;font-size:11px;border:0;border-radius:8px;background:#F4F0EB;color:#4F4742;cursor:pointer}
 @media(max-width:950px){.hs-mood-grid{grid-template-columns:repeat(3,minmax(0,1fr))}.hs-complementary-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.hs-operations{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media(max-width:650px){.hs-service-panel{padding:15px}.hs-mood-grid{gap:8px}.hs-mood-grid button{padding:10px 5px}.hs-mood-grid button>span{height:70px}.hs-mood-grid strong{font-size:11px}.hs-complementary-grid,.hs-operations{grid-template-columns:1fr}.hs-bundle-panel{display:block}.hs-bundle-actions{margin-top:17px}.hs-visit-grid{gap:7px}.hs-visit-grid button{padding:9px 5px}.hs-visit-grid img{height:85px}.hs-visit-grid strong{font-size:11px}.hs-visit-grid small{font-size:9px}.hs-quick-dialog{grid-template-columns:1fr;max-height:90vh;overflow-y:auto;padding:18px}.hs-quick-image{min-height:170px}.hs-quick-image img{height:160px}.hs-quick-copy h2{font-size:20px}.hs-service-options button{padding:9px 12px;font-size:11px}.hs-merch-heading h2{font-size:21px}}
+
+/* Product quick views and honest editorial previews. */
+.product-card-image-wrap{position:relative}
+.hs-card-quick{position:absolute;z-index:4;bottom:10px;left:10px;border:0;border-radius:999px;padding:7px 11px;font-size:10px;font-weight:750;cursor:pointer;color:#514840;background:#FFFFFFE9;box-shadow:0 4px 13px #25201E16}
+.hs-visit-story{display:grid;grid-template-columns:1.2fr 1fr;gap:14px}
+.hs-visit-food{display:flex;gap:17px;align-items:center;padding:20px;border-radius:19px;background:#F1E8DE;min-width:0}
+.hs-visit-food img{width:160px;height:145px;object-fit:contain;flex-shrink:0}
+.hs-visit-food>div,.hs-visit-proof{display:flex;flex-direction:column;gap:10px;align-items:flex-start}
+.hs-visit-food strong,.hs-visit-proof strong{font-size:17px;color:#383032}
+.hs-visit-food small,.hs-visit-proof p{font-size:12px;line-height:1.8;color:#6C6665;margin:0}
+.hs-visit-food button,.hs-visit-proof button,.hs-future-capabilities button{border:0;background:#FFFDFB;color:#605045;border-radius:999px;padding:9px 14px;font-size:12px;font-weight:750;cursor:pointer}
+.hs-visit-proof{background:#F3F3F1;border-radius:19px;padding:23px;justify-content:center}
+.hs-future-capabilities{display:grid;grid-template-columns:1fr 1fr;gap:13px;margin:20px 0 32px}
+.hs-future-capabilities>div{display:flex;flex-direction:column;align-items:flex-start;gap:9px;background:#F3F4F4;border-radius:17px;padding:19px}
+.hs-future-capabilities strong{font-size:14px}
+.hs-future-capabilities p{font-size:12px;color:#6C696B;line-height:1.75;margin:0;flex:1}
+.hs-future-capabilities button:disabled{cursor:not-allowed;opacity:.6}
+@media(max-width:690px){.hs-visit-story,.hs-future-capabilities{grid-template-columns:1fr}.hs-visit-food img{width:120px;height:110px}.hs-card-quick{font-size:9px;padding:5px 8px}.hs-visit-food strong,.hs-visit-proof strong{font-size:14px}}
 </style></head>
 <body>
 <header class="site-header"><div class="wrap header-inner">
@@ -4280,7 +4298,7 @@ function card(p){
  const details=name+'، '+price+(p.demo?'، عرض تجريبي':'')+(available?'':'، غير متوفر');
  const saved=state.favorites.includes(p.id);
  return '<article class="product-card"><div class="product-card-image-wrap">'+
-  '<button type="button" class="card-photo" data-product="'+p.id+'" aria-label="تفاصيل '+details+'" title="'+details+'">'+imgTag(p,'',false)+'</button></div>'+
+  '<button type="button" class="card-photo" data-product="'+p.id+'" aria-label="تفاصيل '+details+'" title="'+details+'">'+imgTag(p,'',false)+'</button><button type="button" class="hs-card-quick" data-quick-view="'+p.id+'" aria-label="معاينة سريعة: '+name+'">نظرة سريعة</button></div>'+
   '<div class="card-body"><div class="card-name-line"><h3><button type="button" class="card-title" data-product="'+p.id+'">'+name+'</button></h3>'+
   '<button type="button" class="card-favorite-toggle" data-fav="'+p.id+'" aria-pressed="'+saved+'" aria-label="'+(saved?'إزالة ':'إضافة ')+name+(saved?' من المفضلة':' إلى المفضلة')+'" title="'+(saved?'إزالة من المفضلة':'إضافة إلى المفضلة')+'">'+CARD_HEART+'</button></div>'+
   '<div class="card-price-line"><div class="card-copy"><span class="card-price">'+price+'</span>'+(available?'':'<span class="card-stock">غير متوفر</span>')+'</div>'+
@@ -4555,7 +4573,8 @@ function homeCurated(){const real=PRODUCTS.filter(p=>p.available!==false&&!p.dem
 function homeComplementary(){const categories=['المقبلات','المشروبات','الحلا'];const ids=categories.flatMap(cat=>PRODUCTS.filter(p=>p.category===cat&&p.available!==false).slice(0,3));return '<section class="hs-complementary" aria-label="إضافات تكمل طلبك"><div class="hs-merch-heading"><div><span>أفكار تجمع صنفين متناسقين</span><h2>تضبط مع بعض</h2><p>مقبلات مع الأطباق، أو مشروب وحلا. الأسعار لكل صنف منفصلًا.</p></div></div><div class="hs-complementary-grid">'+ids.slice(0,6).map(p=>'<div class="hs-mini-food"><button type="button" data-quick-view="'+p.id+'" aria-label="معاينة '+escapeHtml(p.name)+'">'+imgTag(p,'',false)+'</button><div><strong>'+escapeHtml(p.name)+'</strong><small>'+money(p.price)+(p.demo?' · تجريبي':'')+'</small></div><button type="button" class="hs-mini-add" data-safe-add="'+p.id+'" aria-label="إضافة '+escapeHtml(p.name)+'">＋</button></div>').join('')+'</div></section>'}
 function homeBundles(){return '<section class="hs-bundle-panel" aria-label="كوّن وجبتك"><div><span>وجبتك على اختيارك</span><h2>كوّن وجبتك المتكاملة</h2><p>ابدأ بطبق رئيسي، ثم اختر مشروبك وإضافاتك من القائمة. لا توجد خصومات أو أسعار باقات معتمدة بعد.</p></div><div class="hs-bundle-actions"><button type="button" data-category="المشويات والأطباق الرئيسية">الأطباق الرئيسية ←</button><button type="button" data-category="المشروبات">اختر المشروب ←</button><button type="button" data-category="المقبلات">أضف المقبلات ←</button></div></section>'}
 function homePersonalized(){const viewed=recentlyViewed.map(productById).filter(p=>p&&p.available!==false).slice(0,6);const favorites=PRODUCTS.filter(p=>state.favorites.includes(p.id)&&p.available!==false).slice(0,6);let pieces='';if(viewed.length)pieces+=productShowcase('شاهدتها مؤخرًا','ارجع لأصناف تصفحتها من قبل',viewed.map(p=>p.id),'/menu','recent');if(favorites.length)pieces+=productShowcase('اختياراتك المحفوظة','أصنافك المفضلة في مكان واحد',favorites.map(p=>p.id),'/favorites','saved');return pieces?'<section class="hs-personalized" aria-label="اختيارات محفوظة">'+pieces+'</section>':''}
-function homeVisitGallery(){return '<section class="hs-visit" aria-label="تعرف على تجارب مجالس العرب"><div class="hs-merch-heading"><div><span>اكتشف أجواء المجالس</span><h2>من الجلسة إلى المائدة</h2><p>تصورات بصرية للتجارب؛ للاستفسار عن التفاصيل والتوفر تواصل مع الفرع.</p></div></div><div class="hs-visit-grid"><button type="button" data-contact-seating><img src="assets/experiences/sessions.png" alt="تصور لجلسة عربية" loading="lazy"><strong>الجلسات الخاصة</strong><small>استفسر عن التوفر ←</small></button><button type="button" data-contact-seating><img src="assets/experiences/matches-player.png" alt="لاعب كرة قدم" loading="lazy"><strong>متابعة المباريات</strong><small>استفسر عن التفاصيل ←</small></button><button type="button" data-contact-seating><img src="assets/experiences/gaming.png" alt="أجهزة ألعاب" loading="lazy"><strong>أجواء البلايستيشن</strong><small>استفسر عن الأجهزة ←</small></button></div><p class="hs-visit-note">صور توضيحية وليست توثيقًا مصورًا للفرع. ستُضاف صور المطعم والمطبخ الحقيقية عند توفرها.</p></section>'}
+function homeVisitGallery(){return '<section class="hs-visit" aria-label="قصة المائدة والمكان"><div class="hs-merch-heading"><div><span>من مائدة مجالس العرب</span><h2>وراء كل سفرة حكاية</h2><p>نختار ما يعبر عن أجواء الطعام والجلسات؛ الصور هنا توضيحية حتى نشر الصور الرسمية.</p></div></div><div class="hs-visit-story"><div class="hs-visit-food"><img src="assets/categories/areeka-masoob.png" alt="طبق عريكة توضيحي" loading="lazy"><div><strong>نكهات جنوبية أصيلة</strong><small>تعرف على الأطباق من القائمة التجريبية</small><button type="button" data-category="العريكة والمعصوب">استكشف النكهات ←</button></div></div><div class="hs-visit-proof"><strong>صور الفرع والمطبخ وآراء العملاء</strong><p>ستُنشر صور حقيقية للموقع وطريقة التحضير وتقييمات موثقة عند توفرها واعتمادها. لا نستخدم صورًا أو تقييمات وهمية على أنها حقيقية.</p><button type="button" data-contact-seating>استفسر عن زيارة المكان ←</button></div></div></section>'}
+function homeFutureCapabilities(){return '<section class="hs-future-capabilities" aria-label="خيارات متقدمة بعد الربط"><div><strong>تنبيهات العروض</strong><p>لا توجد إشعارات مفعلة أو رسائل تسويقية دون موافقة. تتاح الاشتراكات عند ربط النظام وتفعيل إعدادات الخصوصية.</p><button type="button" disabled aria-disabled="true">الاشتراك غير متاح بعد</button></div><div><strong>الطلب المعتاد والتجهيز</strong><p>إعادة الطلب السابق، أسعار الباقات المعتمدة، أوقات الذروة، وتوفر الفرع تتطلب بيانات تشغيلية حقيقية. بعض الواجهات قابلة للمعاينة من «طلباتي».</p><button type="button" data-go="/orders">عرض تجربة الطلبات ←</button></div></section>'}
 function homeOperationalInfo(){return '<section class="hs-operations" aria-label="معلومات الطلب والفروع"><div><strong>الفروع وساعات العمل</strong><p>البيانات المعتمدة للفرع وساعات العمل لم تُربط بعد. اسأل عبر التواصل الرسمي.</p><button data-contact-seating>استفسر عن الفرع ←</button></div><div><strong>توفر الأصناف والتجهيز</strong><p>الحالة الفعلية للمنتجات ومدة التجهيز تعتمد على بيانات الفرع عند تفعيل الطلبات.</p><button data-go="/menu">تصفح القائمة التجريبية ←</button></div><div><strong>طلباتي ومتابعتها</strong><p>واجهة الطلبات موجودة للمعاينة؛ لا توجد طلبات فعلية ولا تتبع مباشر حاليًا.</p><button data-go="/orders">معاينة تتبع الطلب ←</button></div></section>'}
 function homeFaq(){const rows=[['هل يمكنني طلب الطعام الآن؟','المتجر حاليًا معاينة تفاعلية فقط. الدفع وإرسال الطلب الحقيقي غير مفعّلين حتى اكتمال الربط.'],['كيف أعرف توفر الجلسات؟','تواصل مع الفرع عبر القنوات الرسمية لتأكيد المواعيد وتوفر الجلسات والمباريات والألعاب.'],['هل الأسعار والعروض معتمدة؟','بعض الأصناف والأسعار والعروض تجريبية؛ لا تعتمد عليها للشراء قبل نشر القائمة الرسمية.'],['كيف أعرف المكونات والحساسية؟','هذه المعلومات غير معتمدة لكل الأصناف بعد. عند وجود حساسية غذائية، يجب التأكد مباشرة من المطعم قبل الطلب.']];return '<section class="hs-faq" aria-label="أسئلة شائعة"><div class="hs-merch-heading"><div><span>قبل طلبك</span><h2>أسئلة شائعة</h2></div><button data-go="/help">المساعدة ←</button></div><div class="hs-faq-items">'+rows.map(([q,a])=>'<details><summary>'+q+'</summary><p>'+a+'</p></details>').join('')+'</div></section>'}
 function quickViewProduct(id){const p=productById(id);if(!p)return;const existing=document.getElementById('hsQuickView');if(existing)existing.remove();const overlay=document.createElement('div');overlay.className='hs-quick-overlay';overlay.id='hsQuickView';overlay.setAttribute('role','presentation');overlay.innerHTML='<section role="dialog" aria-modal="true" aria-labelledby="hsQuickTitle" class="hs-quick-dialog"><button type="button" class="hs-quick-close" data-close-quick aria-label="إغلاق">×</button><div class="hs-quick-image">'+imgTag(p,'',true)+'</div><div class="hs-quick-copy"><span>'+escapeHtml(p.category)+(p.demo?' · بيانات تجريبية':'')+'</span><h2 id="hsQuickTitle">'+escapeHtml(p.name)+'</h2><strong>'+money(p.price)+'</strong><p>معاينة الصنف. تفاصيل المكونات والحساسية تتطلب بيانات معتمدة من المطعم.</p><div class="hs-quick-actions"><button type="button" data-product="'+p.id+'">التفاصيل والتخصيص ←</button><button type="button" data-safe-add="'+p.id+'">أضف للسلة ＋</button></div></div></section>';overlay.addEventListener('click',e=>{if(e.target===overlay)overlay.remove()});document.body.append(overlay);overlay.querySelector('[data-close-quick]')?.focus()}
@@ -4565,10 +4584,10 @@ function renderHome(){
  el('app').innerHTML=
  homeBanner()+
  featureCategories()+
- homeServicePicker()+
  /* One prominent lifestyle banner immediately below the categories. */
  storyBanner('experiences')+
  homeExperiences()+
+ homeServicePicker()+
  homeSectionLinks()+
  homeMoodExplorer()+
  homeCurated()+
@@ -4603,6 +4622,7 @@ function renderHome(){
  homePersonalized()+
  homeVisitGallery()+
  homeOperationalInfo()+
+ homeFutureCapabilities()+
  homeFaq()+
  homeTrustStrip()+homeFinalActions()+homepageDisclosure();
 }
