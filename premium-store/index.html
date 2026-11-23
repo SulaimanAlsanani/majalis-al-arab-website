@@ -4230,6 +4230,14 @@ body :not(#__borderless_reset_a):not(#__borderless_reset_b):not(#__borderless_re
 @media (min-width:781px) and (max-height:600px){
   .hs-menu-layout .side-cart{top:76px!important;max-height:calc(100dvh - 88px)}
 }
+
+/* Ensure sticky cart tracks the page scroll, not an accidental body scroll container. */
+@media (min-width:781px){
+  html{overflow-x:clip!important;overflow-y:visible!important}
+  body{overflow-x:clip!important;overflow-y:visible!important}
+  #app.page,.hs-menu-page,.hs-menu-layout{overflow:visible!important;contain:none!important}
+  .hs-menu-layout .side-cart{position:sticky!important;top:86px!important;align-self:start!important}
+}
 </style></head>
 <body>
 <header class="site-header"><div class="wrap header-inner">
