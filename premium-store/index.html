@@ -4238,6 +4238,41 @@ body :not(#__borderless_reset_a):not(#__borderless_reset_b):not(#__borderless_re
   #app.page,.hs-menu-page,.hs-menu-layout{overflow:visible!important;contain:none!important}
   .hs-menu-layout .side-cart{position:sticky!important;top:86px!important;align-self:start!important}
 }
+
+/* Menu UX update */
+@media(min-width:781px){
+ html,body{overflow-x:clip!important;overflow-y:visible!important}
+ #app.page,.hs-menu-page,.hs-menu-layout{overflow:visible!important;contain:none!important}
+ .hs-menu-layout{align-items:stretch!important;display:grid!important}
+ .hs-menu-layout #cartArea{position:sticky!important;top:80px!important;align-self:start!important;max-height:calc(100dvh - 90px);height:fit-content;display:flex!important;flex-direction:column;overflow:hidden!important;z-index:9}
+ #cartArea .cart-head,#cartArea .cart-footer{flex-shrink:0}
+ #cartArea .cart-lines{flex:1 1 auto;min-height:0;max-height:none;overflow-y:auto;overscroll-behavior:contain}
+ .hs-menu-page .hs-menu-tool-row{gap:8px!important;margin-bottom:12px!important}
+ .hs-menu-page .hs-menu-tool-row .catalog-search-field{height:42px!important;min-height:42px!important}
+}
+.card-quantity-slot,.hs-card-quantity{display:inline-flex;gap:5px;align-items:center;white-space:nowrap}
+.card-quantity-slot button{border:1px solid #e5e6e8;background:#f7f8fa;color:#253641;border-radius:8px;width:30px;height:30px;font-weight:800}
+.card-quantity-slot strong{font-size:12px;min-width:15px;text-align:center}
+.hs-menu-tags{display:flex;flex-wrap:wrap;align-items:center;gap:7px;margin:0 0 13px}
+.hs-menu-tags button{background:#fff;border:1px solid #e3e5e7;border-radius:50px;padding:7px 11px;font-size:11px;color:#27343f}
+.hs-menu-tags button.active{background:#27343f;color:#fff}
+.hs-menu-tags .hs-filter-count{font-size:11px;color:#727d85}
+.hs-menu-results-note{font-size:11px;color:#7b8690;margin:-3px 0 12px}
+.hs-quick-extras{border-top:1px solid #edf0f1;margin-top:12px;padding-top:11px}
+.hs-quick-extras h3{font-size:13px;margin:0 0 7px}
+.hs-quick-extras label{display:flex;align-items:center;gap:8px;margin:7px 0;font-size:12px}
+.hs-quick-extras label span{margin-inline-start:auto}
+.hs-quick-extras textarea{width:100%;min-height:55px;padding:8px;border:1px solid #e3e6e8;border-radius:8px;resize:vertical}
+.hs-quick-qty{display:flex;align-items:center;gap:12px;margin:9px 0}
+.hs-quick-qty button{background:#fff;border:1px solid #ddd;border-radius:9px;width:32px;height:32px}
+.hs-quick-copy{max-height:77dvh;overflow:auto}
+.hs-mobile-checkout{display:none}
+@media(max-width:780px){
+ .hs-mobile-checkout:not([hidden]){display:flex;position:fixed;bottom:66px;left:10px;right:10px;z-index:26;align-items:center;justify-content:space-between;gap:10px;background:#23343f;border-radius:13px;padding:10px 12px;color:#fff;box-shadow:0 7px 22px #0003}
+ .hs-mobile-checkout button{border:0;border-radius:9px;background:#ffda28;color:#222d33;padding:10px 13px;font-size:12px;font-weight:800}
+ .hs-mobile-checkout span{font-size:11px}.hs-mobile-checkout strong{display:block;font-size:13px}
+ body:has(.hs-mobile-checkout:not([hidden])) .page{padding-bottom:135px}
+}
 </style></head>
 <body>
 <header class="site-header"><div class="wrap header-inner">
@@ -4341,10 +4376,18 @@ const PREVIEW_PRODUCT_PHOTOS={
  1:'kibda',2:'kibda-cheese',3:'beef-salad',4:'chicken-salad',
  13:'areeka',14:'areeka',15:'areeka',16:'date-fatta'
 };
+
+function uniquePhotoPlaceholder(p){
+ const name=String(p.name||'صنف').slice(0,28).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&apos;'}[c]));
+ const colors=['#F4F5F6','#F2F5F1','#F8F3EE','#F1F4F8','#F8F6ED','#F4F1F8'];
+ const bg=colors[(Number(p.id)||0)%colors.length];
+ const svg='<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 420"><rect width="640" height="420" rx="28" fill="'+bg+'"/><circle cx="320" cy="165" r="106" fill="white" stroke="#dce1e3" stroke-width="5"/><circle cx="320" cy="165" r="82" fill="#edf0e9"/><path d="M260 170q60-68 120 0M266 191q53 41 109 0" fill="none" stroke="#bac8b0" stroke-width="14" stroke-linecap="round"/><text x="320" y="322" text-anchor="middle" direction="rtl" font-family="Tahoma,Arial" font-size="27" font-weight="bold" fill="#374550">'+name+'</text><text x="320" y="357" text-anchor="middle" direction="rtl" font-family="Tahoma,Arial" font-size="17" fill="#79858c">صورة الصنف قيد التوفير</text></svg>';
+ return 'data:image/svg+xml;charset=UTF-8,'+encodeURIComponent(svg);
+}
 function imgTag(p,className='',alt=true){
  const localPhoto=!approvedCatalog&&PREVIEW_PRODUCT_PHOTOS[p.id];
  const photo=p.imageUrl||(localPhoto?'assets/products/'+localPhoto+'.webp':'');
- const fallback=Object.hasOwn(CATEGORY_PLATE_IMAGES,p.category)?CATEGORY_PLATE_IMAGES[p.category]:'assets/categories/appetizers.png';
+ const fallback=uniquePhotoPlaceholder(p);
  const fallbackAlt=alt?'صورة توضيحية':'';
  return '<img class="'+className+(photo?'':' product-photo-illustrative')+'" src="'+escapeHtml(photo||fallback)+'"'+
   (photo?' data-fallback="'+fallback+'" data-fallback-alt="'+fallbackAlt+'"':'')+
@@ -4371,6 +4414,7 @@ function updateCounts(){
  if(favoritesCount)favoritesCount.textContent=state.favorites.length;
  const favoritesLink=el('headerFavorites');
  if(favoritesLink)favoritesLink.setAttribute('aria-label','فتح أصنافي المفضلة، '+state.favorites.length+' أصناف');
+ mobileCheckoutBar();
  const float=el('floatingOrder');
  if(float){
    float.hidden=!count();
@@ -4384,7 +4428,7 @@ const RECENTS_KEY='majalis_recent_product_ids_v1';
 let recentlyViewed=safeGet(RECENTS_KEY,[]).filter(id=>Number.isInteger(id)&&PRODUCTS.some(p=>p.id===id)).slice(0,8);
 function rememberViewed(id){recentlyViewed=[id,...recentlyViewed.filter(n=>n!==id)].slice(0,8);try{localStorage.setItem(RECENTS_KEY,JSON.stringify(recentlyViewed))}catch{}}
 function recentShowcase(){const choices=recentlyViewed.map(productById).filter(Boolean).slice(0,8);return choices.length?productShowcase('شاهدتها مؤخرًا','ارجع للأصناف التي شاهدتها',choices.map(p=>p.id),'/menu','recent'):''}
-function searchSuggestionMarkup(q){if(!q)return '';const matchingCategories=CATEGORIES.filter(n=>normalizeSearch(n).includes(normalizeSearch(q))).slice(0,3);const categoryResults=matchingCategories.length?'<div class="hs-search-categories">'+matchingCategories.map(cat=>'<button type="button" data-category="'+escapeHtml(cat)+'">فئة: '+escapeHtml(cat)+' ←</button>').join('')+'</div>':'';const list=PRODUCTS.filter(p=>p.name.includes(q)||p.category.includes(q)).slice(0,6);return categoryResults+'<div class="search-pop-head"><strong>نتائج سريعة</strong><span>'+list.length+(list.length===6?'+':'')+' نتائج مقترحة</span></div>'+(list.length?list.map(p=>'<button class="search-hit" data-product="'+p.id+'">'+imgTag(p)+'<span><strong>'+escapeHtml(p.name)+'</strong><small>'+escapeHtml(p.category)+(p.demo?' · تجريبي':'')+'</small></span><b>'+money(p.price)+'</b></button>').join(''):'<div class="search-no-results">لا توجد نتائج مطابقة، جرّب كلمة أخرى.</div>')+'<button class="search-all" data-search-all>عرض جميع نتائج البحث ←</button>'}
+function searchSuggestionMarkup(q){if(!q)return '';const matchingCategories=CATEGORIES.filter(n=>normalizeSearch(n).includes(normalizeSearch(q))).slice(0,3);const categoryResults=matchingCategories.length?'<div class="hs-search-categories">'+matchingCategories.map(cat=>'<button type="button" data-category="'+escapeHtml(cat)+'">فئة: '+escapeHtml(cat)+' ←</button>').join('')+'</div>':'';const nq=normalizeSearch(q);const list=PRODUCTS.filter(p=>normalizeSearch(p.name+' '+p.category).includes(nq)).slice(0,6);return categoryResults+'<div class="search-pop-head"><strong>نتائج سريعة</strong><span>'+list.length+(list.length===6?'+':'')+' نتائج مقترحة</span></div>'+(list.length?list.map(p=>'<button class="search-hit" data-product="'+p.id+'">'+imgTag(p)+'<span><strong>'+escapeHtml(p.name)+'</strong><small>'+escapeHtml(p.category)+(p.demo?' · تجريبي':'')+'</small></span><b>'+money(p.price)+'</b></button>').join(''):'<div class="search-no-results">لا توجد نتائج مطابقة، جرّب كلمة أخرى.</div>')+'<button class="search-all" data-search-all>عرض جميع نتائج البحث ←</button>'}
 function updateSuggestions(){const panel=el('searchSuggestions'),q=el('globalSearch')?.value.trim()||'';panel.hidden=!q;panel.innerHTML=q?searchSuggestionMarkup(q):''}
 
 function addItem(id,qty=1,note=''){
@@ -4398,7 +4442,8 @@ function addItem(id,qty=1,note=''){
  if(previous&&previous.qty+requested>99){notify('الحد الأقصى 99 قطعة للصنف بنفس الملاحظة');return false}
  if(previous)previous.qty+=requested;
  else state.cart.push({id:p.id,qty:requested,note:normalized});
- save();updateCounts();notify('تمت إضافة '+p.name+' إلى السلة');renderCartArea();return true;
+ localItemCounts[p.id]=Math.min(9999,Number(localItemCounts[p.id]||0)+requested);try{localStorage.setItem(MAJALIS_STATS_KEY,JSON.stringify(localItemCounts))}catch{}
+ save();updateCounts();syncProductQuantities();refreshMenuExtras();notify('تمت إضافة '+p.name+' إلى السلة');renderCartArea();return true;
 }
 function saveCartNote(index,note){
  const current=state.cart[index];if(!current)return false;
@@ -4413,8 +4458,8 @@ function saveCartNote(index,note){
  save();return true;
 }
 function refreshCartPage(){const y=window.scrollY;renderCart();updateCounts();requestAnimationFrame(()=>{const max=Math.max(0,document.documentElement.scrollHeight-window.innerHeight);window.scrollTo({top:Math.min(y,max),behavior:'instant'})})}
-function changeCart(index,delta){const l=state.cart[index];if(!l)return;const name=productById(l.id)?.name||'الصنف';if(delta>0&&l.qty>=99){notify('الحد الأقصى 99 قطعة للصنف');return}l.qty+=delta;if(l.qty<=0){state.cart.splice(index,1);notify('تم حذف '+name+' من السلة')}else{l.qty=Math.min(99,l.qty);notify('تم تحديث كمية '+name)}save();updateCounts();if(currentPath()==='/cart')refreshCartPage();else if(currentPath()==='/menu')renderCartArea();else render()}
-function removeCart(index){if(!state.cart[index])return;const name=productById(state.cart[index].id)?.name||'الصنف';state.cart.splice(index,1);save();updateCounts();notify('تم حذف '+name+' من السلة');if(currentPath()==='/cart')refreshCartPage();else if(currentPath()==='/menu')renderCartArea();else render()}
+function changeCart(index,delta){const l=state.cart[index];if(!l)return;const name=productById(l.id)?.name||'الصنف';if(delta>0&&l.qty>=99){notify('الحد الأقصى 99 قطعة للصنف');return}l.qty+=delta;if(l.qty<=0){state.cart.splice(index,1);notify('تم حذف '+name+' من السلة')}else{l.qty=Math.min(99,l.qty);notify('تم تحديث كمية '+name)}save();updateCounts();syncProductQuantities();refreshMenuExtras();if(currentPath()==='/cart')refreshCartPage();else if(currentPath()==='/menu')renderCartArea();else render()}
+function removeCart(index){if(!state.cart[index])return;const name=productById(state.cart[index].id)?.name||'الصنف';state.cart.splice(index,1);save();updateCounts();syncProductQuantities();refreshMenuExtras();notify('تم حذف '+name+' من السلة');if(currentPath()==='/cart')refreshCartPage();else if(currentPath()==='/menu')renderCartArea();else render()}
 function toggleFavorite(button){
  const id=Number(button.dataset.fav);
  if(!Number.isInteger(id)||!productById(id))return;
@@ -4439,6 +4484,41 @@ function toggleFavorite(button){
 function sectionHeading(title,desc='',extra=''){return '<div class="panel-head"><div><h2>'+title+'</h2>'+(desc?'<p>'+desc+'</p>':'')+'</div>'+extra+'</div>'}
 const CARD_HEART='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M20.6 5.5a5.2 5.2 0 0 0-7.4 0L12 6.7l-1.2-1.2a5.2 5.2 0 1 0-7.4 7.4l1.2 1.2L12 21l7.4-6.9 1.2-1.2a5.2 5.2 0 0 0 0-7.4Z"/></svg>';
 const CARD_ADD='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.65" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="9" cy="20" r="1"/><circle cx="18" cy="20" r="1"/><path d="M2 3h2l2.2 11.1a2 2 0 0 0 2 1.6h10a2 2 0 0 0 2-1.6l.7-3.4"/><path d="M7 7h6m5-3v7m-3.5-3.5h7"/></svg>';
+
+const MAJALIS_STATS_KEY='majalis_local_item_add_counts_v1';
+const MAJALIS_LAST_BASKET_KEY='majalis_last_reviewed_basket_v1';
+let localItemCounts=safeGet(MAJALIS_STATS_KEY,{});
+function itemCartQty(id){return state.cart.filter(x=>x.id===Number(id)).reduce((a,x)=>a+x.qty,0)}
+function cardQtyMarkup(p){
+ const qty=itemCartQty(p.id);
+ if(p.available===false)return '<button disabled>غير متوفر</button>';
+ if(!qty)return '<button type="button" class="add-button" data-card-add="'+p.id+'" aria-label="إضافة '+escapeHtml(p.name)+'">'+CARD_ADD+'</button>';
+ return '<span class="hs-card-quantity"><button type="button" data-card-dec="'+p.id+'" aria-label="تقليل '+escapeHtml(p.name)+'">−</button><strong>'+qty+'</strong><button type="button" data-card-inc="'+p.id+'" aria-label="زيادة '+escapeHtml(p.name)+'">+</button></span>';
+}
+function syncProductQuantities(){document.querySelectorAll('[data-card-qty]').forEach(slot=>{const p=productById(Number(slot.dataset.cardQty));if(p)slot.innerHTML=cardQtyMarkup(p)})}
+function mobileCheckoutBar(){
+ let b=el('hsMobileCheckout');if(!b){b=document.createElement('div');b.id='hsMobileCheckout';b.className='hs-mobile-checkout';document.body.append(b)}
+ const visible=currentPath()==='/menu'&&count()>0;b.hidden=!visible;
+ if(visible)b.innerHTML='<div><span>'+count()+' قطعة في السلة</span><strong>'+money(total())+' · إجمالي تجريبي</strong></div><button data-go="/checkout">متابعة الدفع ←</button>';
+}
+function smartMenuPicks(){
+ const ids=new Set(state.cart.map(x=>x.id));
+ const cats=new Set(state.cart.map(x=>productById(x.id)?.category).filter(Boolean));
+ const score=p=>(cats.has(p.category)?2:0)+(['المشروبات','المقبلات','الإضافات والجانبيات'].includes(p.category)?3:0)+Math.min(10,Number(localItemCounts[p.id]||0));
+ return PRODUCTS.filter(p=>p.available!==false&&!ids.has(p.id)).sort((a,b)=>score(b)-score(a)||a.id-b.id).slice(0,4);
+}
+function menuDiscovery(){
+ const prior=Array.isArray(safeGet(MAJALIS_LAST_BASKET_KEY,null));
+ return '<div class="hs-menu-tags"><button data-local-popular class="'+(state.sort==='localPopular'?'active':'')+'">★ الأكثر اختيارًا على جهازك</button><button data-go="/offers">العروض التجريبية</button>'+
+ (prior?'<button data-repeat-preview>↻ إعادة السلة السابقة</button>':'')+
+ (state.query||state.priceFilter!=='all'||state.demoFilter!=='all'||state.sort!=='default'?'<button data-reset>مسح التصفية ×</button>':'')+
+ '<span class="hs-filter-count" id="catalogResultCount">'+filterProducts().length+' صنف</span></div><div class="hs-menu-results-note">الترتيب المحلي ليس إحصائية مبيعات؛ العروض والمنتجات التجريبية موضحة في تفاصيلها.</div>';
+}
+function menuRecommendationRail(){
+ if(!state.cart.length)return '';
+ return '<section class="hs-menu-recommendations" style="margin-top:22px"><div class="panel-head"><div><h2>قد تكمل طلبك</h2><p>اقتراحات اختيارية بحسب السلة الحالية، وليست عروض خصم.</p></div></div><div class="product-grid">'+smartMenuPicks().map(card).join('')+'</div></section>';
+}
+function refreshMenuExtras(){if(currentPath()!=='/menu')return;const elMenu=document.querySelector('.hs-menu-recommendations');const fresh=menuRecommendationRail();if(elMenu){if(fresh)elMenu.outerHTML=fresh;else elMenu.remove()}else if(fresh)el('catalog')?.insertAdjacentHTML('beforeend',fresh)}
 function card(p){
  const available=p.available!==false;
  const name=escapeHtml(p.name);
@@ -4450,7 +4530,7 @@ function card(p){
   '<div class="card-body"><div class="card-name-line"><h3><button type="button" class="card-title" data-product="'+p.id+'">'+name+'</button></h3>'+
   '<button type="button" class="card-favorite-toggle" data-fav="'+p.id+'" aria-pressed="'+saved+'" aria-label="'+(saved?'إزالة ':'إضافة ')+name+(saved?' من المفضلة':' إلى المفضلة')+'" title="'+(saved?'إزالة من المفضلة':'إضافة إلى المفضلة')+'">'+CARD_HEART+'</button></div>'+
   '<div class="card-price-line"><div class="card-copy"><span class="card-price">'+price+'</span>'+(available?'':'<span class="card-stock">غير متوفر</span>')+'</div>'+
-  '<button type="button" class="add-button" '+(available?'data-card-add="'+p.id+'" aria-label="أضف '+name+' إلى السلة"':'disabled aria-label="'+name+' غير متوفر"')+'>'+CARD_ADD+'</button></div></div></article>';
+  '<span class="card-quantity-slot" data-card-qty="'+p.id+'">'+cardQtyMarkup(p)+'</span></div></div></article>';
 }
 function cartContent(){if(!state.cart.length)return '<div class="cart-empty"><div class="cart-icon">🛍️</div><strong>سلتك تنتظر طلبك</strong><p>اختر وجباتك المفضلة، ثم راجع تفاصيل الطلب هنا.</p><button class="outlined" data-go="/menu">تصفح الأطباق</button></div>';return '<div class="cart-lines">'+cartDetails().map(l=>'<div class="cart-line">'+imgTag(productById(l.id))+'<div class="cart-line-info"><strong>'+escapeHtml(l.name)+'</strong><small>الكمية '+l.qty+' × '+money(l.unitPrice)+'</small><small>'+(l.note?'ملاحظة: '+escapeHtml(l.note):'لا توجد ملاحظات')+'</small><div class="cart-line-row"><strong>'+money(l.lineTotal)+'</strong><div class="stepper"><button data-dec="'+l.index+'" aria-label="تقليل '+escapeHtml(l.name)+'">−</button><span aria-label="الكمية '+l.qty+'">'+l.qty+'</span><button data-inc="'+l.index+'" aria-label="زيادة '+escapeHtml(l.name)+'">+</button></div></div></div></div>').join('')+'</div>'}
 function sideCart(){return '<aside class="side-cart" id="cartArea"><div class="cart-head"><h2>🛍️ سلة مشترياتك</h2>'+(count()?'<button data-clear>إفراغ السلة</button>':'')+'</div>'+cartContent()+'<div class="cart-footer"><div class="total-row"><span>الإجمالي التجريبي</span><span>'+money(total())+'</span></div><button class="solid-action full" data-go="/checkout" '+(!count()?'disabled':'')+' aria-label="متابعة الدفع — الانتقال إلى معاينة الطلب، الدفع الفعلي غير متاح">متابعة الدفع ←</button><p>الأسعار توضيحية؛ لا يشمل الإجمالي رسوم توصيل أو ضرائب إضافية غير معتمدة.</p></div></aside>'}
@@ -4472,6 +4552,7 @@ function filterProducts(){
  if(state.sort==='desc')rows.sort((a,b)=>b.price-a.price);
  if(state.sort==='name')rows.sort((a,b)=>a.name.localeCompare(b.name,'ar'));
  if(state.sort==='fav')rows=rows.filter(p=>state.favorites.includes(p.id));
+ if(state.sort==='localPopular')rows.sort((a,b)=>Number(localItemCounts[b.id]||0)-Number(localItemCounts[a.id]||0)||a.id-b.id);
  return rows;
 }
 function quickNav(){const choices=['الكل',...CATEGORIES,'المفضلة'];return '<div class="quick-nav" id="categoryNav">'+choices.map(c=>'<button class="'+((state.category===c||(c==='المفضلة'&&state.sort==='fav'))?'active':'')+'" data-category="'+c+'">'+c+'</button>').join('')+'</div>'}
@@ -4482,7 +4563,7 @@ function catalog(){
  return '<div class="hs-menu-tool-row"><div class="catalog-search-row"><label for="catalogSearch" class="catalog-search-label">ابحث في القائمة</label><div class="catalog-search-field"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m16 16 5 5"/></svg><input id="catalogSearch" type="search" inputmode="search" autocomplete="off" placeholder="ابحث عن وجبة أو مشروب..." value="'+escapeHtml(state.query)+'" aria-controls="catalogResults" aria-label="البحث في قائمة الطعام"><button type="button" data-clear-search aria-label="مسح البحث" '+(state.query?'':'hidden')+'>مسح</button></div></div><div class="catalog-toolbar"><label>ترتيب <select id="sortSelect" class="sort-select" aria-label="ترتيب الأصناف"><option value="default" '+selected('default',state.sort)+'>ترتيب القائمة</option><option value="asc" '+selected('asc',state.sort)+'>السعر: الأقل أولًا</option><option value="desc" '+selected('desc',state.sort)+'>السعر: الأعلى أولًا</option><option value="name" '+selected('name',state.sort)+'>حسب الاسم</option></select></label>'+
  '<label>السعر <select id="priceFilter" class="sort-select" aria-label="تصفية حسب السعر"><option value="all" '+selected('all',state.priceFilter)+'>جميع الأسعار</option><option value="under20" '+selected('under20',state.priceFilter)+'>أقل من 20 ر.س</option><option value="20to50" '+selected('20to50',state.priceFilter)+'>من 20 إلى 50</option><option value="above50" '+selected('above50',state.priceFilter)+'>أكثر من 50</option></select></label>'+
  '<label>المنتجات <select id="demoFilter" class="sort-select" aria-label="تصفية حسب نوع الصنف"><option value="all" '+selected('all',state.demoFilter)+'>كل الأصناف</option><option value="catalog" '+selected('catalog',state.demoFilter)+'>القائمة الأساسية</option><option value="demo" '+selected('demo',state.demoFilter)+'>الأصناف التجريبية</option></select></label></div></div>'+
- '<div id="catalogResults">'+catalogResults(rows)+'</div>';
+ menuDiscovery()+'<div id="catalogResults">'+catalogResults(rows)+'</div>';
 }
 function hero(){return '<div class="crumbs"><span>الرئيسية</span><span>›</span><span>مجالس العرب</span></div><section class="restaurant-hero"><div class="restaurant-cover"><div class="cover-decoration"></div><div class="cover-word">مجالس العرب<small>ضيافتك تبدأ من هنا</small></div></div><div class="restaurant-heading"><div class="restaurant-badge">☕</div><div class="restaurant-copy"><h1>مجالس العرب</h1><p>فطور سعودي · عريكة ومعصوب · مشروبات · جلسات</p><div class="restaurant-tags"><span>متجر تجريبي</span><span>'+PRODUCTS.length+' صنفًا للمعاينة</span><span>الاستلام والتوصيل: يتطلبان تفعيلًا</span></div></div><button class="outlined" data-contact-seating>الجلسات والحجوزات</button></div><div class="service-notice">القائمة تشمل '+DEMO_PRODUCTS.length+' صنفًا تجريبيًا إضافيًا لأغراض التصميم، وليست منتجات أو أسعارًا معتمدة لدى مجالس العرب. لا يمكن تنفيذ الطلبات أو الدفع حتى الربط والتحقق من الفرع.</div></section>'}
 function collectionStrip(){return '<div class="collection-strip"><button data-category="الفطور والعشاء"><span class="collection-icon"><img src="assets/categories/breakfast.png" alt="" loading="lazy" decoding="async" onerror="this.onerror=null;this.remove()"></span><strong>فطور على كيفك</strong><small>وجبات صباحية متنوعة</small></button><button data-category="العريكة والمعصوب"><span class="collection-icon"><img src="assets/categories/areeka-masoob.png" alt="" loading="lazy" decoding="async" onerror="this.onerror=null;this.remove()"></span><strong>نكهة الجنوب</strong><small>العريكة والمعصوب والفتة</small></button><button data-category="المشويات والأطباق الرئيسية"><span class="collection-icon"><img src="assets/categories/grills.png" alt="" loading="lazy" decoding="async" onerror="this.onerror=null;this.remove()"></span><strong>وجبات مشبعة</strong><small>أطباق رئيسية تجريبية</small></button><button data-category="الحلا"><span class="collection-icon"><img src="assets/categories/desserts.png" alt="" loading="lazy" decoding="async" onerror="this.onerror=null;this.remove()"></span><strong>وقت الحلا</strong><small>كيك وحلويات متنوعة</small></button><button data-category="المشروبات"><span class="collection-icon"><img src="assets/categories/drinks.png" alt="" loading="lazy" decoding="async" onerror="this.onerror=null;this.remove()"></span><strong>مشروباتك المفضلة</strong><small>شاي وعصائر وقهوة</small></button><button data-category="العروض التجريبية"><span class="collection-icon"><img src="assets/categories/family-meals.png" alt="" loading="lazy" decoding="async" onerror="this.onerror=null;this.remove()"></span><strong>مجموعات وعروض</strong><small>عروض افتراضية للعرض فقط</small></button></div>'}
@@ -4723,7 +4804,27 @@ function homeVisitGallery(){return '<section class="hs-visit" aria-label="قصة
 function homeFutureCapabilities(){return '<section class="hs-future-capabilities" aria-label="خيارات متقدمة بعد الربط"><div><strong>تنبيهات العروض</strong><p>لا توجد إشعارات مفعلة أو رسائل تسويقية دون موافقة. تتاح الاشتراكات عند ربط النظام وتفعيل إعدادات الخصوصية.</p><button type="button" disabled aria-disabled="true">الاشتراك غير متاح بعد</button></div><div><strong>الطلب المعتاد والتجهيز</strong><p>إعادة الطلب السابق، أسعار الباقات المعتمدة، أوقات الذروة، وتوفر الفرع تتطلب بيانات تشغيلية حقيقية. بعض الواجهات قابلة للمعاينة من «طلباتي».</p><button type="button" data-go="/orders">عرض تجربة الطلبات ←</button></div></section>'}
 function homeOperationalInfo(){return '<section class="hs-operations" aria-label="معلومات الطلب والفروع"><div><strong>الفروع وساعات العمل</strong><p>البيانات المعتمدة للفرع وساعات العمل لم تُربط بعد. اسأل عبر التواصل الرسمي.</p><button data-contact-seating>استفسر عن الفرع ←</button></div><div><strong>توفر الأصناف والتجهيز</strong><p>الحالة الفعلية للمنتجات ومدة التجهيز تعتمد على بيانات الفرع عند تفعيل الطلبات.</p><button data-go="/menu">تصفح القائمة التجريبية ←</button></div><div><strong>طلباتي ومتابعتها</strong><p>واجهة الطلبات موجودة للمعاينة؛ لا توجد طلبات فعلية ولا تتبع مباشر حاليًا.</p><button data-go="/orders">معاينة تتبع الطلب ←</button></div></section>'}
 function homeFaq(){const rows=[['هل يمكنني طلب الطعام الآن؟','المتجر حاليًا معاينة تفاعلية فقط. الدفع وإرسال الطلب الحقيقي غير مفعّلين حتى اكتمال الربط.'],['كيف أعرف توفر الجلسات؟','تواصل مع الفرع عبر القنوات الرسمية لتأكيد المواعيد وتوفر الجلسات والمباريات والألعاب.'],['هل الأسعار والعروض معتمدة؟','بعض الأصناف والأسعار والعروض تجريبية؛ لا تعتمد عليها للشراء قبل نشر القائمة الرسمية.'],['كيف أعرف المكونات والحساسية؟','هذه المعلومات غير معتمدة لكل الأصناف بعد. عند وجود حساسية غذائية، يجب التأكد مباشرة من المطعم قبل الطلب.']];return '<section class="hs-faq" aria-label="أسئلة شائعة"><div class="hs-merch-heading"><div><span>قبل طلبك</span><h2>أسئلة شائعة</h2></div><button data-go="/help">المساعدة ←</button></div><div class="hs-faq-items">'+rows.map(([q,a])=>'<details><summary>'+q+'</summary><p>'+a+'</p></details>').join('')+'</div></section>'}
-function quickViewProduct(id){const p=productById(id);if(!p)return;const existing=document.getElementById('hsQuickView');if(existing)existing.remove();const overlay=document.createElement('div');overlay.className='hs-quick-overlay';overlay.id='hsQuickView';overlay.setAttribute('role','presentation');overlay.innerHTML='<section role="dialog" aria-modal="true" aria-labelledby="hsQuickTitle" class="hs-quick-dialog"><button type="button" class="hs-quick-close" data-close-quick aria-label="إغلاق">×</button><div class="hs-quick-image">'+imgTag(p,'',true)+'</div><div class="hs-quick-copy"><span>'+escapeHtml(p.category)+(p.demo?' · بيانات تجريبية':'')+'</span><h2 id="hsQuickTitle">'+escapeHtml(p.name)+'</h2><strong>'+money(p.price)+'</strong><p>معاينة الصنف. تفاصيل المكونات والحساسية تتطلب بيانات معتمدة من المطعم.</p><div class="hs-quick-actions"><button type="button" data-product="'+p.id+'">التفاصيل والتخصيص ←</button><button type="button" data-safe-add="'+p.id+'">أضف للسلة ＋</button></div></div></section>';overlay.addEventListener('click',e=>{if(e.target===overlay)overlay.remove()});document.body.append(overlay);overlay.querySelector('[data-close-quick]')?.focus()}
+
+function quickViewProduct(id){
+ const p=productById(id);if(!p)return;
+ document.getElementById('hsQuickView')?.remove();
+ const overlay=document.createElement('div');overlay.className='hs-quick-overlay';overlay.id='hsQuickView';overlay.dataset.productId=p.id;
+ overlay.setAttribute('role','presentation');
+ const eligibleExtras=PRODUCTS.filter(x=>x.category==='الإضافات والجانبيات'&&x.available!==false).slice(0,5);
+ const extras=eligibleExtras.length?'<div class="hs-quick-extras"><h3>إضافات اختيارية (تُضاف كأصناف مستقلة)</h3>'+
+ eligibleExtras.map(x=>'<label><input type="checkbox" data-quick-extra="'+x.id+'"/>'+escapeHtml(x.name)+(x.demo?' (تجريبي)':'')+'<span>'+money(x.price)+'</span></label>').join('')+'</div>':'';
+ const variants=sizeVariants(p);
+ overlay.innerHTML='<section role="dialog" aria-modal="true" aria-labelledby="hsQuickTitle" class="hs-quick-dialog"><button type="button" class="hs-quick-close" data-close-quick aria-label="إغلاق">×</button>'+
+ '<div class="hs-quick-image">'+imgTag(p,'',true)+'</div><div class="hs-quick-copy"><span>'+escapeHtml(p.category)+(p.demo?' · منتج تجريبي':'')+'</span><h2 id="hsQuickTitle">'+escapeHtml(p.name)+'</h2><strong>'+money(p.price)+'</strong>'+
+ '<p>المكونات ومسببات الحساسية لم تُعتمد بعد. الأسعار والإضافات التجريبية للمعاينة فقط.</p>'+
+ (variants.length?'<p>لهذا الصنف أحجام أخرى في قائمة الطعام، يمكنك اختيارها من صفحة التفاصيل.</p>':'')+
+ '<div class="hs-quick-qty"><span>الكمية</span><button type="button" data-quick-minus aria-label="تقليل الكمية">−</button><strong id="hsQuickQty">1</strong><button type="button" data-quick-plus aria-label="زيادة الكمية">+</button></div>'+
+ extras+'<div class="hs-quick-extras"><label for="hsQuickNote">ملاحظة التحضير</label><textarea id="hsQuickNote" maxlength="250" placeholder="مثال: بدون فلفل"></textarea></div>'+
+ '<div class="hs-quick-actions"><button type="button" data-product="'+p.id+'">التفاصيل والأحجام</button><button type="button" data-quick-add="'+p.id+'">أضف للسلة ＋</button></div></div></section>';
+ overlay.addEventListener('click',e=>{if(e.target===overlay)overlay.remove()});
+ document.body.append(overlay);overlay.querySelector('[data-close-quick]')?.focus();
+}
+
 function renderHome(){
  const byCategory=(name,n=14)=>PRODUCTS.filter(p=>p.category===name&&p.available!==false).slice(0,n).map(p=>p.id);
  const group=(name,title,desc,key,n=14)=>productShowcase(title,desc,byCategory(name,n),'/menu',key);
@@ -4771,7 +4872,7 @@ function renderHome(){
 function renderMenu(){
  el('app').innerHTML='<div class="hs-menu-page">'+
  '<nav class="hs-menu-browse" aria-label="فئات الطعام">'+quickNav()+'</nav>'+
- '<div class="shop-layout hs-menu-layout"><section class="catalog-panel" id="catalog">'+catalog()+'</section>'+sideCart()+'</div></div>';
+ '<div class="shop-layout hs-menu-layout"><section class="catalog-panel" id="catalog">'+catalog()+menuRecommendationRail()+'</section>'+sideCart()+'</div></div>';
 }
 function renderDetail(id){const p=productById(id);if(!p){route('/');return}rememberViewed(id);const draft=state.detailDraft&&state.detailDraft.id===id?state.detailDraft:null;const related=PRODUCTS.filter(x=>x.id!==p.id&&x.category===p.category).slice(0,3);const crumb='<button class="back-link" data-back>→ العودة إلى قائمة الطعام</button>';el('app').innerHTML=crumb+'<article class="detail-route"><div class="detail-layout"><div class="detail-image">'+imgTag(p)+'</div><div class="detail-info"><span class="eyebrow">'+escapeHtml(p.category)+(p.demo?' · صنف تجريبي':'')+'</span><h1>'+escapeHtml(p.name)+'</h1><div class="detail-price-row"><div class="amount">'+money(p.price)+'</div><button type="button" class="detail-favorite" data-fav="'+p.id+'" aria-label="حفظ '+escapeHtml(p.name)+' في المفضلة" aria-pressed="'+state.favorites.includes(p.id)+'">'+CARD_HEART+'</button></div><p class="detail-description">اختر الكمية المناسبة وسجّل ملاحظات التحضير إن رغبت. لا تتوفر بيانات مؤكدة عن المكونات والحساسية والسعرات حتى استكمال ربط القائمة.'+(p.demo?' هذا الصنف وسعره افتراضيان لغرض المعاينة فقط.':'')+'</p><div class="option-box"><h3>الأحجام والتخصيص</h3>'+availableSizes(p)+'</div><label class="field-label" for="itemNote">ملاحظات للمطبخ (اختياري)</label><textarea class="note-input" maxlength="250" id="itemNote" placeholder="مثال: بدون فلفل — يخضع لتأكيد المطعم">'+escapeHtml(draft?.note||'')+'</textarea><div class="detail-controls"><div class="stepper"><button id="qtyMinus" aria-label="تقليل الكمية">−</button><span id="selectedQty" aria-live="polite">'+(draft?.qty||1)+'</span><button id="qtyPlus" aria-label="زيادة الكمية">+</button></div><button class="solid-action" id="addSelected" '+(p.available===false?'disabled aria-disabled="true"':'')+'>'+(p.available===false?'غير متوفر':'أضف للسلة')+' · <span id="selectedTotal">'+money(p.price*(draft?.qty||1))+'</span></button></div><div class="detail-order-actions"><button type="button" class="detail-back-shopping" data-go="/menu">متابعة تصفح القائمة</button><span>إضافة المنتجات للسلة تجريبية ولا تنشئ طلبًا فعليًا.</span></div></div></div></article>'+(related.length?'<section class="recs"><h2>أصناف قد تعجبك</h2><div class="product-grid">'+related.map(card).join('')+'</div></section>':'');state.quantity=draft?.qty||1;state.note=draft?.note||'';state.currentProduct=id;state.origin='/menu';state.detailDraft=null}
 
@@ -4799,7 +4900,7 @@ function checkoutPhoneValue(){return escapeHtml(state.customer.phone||'')}
 function addressSummary(){const c=state.checkout;const parts=[];if(c.addressText)parts.push(c.addressText);if(c.coords)parts.push('إحداثيات مشاركة بإذن المستخدم: '+c.coords.lat.toFixed(5)+', '+c.coords.lng.toFixed(5));return parts.join(' — ')||'لم يُحدد عنوان أو موقع بعد'}
 function checkoutPage(){if(!state.cart.length){route('/cart');return}const delivery=state.fulfillment==='delivery';el('app').innerHTML='<div class="crumbs"><button data-go="/">الرئيسية</button> › <button data-go="/cart">السلة</button> › <span>مراجعة الطلب التجريبي</span></div><section class="checkout-title"><span>الخطوة 02 من 02 · معاينة تفاعلية فقط</span><h1>مراجعة الطلب</h1><p>راجع بيانات التواصل والاستلام أو التوصيل. هذه الصفحة لا تقبل الدفع ولا تنشئ طلبًا فعليًا حتى ربط Odoo واعتماد الخدمة.</p></section><div class="checkout-layout"><div class="checkout-content"><section class="checkout-step"><div class="checkout-step-head"><span>01</span><div><h2>طريقة الحصول على الطلب</h2><p>اختر الاستلام أو التوصيل</p></div></div><div class="checkout-pick-options"><button class="'+(!delivery?'selected':'')+'" data-checkout-mode="pickup" aria-pressed="'+(!delivery)+'"><span>🏬</span><strong>الاستلام من الفرع</strong><small>موقع الفرع ووقت الاستلام سيُفعّلان عند الربط</small></button><button class="'+(delivery?'selected':'')+'" data-checkout-mode="delivery" aria-pressed="'+delivery+'"><span>🛵</span><strong>التوصيل</strong><small>يتطلب التحقق من موقع التوصيل وتغطية الخدمة</small></button></div><div class="checkout-info">'+(delivery?'تحديد موقع العميل لا يعني توفر التوصيل أو تحديد رسومه.':'الاستلام يحتاج اختيار فرع معتمد عند الربط الفعلي.')+'</div></section><section class="checkout-step"><div class="checkout-step-head"><span>02</span><div><h2>بيانات التواصل والتوصيل</h2><p>أدخل رقم جوالك فقط، وسيكون أساس التعرف على العنوان الوطني بعد الربط الرسمي</p></div></div><label class="checkout-phone-label" for="checkoutPhone">رقم الجوال السعودي</label><div class="checkout-phone-row"><span>🇸🇦 +966</span><input id="checkoutPhone" dir="ltr" type="tel" inputmode="tel" autocomplete="tel" maxlength="16" placeholder="05xxxxxxxx" value="'+checkoutPhoneValue()+'"></div><p class="checkout-phone-hint">لا يمكن استخراج العنوان الوطني من رقم الهاتف بصورة موثوقة أو مشروعة دون خدمة مخصصة والتحقق المصرّح به. لا تُرسل رسالة تحقق في هذه المعاينة.</p><div class="checkout-address-actions"><button id="nationalAddressRequest" type="button">♧ التحقق من العنوان الوطني</button>'+(delivery?'<button id="locateMe" type="button">⌖ تحديد موقعي بإذنّي</button>':'')+'</div><div class="checkout-address-box" id="checkoutAddressStatus" aria-live="polite"><strong>'+(delivery?'موقع التوصيل':'بيانات الموقع')+'</strong><p>'+escapeHtml(addressSummary())+'</p><small>العنوان الوطني: بانتظار الربط بسبل والتحقق من رقم الجوال · الموقع الحالي يحتاج إذن المتصفح</small></div><p id="checkoutFeedback" class="checkout-feedback" hidden role="alert"></p></section><section class="checkout-step"><div class="checkout-step-head"><span>03</span><div><h2>طرق الدفع (غير مفعّلة)</h2><p>للعرض فقط؛ لا يمكن تحديد أو تنفيذ أي طريقة دفع حاليًا</p></div></div><div class="checkout-pay-options"><div aria-disabled="true"><span>💳</span><strong>مدى والبطاقات البنكية</strong><small>غير مفعّلة</small></div><div aria-disabled="true"><span></span><strong>Apple Pay</strong><small>غير مفعّل</small></div><div aria-disabled="true"><span>💵</span><strong>الدفع عند الاستلام</strong><small>يحتاج اعتماد الفرع</small></div></div><p class="checkout-no-payment">لا يمكن تحصيل مبلغ أو إنشاء طلب حقيقي قبل تكامل Odoo 18 وتفعيل بوابة دفع معتمدة.</p></section></div><aside class="checkout-side"><h2>ملخص طلبك</h2>'+cartReviewMarkup()+cartTotalsMarkup()+'<button id="checkoutReview" class="solid-action full">استعراض المعاينة ←</button><button class="outlined full" data-go="/cart">العودة إلى السلة</button><small>هذه النسخة لا تنشئ طلبًا ولا تدفع ولا تستعلم عن العنوان الوطني تلقائيًا.</small></aside></div><section id="checkoutPreview" class="checkout-review" hidden></section>'}
 function checkoutValidate(){const feedback=el('checkoutFeedback');const phone=state.customer.phone.replace(/[\s()-]/g,'');if(!/^(?:\+966|966|0)?5\d{8}$/.test(phone)){feedback.hidden=false;feedback.textContent='أدخل رقم جوال سعودي صحيح قبل المتابعة.';el('checkoutPhone')?.focus();return false}feedback.hidden=true;return true}
-function checkoutPreview(){if(!state.cart.length){route('/cart');return}if(!checkoutValidate())return;const panel=el('checkoutPreview');if(!panel)return;panel.hidden=false;panel.innerHTML='<div class="checkout-review-head"><h2>معاينة بيانات الدفع والطلب</h2><button id="closeCheckoutPreview" class="outlined">إغلاق</button></div><div class="checkout-review-grid"><div><strong>رقم التواصل</strong><p>'+escapeHtml(state.customer.phone)+'</p></div><div><strong>طريقة الحصول على الطلب</strong><p>'+(state.fulfillment==='delivery'?'توصيل':'استلام من الفرع')+'</p></div><div><strong>العنوان والموقع</strong><p>'+escapeHtml(addressSummary())+'</p></div><div><strong>الدفع</strong><p>غير متاح قبل الربط</p></div></div>'+cartReviewMarkup()+cartTotalsMarkup()+'<p class="checkout-info">لا يمكن تأكيد الطلب أو التوصيل دون التحقق من العنوان الوطني وبيانات الفرع والدفع.</p>';panel.scrollIntoView({behavior:'smooth',block:'start'})}
+function checkoutPreview(){if(!state.cart.length){route('/cart');return}if(!checkoutValidate())return;try{localStorage.setItem(MAJALIS_LAST_BASKET_KEY,JSON.stringify(state.cart))}catch{}const panel=el('checkoutPreview');if(!panel)return;panel.hidden=false;panel.innerHTML='<div class="checkout-review-head"><h2>معاينة بيانات الدفع والطلب</h2><button id="closeCheckoutPreview" class="outlined">إغلاق</button></div><div class="checkout-review-grid"><div><strong>رقم التواصل</strong><p>'+escapeHtml(state.customer.phone)+'</p></div><div><strong>طريقة الحصول على الطلب</strong><p>'+(state.fulfillment==='delivery'?'توصيل':'استلام من الفرع')+'</p></div><div><strong>العنوان والموقع</strong><p>'+escapeHtml(addressSummary())+'</p></div><div><strong>الدفع</strong><p>غير متاح قبل الربط</p></div></div>'+cartReviewMarkup()+cartTotalsMarkup()+'<p class="checkout-info">لا يمكن تأكيد الطلب أو التوصيل دون التحقق من العنوان الوطني وبيانات الفرع والدفع.</p>';panel.scrollIntoView({behavior:'smooth',block:'start'})}
 function requestAddressIntegration(){const x=el('checkoutFeedback');if(x){x.hidden=false;x.textContent='البحث عن العنوان الوطني عبر رقم الجوال يتطلب تكامل SPL الرسمي والتحقق من ملكية الرقم (OTP) وموافقة صاحب العنوان. هذه الخطوة غير متصلة حاليًا.'}}
 function requestGeolocation(){if(!navigator.geolocation){const x=el('checkoutFeedback');x.hidden=false;x.textContent='المتصفح لا يدعم تحديد الموقع.';return}const b=el('locateMe');b.disabled=true;b.textContent='جارٍ طلب الإذن…';navigator.geolocation.getCurrentPosition(pos=>{const coords={lat:pos.coords.latitude,lng:pos.coords.longitude};state.checkout.coords=coords;const box=el('checkoutAddressStatus');box.querySelector('p').textContent=addressSummary();const x=el('checkoutFeedback');x.hidden=false;x.textContent='تم تحديد الإحداثيات بإذنك. هذا لا يسترجع العنوان الوطني ولا يؤكد نطاق التوصيل.';b.disabled=false;b.textContent='⌖ تحديث موقعي بإذنّي'},err=>{const x=el('checkoutFeedback');x.hidden=false;x.textContent=err.code===1?'لم تسمح للمتصفح بمشاركة الموقع. يمكنك السماح لاحقًا من إعدادات الموقع.':'تعذر الحصول على موقع دقيق. جرّب من اتصال آمن HTTPS مع تفعيل خدمات الموقع.';b.disabled=false;b.textContent='⌖ تحديد موقعي بإذنّي'},{enableHighAccuracy:true,timeout:12000,maximumAge:0})}
 
@@ -4837,6 +4938,27 @@ function slideHomeRail(id,delta){
 
 function render(){stopHeroSlider();const path=currentPath();const m=path.match(/^\/product\/(\d+)$/);if(m)renderDetail(Number(m[1]));else if(path==='/cart')renderCart();else if(path==='/checkout')checkoutPage();else if(path==='/help')renderHelp();else if(path==='/menu')renderMenu();else if(path==='/offers')renderOffers();else if(path==='/favorites')renderFavorites();else if(path==='/orders')renderOrders();else if(path==='/account')renderAccount();else if(path==='/addresses')renderAddresses();else renderHome();if(path==='/')startHeroSlider();updateCounts();el('globalSearch').value=state.query;document.querySelectorAll('.mobile-bottom button').forEach(b=>b.classList.toggle('active',b.dataset.route===path));window.scrollTo({top:0,behavior:'instant'})}
 document.addEventListener('click',e=>{
+ const quickMinus=e.target.closest('[data-quick-minus]'),quickPlus=e.target.closest('[data-quick-plus]');
+ if(quickMinus||quickPlus){const q=el('hsQuickQty');if(q)q.textContent=Math.min(99,Math.max(1,Number(q.textContent)+(quickPlus?1:-1)));return}
+ const quickAdd=e.target.closest('[data-quick-add]');
+ if(quickAdd){
+  const qty=Number(el('hsQuickQty')?.textContent||1);
+  if(!addItem(Number(quickAdd.dataset.quickAdd),qty,el('hsQuickNote')?.value||''))return;
+  document.querySelectorAll('#hsQuickView [data-quick-extra]:checked').forEach(c=>addItem(Number(c.dataset.quickExtra),1));
+  el('hsQuickView')?.remove();return;
+ }
+ const cardPlus=e.target.closest('[data-card-inc]'),cardMinus=e.target.closest('[data-card-dec]');
+ if(cardPlus||cardMinus){
+  const id=Number((cardPlus||cardMinus).dataset.cardInc||(cardPlus||cardMinus).dataset.cardDec);
+  if(cardPlus)addItem(id);else{const line=state.cart.findIndex(x=>x.id===id);if(line>=0)changeCart(line,-1)}
+  return;
+ }
+ if(e.target.closest('[data-local-popular]')){state.sort=state.sort==='localPopular'?'default':'localPopular';const box=el('catalog');if(box)box.innerHTML=catalog()+menuRecommendationRail();return}
+ if(e.target.closest('[data-repeat-preview]')){
+  const prev=safeGet(MAJALIS_LAST_BASKET_KEY,[]);
+  const valid=normalizeSavedCart(prev,PRODUCTS);if(!valid.length){notify('لا تتوفر سلة سابقة صالحة');return}
+  state.cart=valid;save();updateCounts();renderCartArea();syncProductQuantities();refreshMenuExtras();notify('تمت استعادة السلة التي تمت معاينتها سابقًا');return;
+ }
  const closeQuick=e.target.closest('[data-close-quick]');
  if(closeQuick){document.getElementById('hsQuickView')?.remove();return}
  const quick=e.target.closest('[data-quick-view]');
