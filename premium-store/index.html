@@ -4156,7 +4156,7 @@ body :not(#__borderless_reset_a):not(#__borderless_reset_b):not(#__borderless_re
 .hs-menu-layout .catalog-panel{min-width:0}
 .hs-menu-layout .catalog-search-row{max-width:none;margin:0 0 20px}
 .hs-menu-layout .catalog-search-label{margin-bottom:8px;font-size:12px;font-weight:750;color:#303B45}
-.hs-menu-layout .catalog-search-field{min-height:50px;height:50px!important;border-radius:12px!important;background:#F1F2F3!important;border:1px solid #E5E7E9!important;box-shadow:none!important;padding-inline:14px!important}
+.hs-menu-layout .catalog-search-field{min-height:50px;height:50px!important;border-radius:12px!important;background:#F5F5F5!important;border:1px solid #F5F5F5!important;box-shadow:none!important;padding-inline:14px!important}
 .hs-menu-layout .catalog-search-field:focus-within{border-color:#CBB990!important;box-shadow:0 0 0 3px #CBB99019!important}
 .hs-menu-layout .panel-head{display:flex;align-items:flex-start;justify-content:space-between;flex-wrap:wrap;gap:16px;padding:0 0 19px;margin:0 0 20px;border-bottom:1px solid #ECECEF}
 .hs-menu-layout .panel-head h2{font-size:clamp(20px,2vw,27px);font-weight:800;color:#252D37;margin:0 0 6px}
@@ -4238,6 +4238,13 @@ body :not(#__borderless_reset_a):not(#__borderless_reset_b):not(#__borderless_re
   #app.page,.hs-menu-page,.hs-menu-layout{overflow:visible!important;contain:none!important}
   .hs-menu-layout .side-cart{position:sticky!important;top:86px!important;align-self:start!important}
 }
+
+/* Simplified menu controls: preserve search, remove filter toolbar and quick badges. */
+.hs-menu-page .hs-menu-tool-row.hs-search-only{display:block!important;grid-template-columns:none!important;margin:0 0 15px!important;max-width:100%!important}
+.hs-menu-page .hs-search-only .catalog-search-row{display:block!important;width:min(100%,360px)!important;max-width:360px!important;margin:0!important;grid-column:auto!important}
+.hs-menu-page .hs-search-only .catalog-search-field{background:#F5F5F5!important;border-color:#F5F5F5!important}
+.hs-menu-page .hs-card-quick{display:none!important}
+@media(max-width:780px){.hs-menu-page .hs-search-only .catalog-search-row{width:100%!important;max-width:100%!important}}
 </style></head>
 <body>
 <header class="site-header"><div class="wrap header-inner">
@@ -4446,7 +4453,7 @@ function card(p){
  const details=name+'، '+price+(p.demo?'، عرض تجريبي':'')+(available?'':'، غير متوفر');
  const saved=state.favorites.includes(p.id);
  return '<article class="product-card"><div class="product-card-image-wrap">'+
-  '<button type="button" class="card-photo" data-product="'+p.id+'" aria-label="تفاصيل '+details+'" title="'+details+'">'+imgTag(p,'',false)+'</button><button type="button" class="hs-card-quick" data-quick-view="'+p.id+'" aria-label="معاينة سريعة: '+name+'">نظرة سريعة</button></div>'+
+  '<button type="button" class="card-photo" data-product="'+p.id+'" aria-label="تفاصيل '+details+'" title="'+details+'">'+imgTag(p,'',false)+'</button></div>'+
   '<div class="card-body"><div class="card-name-line"><h3><button type="button" class="card-title" data-product="'+p.id+'">'+name+'</button></h3>'+
   '<button type="button" class="card-favorite-toggle" data-fav="'+p.id+'" aria-pressed="'+saved+'" aria-label="'+(saved?'إزالة ':'إضافة ')+name+(saved?' من المفضلة':' إلى المفضلة')+'" title="'+(saved?'إزالة من المفضلة':'إضافة إلى المفضلة')+'">'+CARD_HEART+'</button></div>'+
   '<div class="card-price-line"><div class="card-copy"><span class="card-price">'+price+'</span>'+(available?'':'<span class="card-stock">غير متوفر</span>')+'</div>'+
@@ -4478,10 +4485,7 @@ function quickNav(){const choices=['الكل',...CATEGORIES,'المفضلة'];re
 function catalogResults(rows){return rows.length?'<div class="product-grid">'+rows.map(card).join('')+'</div>':'<div class="cart-empty"><strong>لم نعثر على أصناف مطابقة</strong><p>جرّب تعديل البحث أو الفلاتر.</p><button class="outlined" data-reset>مسح الفلاتر</button></div>'}
 function catalog(){
  const rows=filterProducts();
- const selected=(v,current)=>v===current?'selected':'';
- return '<div class="hs-menu-tool-row"><div class="catalog-search-row"><label for="catalogSearch" class="catalog-search-label">ابحث في القائمة</label><div class="catalog-search-field"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m16 16 5 5"/></svg><input id="catalogSearch" type="search" inputmode="search" autocomplete="off" placeholder="ابحث عن وجبة أو مشروب..." value="'+escapeHtml(state.query)+'" aria-controls="catalogResults" aria-label="البحث في قائمة الطعام"><button type="button" data-clear-search aria-label="مسح البحث" '+(state.query?'':'hidden')+'>مسح</button></div></div><div class="catalog-toolbar"><label>ترتيب <select id="sortSelect" class="sort-select" aria-label="ترتيب الأصناف"><option value="default" '+selected('default',state.sort)+'>ترتيب القائمة</option><option value="asc" '+selected('asc',state.sort)+'>السعر: الأقل أولًا</option><option value="desc" '+selected('desc',state.sort)+'>السعر: الأعلى أولًا</option><option value="name" '+selected('name',state.sort)+'>حسب الاسم</option></select></label>'+
- '<label>السعر <select id="priceFilter" class="sort-select" aria-label="تصفية حسب السعر"><option value="all" '+selected('all',state.priceFilter)+'>جميع الأسعار</option><option value="under20" '+selected('under20',state.priceFilter)+'>أقل من 20 ر.س</option><option value="20to50" '+selected('20to50',state.priceFilter)+'>من 20 إلى 50</option><option value="above50" '+selected('above50',state.priceFilter)+'>أكثر من 50</option></select></label>'+
- '<label>المنتجات <select id="demoFilter" class="sort-select" aria-label="تصفية حسب نوع الصنف"><option value="all" '+selected('all',state.demoFilter)+'>كل الأصناف</option><option value="catalog" '+selected('catalog',state.demoFilter)+'>القائمة الأساسية</option><option value="demo" '+selected('demo',state.demoFilter)+'>الأصناف التجريبية</option></select></label></div></div>'+
+ return '<div class="hs-menu-tool-row hs-search-only"><div class="catalog-search-row"><div class="catalog-search-field"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m16 16 5 5"/></svg><input id="catalogSearch" type="search" inputmode="search" autocomplete="off" placeholder="ابحث عن وجبة أو مشروب..." value="'+escapeHtml(state.query)+'" aria-controls="catalogResults" aria-label="البحث في قائمة الطعام"><button type="button" data-clear-search aria-label="مسح البحث" '+(state.query?'':'hidden')+'>مسح</button></div></div></div>'+
  '<div id="catalogResults">'+catalogResults(rows)+'</div>';
 }
 function hero(){return '<div class="crumbs"><span>الرئيسية</span><span>›</span><span>مجالس العرب</span></div><section class="restaurant-hero"><div class="restaurant-cover"><div class="cover-decoration"></div><div class="cover-word">مجالس العرب<small>ضيافتك تبدأ من هنا</small></div></div><div class="restaurant-heading"><div class="restaurant-badge">☕</div><div class="restaurant-copy"><h1>مجالس العرب</h1><p>فطور سعودي · عريكة ومعصوب · مشروبات · جلسات</p><div class="restaurant-tags"><span>متجر تجريبي</span><span>'+PRODUCTS.length+' صنفًا للمعاينة</span><span>الاستلام والتوصيل: يتطلبان تفعيلًا</span></div></div><button class="outlined" data-contact-seating>الجلسات والحجوزات</button></div><div class="service-notice">القائمة تشمل '+DEMO_PRODUCTS.length+' صنفًا تجريبيًا إضافيًا لأغراض التصميم، وليست منتجات أو أسعارًا معتمدة لدى مجالس العرب. لا يمكن تنفيذ الطلبات أو الدفع حتى الربط والتحقق من الفرع.</div></section>'}
