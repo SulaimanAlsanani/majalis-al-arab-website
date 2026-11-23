@@ -4355,6 +4355,103 @@ body :not(#__borderless_reset_a):not(#__borderless_reset_b):not(#__borderless_re
  #app.page #heroSlider.hero-slider{height:172px!important}
  #app.page #heroSlider .hero-slide .discovery-copy h1{font-size:16px!important}
 }
+
+/* Restore desktop-like composed artwork on handheld hero slides:
+   a fully contained concentric disc, a separated central phone and side food images. */
+@media (max-width:1024px){
+ #app.page #heroSlider .hero-slide .discovery-visual{
+   position:absolute!important;inset-block:0!important;
+   overflow:hidden!important;isolation:isolate!important;
+ }
+ #app.page #heroSlider .reference-hero-art{
+   position:absolute!important;inset:0!important;
+   width:100%!important;height:100%!important;
+   overflow:hidden!important;isolation:isolate!important;
+ }
+ #app.page #heroSlider .reference-hero-ring{
+   position:absolute!important;box-sizing:border-box!important;
+   width:min(84%,220px)!important;height:auto!important;aspect-ratio:1!important;
+   left:50%!important;top:50%!important;bottom:auto!important;
+   transform:translate(-50%,-50%)!important;
+   border-width:clamp(10px,1.8vw,19px)!important;
+   border-color:var(--ring,#ffdf00)!important;
+   background:var(--disc,#20c1ee)!important;
+   border-radius:50%!important;z-index:0!important;
+ }
+ #app.page #heroSlider .reference-hero-disc{
+   position:absolute!important;box-sizing:border-box!important;
+   width:min(64%,165px)!important;height:auto!important;aspect-ratio:1!important;
+   left:50%!important;top:50%!important;bottom:auto!important;
+   transform:translate(-50%,-50%)!important;
+   border-radius:50%!important;z-index:1!important;
+ }
+ #app.page #heroSlider .reference-hero-phone{
+   position:absolute!important;box-sizing:border-box!important;
+   width:min(56%,180px)!important;max-width:56%!important;
+   height:80%!important;top:50%!important;bottom:auto!important;
+   left:50%!important;transform:translate(-50%,-50%)!important;
+   z-index:4!important;
+ }
+ #app.page #heroSlider .reference-food-float{
+   position:absolute!important;
+   width:clamp(15px,3vw,49px)!important;
+   max-width:17%!important;max-height:26%!important;
+   height:auto!important;aspect-ratio:1!important;
+   object-fit:contain!important;
+   animation:none!important;translate:none!important;
+   z-index:3!important;
+   filter:drop-shadow(0 3px 3px #40322233)!important;
+ }
+ #app.page #heroSlider .reference-float-one{
+   right:2%!important;left:auto!important;top:17%!important;bottom:auto!important;
+ }
+ #app.page #heroSlider .reference-float-two{
+   left:2%!important;right:auto!important;top:57%!important;bottom:auto!important;
+ }
+ #app.page #heroSlider .reference-float-three{
+   right:2%!important;left:auto!important;top:auto!important;bottom:12%!important;
+ }
+}
+@media (max-width:600px){
+ #app.page #heroSlider .reference-hero-ring{
+   width:84%!important;max-width:142px!important;
+   border-width:clamp(9px,2.8vw,12px)!important;
+ }
+ #app.page #heroSlider .reference-hero-disc{width:63%!important;max-width:106px!important}
+ #app.page #heroSlider .reference-hero-phone{
+   width:56%!important;max-width:89px!important;
+   height:79%!important;left:50%!important;top:50%!important;
+   transform:translate(-50%,-50%)!important;
+   border-width:2px!important;padding:2px!important;
+   border-radius:14px!important;
+ }
+ #app.page #heroSlider .reference-hero-screen{
+   box-sizing:border-box!important;min-height:0!important;
+   padding:3px!important;border-radius:10px!important;overflow:hidden!important;
+ }
+ #app.page #heroSlider .reference-phone-status{
+   height:9px!important;min-height:0!important;
+   font-size:5px!important;padding:0 2px!important;
+ }
+ #app.page #heroSlider .reference-phone-notch{height:4px!important}
+ #app.page #heroSlider .reference-phone-top{font-size:6px!important;padding:1px 2px!important}
+ #app.page #heroSlider .reference-phone-search{
+   font-size:5px!important;padding:3px!important;margin:1px 0!important;
+ }
+ #app.page #heroSlider .reference-phone-feature{height:28%!important;min-height:0!important}
+ #app.page #heroSlider .reference-phone-feature strong{font-size:5px!important;bottom:2px!important;right:2px!important;padding:1px 2px!important}
+ #app.page #heroSlider .reference-phone-caption{font-size:6px!important;padding:2px 0!important}
+ #app.page #heroSlider .reference-phone-grid{gap:2px!important;min-height:0!important}
+ #app.page #heroSlider .reference-phone-grid span{height:clamp(17px,5vw,28px)!important}
+ #app.page #heroSlider .reference-phone-navbar{padding:2px!important;margin-top:auto!important}
+ #app.page #heroSlider .reference-food-float{
+   width:15%!important;max-width:15%!important;
+   max-height:20%!important;
+ }
+ #app.page #heroSlider .reference-float-one{right:2%!important;top:17%!important}
+ #app.page #heroSlider .reference-float-two{left:2%!important;top:55%!important}
+ #app.page #heroSlider .reference-float-three{display:none!important}
+}
 </style></head>
 <body>
 <header class="site-header"><div class="wrap header-inner">
