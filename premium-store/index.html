@@ -4502,6 +4502,59 @@ body :not(#__borderless_reset_a):not(#__borderless_reset_b):not(#__borderless_re
    left:2%!important;top:54%!important;right:auto!important;bottom:auto!important;
  }
 }
+
+/* Mobile/iPad hero circle: 80% visible, 20% clipped below; accents spaced away from phone. */
+@media(max-width:1024px){
+ #app.page #heroSlider .reference-hero-ring{
+   left:50%!important;top:auto!important;bottom:0!important;
+   transform:translate(-50%,20%)!important;
+   width:min(83%,225px)!important;max-width:83%!important;
+   aspect-ratio:1!important;height:auto!important;
+   border-width:clamp(10px,1.9vw,19px)!important;
+ }
+ #app.page #heroSlider .reference-hero-disc{
+   left:50%!important;top:auto!important;bottom:0!important;
+   transform:translate(-50%,20%)!important;
+   width:min(64%,165px)!important;max-width:64%!important;
+   aspect-ratio:1!important;height:auto!important;
+ }
+ #app.page #heroSlider .reference-hero-phone{
+   top:48%!important;left:50%!important;
+   transform:translate(-50%,-50%)!important;
+   width:min(53%,170px)!important;max-width:53%!important;
+ }
+ #app.page #heroSlider .reference-food-float{
+   width:13%!important;max-width:13%!important;
+   max-height:21%!important;min-width:0!important;
+   animation:none!important;translate:none!important;
+   transform:none!important;
+ }
+ #app.page #heroSlider .reference-float-one{
+   right:1%!important;left:auto!important;top:12%!important;bottom:auto!important;
+ }
+ #app.page #heroSlider .reference-float-two{
+   left:1%!important;right:auto!important;top:auto!important;bottom:13%!important;
+ }
+ #app.page #heroSlider .reference-float-three{
+   right:1%!important;left:auto!important;top:auto!important;bottom:10%!important;
+ }
+}
+@media(max-width:600px){
+ #app.page #heroSlider .reference-hero-ring{
+   width:83%!important;max-width:135px!important;
+   border-width:clamp(8px,2.5vw,11px)!important;
+ }
+ #app.page #heroSlider .reference-hero-disc{width:64%!important;max-width:105px!important}
+ #app.page #heroSlider .reference-hero-phone{
+   top:47%!important;width:53%!important;max-width:85px!important;height:79%!important;
+ }
+ #app.page #heroSlider .reference-food-float{
+   width:12%!important;max-width:12%!important;max-height:18%!important;
+ }
+ #app.page #heroSlider .reference-float-one{right:1%!important;top:13%!important}
+ #app.page #heroSlider .reference-float-two{left:1%!important;bottom:14%!important}
+ #app.page #heroSlider .reference-float-three{display:none!important}
+}
 </style></head>
 <body>
 <header class="site-header"><div class="wrap header-inner">
