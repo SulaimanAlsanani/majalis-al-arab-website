@@ -4239,57 +4239,12 @@ body :not(#__borderless_reset_a):not(#__borderless_reset_b):not(#__borderless_re
   .hs-menu-layout .side-cart{position:sticky!important;top:86px!important;align-self:start!important}
 }
 
-/* Compact, aligned search and filters without upper labels. */
-.hs-menu-page .hs-menu-tool-row{display:grid!important;grid-template-columns:minmax(205px,1.1fr) minmax(330px,2.1fr)!important;align-items:center!important;gap:10px!important;margin:0 0 16px!important}
-.hs-menu-page .hs-menu-tool-row .catalog-search-row{grid-column:auto!important;max-width:none!important;width:100%!important;margin:0!important}
-.hs-menu-page .hs-menu-tool-row .catalog-toolbar{grid-column:auto!important;display:grid!important;grid-template-columns:repeat(3,minmax(0,1fr))!important;align-items:center!important;gap:8px!important;margin:0!important;max-width:none!important}
-.hs-menu-page .hs-menu-tool-row .catalog-toolbar label{display:block!important;min-width:0!important;width:100%!important;flex:none!important;font-size:0!important}
-.hs-menu-page .hs-menu-tool-row .catalog-toolbar select{width:100%!important;min-height:43px!important;height:43px!important;margin:0!important;font-size:11px!important}
-.hs-menu-page .hs-menu-tool-row .catalog-search-field{background:#F5F5F5!important;border-color:#F5F5F5!important}
+/* Simplified menu controls: preserve search, remove filter toolbar and quick badges. */
+.hs-menu-page .hs-menu-tool-row.hs-search-only{display:block!important;grid-template-columns:none!important;margin:0 0 15px!important;max-width:100%!important}
+.hs-menu-page .hs-search-only .catalog-search-row{display:block!important;width:min(100%,360px)!important;max-width:360px!important;margin:0!important;grid-column:auto!important}
+.hs-menu-page .hs-search-only .catalog-search-field{background:#F5F5F5!important;border-color:#F5F5F5!important}
 .hs-menu-page .hs-card-quick{display:none!important}
-@media(max-width:900px){.hs-menu-page .hs-menu-tool-row{grid-template-columns:1fr!important}.hs-menu-page .hs-menu-tool-row .catalog-toolbar{grid-column:1!important}}
-@media(max-width:480px){.hs-menu-page .hs-menu-tool-row .catalog-toolbar{gap:5px!important}.hs-menu-page .hs-menu-tool-row .catalog-toolbar select{font-size:10px!important;padding-inline:5px!important}}
-
-/* Precise improvements to the existing Majalis cards, cart, search and responsiveness. */
-@media(min-width:781px){
- html,body{overflow-x:clip!important;overflow-y:visible!important}
- #app.page,.hs-menu-page,.hs-menu-layout{overflow:visible!important}
- .hs-menu-layout{align-items:stretch!important}
- .hs-menu-layout #cartArea{position:sticky!important;top:82px!important;align-self:start!important;display:flex!important;flex-direction:column!important;height:fit-content;max-height:calc(100dvh - 96px);min-height:0;overflow:hidden!important;z-index:10}
- .hs-menu-layout #cartArea .cart-head,.hs-menu-layout #cartArea .cart-footer{flex:0 0 auto}
- .hs-menu-layout #cartArea .cart-lines{flex:1 1 auto;min-height:0;max-height:none!important;overflow-y:auto!important;overscroll-behavior:contain;scrollbar-width:thin}
-}
-.product-grid>.product-card{height:100%;display:flex;flex-direction:column}
-.product-card .product-card-image-wrap{position:relative}
-.product-card .card-photo{display:block;width:100%}
-.product-card .card-photo img{width:100%;aspect-ratio:1.5/1;object-fit:contain;background:#F5F5F5}
-.product-card .card-body{display:flex;flex-direction:column;flex:1;padding:12px}
-.product-card .card-name-line{min-height:43px;align-items:start}
-.product-card .card-title{line-height:1.55}
-.product-card .card-price-line{margin-top:auto;min-height:34px}
-.product-availability-label{position:absolute;top:9px;right:9px;background:#F2F3F4;color:#59636A;border:1px solid #E1E4E6;padding:4px 8px;border-radius:30px;font-size:10px;font-weight:750}
-.product-card-unavailable .card-photo img{opacity:.55;filter:grayscale(.35)}
-.product-cart-badge{display:block;font-size:10px;color:#617179;margin-top:2px;white-space:nowrap}
-.catalog-count-row{text-align:right;margin:-5px 0 11px;color:#849099;font-size:11px}
-.catalog-count-row output{font:inherit}
-.cart-inline-note-trigger{display:inline-block;border:0;padding:2px 0;background:transparent;color:#4F6470;font-size:10px;text-decoration:underline;text-underline-offset:3px}
-.cart-inline-note{margin-top:6px}
-.cart-inline-note textarea{display:block;box-sizing:border-box;width:100%;min-height:54px;border:1px solid #DDE1E4;border-radius:8px;background:#fff;padding:7px;font-size:11px;resize:vertical}
-.cart-inline-note>button{margin-top:5px;padding:5px 9px;border:0;border-radius:7px;background:#FFDA28;color:#202B32;font-size:11px;font-weight:750}
-.majalis-menu-mobile-checkout{display:none}
-@media(max-width:780px){
- .product-card .card-body{padding:10px}
- .product-card .card-name-line{min-height:38px}
- .product-card .card-photo img{aspect-ratio:1.4/1}
- .hs-menu-page .hs-menu-tool-row{gap:7px!important}
- .hs-menu-page .catalog-toolbar select{min-height:41px!important}
- .majalis-menu-mobile-checkout:not([hidden]){display:flex!important;position:fixed;bottom:65px;left:10px;right:10px;z-index:27;align-items:center;justify-content:space-between;gap:10px;padding:9px 11px;background:#263742;border:1px solid #34434B;color:#fff;border-radius:12px;box-shadow:0 6px 22px #0002}
- .majalis-menu-mobile-checkout span{display:flex;flex-direction:column;gap:2px;min-width:0}
- .majalis-menu-mobile-checkout strong{font-size:12px}
- .majalis-menu-mobile-checkout small{font-size:10px;color:#E1E8ED}
- .majalis-menu-mobile-checkout button{flex:0 0 auto;border:0;border-radius:9px;padding:11px 13px;background:#FFDA28;color:#1D2C36;font-size:12px;font-weight:800}
- body:has(.majalis-menu-mobile-checkout:not([hidden])) #app.page{padding-bottom:145px!important}
-}
+@media(max-width:780px){.hs-menu-page .hs-search-only .catalog-search-row{width:100%!important;max-width:100%!important}}
 </style></head>
 <body>
 <header class="site-header"><div class="wrap header-inner">
@@ -4391,20 +4346,13 @@ function save(){try{localStorage.setItem(STORAGE,JSON.stringify(state.cart));loc
 function money(n){return Number(n).toLocaleString('ar-SA')+' ر.س'}
 const PREVIEW_PRODUCT_PHOTOS={
  1:'kibda',2:'kibda-cheese',3:'beef-salad',4:'chicken-salad',
- 13:'areeka',16:'date-fatta'
+ 13:'areeka',14:'areeka',15:'areeka',16:'date-fatta'
 };
-function productImagePlaceholder(p){
- const label=String(p.name||'صنف').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&apos;'}[c])).slice(0,32);
- const shades=['#F1F2F3','#F3F5F1','#F6F3EF','#F0F3F6'];
- const bg=shades[Math.abs(Number(p.id)||0)%shades.length];
- const svg='<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 420"><rect width="640" height="420" fill="'+bg+'"/><circle cx="320" cy="155" r="104" fill="#fff" stroke="#dfe3e5" stroke-width="5"/><circle cx="320" cy="155" r="76" fill="#eef1ee"/><path d="M267 165q53-61 106 0" fill="none" stroke="#bdccbc" stroke-width="13" stroke-linecap="round"/><text x="320" y="313" text-anchor="middle" direction="rtl" font-family="Tahoma,Arial" font-size="26" font-weight="bold" fill="#38454d">'+label+'</text><text x="320" y="350" text-anchor="middle" direction="rtl" font-family="Tahoma,Arial" font-size="17" fill="#78848c">الصورة قيد التوفير</text></svg>';
- return 'data:image/svg+xml;charset=UTF-8,'+encodeURIComponent(svg);
-}
 function imgTag(p,className='',alt=true){
  const localPhoto=!approvedCatalog&&PREVIEW_PRODUCT_PHOTOS[p.id];
  const photo=p.imageUrl||(localPhoto?'assets/products/'+localPhoto+'.webp':'');
- const fallback=productImagePlaceholder(p);
- const fallbackAlt=alt?p.name+' — الصورة قيد التوفير':'';
+ const fallback=Object.hasOwn(CATEGORY_PLATE_IMAGES,p.category)?CATEGORY_PLATE_IMAGES[p.category]:'assets/categories/appetizers.png';
+ const fallbackAlt=alt?'صورة توضيحية':'';
  return '<img class="'+className+(photo?'':' product-photo-illustrative')+'" src="'+escapeHtml(photo||fallback)+'"'+
   (photo?' data-fallback="'+fallback+'" data-fallback-alt="'+fallbackAlt+'"':'')+
   ' alt="'+(alt?(photo?escapeHtml(p.name):fallbackAlt):'')+'" loading="lazy" decoding="async" width="320" height="180">';
@@ -4457,7 +4405,7 @@ function addItem(id,qty=1,note=''){
  if(previous&&previous.qty+requested>99){notify('الحد الأقصى 99 قطعة للصنف بنفس الملاحظة');return false}
  if(previous)previous.qty+=requested;
  else state.cart.push({id:p.id,qty:requested,note:normalized});
- save();updateCounts();notify('تمت إضافة '+p.name+' إلى السلة');renderCartArea();updateProductQuantityBadges();return true;
+ save();updateCounts();notify('تمت إضافة '+p.name+' إلى السلة');renderCartArea();return true;
 }
 function saveCartNote(index,note){
  const current=state.cart[index];if(!current)return false;
@@ -4472,8 +4420,8 @@ function saveCartNote(index,note){
  save();return true;
 }
 function refreshCartPage(){const y=window.scrollY;renderCart();updateCounts();requestAnimationFrame(()=>{const max=Math.max(0,document.documentElement.scrollHeight-window.innerHeight);window.scrollTo({top:Math.min(y,max),behavior:'instant'})})}
-function changeCart(index,delta){const l=state.cart[index];if(!l)return;const name=productById(l.id)?.name||'الصنف';if(delta>0&&l.qty>=99){notify('الحد الأقصى 99 قطعة للصنف');return}l.qty+=delta;if(l.qty<=0){state.cart.splice(index,1);notify('تم حذف '+name+' من السلة')}else{l.qty=Math.min(99,l.qty);notify('تم تحديث كمية '+name)}save();updateCounts();updateProductQuantityBadges();if(currentPath()==='/cart')refreshCartPage();else if(currentPath()==='/menu')renderCartArea();else render()}
-function removeCart(index){if(!state.cart[index])return;const name=productById(state.cart[index].id)?.name||'الصنف';state.cart.splice(index,1);save();updateCounts();updateProductQuantityBadges();notify('تم حذف '+name+' من السلة');if(currentPath()==='/cart')refreshCartPage();else if(currentPath()==='/menu')renderCartArea();else render()}
+function changeCart(index,delta){const l=state.cart[index];if(!l)return;const name=productById(l.id)?.name||'الصنف';if(delta>0&&l.qty>=99){notify('الحد الأقصى 99 قطعة للصنف');return}l.qty+=delta;if(l.qty<=0){state.cart.splice(index,1);notify('تم حذف '+name+' من السلة')}else{l.qty=Math.min(99,l.qty);notify('تم تحديث كمية '+name)}save();updateCounts();if(currentPath()==='/cart')refreshCartPage();else if(currentPath()==='/menu')renderCartArea();else render()}
+function removeCart(index){if(!state.cart[index])return;const name=productById(state.cart[index].id)?.name||'الصنف';state.cart.splice(index,1);save();updateCounts();notify('تم حذف '+name+' من السلة');if(currentPath()==='/cart')refreshCartPage();else if(currentPath()==='/menu')renderCartArea();else render()}
 function toggleFavorite(button){
  const id=Number(button.dataset.fav);
  if(!Number.isInteger(id)||!productById(id))return;
@@ -4498,27 +4446,22 @@ function toggleFavorite(button){
 function sectionHeading(title,desc='',extra=''){return '<div class="panel-head"><div><h2>'+title+'</h2>'+(desc?'<p>'+desc+'</p>':'')+'</div>'+extra+'</div>'}
 const CARD_HEART='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M20.6 5.5a5.2 5.2 0 0 0-7.4 0L12 6.7l-1.2-1.2a5.2 5.2 0 1 0-7.4 7.4l1.2 1.2L12 21l7.4-6.9 1.2-1.2a5.2 5.2 0 0 0 0-7.4Z"/></svg>';
 const CARD_ADD='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.65" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="9" cy="20" r="1"/><circle cx="18" cy="20" r="1"/><path d="M2 3h2l2.2 11.1a2 2 0 0 0 2 1.6h10a2 2 0 0 0 2-1.6l.7-3.4"/><path d="M7 7h6m5-3v7m-3.5-3.5h7"/></svg>';
-function productQuantityInCart(id){return state.cart.reduce((n,l)=>n+(l.id===Number(id)?l.qty:0),0)}
-function updateProductQuantityBadges(){
- document.querySelectorAll('[data-item-count]').forEach(b=>{const n=productQuantityInCart(b.dataset.itemCount);b.hidden=!n;b.textContent=n?n+' في السلة':''});
-}
-function updateMenuResultsCount(){const v=el('catalogResultCount');if(v)v.textContent=filterProducts().length+' صنفًا'}
 function card(p){
  const available=p.available!==false;
  const name=escapeHtml(p.name);
  const price=escapeHtml(money(p.price));
  const details=name+'، '+price+(p.demo?'، عرض تجريبي':'')+(available?'':'، غير متوفر');
  const saved=state.favorites.includes(p.id);
- return '<article class="product-card'+(available?'':' product-card-unavailable')+'"><div class="product-card-image-wrap">'+
-  '<button type="button" class="card-photo" data-product="'+p.id+'" aria-label="تفاصيل '+details+'" title="'+details+'">'+imgTag(p,'',false)+'</button>'+(available?'':'<span class="product-availability-label" role="status">غير متوفر</span>')+'</div>'+
+ return '<article class="product-card"><div class="product-card-image-wrap">'+
+  '<button type="button" class="card-photo" data-product="'+p.id+'" aria-label="تفاصيل '+details+'" title="'+details+'">'+imgTag(p,'',false)+'</button></div>'+
   '<div class="card-body"><div class="card-name-line"><h3><button type="button" class="card-title" data-product="'+p.id+'">'+name+'</button></h3>'+
   '<button type="button" class="card-favorite-toggle" data-fav="'+p.id+'" aria-pressed="'+saved+'" aria-label="'+(saved?'إزالة ':'إضافة ')+name+(saved?' من المفضلة':' إلى المفضلة')+'" title="'+(saved?'إزالة من المفضلة':'إضافة إلى المفضلة')+'">'+CARD_HEART+'</button></div>'+
-  '<div class="card-price-line"><div class="card-copy"><span class="card-price">'+price+'</span><small class="product-cart-badge" data-item-count="'+p.id+'" '+(productQuantityInCart(p.id)?'':'hidden')+'>'+(productQuantityInCart(p.id)?productQuantityInCart(p.id)+' في السلة':'')+'</small></div>'+
+  '<div class="card-price-line"><div class="card-copy"><span class="card-price">'+price+'</span>'+(available?'':'<span class="card-stock">غير متوفر</span>')+'</div>'+
   '<button type="button" class="add-button" '+(available?'data-card-add="'+p.id+'" aria-label="أضف '+name+' إلى السلة"':'disabled aria-label="'+name+' غير متوفر"')+'>'+CARD_ADD+'</button></div></div></article>';
 }
 function cartContent(){if(!state.cart.length)return '<div class="cart-empty"><div class="cart-icon">🛍️</div><strong>سلتك تنتظر طلبك</strong><p>اختر وجباتك المفضلة، ثم راجع تفاصيل الطلب هنا.</p><button class="outlined" data-go="/menu">تصفح الأطباق</button></div>';return '<div class="cart-lines">'+cartDetails().map(l=>'<div class="cart-line">'+imgTag(productById(l.id))+'<div class="cart-line-info"><strong>'+escapeHtml(l.name)+'</strong><small>الكمية '+l.qty+' × '+money(l.unitPrice)+'</small><small>'+(l.note?'ملاحظة: '+escapeHtml(l.note):'لا توجد ملاحظات')+'</small><div class="cart-line-row"><strong>'+money(l.lineTotal)+'</strong><div class="stepper"><button data-dec="'+l.index+'" aria-label="تقليل '+escapeHtml(l.name)+'">−</button><span aria-label="الكمية '+l.qty+'">'+l.qty+'</span><button data-inc="'+l.index+'" aria-label="زيادة '+escapeHtml(l.name)+'">+</button></div></div></div></div>').join('')+'</div>'}
 function sideCart(){return '<aside class="side-cart" id="cartArea"><div class="cart-head"><h2>🛍️ سلة مشترياتك</h2>'+(count()?'<button data-clear>إفراغ السلة</button>':'')+'</div>'+cartContent()+'<div class="cart-footer"><div class="total-row"><span>الإجمالي التجريبي</span><span>'+money(total())+'</span></div><button class="solid-action full" data-go="/checkout" '+(!count()?'disabled':'')+' aria-label="متابعة الدفع — الانتقال إلى معاينة الطلب، الدفع الفعلي غير متاح">متابعة الدفع ←</button><p>الأسعار توضيحية؛ لا يشمل الإجمالي رسوم توصيل أو ضرائب إضافية غير معتمدة.</p></div></aside>'}
-function renderCartArea(){const box=el('cartArea');if(box){const y=box.querySelector('.cart-lines')?.scrollTop||0;box.outerHTML=sideCart();const inner=el('cartArea')?.querySelector('.cart-lines');if(inner)inner.scrollTop=y}}
+function renderCartArea(){const box=el('cartArea');if(box)box.outerHTML=sideCart()}
 function normalizeSearch(s){return String(s||'').toLocaleLowerCase('ar').normalize('NFKD').replace(/[\u064b-\u065f\u0670]/g,'').replace(/[أإآ]/g,'ا').replace(/ة/g,'ه').replace(/ى/g,'ي').trim()}
 function filterProducts(){
  const q=normalizeSearch(state.query);
@@ -4542,11 +4485,8 @@ function quickNav(){const choices=['الكل',...CATEGORIES,'المفضلة'];re
 function catalogResults(rows){return rows.length?'<div class="product-grid">'+rows.map(card).join('')+'</div>':'<div class="cart-empty"><strong>لم نعثر على أصناف مطابقة</strong><p>جرّب تعديل البحث أو الفلاتر.</p><button class="outlined" data-reset>مسح الفلاتر</button></div>'}
 function catalog(){
  const rows=filterProducts();
- const selected=(v,current)=>v===current?'selected':'';
- return '<div class="hs-menu-tool-row"><div class="catalog-search-row"><div class="catalog-search-field"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m16 16 5 5"/></svg><input id="catalogSearch" type="search" inputmode="search" autocomplete="off" placeholder="ابحث عن وجبة أو مشروب..." value="'+escapeHtml(state.query)+'" aria-controls="catalogResults" aria-label="البحث في قائمة الطعام"><button type="button" data-clear-search aria-label="مسح البحث" '+(state.query?'':'hidden')+'>مسح</button></div></div><div class="catalog-toolbar"><label><select id="sortSelect" class="sort-select" aria-label="ترتيب الأصناف"><option value="default" '+selected('default',state.sort)+'>ترتيب القائمة</option><option value="asc" '+selected('asc',state.sort)+'>السعر: الأقل أولًا</option><option value="desc" '+selected('desc',state.sort)+'>السعر: الأعلى أولًا</option><option value="name" '+selected('name',state.sort)+'>حسب الاسم</option></select></label>'+
- '<label><select id="priceFilter" class="sort-select" aria-label="تصفية حسب السعر"><option value="all" '+selected('all',state.priceFilter)+'>جميع الأسعار</option><option value="under20" '+selected('under20',state.priceFilter)+'>أقل من 20 ر.س</option><option value="20to50" '+selected('20to50',state.priceFilter)+'>من 20 إلى 50</option><option value="above50" '+selected('above50',state.priceFilter)+'>أكثر من 50</option></select></label>'+
- '<label><select id="demoFilter" class="sort-select" aria-label="تصفية حسب نوع الصنف"><option value="all" '+selected('all',state.demoFilter)+'>كل الأصناف</option><option value="catalog" '+selected('catalog',state.demoFilter)+'>القائمة الأساسية</option><option value="demo" '+selected('demo',state.demoFilter)+'>الأصناف التجريبية</option></select></label></div></div>'+
- '<div class="catalog-count-row"><output id="catalogResultCount" aria-live="polite">'+rows.length+' صنفًا</output></div><div id="catalogResults">'+catalogResults(rows)+'</div>';
+ return '<div class="hs-menu-tool-row hs-search-only"><div class="catalog-search-row"><div class="catalog-search-field"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m16 16 5 5"/></svg><input id="catalogSearch" type="search" inputmode="search" autocomplete="off" placeholder="ابحث عن وجبة أو مشروب..." value="'+escapeHtml(state.query)+'" aria-controls="catalogResults" aria-label="البحث في قائمة الطعام"><button type="button" data-clear-search aria-label="مسح البحث" '+(state.query?'':'hidden')+'>مسح</button></div></div></div>'+
+ '<div id="catalogResults">'+catalogResults(rows)+'</div>';
 }
 function hero(){return '<div class="crumbs"><span>الرئيسية</span><span>›</span><span>مجالس العرب</span></div><section class="restaurant-hero"><div class="restaurant-cover"><div class="cover-decoration"></div><div class="cover-word">مجالس العرب<small>ضيافتك تبدأ من هنا</small></div></div><div class="restaurant-heading"><div class="restaurant-badge">☕</div><div class="restaurant-copy"><h1>مجالس العرب</h1><p>فطور سعودي · عريكة ومعصوب · مشروبات · جلسات</p><div class="restaurant-tags"><span>متجر تجريبي</span><span>'+PRODUCTS.length+' صنفًا للمعاينة</span><span>الاستلام والتوصيل: يتطلبان تفعيلًا</span></div></div><button class="outlined" data-contact-seating>الجلسات والحجوزات</button></div><div class="service-notice">القائمة تشمل '+DEMO_PRODUCTS.length+' صنفًا تجريبيًا إضافيًا لأغراض التصميم، وليست منتجات أو أسعارًا معتمدة لدى مجالس العرب. لا يمكن تنفيذ الطلبات أو الدفع حتى الربط والتحقق من الفرع.</div></section>'}
 function collectionStrip(){return '<div class="collection-strip"><button data-category="الفطور والعشاء"><span class="collection-icon"><img src="assets/categories/breakfast.png" alt="" loading="lazy" decoding="async" onerror="this.onerror=null;this.remove()"></span><strong>فطور على كيفك</strong><small>وجبات صباحية متنوعة</small></button><button data-category="العريكة والمعصوب"><span class="collection-icon"><img src="assets/categories/areeka-masoob.png" alt="" loading="lazy" decoding="async" onerror="this.onerror=null;this.remove()"></span><strong>نكهة الجنوب</strong><small>العريكة والمعصوب والفتة</small></button><button data-category="المشويات والأطباق الرئيسية"><span class="collection-icon"><img src="assets/categories/grills.png" alt="" loading="lazy" decoding="async" onerror="this.onerror=null;this.remove()"></span><strong>وجبات مشبعة</strong><small>أطباق رئيسية تجريبية</small></button><button data-category="الحلا"><span class="collection-icon"><img src="assets/categories/desserts.png" alt="" loading="lazy" decoding="async" onerror="this.onerror=null;this.remove()"></span><strong>وقت الحلا</strong><small>كيك وحلويات متنوعة</small></button><button data-category="المشروبات"><span class="collection-icon"><img src="assets/categories/drinks.png" alt="" loading="lazy" decoding="async" onerror="this.onerror=null;this.remove()"></span><strong>مشروباتك المفضلة</strong><small>شاي وعصائر وقهوة</small></button><button data-category="العروض التجريبية"><span class="collection-icon"><img src="assets/categories/family-meals.png" alt="" loading="lazy" decoding="async" onerror="this.onerror=null;this.remove()"></span><strong>مجموعات وعروض</strong><small>عروض افتراضية للعرض فقط</small></button></div>'}
@@ -4899,7 +4839,7 @@ function slideHomeRail(id,delta){
  rail.scrollTo({left:-Math.min(maxScroll,next*step),behavior});
 }
 
-function render(){stopHeroSlider();const path=currentPath();const m=path.match(/^\/product\/(\d+)$/);if(m)renderDetail(Number(m[1]));else if(path==='/cart')renderCart();else if(path==='/checkout')checkoutPage();else if(path==='/help')renderHelp();else if(path==='/menu')renderMenu();else if(path==='/offers')renderOffers();else if(path==='/favorites')renderFavorites();else if(path==='/orders')renderOrders();else if(path==='/account')renderAccount();else if(path==='/addresses')renderAddresses();else renderHome();if(path==='/')startHeroSlider();updateCounts();updateProductQuantityBadges();updateMenuResultsCount();el('globalSearch').value=state.query;document.querySelectorAll('.mobile-bottom button').forEach(b=>b.classList.toggle('active',b.dataset.route===path));window.scrollTo({top:0,behavior:'instant'})}
+function render(){stopHeroSlider();const path=currentPath();const m=path.match(/^\/product\/(\d+)$/);if(m)renderDetail(Number(m[1]));else if(path==='/cart')renderCart();else if(path==='/checkout')checkoutPage();else if(path==='/help')renderHelp();else if(path==='/menu')renderMenu();else if(path==='/offers')renderOffers();else if(path==='/favorites')renderFavorites();else if(path==='/orders')renderOrders();else if(path==='/account')renderAccount();else if(path==='/addresses')renderAddresses();else renderHome();if(path==='/')startHeroSlider();updateCounts();el('globalSearch').value=state.query;document.querySelectorAll('.mobile-bottom button').forEach(b=>b.classList.toggle('active',b.dataset.route===path));window.scrollTo({top:0,behavior:'instant'})}
 document.addEventListener('click',e=>{
  const closeQuick=e.target.closest('[data-close-quick]');
  if(closeQuick){document.getElementById('hsQuickView')?.remove();return}
@@ -4910,7 +4850,7 @@ document.addEventListener('click',e=>{
  const safe=e.target.closest('[data-safe-add]');
  if(safe){const p=productById(Number(safe.dataset.safeAdd));if(!p)return;if(p.options?.length||sizeVariants(p).length){document.getElementById('hsQuickView')?.remove();route('/product/'+p.id)}else{addItem(p.id);document.getElementById('hsQuickView')?.remove()}return}
  if(e.target.closest('#hsQuickView [data-product]'))document.getElementById('hsQuickView')?.remove();
- const seat=e.target.closest('[data-contact-seating]');if(seat){const label=(seat.innerText||seat.textContent||'الجلسات').trim().replace(/\s+/g,' ').slice(0,100);window.open('https://wa.me/966549792477?text='+encodeURIComponent('مرحبًا، أود الاستفسار عن توفر الجلسات والترفيه في مجالس العرب: '+label),'_blank','noopener,noreferrer');return}const jump=e.target.closest('[data-home-jump]');if(jump){const destination=el(jump.dataset.homeJump);if(destination){const reduced=window.matchMedia('(prefers-reduced-motion: reduce)').matches;destination.scrollIntoView({behavior:reduced?'auto':'smooth',block:'start'});destination.focus({preventScroll:true})}return}if(e.target.closest('[data-clear-search]')){state.query='';const input=el('catalogSearch');if(input){input.value='';input.focus()}const results=el('catalogResults');if(results)results.innerHTML=catalogResults(filterProducts());const counter=el('catalogResultCount');if(counter)counter.textContent=filterProducts().length+' صنفًا';const clear= document.querySelector('[data-clear-search]');if(clear)clear.hidden=true;return}const heroMove=e.target.closest('[data-hero-move]');if(heroMove){setHeroSlide(heroActive+Number(heroMove.dataset.heroMove),true);return}const heroDot=e.target.closest('[data-hero-index]');if(heroDot){setHeroSlide(Number(heroDot.dataset.heroIndex),true);return}const slideBtn=e.target.closest('[data-slide-dir]');if(slideBtn){slideHomeRail(slideBtn.dataset.slideTrack,Number(slideBtn.dataset.slideDir));return}if(e.target.closest('[data-search-all]')){el('searchSuggestions').hidden=true;route('/menu');return}
+ const seat=e.target.closest('[data-contact-seating]');if(seat){const label=(seat.innerText||seat.textContent||'الجلسات').trim().replace(/\s+/g,' ').slice(0,100);window.open('https://wa.me/966549792477?text='+encodeURIComponent('مرحبًا، أود الاستفسار عن توفر الجلسات والترفيه في مجالس العرب: '+label),'_blank','noopener,noreferrer');return}const jump=e.target.closest('[data-home-jump]');if(jump){const destination=el(jump.dataset.homeJump);if(destination){const reduced=window.matchMedia('(prefers-reduced-motion: reduce)').matches;destination.scrollIntoView({behavior:reduced?'auto':'smooth',block:'start'});destination.focus({preventScroll:true})}return}if(e.target.closest('[data-clear-search]')){state.query='';const input=el('catalogSearch');if(input){input.value='';input.focus()}const results=el('catalogResults');if(results)results.innerHTML=catalogResults(filterProducts());const counter=el('catalogResultCount');if(counter)counter.textContent=filterProducts().length;const clear= document.querySelector('[data-clear-search]');if(clear)clear.hidden=true;return}const heroMove=e.target.closest('[data-hero-move]');if(heroMove){setHeroSlide(heroActive+Number(heroMove.dataset.heroMove),true);return}const heroDot=e.target.closest('[data-hero-index]');if(heroDot){setHeroSlide(Number(heroDot.dataset.heroIndex),true);return}const slideBtn=e.target.closest('[data-slide-dir]');if(slideBtn){slideHomeRail(slideBtn.dataset.slideTrack,Number(slideBtn.dataset.slideDir));return}if(e.target.closest('[data-search-all]')){el('searchSuggestions').hidden=true;route('/menu');return}
 if(e.target.closest('#goCheckout,#goCheckoutMobile')){route('/checkout');return}
 const payMode=e.target.closest('[data-checkout-mode]');if(payMode){state.fulfillment=payMode.dataset.checkoutMode;checkoutPage();return}
 if(e.target.closest('#nationalAddressRequest')){requestAddressIntegration();return}
@@ -4952,7 +4892,7 @@ if(e.target.closest('[data-mode]')){state.fulfillment=e.target.closest('[data-mo
 if(e.target.closest('#previewOrder')){orderPreview();return}
 if(e.target.closest('#copySummary')){const t=el('summaryText');if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(t.value).then(()=>notify('تم نسخ ملخص السلة')).catch(()=>{t.select();notify('حدد النص لنسخه')})}else{t.select();notify('حدد النص لنسخه')}return}
 });
-document.addEventListener('input',e=>{if(e.target.id==='catalogSearch'){state.query=e.target.value.slice(0,100);const rows=filterProducts();const results=el('catalogResults');if(results)results.innerHTML=catalogResults(rows);const counter=el('catalogResultCount');if(counter)counter.textContent=rows.length+' صنفًا';const clear=document.querySelector('[data-clear-search]');if(clear)clear.hidden=!state.query;return}if(e.target.id==='checkoutPhone'){state.customer.phone=e.target.value.slice(0,16);const feedback=el('checkoutFeedback');if(feedback)feedback.hidden=true;return}if(e.target.id==='generalOrderNote'){state.generalNote=e.target.value.slice(0,500);save()}const key=e.target.dataset?.customer;if(key&&Object.hasOwn(state.customer,key)){state.customer[key]=e.target.value.slice(0,120);saveCustomerSession();const warning=el('basketValidation');if(warning)warning.hidden=true}});
+document.addEventListener('input',e=>{if(e.target.id==='catalogSearch'){state.query=e.target.value.slice(0,100);const rows=filterProducts();const results=el('catalogResults');if(results)results.innerHTML=catalogResults(rows);const counter=el('catalogResultCount');if(counter)counter.textContent=rows.length;const clear=document.querySelector('[data-clear-search]');if(clear)clear.hidden=!state.query;return}if(e.target.id==='checkoutPhone'){state.customer.phone=e.target.value.slice(0,16);const feedback=el('checkoutFeedback');if(feedback)feedback.hidden=true;return}if(e.target.id==='generalOrderNote'){state.generalNote=e.target.value.slice(0,500);save()}const key=e.target.dataset?.customer;if(key&&Object.hasOwn(state.customer,key)){state.customer[key]=e.target.value.slice(0,120);saveCustomerSession();const warning=el('basketValidation');if(warning)warning.hidden=true}});
 document.addEventListener('change',e=>{if(e.target.id==='sortSelect'){state.sort=e.target.value;render()}if(e.target.id==='priceFilter'){state.priceFilter=e.target.value;render()}if(e.target.id==='demoFilter'){state.demoFilter=e.target.value;render()}});
 el('globalSearch').addEventListener('input',e=>{state.query=e.target.value.trim();state.category='الكل';updateSuggestions();if(currentPath()==='/menu'){const panel=el('catalog');if(panel)panel.innerHTML=catalog()}});
 el('headerCart').onclick=()=>route('/cart');
