@@ -4569,6 +4569,25 @@ body :not(#__borderless_reset_a):not(#__borderless_reset_b):not(#__borderless_re
    top:76%!important;height:84%!important;
  }
 }
+
+/* Lower phone and both background circles further below the cropped hero edge,
+   phones and tablets only. Desktop presentation is unchanged. */
+@media(max-width:1024px){
+ #app.page #heroSlider .reference-hero-phone{
+   top:89%!important;bottom:auto!important;left:50%!important;
+   height:84%!important;transform:translate(-50%,-50%)!important;
+ }
+ #app.page #heroSlider .reference-hero-ring,
+ #app.page #heroSlider .reference-hero-disc{
+   top:auto!important;bottom:0!important;left:50%!important;
+   transform:translate(-50%,90%)!important;
+ }
+}
+@media(max-width:600px){
+ #app.page #heroSlider .reference-hero-phone{
+   top:90%!important;height:84%!important;
+ }
+}
 </style></head>
 <body>
 <header class="site-header"><div class="wrap header-inner">
