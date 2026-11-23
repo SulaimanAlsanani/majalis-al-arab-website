@@ -4304,6 +4304,57 @@ body :not(#__borderless_reset_a):not(#__borderless_reset_b):not(#__borderless_re
   .majalis-mobile-total-action{padding-inline:10px;font-size:11px}
 }
 @media(min-width:781px){.majalis-mobile-total{display:none!important}}
+
+/* Compact MAIN rotating banners for mobile and iPad only.
+   Hide long descriptions and campaign actions; preserve desktop exactly. */
+@media (max-width:1024px){
+ #app.page #heroSlider.hero-slider{
+   box-sizing:border-box!important;width:100%!important;max-width:100%!important;
+   height:clamp(240px,30vw,330px)!important;min-height:0!important;max-height:330px!important;
+   overflow:hidden!important;
+ }
+ #app.page #heroSlider .hero-track,
+ #app.page #heroSlider .hero-slide{height:100%!important;min-height:0!important}
+ #app.page #heroSlider .hero-slide .discovery-copy > p,
+ #app.page #heroSlider .hero-slide .discovery-actions,
+ #app.page #heroSlider .hero-slide .discovery-labels{
+   display:none!important;
+ }
+ #app.page #heroSlider .hero-slide .discovery-copy{
+   justify-content:center!important;gap:5px!important;
+   min-width:0!important;box-sizing:border-box!important;
+   padding:clamp(14px,2.4vw,25px)!important;
+ }
+ #app.page #heroSlider .hero-slide .discovery-copy h1{
+   margin:5px 0!important;line-height:1.22!important;
+   font-size:clamp(22px,3.2vw,32px)!important;
+ }
+ #app.page #heroSlider .hero-slide .discovery-visual{min-height:0!important}
+}
+@media (max-width:600px){
+ #app.page #heroSlider.hero-slider{
+   height:clamp(172px,52vw,225px)!important;max-height:225px!important;
+   margin-bottom:9px!important;
+ }
+ #app.page #heroSlider .hero-slide .discovery-copy{
+   width:59%!important;max-width:59%!important;
+   padding:clamp(9px,2.7vw,15px)!important;gap:3px!important;
+ }
+ #app.page #heroSlider .hero-slide .discovery-visual{
+   width:41%!important;max-width:41%!important;min-height:0!important;
+   display:block!important;overflow:hidden!important;
+ }
+ #app.page #heroSlider .hero-slide .discovery-copy h1{
+   font-size:clamp(16px,4.5vw,22px)!important;line-height:1.2!important;
+   margin:2px 0!important;
+ }
+ #app.page #heroSlider .hero-slide .discovery-kicker{font-size:clamp(9px,2.5vw,11px)!important}
+ #app.page #heroSlider .hero-dots{bottom:5px!important}
+}
+@media (max-width:360px){
+ #app.page #heroSlider.hero-slider{height:172px!important}
+ #app.page #heroSlider .hero-slide .discovery-copy h1{font-size:16px!important}
+}
 </style></head>
 <body>
 <header class="site-header"><div class="wrap header-inner">
