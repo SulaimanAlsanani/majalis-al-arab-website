@@ -4627,6 +4627,26 @@ body :not(#__borderless_reset_a):not(#__borderless_reset_b):not(#__borderless_re
    left:12%!important;bottom:-28%!important;
  }
 }
+
+/* Keep the full left/right arc of the hero ring visible on mobile.
+   The bottom arc may remain clipped as part of the composition. */
+@media(max-width:600px){
+ #app.page #heroSlider .reference-hero-ring{
+   box-sizing:border-box!important;
+   width:84%!important;max-width:84%!important;
+   left:8%!important;right:auto!important;
+   top:auto!important;bottom:-24%!important;
+   transform:none!important;
+   border-width:clamp(9px,2.7vw,13px)!important;
+ }
+ #app.page #heroSlider .reference-hero-disc{
+   box-sizing:border-box!important;
+   width:60%!important;max-width:60%!important;
+   left:20%!important;right:auto!important;
+   top:auto!important;bottom:-18%!important;
+   transform:none!important;
+ }
+}
 </style></head>
 <body>
 <header class="site-header"><div class="wrap header-inner">
