@@ -4101,6 +4101,38 @@ body :not(#__borderless_reset_a):not(#__borderless_reset_b):not(#__borderless_re
 .hs-future-capabilities p{font-size:12px;color:#6C696B;line-height:1.75;margin:0;flex:1}
 .hs-future-capabilities button:disabled{cursor:not-allowed;opacity:.6}
 @media(max-width:690px){.hs-visit-story,.hs-future-capabilities{grid-template-columns:1fr}.hs-visit-food img{width:120px;height:110px}.hs-card-quick{font-size:9px;padding:5px 8px}.hs-visit-food strong,.hs-visit-proof strong{font-size:14px}}
+
+/* Three bundle shortcuts in a dedicated horizontal row below the copy. */
+.hs-bundle-panel{display:flex!important;flex-direction:column!important;align-items:stretch!important;justify-content:center!important;gap:0!important}
+.hs-bundle-panel>div:first-child{width:100%!important;max-width:750px!important;min-width:0!important}
+.hs-bundle-panel .hs-bundle-actions{
+ display:grid!important;grid-template-columns:repeat(3,minmax(0,1fr))!important;
+ align-items:center!important;gap:clamp(9px,1.3vw,15px)!important;
+ width:min(100%,660px)!important;max-width:100%!important;
+ margin:clamp(19px,2.3vw,27px) 0 0!important;padding:0!important;
+ flex-wrap:nowrap!important;box-sizing:border-box!important;
+}
+.hs-bundle-panel .hs-bundle-actions button{
+ display:flex!important;align-items:center!important;justify-content:center!important;
+ position:static!important;transform:none!important;min-width:0!important;
+ min-height:45px!important;width:100%!important;margin:0!important;
+ padding:10px 12px!important;text-align:center!important;white-space:nowrap!important;
+ box-sizing:border-box!important;line-height:1.45!important;font-size:clamp(11px,1vw,13px)!important;
+}
+@media(max-width:650px){
+ .hs-bundle-panel .hs-bundle-actions{
+  width:100%!important;grid-template-columns:repeat(3,minmax(0,1fr))!important;
+  gap:7px!important;margin-top:18px!important;
+ }
+ .hs-bundle-panel .hs-bundle-actions button{
+  min-height:42px!important;padding:9px 5px!important;
+  font-size:clamp(9px,2.45vw,11px)!important;
+ }
+}
+@media(max-width:350px){
+ .hs-bundle-panel .hs-bundle-actions{display:flex!important;overflow-x:auto!important;gap:8px!important;scrollbar-width:thin;scroll-snap-type:x mandatory}
+ .hs-bundle-panel .hs-bundle-actions button{flex:0 0 auto!important;width:auto!important;min-width:100px!important;scroll-snap-align:start}
+}
 </style></head>
 <body>
 <header class="site-header"><div class="wrap header-inner">
