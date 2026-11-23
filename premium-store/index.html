@@ -4489,142 +4489,63 @@ body :not(#__borderless_reset_a):not(#__borderless_reset_b):not(#__borderless_re
  .majalis-promo{min-height:120px!important}
 }
 
-/* Mobile-specific campaign layout — desktop styling remains unchanged. */
-@media (max-width:600px){
- #app.page #heroSlider.hero-slider{
-   display:block!important;width:100%!important;max-width:100%!important;
-   height:clamp(190px,58vw,260px)!important;min-height:0!important;max-height:260px!important;
-   border-radius:14px!important;overflow:hidden!important;margin-block:0 10px!important;
- }
- #app.page #heroSlider .hero-track{display:flex!important;align-items:stretch!important;height:100%!important}
- #app.page #heroSlider .hero-slide{
-   position:relative!important;display:block!important;flex:0 0 100%!important;
-   width:100%!important;min-width:0!important;height:100%!important;min-height:0!important;
-   overflow:hidden!important;
- }
- #app.page #heroSlider .hero-slide .discovery-copy{
-   position:absolute!important;inset-inline-start:0!important;inset-inline-end:auto!important;
-   top:0!important;bottom:0!important;width:57%!important;max-width:57%!important;
-   height:100%!important;min-height:0!important;padding:clamp(12px,3vw,19px)!important;
-   display:flex!important;flex-direction:column!important;justify-content:center!important;
-   align-items:flex-start!important;gap:5px!important;z-index:5!important;
-   box-sizing:border-box!important;overflow:hidden!important;
- }
- #app.page #heroSlider .hero-slide .discovery-copy h1{
-   font-size:clamp(17px,4.65vw,24px)!important;line-height:1.23!important;
-   letter-spacing:0!important;margin:3px 0!important;
-   max-width:100%!important;overflow-wrap:break-word!important;
- }
- #app.page #heroSlider .hero-slide .discovery-kicker{font-size:clamp(9px,2.4vw,11px)!important;line-height:1.35!important}
- #app.page #heroSlider .hero-slide .discovery-visual{
-   position:absolute!important;inset-inline-end:0!important;inset-inline-start:auto!important;
-   top:0!important;bottom:0!important;width:43%!important;height:100%!important;
-   min-height:0!important;display:block!important;opacity:1!important;overflow:hidden!important;
- }
- #app.page #heroSlider .reference-hero-art{position:absolute!important;inset:0!important;overflow:hidden!important}
- #app.page #heroSlider .reference-hero-phone{
-   position:absolute!important;box-sizing:border-box!important;left:50%!important;
-   top:50%!important;transform:translate(-50%,-50%)!important;
-   width:min(76%,135px)!important;height:88%!important;min-height:0!important;
-   max-width:calc(100% - 12px)!important;
-   padding:3px!important;border:2px solid #454044!important;border-radius:17px!important;
-   overflow:hidden!important;box-shadow:0 5px 13px #24140c25!important;
- }
- #app.page #heroSlider .reference-hero-screen{
-   box-sizing:border-box!important;width:100%!important;height:100%!important;
-   min-height:0!important;overflow:hidden!important;padding:4px!important;
-   background:#fff9f8!important;border-radius:12px!important;
-   display:flex!important;flex-direction:column!important;gap:2px!important;
- }
- #app.page #heroSlider .reference-phone-status{
-   flex:0 0 10px!important;height:10px!important;min-height:0!important;
-   font-size:6px!important;line-height:9px!important;padding:0 2px!important;
- }
- #app.page #heroSlider .reference-phone-notch{height:5px!important;top:-1px!important}
- #app.page #heroSlider .reference-phone-top{
-   flex:0 0 auto!important;font-size:7px!important;line-height:1.2!important;
-   padding:1px 2px!important;gap:2px!important;
- }
- #app.page #heroSlider .reference-phone-search{
-   flex:0 0 auto!important;font-size:6px!important;line-height:1.2!important;
-   padding:4px 3px!important;margin:1px 0!important;border-radius:5px!important;
-   white-space:nowrap!important;overflow:hidden!important;text-overflow:ellipsis!important;
- }
- #app.page #heroSlider .reference-phone-feature{
-   flex:0 1 32%!important;height:auto!important;min-height:0!important;
-   border-radius:6px!important;overflow:hidden!important;
- }
- #app.page #heroSlider .reference-phone-feature img{
-   display:block!important;width:90%!important;max-width:100%!important;
-   height:100%!important;object-fit:contain!important;
- }
- #app.page #heroSlider .reference-phone-feature strong{
-   bottom:2px!important;right:2px!important;padding:1px 2px!important;
-   font-size:6px!important;line-height:1.1!important;max-width:96%!important;
-   overflow:hidden!important;text-overflow:ellipsis!important;white-space:nowrap!important;
- }
- #app.page #heroSlider .reference-phone-caption{
-   flex:0 0 auto!important;font-size:7px!important;line-height:1.2!important;
-   padding:2px 1px!important;white-space:nowrap!important;
- }
- #app.page #heroSlider .reference-phone-grid{
-   flex:1 1 auto!important;min-height:0!important;
-   display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;
-   grid-template-rows:repeat(2,minmax(0,1fr))!important;gap:3px!important;
-   overflow:hidden!important;
- }
- #app.page #heroSlider .reference-phone-grid span{
-   height:auto!important;min-height:0!important;overflow:hidden!important;border-radius:5px!important;
- }
- #app.page #heroSlider .reference-phone-grid img{
-   display:block!important;width:100%!important;height:100%!important;object-fit:contain!important;
- }
- #app.page #heroSlider .reference-phone-navbar{
-   flex:0 0 8px!important;margin-top:0!important;
-   padding:2px!important;display:flex!important;align-items:center!important;
- }
- #app.page #heroSlider .reference-phone-navbar i{width:9px!important;height:3px!important}
- #app.page #heroSlider .reference-food-float{
-   width:clamp(26px,8vw,42px)!important;max-width:30%!important;
-   max-height:32%!important;object-fit:contain!important;
- }
- #app.page #heroSlider .reference-float-three{display:none!important}
- #app.page #heroSlider .hero-dots{bottom:4px!important}
- /* Secondary campaign cards use the same compact side-by-side concept. */
- #app.page .story-banner{
-   display:grid!important;grid-template-columns:minmax(0,59%) minmax(0,41%)!important;
-   min-height:clamp(160px,46vw,215px)!important;height:auto!important;
-   margin-block:11px!important;overflow:hidden!important;
- }
- #app.page .story-banner .story-copy{min-width:0!important;padding:clamp(12px,3vw,18px)!important;gap:5px!important}
- #app.page .story-banner .story-copy h2{font-size:clamp(16px,4.4vw,22px)!important;line-height:1.25!important}
- #app.page .story-banner .story-visual{min-height:0!important;height:100%!important;overflow:hidden!important}
- #app.page .story-banner .story-floating-main{max-width:87%!important;max-height:82%!important;object-fit:contain!important}
- #app.page .majalis-promo{min-height:clamp(133px,39vw,180px)!important;grid-template-columns:minmax(0,58%) minmax(0,42%)!important}
- #app.page .majalis-promo .majalis-promo-copy{padding:clamp(10px,2.8vw,17px)!important}
- #app.page .majalis-promo .majalis-promo-copy h2{font-size:clamp(16px,4.1vw,21px)!important}
- #app.page .majalis-promo .majalis-promo-art{position:relative!important;min-width:0!important;overflow:hidden!important}
- #app.page .majalis-promo-phone{
-   box-sizing:border-box!important;width:min(35%,62px)!important;min-width:0!important;
-   max-width:62px!important;height:76%!important;top:12%!important;
-   padding:10px 3px 3px!important;border-width:3px!important;border-radius:11px!important;
- }
- #app.page .majalis-promo-phone strong{font-size:6px!important;white-space:nowrap!important}
- #app.page .majalis-promo-phone small{
-   font-size:5px!important;margin:3px 0!important;padding:2px!important;white-space:nowrap!important;overflow:hidden!important;
- }
- #app.page .majalis-promo-phone img{height:54%!important;max-height:54%!important;object-fit:contain!important}
- #app.page .editorial-banner{overflow:hidden!important}
- #app.page .editorial-banner .editorial-disc{transform:scale(.72)!important}
- #app.page .promo-box{min-height:clamp(110px,31vw,145px)!important}
+/* Compact promotional artwork on mobile and iPad only: remove campaign CTAs, not navigation controls. */
+@media (max-width:1024px){
+  #heroSlider .hero-slide .discovery-actions,
+  .story-banner .story-copy > button,
+  .majalis-promo .majalis-promo-copy > button,
+  .editorial-banner .editorial-copy > button,
+  .promo-box > b,
+  .menu-qr-banner > .menu-banner-cta,
+  .hs-bundle-panel .hs-bundle-actions{
+    display:none!important;
+  }
+  #heroSlider .hero-slide .discovery-copy > h1{font-size:clamp(20px,3.1vw,32px)!important;line-height:1.21!important;margin-block:3px!important}
+  #heroSlider .hero-slide .discovery-kicker{font-size:clamp(9px,1.2vw,11px)!important}
+  .story-banner .story-copy h2{font-size:clamp(19px,2.65vw,28px)!important;line-height:1.23!important;margin-block:3px!important}
+  .story-banner .story-kicker{font-size:clamp(9px,1.15vw,11px)!important}
+  .majalis-promo .majalis-promo-copy h2{font-size:clamp(18px,2.55vw,27px)!important;line-height:1.25!important;margin-block:3px!important}
+  .editorial-banner .editorial-copy h2{font-size:clamp(20px,2.7vw,28px)!important;line-height:1.24!important;margin-block:3px!important}
+  .promo-box h3{font-size:clamp(17px,2.45vw,24px)!important;line-height:1.25!important;margin-block:3px!important}
+  .menu-qr-banner .menu-banner-message h2{font-size:clamp(17px,2.5vw,25px)!important;line-height:1.3!important;margin-block:3px!important}
+  .hs-bundle-panel h2{font-size:clamp(19px,2.6vw,27px)!important}
+  .offers-masthead h2{font-size:clamp(21px,2.75vw,30px)!important;line-height:1.25!important}
+  #heroSlider .hero-slide .discovery-visual,
+  .story-banner .story-visual,
+  .majalis-promo .majalis-promo-art{min-width:0!important}
+  .story-banner .story-floating-main,.story-banner .story-floating-third{max-width:100%!important}
+  .editorial-banner .editorial-disc{transform:scale(.88);transform-origin:center}
+  .promo-box > i{font-size:clamp(22px,3.5vw,36px)!important}
+  .hs-bundle-panel{padding:clamp(14px,2vw,24px)!important}
 }
-@media(max-width:370px){
- #app.page #heroSlider.hero-slider{height:190px!important}
- #app.page #heroSlider .hero-slide .discovery-copy h1{font-size:16px!important}
- #app.page #heroSlider .reference-hero-phone{width:min(75%,103px)!important;height:84%!important}
- #app.page #heroSlider .reference-phone-feature{flex-basis:30%!important}
- #app.page #heroSlider .reference-phone-grid{gap:2px!important}
- #app.page .story-banner{min-height:160px!important}
+@media (max-width:600px){
+  #heroSlider .hero-slide .discovery-copy{gap:2px!important;padding:clamp(9px,2.5vw,13px)!important}
+  #heroSlider .hero-slide .discovery-copy > h1{font-size:clamp(16px,4.15vw,21px)!important;line-height:1.22!important}
+  #heroSlider .hero-slide .discovery-kicker{font-size:9px!important}
+  #heroSlider.hero-slider{height:clamp(170px,46vw,205px)!important;max-height:205px!important}
+  .story-banner{min-height:clamp(132px,36vw,165px)!important}
+  .story-banner .story-copy{gap:3px!important;padding:clamp(9px,2.4vw,13px)!important}
+  .story-banner .story-copy h2{font-size:clamp(15px,3.9vw,19px)!important}
+  .story-banner .story-kicker{font-size:9px!important}
+  .majalis-promo{min-height:clamp(108px,30vw,135px)!important}
+  .majalis-promo .majalis-promo-copy{gap:3px!important;padding:clamp(9px,2.5vw,13px)!important}
+  .majalis-promo .majalis-promo-copy h2{font-size:clamp(15px,4vw,19px)!important}
+  .editorial-banner .editorial-copy h2{font-size:clamp(17px,4.25vw,21px)!important}
+  .editorial-banner .editorial-disc{transform:scale(.75)}
+  .promo-box{min-height:clamp(93px,26vw,120px)!important}
+  .promo-box h3{font-size:clamp(14px,3.7vw,18px)!important}
+  .promo-box > i{font-size:24px!important}
+  .menu-qr-banner .menu-banner-message h2{font-size:clamp(15px,3.9vw,19px)!important}
+  .menu-qr-banner .menu-banner-mark{transform:scale(.85);transform-origin:center}
+  .hs-bundle-panel h2{font-size:clamp(17px,4.2vw,21px)!important}
+  .offers-masthead h2{font-size:clamp(18px,4.8vw,24px)!important}
+  .offers-big-icon{font-size:clamp(35px,9vw,47px)!important}
+}
+@media (max-width:360px){
+  #heroSlider.hero-slider{height:170px!important}
+  #heroSlider .hero-slide .discovery-copy > h1{font-size:16px!important}
+  .story-banner{min-height:132px!important}
+  .majalis-promo{min-height:108px!important}
 }
 </style></head>
 <body>
