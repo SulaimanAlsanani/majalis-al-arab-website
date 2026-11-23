@@ -4373,6 +4373,67 @@ body :not(#__borderless_reset_a):not(#__borderless_reset_b):not(#__borderless_re
  .story-banner{min-height:184px!important}
  .story-banner .story-copy h2{font-size:16px!important}
 }
+
+/* Tight, content-led campaign spacing on phones and tablets.
+   Overrides historical oversized banner margins without changing artwork or copy. */
+@media (max-width:1024px){
+ #app.page :is(#heroSlider,.story-banner,.majalis-promo,.editorial-banner,.promo-box,.menu-qr-banner,.offers-masthead){box-sizing:border-box!important;max-width:100%!important}
+ #heroSlider.hero-slider{margin-block:0 clamp(8px,1.5vw,13px)!important}
+ .story-banner{margin-block:clamp(9px,1.6vw,16px)!important}
+ .home-content-group+.story-banner{margin-top:clamp(9px,1.6vw,16px)!important}
+ .story-banner.story-experiences+.home-experience-section{margin-top:clamp(10px,1.8vw,17px)!important}
+ .home-offers-group .promo-two{gap:clamp(7px,1.1vw,12px)!important}
+ .editorial-banner{margin-block:clamp(9px,1.6vw,15px)!important}
+ .majalis-promo{margin-block:clamp(8px,1.4vw,14px)!important}
+ .menu-qr-banner{margin-block:clamp(8px,1.6vw,16px)!important}
+ .story-banner .story-copy,.majalis-promo-copy,.editorial-banner .editorial-copy{min-width:0!important;box-sizing:border-box!important}
+ .story-banner .story-copy :is(h2,p),.majalis-promo-copy :is(h2,p),.editorial-banner .editorial-copy :is(h2,p){max-width:100%!important;overflow-wrap:break-word}
+}
+@media (min-width:601px) and (max-width:1024px){
+ #heroSlider.hero-slider{height:clamp(275px,34vw,350px)!important;max-height:350px!important}
+ #heroSlider .hero-slide .discovery-copy{padding:clamp(14px,2.15vw,23px)!important;gap:8px!important}
+ #heroSlider .hero-slide .discovery-copy h1{margin-block:5px!important}
+ #heroSlider .hero-slide .discovery-copy p{margin-block:3px!important}
+ #heroSlider .hero-slide .discovery-actions{margin-top:6px!important;gap:8px!important}
+ .story-banner{min-height:clamp(210px,24vw,265px)!important}
+ .story-banner .story-copy{padding:clamp(15px,2vw,23px)!important;gap:7px!important}
+ .story-banner .story-visual{min-height:0!important}
+ .majalis-promo{min-height:190px!important}
+ .offers-masthead{min-height:0!important;padding:clamp(17px,2.4vw,25px)!important}
+ .promo-box{min-height:145px!important}
+ .menu-qr-banner{min-height:0!important}
+}
+@media (max-width:600px){
+ #heroSlider.hero-slider{height:clamp(205px,57vw,250px)!important;min-height:0!important;max-height:250px!important}
+ #heroSlider .hero-slide .discovery-copy{padding:clamp(9px,2.8vw,14px)!important;gap:3px!important}
+ #heroSlider .hero-slide .discovery-copy :is(h1,p){margin-block:2px!important}
+ #heroSlider .hero-slide .discovery-actions{margin-top:3px!important;gap:4px!important}
+ #heroSlider .hero-slide .discovery-kicker{margin:0!important}
+ #heroSlider .hero-slide .discovery-labels{display:none!important}
+ #heroSlider .hero-dots{bottom:3px!important}
+ .story-banner{min-height:clamp(165px,45vw,205px)!important;margin-block:9px!important}
+ .story-banner .story-copy{padding:clamp(9px,2.8vw,14px)!important;gap:4px!important}
+ .story-banner .story-copy :is(h2,p){margin-block:2px!important}
+ .story-banner .story-copy button{margin-top:3px!important}
+ .story-banner .story-visual{min-height:0!important}
+ .majalis-promo{min-height:clamp(135px,38vw,172px)!important;margin-block:8px!important}
+ .majalis-promo-copy{padding:clamp(9px,2.7vw,14px)!important;gap:4px!important}
+ .majalis-promo-copy :is(h2,p){margin-block:2px!important}
+ .editorial-banner{margin-block:9px!important}
+ .editorial-banner .editorial-copy{padding:clamp(12px,3vw,17px)!important;gap:5px!important}
+ .editorial-banner .editorial-copy :is(h2,p){margin-block:3px!important}
+ .editorial-banner .editorial-art{min-height:65px!important;max-height:85px!important}
+ .offers-masthead{padding:clamp(12px,3.2vw,18px)!important;margin-bottom:12px!important;gap:8px!important}
+ .offers-masthead h2{margin-block:4px!important}
+ .promo-two{gap:7px!important}
+ .promo-box{min-height:clamp(108px,32vw,140px)!important;padding:clamp(9px,2.7vw,14px)!important}
+ .menu-qr-banner{padding:clamp(9px,2.7vw,13px)!important;gap:7px!important}
+}
+@media (max-width:360px){
+ #heroSlider.hero-slider{height:205px!important}
+ .story-banner{min-height:165px!important}
+ .majalis-promo{min-height:135px!important}
+}
 </style></head>
 <body>
 <header class="site-header"><div class="wrap header-inner">
