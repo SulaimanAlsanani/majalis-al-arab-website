@@ -4172,6 +4172,35 @@ body :not(#__borderless_reset_a):not(#__borderless_reset_b):not(#__borderless_re
 @media(max-width:1050px){.hs-menu-layout{grid-template-columns:minmax(0,1fr) 250px}.hs-menu-layout .panel-head{display:block}.hs-menu-layout .catalog-toolbar{margin-top:13px}}
 @media(max-width:780px){.hs-menu-layout{display:block}.hs-menu-layout .side-cart{display:none}.hs-menu-heading{padding-top:18px}.hs-menu-heading h1{font-size:26px}.hs-menu-heading-actions button{padding:10px 12px}.hs-menu-disclaimer{margin-bottom:17px}.hs-menu-browse{margin-bottom:16px}}
 @media(max-width:480px){.hs-menu-heading{align-items:flex-start;gap:13px}.hs-menu-heading h1{font-size:23px}.hs-menu-heading p{font-size:11px}.hs-menu-heading-actions{flex-direction:column;gap:6px}.hs-menu-heading-actions button{padding:7px 10px;font-size:10px;width:88px}.hs-menu-browse-title span{display:none}.hs-menu-page .quick-nav button{padding:9px 12px!important;font-size:11px!important}.hs-menu-layout .catalog-toolbar{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}.hs-menu-layout .catalog-toolbar label{min-width:0;flex:auto}.hs-menu-layout .catalog-toolbar label:first-child{grid-column:span 2}.hs-menu-layout .panel-head h2{font-size:22px}}
+
+/* Compact menu: category rail + search and filters in a single aligned row. */
+.hs-menu-page{padding-top:clamp(8px,1.4vw,16px)!important}
+.hs-menu-page .hs-menu-browse{margin:0 0 clamp(14px,2vw,23px)!important;padding:0 0 clamp(11px,1.4vw,17px)!important}
+.hs-menu-page .quick-nav{padding:3px 0 7px!important}
+.hs-menu-page .hs-menu-tool-row{display:grid!important;grid-template-columns:minmax(220px,1.1fr) repeat(3,minmax(112px,.75fr))!important;align-items:end!important;gap:clamp(9px,1.1vw,14px)!important;margin:0 0 20px!important;min-width:0!important}
+.hs-menu-page .hs-menu-tool-row .catalog-search-row{grid-column:1!important;width:100%!important;max-width:none!important;min-width:0!important;margin:0!important}
+.hs-menu-page .hs-menu-tool-row .catalog-search-label{display:block!important;margin:0 0 6px!important;font-size:11px!important;line-height:1.35!important}
+.hs-menu-page .hs-menu-tool-row .catalog-search-field{height:43px!important;min-height:43px!important;max-width:100%!important;padding-inline:11px!important}
+.hs-menu-page .hs-menu-tool-row .catalog-search-field input{min-width:0!important;width:100%!important;font-size:12px!important}
+.hs-menu-page .hs-menu-tool-row .catalog-toolbar{grid-column:2 / -1!important;display:grid!important;grid-template-columns:repeat(3,minmax(0,1fr))!important;align-items:end!important;gap:clamp(9px,1.1vw,14px)!important;width:100%!important;max-width:100%!important;margin:0!important;padding:0!important}
+.hs-menu-page .hs-menu-tool-row .catalog-toolbar label{display:flex!important;flex-direction:column!important;gap:6px!important;min-width:0!important;width:100%!important;margin:0!important;font-size:11px!important;line-height:1.35!important}
+.hs-menu-page .hs-menu-tool-row .catalog-toolbar select{display:block!important;width:100%!important;min-width:0!important;max-width:100%!important;min-height:43px!important;height:43px!important;padding:0 10px!important;box-sizing:border-box!important;font-size:11px!important;text-overflow:ellipsis!important;white-space:nowrap!important}
+.hs-menu-page .hs-menu-layout .catalog-panel{min-width:0!important}
+.hs-menu-page .hs-menu-layout #catalogResults{margin-top:0!important}
+@media(max-width:1170px){
+ .hs-menu-page .hs-menu-tool-row{grid-template-columns:minmax(190px,1fr) minmax(0,1.8fr)!important}
+ .hs-menu-page .hs-menu-tool-row .catalog-toolbar{grid-column:2!important}
+}
+@media(max-width:700px){
+ .hs-menu-page .hs-menu-tool-row{grid-template-columns:1fr!important;gap:11px!important}
+ .hs-menu-page .hs-menu-tool-row .catalog-search-row{grid-column:1!important}
+ .hs-menu-page .hs-menu-tool-row .catalog-toolbar{grid-column:1!important;grid-template-columns:repeat(3,minmax(0,1fr))!important;gap:7px!important}
+ .hs-menu-page .hs-menu-tool-row .catalog-toolbar select{padding:0 5px!important;font-size:10px!important}
+}
+@media(max-width:360px){
+ .hs-menu-page .hs-menu-tool-row .catalog-toolbar{grid-template-columns:repeat(2,minmax(0,1fr))!important}
+ .hs-menu-page .hs-menu-tool-row .catalog-toolbar label:first-child{grid-column:1 / -1!important}
+}
 </style></head>
 <body>
 <header class="site-header"><div class="wrap header-inner">
@@ -4413,8 +4442,7 @@ function catalogResults(rows){return rows.length?'<div class="product-grid">'+ro
 function catalog(){
  const rows=filterProducts();
  const selected=(v,current)=>v===current?'selected':'';
- return '<div class="catalog-search-row"><label for="catalogSearch" class="catalog-search-label">ابحث في القائمة</label><div class="catalog-search-field"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m16 16 5 5"/></svg><input id="catalogSearch" type="search" inputmode="search" autocomplete="off" placeholder="ابحث عن وجبة أو مشروب..." value="'+escapeHtml(state.query)+'" aria-controls="catalogResults" aria-label="البحث في قائمة الطعام"><button type="button" data-clear-search aria-label="مسح البحث" '+(state.query?'':'hidden')+'>مسح</button></div></div><div class="panel-head"><div><h2>'+(state.category==='الكل'?'قائمة الطعام':escapeHtml(state.category))+'</h2><p><span id="catalogResultCount" aria-live="polite">'+rows.length+'</span> صنف مطابق · الأسعار للمعاينة حتى اعتماد ربط Odoo</p></div>'+
- '<div class="catalog-toolbar"><label>ترتيب <select id="sortSelect" class="sort-select" aria-label="ترتيب الأصناف"><option value="default" '+selected('default',state.sort)+'>ترتيب القائمة</option><option value="asc" '+selected('asc',state.sort)+'>السعر: الأقل أولًا</option><option value="desc" '+selected('desc',state.sort)+'>السعر: الأعلى أولًا</option><option value="name" '+selected('name',state.sort)+'>حسب الاسم</option></select></label>'+
+ return '<div class="hs-menu-tool-row"><div class="catalog-search-row"><label for="catalogSearch" class="catalog-search-label">ابحث في القائمة</label><div class="catalog-search-field"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m16 16 5 5"/></svg><input id="catalogSearch" type="search" inputmode="search" autocomplete="off" placeholder="ابحث عن وجبة أو مشروب..." value="'+escapeHtml(state.query)+'" aria-controls="catalogResults" aria-label="البحث في قائمة الطعام"><button type="button" data-clear-search aria-label="مسح البحث" '+(state.query?'':'hidden')+'>مسح</button></div></div><div class="catalog-toolbar"><label>ترتيب <select id="sortSelect" class="sort-select" aria-label="ترتيب الأصناف"><option value="default" '+selected('default',state.sort)+'>ترتيب القائمة</option><option value="asc" '+selected('asc',state.sort)+'>السعر: الأقل أولًا</option><option value="desc" '+selected('desc',state.sort)+'>السعر: الأعلى أولًا</option><option value="name" '+selected('name',state.sort)+'>حسب الاسم</option></select></label>'+
  '<label>السعر <select id="priceFilter" class="sort-select" aria-label="تصفية حسب السعر"><option value="all" '+selected('all',state.priceFilter)+'>جميع الأسعار</option><option value="under20" '+selected('under20',state.priceFilter)+'>أقل من 20 ر.س</option><option value="20to50" '+selected('20to50',state.priceFilter)+'>من 20 إلى 50</option><option value="above50" '+selected('above50',state.priceFilter)+'>أكثر من 50</option></select></label>'+
  '<label>المنتجات <select id="demoFilter" class="sort-select" aria-label="تصفية حسب نوع الصنف"><option value="all" '+selected('all',state.demoFilter)+'>كل الأصناف</option><option value="catalog" '+selected('catalog',state.demoFilter)+'>القائمة الأساسية</option><option value="demo" '+selected('demo',state.demoFilter)+'>الأصناف التجريبية</option></select></label></div></div>'+
  '<div id="catalogResults">'+catalogResults(rows)+'</div>';
@@ -4705,10 +4733,7 @@ function renderHome(){
 }
 function renderMenu(){
  el('app').innerHTML='<div class="hs-menu-page">'+
- '<header class="hs-menu-heading"><div><span class="hs-menu-kicker">قائمة مجالس العرب</span><h1>وش خاطرك فيه اليوم؟</h1><p>تصفح الأصناف حسب الفئة، وابحث وخصص طلبك بكل سهولة.</p></div>'+
- '<div class="hs-menu-heading-actions"><button type="button" data-go="/favorites">♡ المفضلة</button><button type="button" data-go="/cart">السلة <span class="hs-menu-cart-count">'+count()+'</span></button></div></header>'+
- '<div class="hs-menu-disclaimer" role="note">الأسعار والأصناف المعروضة للمعاينة حتى اعتماد الكتالوج وربط الطلبات.</div>'+
- '<section class="hs-menu-browse" aria-label="تصفح حسب الفئة"><div class="hs-menu-browse-title"><strong>الأقسام</strong><span>اختر فئة لتصفية الأصناف</span></div>'+quickNav()+'</section>'+
+ '<nav class="hs-menu-browse" aria-label="فئات الطعام">'+quickNav()+'</nav>'+
  '<div class="shop-layout hs-menu-layout"><section class="catalog-panel" id="catalog">'+catalog()+'</section>'+sideCart()+'</div></div>';
 }
 function renderDetail(id){const p=productById(id);if(!p){route('/');return}rememberViewed(id);const draft=state.detailDraft&&state.detailDraft.id===id?state.detailDraft:null;const related=PRODUCTS.filter(x=>x.id!==p.id&&x.category===p.category).slice(0,3);const crumb='<button class="back-link" data-back>→ العودة إلى قائمة الطعام</button>';el('app').innerHTML=crumb+'<article class="detail-route"><div class="detail-layout"><div class="detail-image">'+imgTag(p)+'</div><div class="detail-info"><span class="eyebrow">'+escapeHtml(p.category)+(p.demo?' · صنف تجريبي':'')+'</span><h1>'+escapeHtml(p.name)+'</h1><div class="detail-price-row"><div class="amount">'+money(p.price)+'</div><button type="button" class="detail-favorite" data-fav="'+p.id+'" aria-label="حفظ '+escapeHtml(p.name)+' في المفضلة" aria-pressed="'+state.favorites.includes(p.id)+'">'+CARD_HEART+'</button></div><p class="detail-description">اختر الكمية المناسبة وسجّل ملاحظات التحضير إن رغبت. لا تتوفر بيانات مؤكدة عن المكونات والحساسية والسعرات حتى استكمال ربط القائمة.'+(p.demo?' هذا الصنف وسعره افتراضيان لغرض المعاينة فقط.':'')+'</p><div class="option-box"><h3>الأحجام والتخصيص</h3>'+availableSizes(p)+'</div><label class="field-label" for="itemNote">ملاحظات للمطبخ (اختياري)</label><textarea class="note-input" maxlength="250" id="itemNote" placeholder="مثال: بدون فلفل — يخضع لتأكيد المطعم">'+escapeHtml(draft?.note||'')+'</textarea><div class="detail-controls"><div class="stepper"><button id="qtyMinus" aria-label="تقليل الكمية">−</button><span id="selectedQty" aria-live="polite">'+(draft?.qty||1)+'</span><button id="qtyPlus" aria-label="زيادة الكمية">+</button></div><button class="solid-action" id="addSelected" '+(p.available===false?'disabled aria-disabled="true"':'')+'>'+(p.available===false?'غير متوفر':'أضف للسلة')+' · <span id="selectedTotal">'+money(p.price*(draft?.qty||1))+'</span></button></div><div class="detail-order-actions"><button type="button" class="detail-back-shopping" data-go="/menu">متابعة تصفح القائمة</button><span>إضافة المنتجات للسلة تجريبية ولا تنشئ طلبًا فعليًا.</span></div></div></div></article>'+(related.length?'<section class="recs"><h2>أصناف قد تعجبك</h2><div class="product-grid">'+related.map(card).join('')+'</div></section>':'');state.quantity=draft?.qty||1;state.note=draft?.note||'';state.currentProduct=id;state.origin='/menu';state.detailDraft=null}
