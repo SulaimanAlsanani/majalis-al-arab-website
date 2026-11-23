@@ -4452,6 +4452,56 @@ body :not(#__borderless_reset_a):not(#__borderless_reset_b):not(#__borderless_re
  #app.page #heroSlider .reference-float-two{left:2%!important;top:55%!important}
  #app.page #heroSlider .reference-float-three{display:none!important}
 }
+
+/* Mobile and tablet composition: exactly 80% of the ring stays inside the artwork,
+   the bottom 20% is clipped by the banner; food photos sit clear of the phone. */
+@media(max-width:1024px){
+ #app.page #heroSlider .reference-hero-ring{
+   top:auto!important;bottom:0!important;left:50%!important;
+   transform:translate(-50%,20%)!important;
+   width:min(84%,220px)!important;aspect-ratio:1!important;
+   border-radius:50%!important;box-sizing:border-box!important;
+ }
+ #app.page #heroSlider .reference-hero-disc{
+   top:auto!important;bottom:0!important;left:50%!important;
+   transform:translate(-50%,20%)!important;
+   width:min(64%,165px)!important;aspect-ratio:1!important;
+ }
+ #app.page #heroSlider .reference-food-float{
+   max-width:13%!important;width:clamp(18px,2.8vw,40px)!important;
+   max-height:22%!important;animation:none!important;translate:none!important;
+ }
+ #app.page #heroSlider .reference-float-one{
+   right:3%!important;left:auto!important;top:12%!important;bottom:auto!important;
+ }
+ #app.page #heroSlider .reference-float-two{
+   left:3%!important;right:auto!important;top:49%!important;bottom:auto!important;
+ }
+ #app.page #heroSlider .reference-float-three{
+   right:3%!important;left:auto!important;top:auto!important;bottom:10%!important;
+ }
+}
+@media(max-width:600px){
+ #app.page #heroSlider .reference-hero-ring{
+   width:84%!important;max-width:142px!important;
+   top:auto!important;bottom:0!important;left:50%!important;
+   transform:translate(-50%,20%)!important;
+ }
+ #app.page #heroSlider .reference-hero-disc{
+   width:63%!important;max-width:106px!important;
+   top:auto!important;bottom:0!important;left:50%!important;
+   transform:translate(-50%,20%)!important;
+ }
+ #app.page #heroSlider .reference-food-float{
+   width:11%!important;max-width:11%!important;max-height:18%!important;
+ }
+ #app.page #heroSlider .reference-float-one{
+   right:2%!important;top:13%!important;left:auto!important;bottom:auto!important;
+ }
+ #app.page #heroSlider .reference-float-two{
+   left:2%!important;top:54%!important;right:auto!important;bottom:auto!important;
+ }
+}
 </style></head>
 <body>
 <header class="site-header"><div class="wrap header-inner">
