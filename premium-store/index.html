@@ -4555,6 +4555,20 @@ body :not(#__borderless_reset_a):not(#__borderless_reset_b):not(#__borderless_re
  #app.page #heroSlider .reference-float-two{left:1%!important;bottom:14%!important}
  #app.page #heroSlider .reference-float-three{display:none!important}
 }
+
+/* Lower the decorative hero phone on mobile and iPad so its bottom is clipped
+   by the existing banner boundary. Desktop and other art remain unchanged. */
+@media(max-width:1024px){
+ #app.page #heroSlider .reference-hero-phone{
+   top:77%!important;bottom:auto!important;left:50%!important;
+   height:84%!important;transform:translate(-50%,-50%)!important;
+ }
+}
+@media(max-width:600px){
+ #app.page #heroSlider .reference-hero-phone{
+   top:76%!important;height:84%!important;
+ }
+}
 </style></head>
 <body>
 <header class="site-header"><div class="wrap header-inner">
