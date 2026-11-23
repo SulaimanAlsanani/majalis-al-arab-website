@@ -4921,7 +4921,7 @@ document.addEventListener('click',e=>{
   if(!count())return;
   if(currentPath()==='/checkout'){
    const review=el('checkoutReview');
-   if(review){review.scrollIntoView({behavior:'smooth',block:'center'});review.focus({preventScroll:true});}
+   if(review){review.click();if(!el('checkoutPreview')?.hidden){el('checkoutPreview').scrollIntoView({behavior:'smooth',block:'start'})}else{review.scrollIntoView({behavior:'smooth',block:'center'})}}
   }else route('/checkout');
   return;
  }
