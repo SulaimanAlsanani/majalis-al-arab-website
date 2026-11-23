@@ -4004,6 +4004,14 @@ body :not(#__borderless_reset_a):not(#__borderless_reset_b):not(#__borderless_re
 @media(max-width:420px){
  .story-banner.story-experiences .story-floating-main{left:5%!important;width:37%!important;height:60%!important}
 }
+
+/* Merchandising rhythm: editorial campaign per shopping cluster, not every product rail. */
+.home-content-group .home-showcase+.home-showcase{margin-top:clamp(26px,3.4vw,48px)!important}
+.story-banner+.home-content-group{margin-top:12px!important}
+.home-content-group+.story-banner{margin-top:clamp(28px,3.2vw,48px)!important}
+.story-banner.story-experiences+.home-experience-section{margin-top:clamp(20px,2.3vw,32px)!important}
+.home-content-group{padding-block:clamp(17px,2.5vw,30px)!important}
+@media(max-width:720px){.home-content-group .home-showcase+.home-showcase{margin-top:24px!important}.home-content-group+.story-banner{margin-top:26px!important}}
 </style></head>
 <body>
 <header class="site-header"><div class="wrap header-inner">
@@ -4477,29 +4485,36 @@ function renderHome(){
  el('app').innerHTML=
  homeBanner()+
  featureCategories()+
+ /* One prominent lifestyle banner immediately below the categories. */
  storyBanner('experiences')+
  homeExperiences()+
  homeSectionLinks()+
+ /* Breakfast and southern dishes share one editorial campaign. */
  storyBanner('breakfast')+
- '<section id="home-breakfast" tabindex="-1" class="home-content-group home-discover-group">'+group('الفطور والعشاء','فطور على الأصول','أصناف صباحية تناسب يومك','breakfast')+'</section>'+
- storyBanner('southern')+
+ '<section id="home-breakfast" tabindex="-1" class="home-content-group home-discover-group">'+
+ group('الفطور والعشاء','فطور على الأصول','أصناف صباحية تناسب يومك','breakfast')+
  group('العريكة والمعصوب','نكهات الجنوب','العريكة والمعصوب والفتة','south')+
+ '</section>'+
+ /* Main dishes + quick bites: one banner, multiple shoppable rails. */
  storyBanner('grills')+
+ '<section class="home-content-group home-discover-group" aria-label="الأطباق الرئيسية والوجبات الخفيفة">'+
  group('المشويات والأطباق الرئيسية','أطباق رئيسية ومشويات','أطباق للغداء والعشاء','grills')+
- storyBanner('sandwiches')+
  group('السندويتشات','سندويتشات ورولات','خيارات سهلة وسريعة','sandwiches')+
- storyBanner('salads')+
  group('الإيدامات والسلطات','سلطات وإيدامات','أطباق خفيفة ومكملات للسفرة','salads')+
- storyBanner('appetizers')+
  group('المقبلات','مقبلات تكمل الطلب','خيارات لبدء السفرة','appetizers')+
+ '</section>'+
+ /* Sharing gets a dedicated banner for its own product rail. */
  storyBanner('family')+
+ '<section class="home-content-group home-offers-group" aria-label="وجبات المشاركة">'+
  group('الوجبات العائلية','للجلسات واللمة','أطباق مشاركة وعائلية تجريبية','family')+
- storyBanner('dessert')+
- group('الحلا','وقت الحلا','حلويات تكمل الوجبة','sweet')+
+ '</section>'+
+ /* One closing coffee campaign for desserts and drinks, not a banner for each rail. */
  storyBanner('coffee')+
- '<section id="home-coffee" tabindex="-1" class="home-content-group home-taste-group">'+group('القهوة المختصة','قهوة ومزاج','اختيارات محبي القهوة','coffee')+'</section>'+
- storyBanner('drinks')+
+ '<section id="home-coffee" tabindex="-1" class="home-content-group home-taste-group">'+
+ group('الحلا','وقت الحلا','حلويات تكمل الوجبة','sweet')+
+ group('القهوة المختصة','قهوة ومزاج','اختيارات محبي القهوة','coffee')+
  group('المشروبات','المشروبات','خيارات باردة وساخنة','drinks')+
+ '</section>'+
  homeTrustStrip()+homeFinalActions()+homepageDisclosure();
 }
 function renderMenu(){el('app').innerHTML=serviceModeBanner()+quickNav()+'<div class="shop-layout"><section class="catalog-panel" id="catalog">'+catalog()+'</section>'+sideCart()+'</div>'}
