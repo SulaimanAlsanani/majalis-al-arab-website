@@ -11,44 +11,49 @@ test('homepage shows visible search, active banner, categories, and usable cart 
   await page.screenshot({path: 'test-results/home-' + test.info().project.name + '.png', fullPage: true});
 });
 
-test('meal cards inset the complete photo above the product details', async ({page}) => {
+test('meal cards show a right-side photo with icon-only cart and favorite actions', async ({page}) => {
   await page.goto('/#/menu');
   const cards=page.locator('.product-grid .product-card');
-  await expect(cards.first()).toBeVisible();
-  expect(await cards.count()).toBeGreaterThan(20);
-  const first = cards.first();
-  const photo = first.locator('.card-photo');
+  const first=cards.first();
+  const photo=first.locator('.card-photo');
+  const add=first.locator('.add-button');
+  const favorite=first.locator('.card-favorite-toggle');
   await expect(photo).toHaveAccessibleName(/تفاصيل.*ر\.س/);
-  await expect(photo).toHaveCSS('background-color', 'rgb(247, 243, 241)');
+  expect(await cards.count()).toBeGreaterThan(20);
   await expect(photo.locator('img')).toHaveCSS('object-fit', 'contain');
-  await expect(first.locator('.card-title')).toBeVisible();
+  await expect(first.locator('.meal-category')).not.toBeEmpty();
   await expect(first.locator('.card-price')).toContainText('ر.س');
-  await expect(first.locator('.add-button svg')).toBeVisible();
-  await expect(first.locator('.add-button')).toHaveAccessibleName(/أضف .* إلى السلة/);
-  await expect(first.locator('.add-button')).toHaveText('');
-  const dimensions = await photo.evaluate(node => {
-    const image = node.getBoundingClientRect();
-    const artwork = node.querySelector('img').getBoundingClientRect();
-    const card = node.closest('.product-card');
-    const cardRect = card.getBoundingClientRect();
-    const title = card.querySelector('.card-title').getBoundingClientRect();
-    const price = card.querySelector('.card-price').getBoundingClientRect();
-    const add = card.querySelector('.add-button').getBoundingClientRect();
+  await expect(add).toHaveAccessibleName(/أضف .* إلى السلة/);
+  await expect(add.locator('svg')).toBeVisible();
+  await expect(favorite.locator('svg')).toBeVisible();
+  await expect(add).toHaveText('');
+  await expect(favorite).toHaveText('');
+
+  const layout=await photo.evaluate(node=>{
+    const image=node.getBoundingClientRect();
+    const artwork=node.querySelector('img').getBoundingClientRect();
+    const card=node.closest('.product-card');
+    const category=card.querySelector('.meal-category').getBoundingClientRect();
+    const name=card.querySelector('.meal-name').getBoundingClientRect();
+    const price=card.querySelector('.meal-price').getBoundingClientRect();
+    const actions=card.querySelector('.meal-actions').getBoundingClientRect();
     return {
-      ratio: image.width / image.height,
-      frameInset: image.left > cardRect.left && image.right < cardRect.right && image.top > cardRect.top,
-      artworkInset: artwork.width < image.width && artwork.height < image.height,
-      detailsBelowPhoto: [title, price, add].every(rect => rect.top >= image.bottom),
-      priceBelowTitle: price.top >= title.bottom,
-      addOnLeft: add.right <= title.left
+      ratio:image.width/image.height,
+      artworkInset:artwork.width<image.width&&artwork.height<image.height,
+      imageOnRight:[category,name,price,actions].every(rect=>rect.right<=image.left),
+      ordered:category.bottom<=name.top&&name.bottom<=price.top&&price.bottom<=actions.top
     };
   });
-  expect(dimensions.ratio).toBeCloseTo(21 / 10, 1);
-  expect(dimensions.frameInset).toBe(true);
-  expect(dimensions.artworkInset).toBe(true);
-  expect(dimensions.detailsBelowPhoto).toBe(true);
-  expect(dimensions.priceBelowTitle).toBe(true);
-  expect(dimensions.addOnLeft).toBe(true);
+  expect(layout.ratio).toBeCloseTo(19/20,1);
+  expect(layout.artworkInset).toBe(true);
+  expect(layout.imageOnRight).toBe(true);
+  expect(layout.ordered).toBe(true);
+  await favorite.click();
+  await expect(favorite).toHaveAttribute('aria-pressed','true');
+  await add.click();
+  await expect(page.locator('#headerCount')).toHaveText('1');
+  await page.goto('/#/cart');
+  await expect(page.locator('.basket-suggestion-grid .meal-row').first().locator('.add-button svg')).toBeVisible();
 });
 
 test('search with Arabic text, filters and product detail notes are functional', async ({page}) => {

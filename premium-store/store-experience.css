@@ -28,3 +28,94 @@
   .preview-statuses { grid-template-columns:repeat(2,minmax(0,1fr)); }
   .experience-field-grid { grid-template-columns:1fr; }
 }
+
+/* Horizontal meal cards use the same layout in the menu, rails and suggestions. */
+#app.page :is(.product-grid,.hs-complementary-grid,.basket-suggestion-grid):has(> .meal-row) {
+  grid-template-columns:repeat(2,minmax(0,1fr))!important;
+  gap:clamp(10px,2vw,26px)!important;
+}
+
+#app.page .product-rail > .meal-row {
+  flex:0 0 calc((100% - 18px)/2)!important;
+}
+
+#app.page .product-card.meal-row {
+  display:grid!important;
+  grid-template-columns:clamp(70px,10vw,114px) minmax(0,1fr)!important;
+  align-items:center;
+  gap:clamp(10px,1.4vw,16px);
+  padding:clamp(8px,1.4vw,16px)!important;
+  border:0!important;
+  background:#fff!important;
+  box-shadow:none!important;
+}
+
+#app.page .meal-row .product-card-image-wrap {
+  margin:0!important;
+  border-radius:16px!important;
+  background:#eef0f0!important;
+}
+
+#app.page .meal-row .card-photo {
+  display:block!important;
+  position:relative!important;
+  height:auto!important;
+  aspect-ratio:19/20!important;
+  background:#eef0f0!important;
+  border-radius:16px!important;
+}
+
+#app.page .meal-row .card-photo img {
+  position:absolute!important;
+  inset:5%!important;
+  width:90%!important;
+  height:90%!important;
+  object-fit:contain!important;
+}
+
+#app.page .meal-row .card-body {
+  display:flex!important;
+  flex-direction:column!important;
+  align-items:flex-start!important;
+  gap:4px!important;
+  min-width:0;
+  padding:0!important;
+}
+
+.meal-category {
+  color:#667582;
+  font-size:.8rem;
+  line-height:1.4;
+  overflow-wrap:anywhere;
+}
+
+.meal-name { margin:0; max-width:100%; }
+#app.page .meal-row .card-title {
+  display:block!important;
+  font-size:clamp(14px,1.3vw,18px)!important;
+  font-weight:700!important;
+  color:#c71d39!important;
+  white-space:normal!important;
+  overflow:visible!important;
+  overflow-wrap:anywhere;
+}
+.meal-price { display:flex; flex-wrap:wrap; align-items:baseline; gap:6px; }
+.meal-actions { display:flex; align-items:center; gap:6px; }
+#app.page .meal-actions :is(.add-button,.card-favorite-toggle) {
+  display:grid!important;
+  place-items:center!important;
+  width:36px!important;
+  height:36px!important;
+  min-width:36px!important;
+  min-height:36px!important;
+}
+#app.page .meal-actions .card-favorite-toggle:not([aria-pressed="true"]) { color:#7d7076!important; }
+#app.page .meal-actions .add-button:focus-visible { outline:2px solid #b63255; outline-offset:-2px; }
+
+@media(max-width:640px) {
+  #app.page :is(.product-grid,.hs-complementary-grid,.basket-suggestion-grid):has(> .meal-row) {
+    grid-template-columns:minmax(0,1fr)!important;
+  }
+  #app.page .product-rail > .meal-row { flex-basis:min(300px,86%)!important; }
+  #app.page .product-card.meal-row { grid-template-columns:84px minmax(0,1fr)!important; }
+}
