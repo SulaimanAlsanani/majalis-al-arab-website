@@ -1,4 +1,5 @@
 const { test, expect } = require('@playwright/test');
+const { readFile } = require('node:fs/promises');
 
 test('homepage shows visible search, active banner, categories, and usable cart control', async ({page}) => {
   await page.goto('/');
@@ -117,4 +118,64 @@ test('no horizontal page overflow across storefront routes and viewport widths',
       expect(main.x+main.width,'Main content shifted outside right at '+route+' / '+width).toBeLessThanOrEqual(width+2);
     }
   }
+});
+
+test('checkout reviews pickup and delivery with localized phone numbers and current details', async ({page, context, baseURL}) => {
+  await context.grantPermissions(['geolocation']);
+  await context.setGeolocation({latitude:18.2167, longitude:42.5041});
+  const checkoutRequests = [];
+  page.on('request', request => {
+    if (request.url().startsWith(baseURL) && request.method() !== 'GET') checkoutRequests.push(request.url());
+  });
+  await page.goto('/#/product/1');
+  await page.locator('#itemNote').fill('بدون فلفل');
+  await page.locator('#qtyPlus').click();
+  await page.locator('#addSelected').click();
+  await expect(page.locator('.basket-item')).toContainText('بدون فلفل');
+  await page.reload();
+  await expect(page.locator('#headerCount')).toHaveText('2');
+
+  const continueButton = page.locator('[data-mobile-continue]');
+  const mobile = await continueButton.isVisible();
+  await (mobile ? continueButton : page.locator('#goCheckout')).click();
+  await expect(page).toHaveURL(/#\/checkout$/);
+  const review = mobile ? continueButton : page.locator('#checkoutReview');
+  const panel = page.locator('#checkoutPreview');
+  const phone = page.locator('#checkoutPhone');
+  const address = page.locator('#checkoutAddress');
+  await review.click();
+  await expect(phone).toBeFocused();
+  await expect(phone).toHaveAttribute('aria-invalid', 'true');
+
+  await phone.fill('٠٥٠ ١٢٣ ٤٥٦٧');
+  await review.click();
+  await expect(panel).toContainText('+966501234567');
+  await expect(panel).toContainText('طريق المطار، أبها');
+  await expect(panel).toContainText('بدون فلفل');
+
+  await page.locator('[data-checkout-mode="delivery"]').click();
+  await review.click();
+  await expect(address).toHaveAttribute('aria-invalid', 'true');
+  await address.fill('أبها، حي المنسك، شارع <تجريبي>');
+  await review.click();
+  await expect(panel).toContainText('أبها، حي المنسك، شارع <تجريبي>');
+  const pendingDownload = page.waitForEvent('download');
+  await panel.locator('[data-download-order-summary]').click();
+  const download = await pendingDownload;
+  const summary = await readFile(await download.path(), 'utf8');
+  expect(download.suggestedFilename()).toBe('majalis-demo-order-summary.txt');
+  expect(summary).toContain('أبها، حي المنسك، شارع <تجريبي>');
+  expect(summary).toContain('\nرقم التواصل: +966501234567');
+  await address.fill('');
+  await expect(panel).toBeHidden();
+
+  await page.locator('#locateMe').click();
+  await expect(page.locator('#clearCheckoutLocation')).toBeVisible();
+  await review.click();
+  await expect(panel).toContainText('18.21670, 42.50410');
+  await page.locator('#clearCheckoutLocation').click();
+  await review.click();
+  await expect(address).toHaveAttribute('aria-invalid', 'true');
+  await expect(panel).toBeHidden();
+  expect(checkoutRequests).toEqual([]);
 });
