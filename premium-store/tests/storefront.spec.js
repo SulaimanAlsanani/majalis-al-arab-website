@@ -238,7 +238,7 @@ test('meal rows increase to three columns only when the catalog has room', async
   await page.goto('/#/menu');
   const cards = page.locator('#catalogResults .meal-row');
   await expect(cards.first()).toBeVisible();
-  for (const [width, columns] of [[1440,3],[900,2],[390,1]]) {
+  for (const [width, columns] of [[1440,3],[900,2],[390,2],[320,2]]) {
     await page.setViewportSize({ width, height:900 });
     const firstRowCount = await cards.evaluateAll(items => {
       const firstTop = items[0].getBoundingClientRect().top;
