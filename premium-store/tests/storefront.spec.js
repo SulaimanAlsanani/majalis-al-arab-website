@@ -179,3 +179,52 @@ test('checkout reviews pickup and delivery with localized phone numbers and curr
   await expect(panel).toBeHidden();
   expect(checkoutRequests).toEqual([]);
 });
+
+test('demo order flow applies saved address and discount, tracks status and reorders', async ({page}) => {
+  await page.goto('/#/addresses');
+  await page.locator('[name="label"]').fill('البيت');
+  await page.locator('[name="address"]').fill('أبها، عنوان للمعاينة');
+  await page.locator('#previewAddressForm [type="submit"]').click();
+  await expect(page.getByRole('heading', {name:'البيت'})).toBeVisible();
+  await page.goto('/#/menu');
+  await page.locator('[data-service-mode="delivery"]').click();
+  await expect(page.locator('[data-service-mode="delivery"]')).toHaveAttribute('aria-pressed','true');
+  await page.goto('/#/product/1');
+  await page.locator('#addSelected').click();
+  await expect(page).toHaveURL(/#\/cart$/);
+  await page.goto('/#/checkout');
+  await page.locator('#previewSavedAddress').selectOption({label:'البيت'});
+  await expect(page.locator('#checkoutAddress')).toHaveValue('أبها، عنوان للمعاينة');
+  await page.locator('#checkoutPhone').fill('0500000000');
+  await page.locator('#previewCoupon').fill('MAJALIS10');
+  await page.locator('#previewCouponForm [type="submit"]').click();
+  await expect(page.getByText('الخصم التجريبي',{exact:true})).toBeVisible();
+  await page.locator('#previewPayment').selectOption('card');
+  await page.locator('#checkoutReview').click();
+  await expect(page.locator('#checkoutPreview')).toContainText('مدى (محاكاة)');
+  await page.locator('[data-experience="save-order"]').click();
+  await expect(page).toHaveURL(/#\/orders$/);
+  await expect(page.locator('.preview-statuses [aria-current="step"]')).toHaveText('استُلِم الطلب');
+  await page.locator('[data-experience="advance"]').click();
+  await expect(page.locator('.preview-statuses [aria-current="step"]')).toHaveText('قيد التجهيز');
+  await page.reload();
+  await expect(page.locator('.preview-statuses [aria-current="step"]')).toHaveText('قيد التجهيز');
+  await page.locator('[data-experience="reorder"]').click();
+  await expect(page.locator('#headerCount')).toHaveText('1');
+});
+
+test('seating draft saves date, party size and hospitality without making a reservation', async ({page}) => {
+  await page.goto('/#/seating');
+  await page.locator('[name="guests"]').fill('4');
+  const date = page.locator('[name="date"]');
+  await date.fill(await date.getAttribute('min'));
+  await page.locator('[name="time"]').fill('19:00');
+  await page.locator('[name="hospitality"]').selectOption({index:1});
+  await page.locator('#previewBookingForm [type="submit"]').click();
+  const summary = page.locator('.experience-booking-summary');
+  await expect(summary).toContainText('4 ضيوف');
+  await expect(summary).toContainText('19:00');
+  await expect(summary.getByRole('link')).toHaveAttribute('href', /^https:\/\/wa\.me\//);
+  await page.reload();
+  await expect(summary).toBeVisible();
+});
