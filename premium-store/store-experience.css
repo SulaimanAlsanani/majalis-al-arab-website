@@ -129,8 +129,27 @@
 
 @media(max-width:640px) {
   #app.page :is(.product-grid,.hs-complementary-grid,.basket-suggestion-grid):has(> .meal-row) {
-    grid-template-columns:minmax(0,1fr)!important;
+    grid-template-columns:repeat(2,minmax(0,1fr))!important;
+    --meal-list-gap:8px;
   }
-  #app.page .product-rail > .meal-row { flex-basis:min(276px,80%)!important; }
-  #app.page .product-card.meal-row { grid-template-columns:70px minmax(0,1fr)!important; }
+  #app.page :is(.product-grid,.hs-complementary-grid,.basket-suggestion-grid) > .meal-row {
+    inline-size:100%;
+  }
+  #app.page .product-rail:has(> .meal-row) { --meal-rail-gap:8px; }
+  #app.page .product-card.meal-row {
+    grid-template-columns:clamp(36px,11vw,64px) minmax(0,1fr)!important;
+    gap:5px;
+    padding:5px!important;
+  }
+  #app.page .meal-row :is(.product-card-image-wrap,.card-photo) { border-radius:10px!important; }
+  #app.page .meal-row .card-title { font-size:clamp(11px,3.2vw,15px)!important; }
+  .meal-category { font-size:.65rem; }
+  .meal-actions { gap:2px; }
+  #app.page .meal-actions :is(.add-button,.card-favorite-toggle) {
+    flex:0 0 26px!important;
+    width:26px!important;
+    height:28px!important;
+    min-width:26px!important;
+    min-height:28px!important;
+  }
 }
