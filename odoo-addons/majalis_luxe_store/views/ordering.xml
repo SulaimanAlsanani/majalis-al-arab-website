@@ -29,5 +29,39 @@
         <xpath expr="//t[@t-call='website_sale.checkout_layout']/div[hasclass('col')]/h3[1]" position="attributes">
             <attribute name="t-if">not website.majalis_luxe_store</attribute>
         </xpath>
+        <xpath expr="//t[@t-call='website_sale.cart_lines']" position="after">
+            <form t-if="website.majalis_luxe_store and website_sale_order and website_sale_order.website_order_line"
+                  id="majalis_preparation_note_form" class="border rounded-3 p-3 p-md-4 my-3"
+                  action="/shop/majalis/order-note" method="post">
+                <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"
+                       t-nocache="The csrf token must always be up to date."/>
+                <input type="hidden" name="cart_id" t-att-value="website_sale_order.id"/>
+                <label for="majalis_preparation_note" class="form-label fw-bold">ملاحظة التحضير (اختياري)</label>
+                <textarea id="majalis_preparation_note" name="preparation_note" class="form-control"
+                          rows="3" maxlength="500" aria-describedby="majalis_preparation_note_help"
+                          placeholder="مثال: الصلصات على جنب"><t t-out="website_sale_order.majalis_preparation_note or ''"/></textarea>
+                <p id="majalis_preparation_note_help" class="small text-muted mt-2 mb-2">تطبّق على الطلب كاملًا. الحد الأقصى 500 حرف.</p>
+                <p t-if="request.params.get('majalis_note') == 'saved'" class="small text-success" role="status">تم حفظ الملاحظة.</p>
+                <p t-if="request.params.get('majalis_note') == 'too_long'" class="small text-danger" role="alert">اختصر ملاحظة التحضير إلى 500 حرف.</p>
+                <button type="submit" name="action" value="save" class="btn btn-outline-secondary btn-sm">حفظ الملاحظة</button>
+            </form>
+            <p t-if="website.majalis_luxe_store and request.params.get('majalis_note') == 'cart_changed'"
+               class="alert alert-warning mt-3" role="alert">تغيّرت السلة. راجع الأصناف وأعد إدخال الملاحظة.</p>
+        </xpath>
+    </template>
+
+    <template id="cart_save_note_navigation" inherit_id="website_sale.navigation_buttons" name="Majalis save preparation note on checkout">
+        <xpath expr="//a[@name='website_sale_main_button']" position="before">
+            <button t-if="website.majalis_luxe_store and xmlid == 'website_sale.cart'"
+                    type="submit" form="majalis_preparation_note_form" name="action" value="checkout"
+                    t-attf-class="#{_cta_classes or ''} btn btn-primary w-100"
+                    t-att-disabled="not website_sale_order._is_cart_ready()">
+                <t t-out="step_specific_values['main_button']"/>
+                <i class="fa fa-angle-right ms-2 fw-light" aria-hidden="true"/>
+            </button>
+        </xpath>
+        <xpath expr="//a[@name='website_sale_main_button']" position="attributes">
+            <attribute name="t-if">not (website.majalis_luxe_store and xmlid == 'website_sale.cart')</attribute>
+        </xpath>
     </template>
 </odoo>

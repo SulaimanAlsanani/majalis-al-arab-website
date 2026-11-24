@@ -9,6 +9,35 @@ from odoo.tools import format_amount
 
 class MajalisShop(WebsiteSale):
 
+    @route('/shop/majalis/order-note', type='http', auth='public', website=True, methods=['POST'], csrf=True)
+    def majalis_order_note(self, cart_id=None, preparation_note='', action='save', **_post):
+        website = request.website
+        if not website.majalis_luxe_store or not website.has_ecommerce_access():
+            raise NotFound()
+
+        order = website.sale_get_order()
+        if (
+            not order
+            or cart_id != str(order.id)
+            or order.website_id != website
+            or order.state != 'draft'
+            or not order.website_order_line
+        ):
+            return request.redirect('/shop/cart?majalis_note=cart_changed', code=303)
+
+        note = preparation_note.replace('\r\n', '\n').replace('\r', '\n').strip()
+        if len(note) > 500:
+            return request.redirect('/shop/cart?majalis_note=too_long', code=303)
+
+        if note != (order.majalis_preparation_note or ''):
+            order.majalis_preparation_note = note or False
+
+        if action == 'checkout':
+            checkout_step = website._get_checkout_steps('website_sale.cart')
+            return request.redirect(checkout_step['main_button_href'], code=303)
+
+        return request.redirect('/shop/cart?majalis_note=saved', code=303)
+
     def _get_additional_extra_shop_values(self, values, **post):
         extra = super()._get_additional_extra_shop_values(values, **post)
         website = request.website
