@@ -233,3 +233,17 @@ test('seating draft saves date, party size and hospitality without making a rese
   await page.reload();
   await expect(summary).toBeVisible();
 });
+
+test('meal rows increase to three columns only when the catalog has room', async ({page}) => {
+  await page.goto('/#/menu');
+  const cards = page.locator('#catalogResults .meal-row');
+  await expect(cards.first()).toBeVisible();
+  for (const [width, columns] of [[1440,3],[900,2],[390,1]]) {
+    await page.setViewportSize({ width, height:900 });
+    const firstRowCount = await cards.evaluateAll(items => {
+      const firstTop = items[0].getBoundingClientRect().top;
+      return items.filter(item => Math.abs(item.getBoundingClientRect().top - firstTop)<1).length;
+    });
+    expect(firstRowCount, 'meal columns at '+width+'px').toBe(columns);
+  }
+});

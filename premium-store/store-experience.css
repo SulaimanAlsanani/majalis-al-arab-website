@@ -31,12 +31,22 @@
 
 /* Horizontal meal cards use the same layout in the menu, rails and suggestions. */
 #app.page :is(.product-grid,.hs-complementary-grid,.basket-suggestion-grid):has(> .meal-row) {
-  grid-template-columns:repeat(2,minmax(0,1fr))!important;
-  gap:clamp(10px,2vw,26px)!important;
+  --meal-list-gap:clamp(10px,2vw,26px);
+  grid-template-columns:repeat(auto-fit,minmax(min(100%,max(264px,(100% - 2 * var(--meal-list-gap))/3)),1fr))!important;
+  gap:var(--meal-list-gap)!important;
 }
 
+#app.page .product-rail:has(> .meal-row) {
+  --meal-rail-gap:14px;
+  --visible-meal-cards:2;
+  gap:var(--meal-rail-gap);
+}
 #app.page .product-rail > .meal-row {
-  flex:0 0 calc((100% - 18px)/2)!important;
+  flex:0 0 calc((100% + var(--meal-rail-gap))/var(--visible-meal-cards) - var(--meal-rail-gap))!important;
+}
+
+@media(min-width:1024px) {
+  #app.page .product-rail:has(> .meal-row) { --visible-meal-cards:3; }
 }
 
 #app.page .product-card.meal-row {
