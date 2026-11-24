@@ -54,7 +54,7 @@
   grid-template-columns:clamp(68px,8.5vw,96px) minmax(0,1fr)!important;
   align-items:center;
   gap:clamp(8px,1.1vw,14px);
-  padding:clamp(7px,1vw,11px)!important;
+  padding:clamp(6px,.8vw,9px) clamp(7px,1vw,11px)!important;
   border:0!important;
   background:#fff!important;
   box-shadow:none!important;
@@ -92,7 +92,7 @@
   display:flex!important;
   flex-direction:column!important;
   align-items:flex-start!important;
-  gap:3px!important;
+  gap:2px!important;
   min-width:0;
   padding:0!important;
 }
