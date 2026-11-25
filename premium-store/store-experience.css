@@ -194,3 +194,32 @@
   gap:var(--home-section-gap);
   padding-block:0!important;
 }
+
+/* Secondary banners use 80% of their original minimum height and can grow with the copy. */
+#app.page > .story-banner {
+  --story-min-height:clamp(204px,20.8vw,292px);
+  min-height:var(--story-min-height)!important;
+}
+#app.page > .story-banner .story-visual {
+  min-height:var(--story-min-height)!important;
+}
+#app.page > .story-banner .story-copy {
+  padding-block:clamp(12px,1.5vw,24px)!important;
+  gap:7px!important;
+}
+#app.page > .story-banner .story-copy button { margin-top:3px; }
+
+@media(max-width:720px) {
+  #app.page > .story-banner { --story-min-height:168px; }
+  #app.page > .story-banner .story-copy {
+    padding-block:9px!important;
+    gap:5px!important;
+  }
+}
+@media(max-width:420px) {
+  #app.page > .story-banner { --story-min-height:140.8px; }
+  #app.page > .story-banner .story-copy {
+    padding-block:7px!important;
+    gap:4px!important;
+  }
+}
