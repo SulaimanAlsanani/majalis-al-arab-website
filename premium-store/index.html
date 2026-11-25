@@ -4921,22 +4921,68 @@ function catalog(){
 }
 function hero(){return '<div class="crumbs"><span>الرئيسية</span><span>›</span><span>مجالس العرب</span></div><section class="restaurant-hero"><div class="restaurant-cover"><div class="cover-decoration"></div><div class="cover-word">مجالس العرب<small>ضيافتك تبدأ من هنا</small></div></div><div class="restaurant-heading"><div class="restaurant-badge">☕</div><div class="restaurant-copy"><h1>مجالس العرب</h1><p>فطور سعودي · عريكة ومعصوب · مشروبات · جلسات</p><div class="restaurant-tags"><span>متجر تجريبي</span><span>'+PRODUCTS.length+' صنفًا للمعاينة</span><span>الاستلام والتوصيل: يتطلبان تفعيلًا</span></div></div><button class="outlined" data-contact-seating>الجلسات والحجوزات</button></div><div class="service-notice">القائمة تشمل '+DEMO_PRODUCTS.length+' صنفًا تجريبيًا إضافيًا لأغراض التصميم، وليست منتجات أو أسعارًا معتمدة لدى مجالس العرب. لا يمكن تنفيذ الطلبات أو الدفع حتى الربط والتحقق من الفرع.</div></section>'}
 function collectionStrip(){return '<div class="collection-strip"><button data-category="الفطور والعشاء"><span class="collection-icon"><img src="assets/categories/breakfast.png" alt="" loading="lazy" decoding="async" onerror="this.onerror=null;this.remove()"></span><strong>فطور على كيفك</strong><small>وجبات صباحية متنوعة</small></button><button data-category="العريكة والمعصوب"><span class="collection-icon"><img src="assets/categories/areeka-masoob.png" alt="" loading="lazy" decoding="async" onerror="this.onerror=null;this.remove()"></span><strong>نكهة الجنوب</strong><small>العريكة والمعصوب والفتة</small></button><button data-category="المشويات والأطباق الرئيسية"><span class="collection-icon"><img src="assets/categories/grills.png" alt="" loading="lazy" decoding="async" onerror="this.onerror=null;this.remove()"></span><strong>وجبات مشبعة</strong><small>أطباق رئيسية تجريبية</small></button><button data-category="الحلا"><span class="collection-icon"><img src="assets/categories/desserts.png" alt="" loading="lazy" decoding="async" onerror="this.onerror=null;this.remove()"></span><strong>وقت الحلا</strong><small>كيك وحلويات متنوعة</small></button><button data-category="المشروبات"><span class="collection-icon"><img src="assets/categories/drinks.png" alt="" loading="lazy" decoding="async" onerror="this.onerror=null;this.remove()"></span><strong>مشروباتك المفضلة</strong><small>شاي وعصائر وقهوة</small></button><button data-category="العروض التجريبية"><span class="collection-icon"><img src="assets/categories/family-meals.png" alt="" loading="lazy" decoding="async" onerror="this.onerror=null;this.remove()"></span><strong>مجموعات وعروض</strong><small>عروض افتراضية للعرض فقط</small></button></div>'}
-function homeBanner(){
- return '<section id="majalisHomeHero" class="majalis-home-hero" aria-labelledby="majalisHomeTitle">'+
-  '<img class="majalis-home-hero-photo" src="assets/home-hero.webp" alt="" width="1440" height="960" fetchpriority="high">'+
-  '<div class="majalis-home-hero-copy">'+
-   '<p class="majalis-home-location">مطاعم وديوانية مجالس العرب · أبها</p>'+
-   '<h1 id="majalisHomeTitle">أطباق سعودية<br>لجمعة الأهل والأصحاب</h1>'+
-   '<p>من فطور الصباح والعريكة إلى المشويات وقهوة الديوانية.</p>'+
-   '<div class="majalis-home-cta"><button class="majalis-home-primary" type="button" data-category="الكل">تصفح المنيو <span aria-hidden="true">←</span></button>'+
-   '<button class="majalis-home-secondary" type="button" data-go="/seating">الجلسات والضيافة</button></div>'+
-   '<form id="majalisHomeSearch" class="majalis-home-search"><input name="query" type="search" aria-label="ابحث في قائمة الطعام" placeholder="ابحث عن وجبة أو مشروب" maxlength="100">'+
-   '<button type="submit" aria-label="بحث"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="6"/><path d="m16 16 5 5"/></svg></button></form>'+
-  '</div></section>';
+const HERO_SLIDES=[
+{style:'drinks',image:'https://images.unsplash.com/photo-1600271886742-f049cd451bba?auto=format&fit=crop&w=1800&q=85',kicker:'🥤 قسم المشروبات',title:'اختَر مشروبك المفضل',em:'واستمتع بألذ النكهات',desc:'من العصائر الطازجة والمشروبات الباردة إلى القهوة والمشروبات الساخنة، اكتشف الخيارات المتنوعة واختر ما يناسب ذوقك ومزاجك اليوم.',primary:'المشروبات',category:'المشروبات',secondary:'القهوة المختصة',secondaryCategory:'القهوة المختصة',symbol:'🥤',short:'انتعاشك',art:'مشروبات'},
+{style:'main',image:'assets/categories/family-meals.png',kicker:'كل أطباقك المفضلة في مكان واحد',title:'اكتشف مجالس العرب',em:'واستمتع بأشهى الأطباق',desc:'من الفطور والأطباق الشعبية إلى المشويات والحلويات والقهوة، تصفح خيارات مجالس العرب واختر وجبتك المفضلة بكل سهولة ويسر.',primary:'قائمة الطعام',path:'/menu',secondary:'العروض التجريبية',secondaryPath:'/offers',symbol:'✦',short:'مجالس العرب',art:'اللمة أحلى'},
+{style:'breakfast',image:'https://images.unsplash.com/photo-1525351484163-7529414344d8?auto=format&fit=crop&w=1800&q=85',kicker:'🍳 قسم الفطور والعشاء',title:'ابدأ يومك بفطور',em:'واستمتع بطعم الأصالة',desc:'من الفول والشكشوكة إلى الكبدة والأطباق الشعبية، استكشف خيارات الفطور والعشاء واختر النكهات التي تفضلها في كل وقت.',primary:'قسم الفطور',category:'الفطور والعشاء',secondary:'القائمة الكاملة',secondaryPath:'/menu',symbol:'☀',short:'بداية مميزة',art:'فطورنا'},
+{style:'grills',image:'https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=1800&q=85',kicker:'🍗 قسم الأطباق الرئيسية',title:'اكتشف أشهى المشويات',em:'واستمتع بوجبات مميزة',desc:'من المشويات الطازجة إلى الأطباق الرئيسية المتنوعة، تصفح قائمة الوجبات واختر الطبق الذي يناسب شهيتك ويكمل لمّتك اليوم.',primary:'الأطباق الرئيسية',category:'المشويات والأطباق الرئيسية',secondary:'المنيو كامل',secondaryPath:'/menu',symbol:'🍗',short:'وجبات متنوعة',art:'الطبق الرئيسي'},
+{style:'southern',image:'https://images.unsplash.com/photo-1601050690597-df0568f70950?auto=format&fit=crop&w=1800&q=85',kicker:'🍯 قسم العريكة والمعصوب',title:'عش نكهات الجنوب',em:'واستمتع بأصالة المذاق',desc:'من العريكة والمعصوب إلى العسل والقشطة والتمر، استكشف خيارات الأطباق الجنوبية واختر ما يحلو لك من النكهات الأصيلة.',primary:'العريكة والمعصوب',category:'العريكة والمعصوب',secondary:'تصفح القائمة',secondaryPath:'/menu',symbol:'✺',short:'الطعم الأصيل',art:'جنوبية'},
+{style:'family',image:'https://images.unsplash.com/photo-1552566626-52f8b828add9?auto=format&fit=crop&w=1800&q=85',kicker:'🎁 الوجبات العائلية',title:'اجمع أحبابك حول',em:'واستمتع بأحلى لمّة',desc:'من الوجبات العائلية إلى خيارات المشاركة المتنوعة، تصفح الأطباق المناسبة للجلسات واجعل لمّتكم ألذ مع النكهات المفضلة للجميع.',primary:'الوجبات العائلية',category:'الوجبات العائلية',secondary:'العروض',secondaryPath:'/offers',symbol:'✦',short:'للأهل والأصحاب',art:'اللمة غير'},
+{style:'sandwiches',image:'https://images.unsplash.com/photo-1553909489-cd47e0ef937f?auto=format&fit=crop&w=1800&q=85',kicker:'🥪 قسم السندويتشات',title:'اختر ساندويتشك المفضل',em:'واستمتع بلقمة شهية',desc:'من السندويتشات الخفيفة إلى الوجبات السريعة، استكشف الخيارات المتنوعة واختر ما يناسب وقتك وشهيتك بكل سهولة وراحة دائمًا.',primary:'السندويتشات',category:'السندويتشات',secondary:'كل الأصناف',secondaryPath:'/menu',symbol:'🥪',short:'على السريع',art:'سندويتشات'},
+{style:'coffee',image:'https://images.unsplash.com/photo-1442512595331-e89e73853f31?auto=format&fit=crop&w=1800&q=85',kicker:'☕ القهوة المختصة',title:'خلّ قهوتك تضبط',em:'واستمتع بأجمل الأوقات',desc:'من القهوة المختصة إلى المشروبات الساخنة المتنوعة، استكشف أصناف القهوة واختر فنجانك المفضل لتكتمل جلستك على مزاجك تمامًا.',primary:'قسم القهوة',category:'القهوة المختصة',secondary:'الحلا',secondaryCategory:'الحلا',symbol:'☕',short:'وقت القهوة',art:'فنجانك'},
+{style:'dessert',image:'https://images.unsplash.com/photo-1578985545062-69928b1d9587?auto=format&fit=crop&w=1800&q=85',kicker:'🍰 قسم الحلا',title:'حلّ يومك بالحلا',em:'واستمتع بأشهى الحلويات',desc:'من الكيك والكريب إلى البان كيك وأصناف الحلا المتنوعة، استكشف الخيارات اللذيذة واختر التحلية المناسبة بعد وجبتك المفضلة.',primary:'قسم الحلا',category:'الحلا',secondary:'المشروبات',secondaryCategory:'المشروبات',symbol:'❋',short:'للحلو وقته',art:'الحلا'},
+{style:'sessions',image:'https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?auto=format&fit=crop&w=1800&q=85',kicker:'🛋️ الجلسات الخاصة',title:'اختَر جلستك المفضلة',em:'واستمتع بأحلى الأوقات',desc:'من الجلسات الخاصة إلى أجواء اللمة مع الأصدقاء والعائلة، استكشف خيارات الجلوس وتواصل مع الفرع للاستفسار عن التوفر.',primary:'استكشف الجلسات',path:'/help',secondary:'تواصل معنا',secondaryPath:'/help',symbol:'🛋️',short:'جلسات خاصة',art:'راحة وخصوصية'},
+{style:'offers',image:'https://images.unsplash.com/photo-1508424757105-b6d5ad9329d0?auto=format&fit=crop&w=1800&q=85',kicker:'✦ عروض تجريبية',title:'اكتشف أفكار العروض',em:'واستمتع بخيارات متنوعة',desc:'تصفح أفكار الباقات والعروض التجريبية لوجبات مجالس العرب، وتعرّف على خيارات المشاركة المعروضة للمعاينة فقط دون خصومات مؤكدة.',primary:'عرض الباقات التجريبية',path:'/offers',secondary:'القائمة الكاملة',secondaryPath:'/menu',symbol:'🎁',short:'للّمة الحلوة',art:'باقاتنا'},
+{style:'matches',image:'https://images.unsplash.com/photo-1574629810360-7efbbe195018?auto=format&fit=crop&w=1800&q=85',kicker:'⚽ المباريات',title:'عش حماس المباراة',em:'واستمتع بأجواء التشجيع',desc:'من جلسات مشاهدة المباريات إلى أجواء التشجيع مع الأصدقاء، استكشف الخيارات المتاحة واستفسر من الفرع عن مواعيد التوفر.',primary:'جلسات المباريات',path:'/help',secondary:'الاستفسارات',secondaryPath:'/help',symbol:'⚽',short:'شجع بحماس',art:'وقت المباراة'},
+{style:'playstation',image:'https://images.unsplash.com/photo-1542751371-adc38448a05e?auto=format&fit=crop&w=1800&q=85',kicker:'🎮 البلايستيشن',title:'جهّز وقت التحدي',em:'واستمتع بأجواء اللعب',desc:'من جلسات البلايستيشن إلى أوقات المنافسة مع الأصدقاء، استكشف خيارات الترفيه وتواصل مع الفرع للاستفسار عن الأجهزة والأوقات.',primary:'استفسر عن البلايستيشن',path:'/help',secondary:'تواصل مع الفرع',secondaryPath:'/help',symbol:'🎮',short:'وقت اللعب',art:'أجواء حماس'},
+{style:'salads',image:'https://images.unsplash.com/photo-1512621776951-a57141f2eefd?auto=format&fit=crop&w=1800&q=85',kicker:'🥗 قسم الإيدامات والسلطات',title:'كمّل سفرتك بالسلطات',em:'واستمتع بنكهات خفيفة',desc:'من السلطات الطازجة إلى الإيدامات والأطباق الجانبية، استكشف الخيارات المتنوعة وأضف إلى وجبتك ما يناسب ذوقك وشهيتك اليوم.',primary:'الإيدامات والسلطات',category:'الإيدامات والسلطات',secondary:'تصفح القائمة',secondaryPath:'/menu',symbol:'🥗',short:'إضافة لذيذة',art:'نكهات منوعة'},
+{style:'appetizers',image:'https://images.unsplash.com/photo-1573080496219-bb080dd4f877?auto=format&fit=crop&w=1800&q=85',kicker:'🍟 قسم المقبلات',title:'ابدأ وجبتك بالمقبلات',em:'واستمتع بلقمة لذيذة',desc:'من المقبلات الخفيفة إلى الأطباق الجانبية المتنوعة، تصفح الخيارات المتاحة واختر ما يفتح شهيتك ويكمل وجبتك اليوم دائمًا.',primary:'قسم المقبلات',category:'المقبلات',secondary:'بقية الأصناف',secondaryPath:'/menu',symbol:'🍟',short:'قبل الوجبة',art:'مقبلات'}
+];
+function heroAction(label,path,category,primary){return '<button type="button" class="'+(primary?'discover-btn':'discover-outline')+'" '+(category?'data-category="'+category+'"':'data-go="'+path+'"')+'>'+label+' ←</button>'}
+
+/* Photographic section compositions without illustrated icons or image-backed banners. */
+const HERO_DISPLAY_PHOTOS={"main":["photo-1544025162-d76694265947","photo-1553909489-cd47e0ef937f","photo-1578985545062-69928b1d9587"],"sessions":["photo-1517248135467-4c7edcad34c4","photo-1559339352-11d035aa65de","photo-1511920170033-f8396924c348"],"playstation":["photo-1535223289827-42f1e9919769","photo-1542751371-adc38448a05e","photo-1511512578047-dfb367046420"],"matches":["photo-1518091043644-c1d4457512c6","photo-1574629810360-7efbbe195018","photo-1522778119026-d647f0596c20"],"breakfast":["photo-1525351484163-7529414344d8","photo-1533089860892-a7c6f0a88666","photo-1490645935967-10de6ba17061"],"southern":["photo-1601050690597-df0568f70950","photo-1547592180-85f173990554","photo-1509440159596-0249088772ff"],"grills":["photo-1544025162-d76694265947","photo-1558030006-450675393462","photo-1432139555190-58524dae6a55"],"sandwiches":["photo-1553909489-cd47e0ef937f","photo-1568901346375-23c9450c58cd","photo-1528735602780-2552fd46c7af"],"salads":["photo-1512621776951-a57141f2eefd","photo-1490645935967-10de6ba17061","photo-1540420773420-3366772f4999"],"appetizers":["photo-1573080496219-bb080dd4f877","photo-1541592106381-b31e9677c0e5","photo-1562967914-608f82629710"],"family":["photo-1552566626-52f8b828add9","photo-1547592180-85f173990554","photo-1544025162-d76694265947"],"dessert":["photo-1578985545062-69928b1d9587","photo-1488477181946-6428a0291777","photo-1565958011703-44f9829ba187"],"coffee":["photo-1442512595331-e89e73853f31","photo-1509042239860-f550ce710b93","photo-1511920170033-f8396924c348"],"drinks":["photo-1600271886742-f049cd451bba","photo-1544145945-f90425340c7e","photo-1536935338788846bb9981813"],"offers":["photo-1552566626-52f8b828add9","photo-1568901346375-23c9450c58cd","photo-1578985545062-69928b1d9587"]};
+function heroCategoryArt(slide){
+ const local={
+ main:['breakfast','grills','sandwiches'],
+ sessions:['coffee','desserts','family-meals'],
+ playstation:['sandwiches','drinks','appetizers'],
+ matches:['grills','sandwiches','drinks'],
+ breakfast:['breakfast','areeka-masoob','coffee'],
+ southern:['areeka-masoob','breakfast','desserts'],
+ grills:['grills','family-meals','appetizers'],
+ sandwiches:['sandwiches','appetizers','drinks'],
+ salads:['salads','appetizers','breakfast'],
+ appetizers:['appetizers','grills','salads'],
+ family:['family-meals','grills','salads'],
+ dessert:['desserts','coffee','drinks'],
+ coffee:['coffee','desserts','areeka-masoob'],
+ drinks:['drinks','coffee','desserts'],
+ offers:['family-meals','grills','sandwiches']
+ };
+ const set=local[slide.style]||local.main;
+ const asset=(name)=>'assets/categories/'+name+'.png';
+ return '<div class="reference-hero-art" aria-hidden="true">'+
+  '<div class="reference-hero-ring"></div><div class="reference-hero-disc"></div>'+
+  '<div class="reference-hero-phone"><div class="reference-hero-screen">'+
+    '<div class="reference-phone-status"><span>9:41</span><span class="reference-phone-notch"></span><span>◖ ▰</span></div>'+
+    '<div class="reference-phone-top"><strong>مجالس العرب</strong><span>⌕</span></div>'+
+    '<div class="reference-phone-search">ابحث عن صنفك المفضل ⌕</div>'+
+    '<div class="reference-phone-feature"><img src="'+asset(set[0])+'" alt="" loading="lazy"></div>'+
+    '<div class="reference-phone-caption">وش تشتهي اليوم؟</div>'+
+    '<div class="reference-phone-grid">'+set.concat(set).slice(0,4).map((name)=>'<span><img src="'+asset(name)+'" alt="" loading="lazy"></span>').join('')+'</div>'+
+    '<div class="reference-phone-navbar"><i></i><i></i><i></i><i></i></div>'+
+   '</div></div>'+
+  '<img class="reference-food-float reference-float-one" src="'+asset(set[0])+'" alt="" loading="lazy">'+
+  '<img class="reference-food-float reference-float-two" src="'+asset(set[1])+'" alt="" loading="lazy">'+
+  '<img class="reference-food-float reference-float-three" src="'+asset(set[2])+'" alt="" loading="lazy">'+
+ '</div>';
 }
 
+function homeBanner(){return '<section class="hero-slider" id="heroSlider" aria-label="بنرات مجالس العرب المتحركة" aria-roledescription="عرض شرائح"><div class="hero-track" id="heroTrack">'+HERO_SLIDES.map((x,i)=>'<article class="discovery-hero hero-slide hero-'+x.style+'" aria-label="البنر '+(i+1)+' من '+HERO_SLIDES.length+'" aria-hidden="'+(i!==0)+'"><div class="discovery-copy"><span class="discovery-kicker">'+x.kicker+'</span><h1>'+x.title+'<br><em>'+x.em+'</em></h1><p>'+x.desc+'</p><div class="discovery-actions">'+heroAction(x.primary,x.path,x.category,true)+heroAction(x.secondary,x.secondaryPath,x.secondaryCategory,false)+'</div><div class="discovery-labels"><span>✦ تجربة تصفح تجريبية</span><span>✦ خيارات متنوعة</span></div></div><div class="discovery-visual">'+heroCategoryArt(x)+'</div></article>').join('')+'</div><div class="hero-dots" role="group" aria-label="اختيار البنر">'+HERO_SLIDES.map((_,i)=>'<button type="button" data-hero-index="'+i+'" class="'+(i===0?'active':'')+'" aria-label="عرض البنر '+(i+1)+'" aria-current="'+(i===0)+'"></button>').join('')+'</div><span class="hero-index" id="heroIndex">1 / '+HERO_SLIDES.length+'</span></section>'}
+
 const CATEGORY_PLATE_IMAGES={"الفطور والعشاء":"assets/categories/breakfast.png","العريكة والمعصوب":"assets/categories/areeka-masoob.png","المشويات والأطباق الرئيسية":"assets/categories/grills.png","السندويتشات":"assets/categories/sandwiches.png","الإيدامات والسلطات":"assets/categories/salads.png","الحلا":"assets/categories/desserts.png","القهوة المختصة":"assets/categories/coffee.png","المشروبات":"assets/categories/drinks.png","المقبلات":"assets/categories/appetizers.png","الوجبات العائلية":"assets/categories/family-meals.png","العروض التجريبية":"assets/categories/family-meals.png"};
-function featureCategories(){const featured=[['🍳','فطور','الفطور والعشاء'],['🍯','عريكة ومعصوب','العريكة والمعصوب'],['🍗','مشويات','المشويات والأطباق الرئيسية'],['🥪','سندويتشات','السندويتشات'],['🥗','سلطات','الإيدامات والسلطات'],['🍰','حلويات','الحلا'],['☕','قهوة','القهوة المختصة'],['🥤','مشروبات','المشروبات'],['🍟','مقبلات','المقبلات'],['🎁','وجبات عائلية','الوجبات العائلية']];return '<section class="first-fold-categories" aria-label="أقسام قائمة الطعام"><div class="home-section-head"><div><h2>أقسام المنيو</h2></div><button data-category="الكل">كل الأقسام ←</button></div><div class="feature-category-grid">'+featured.map(([icon,label,category])=>'<button type="button" class="feature-category" data-category="'+category+'"><span class="feature-category-icon feature-category-photo"><img src="'+CATEGORY_PLATE_IMAGES[category]+'" alt="طبق '+label+'" loading="lazy" decoding="async" onerror="this.onerror=null;this.remove();"><span class="category-photo-fallback" aria-hidden="true">'+icon+'</span></span><strong>'+label+'</strong></button>').join('')+'</div></section>'}
+function featureCategories(){const featured=[['🍳','فطور','الفطور والعشاء'],['🍯','عريكة ومعصوب','العريكة والمعصوب'],['🍗','مشويات','المشويات والأطباق الرئيسية'],['🥪','سندويتشات','السندويتشات'],['🥗','سلطات','الإيدامات والسلطات'],['🍰','حلويات','الحلا'],['☕','قهوة','القهوة المختصة'],['🥤','مشروبات','المشروبات'],['🍟','مقبلات','المقبلات'],['🎁','وجبات عائلية','الوجبات العائلية']];return '<section class="first-fold-categories" aria-label="أقسام قائمة الطعام"><div class="home-section-head"><div><span>تصفّح حسب المزاج</span><h2>وش خاطرك فيه؟ طلبك يبدأ من هنا</h2></div><button data-go="/menu">كل الأقسام ←</button></div><div class="feature-category-grid">'+featured.map(([icon,label,category])=>'<button type="button" class="feature-category" data-category="'+category+'"><span class="feature-category-icon feature-category-photo"><img src="'+CATEGORY_PLATE_IMAGES[category]+'" alt="طبق '+label+'" loading="lazy" decoding="async" onerror="this.onerror=null;this.remove();"><span class="category-photo-fallback" aria-hidden="true">'+icon+'</span></span><strong>'+label+'</strong></button>').join('')+'</div></section>'}
 function menuQrBanner(){
  return '<section class="menu-qr-banner" aria-label="تصفح متجر مجالس العرب بسهولة">'+
    '<div class="menu-banner-brand"><span class="menu-banner-mark" aria-hidden="true">م</span><strong>مجالس العرب</strong><small>مطاعم • ديوانية • جلسات</small></div>'+
@@ -5103,7 +5149,7 @@ const HOME_MOODS=[
  ['قهوة ومزاج','القهوة المختصة','coffee.png']
 ];
 function homeServicePicker(){return '<section class="hs-service-panel" aria-label="خيارات الخدمة"><div class="hs-service-title"><strong>كيف تفضّل طلبك؟</strong><small>اختيارات للمعاينة فقط · لم تتفعّل الطلبات الحقيقية</small></div><div class="hs-service-options"><button type="button" data-home-mode="pickup" class="'+(state.fulfillment==='pickup'?'selected':'')+'" aria-pressed="'+(state.fulfillment==='pickup')+'">استلام من الفرع</button><button type="button" data-home-mode="delivery" class="'+(state.fulfillment==='delivery'?'selected':'')+'" aria-pressed="'+(state.fulfillment==='delivery')+'">توصيل</button></div><span class="hs-service-note">الفرع والتوفر وأوقات التجهيز تُحدّد بعد ربط Odoo</span></section>'}
-function homeMoodExplorer(){return '<section class="hs-moods" aria-label="اختيارات حسب المزاج"><div class="hs-merch-heading"><div><span>اختيارك صار أسهل</span><h2>وش يناسب مزاجك؟</h2></div><button type="button" data-category="الكل">القائمة كاملة ←</button></div><div class="hs-mood-grid">'+HOME_MOODS.map(([title,category,photo])=>'<button type="button" class="hs-mood-card" data-category="'+escapeHtml(category)+'" aria-label="تصفح '+escapeHtml(title)+'"><span class="hs-mood-card-media"><img src="assets/categories/'+photo+'" alt="" loading="lazy" decoding="async"></span><span class="hs-mood-card-body"><strong>'+escapeHtml(title)+'</strong><small>تصفح الأصناف ←</small></span></button>').join('')+'</div></section>'}
+function homeMoodExplorer(){return '<section class="hs-moods" aria-label="اختيارات حسب المزاج"><div class="hs-merch-heading"><div><span>اختيارك صار أسهل</span><h2>وش يناسب مزاجك؟</h2></div><button type="button" data-go="/menu">القائمة كاملة ←</button></div><div class="hs-mood-grid">'+HOME_MOODS.map(([title,category,photo])=>'<button type="button" class="hs-mood-card" data-category="'+escapeHtml(category)+'" aria-label="تصفح '+escapeHtml(title)+'"><span class="hs-mood-card-media"><img src="assets/categories/'+photo+'" alt="" loading="lazy" decoding="async"></span><span class="hs-mood-card-body"><strong>'+escapeHtml(title)+'</strong><small>تصفح الأصناف ←</small></span></button>').join('')+'</div></section>'}
 function homeCurated(){const real=PRODUCTS.filter(p=>p.available!==false&&!p.demo);const picks=[...real.filter(p=>p.category==='الفطور والعشاء').slice(0,3),...real.filter(p=>p.category==='العريكة والمعصوب').slice(0,2),...real.filter(p=>p.category==='الحلا').slice(0,1),...real.filter(p=>p.category==='المشروبات').slice(0,1)].slice(0,7);return '<section class="hs-curated" aria-label="ترشيحات مجالس العرب"><div class="hs-merch-heading"><div><span>منتقاة من القائمة المعروضة</span><h2>ترشيحات مجالس العرب</h2><p>ليست ترتيبًا للأكثر مبيعًا؛ اختيارات متنوعة لتبدأ منها.</p></div><button type="button" data-go="/menu">شاهد القائمة ←</button></div><div class="product-rail hs-curated-rail" id="home-curated-rail">'+picks.map(p=>card(p)).join('')+'</div></section>'}
 function homeComplementary(){const categories=['المقبلات','المشروبات','الحلا'];const ids=categories.flatMap(cat=>PRODUCTS.filter(p=>p.category===cat&&p.available!==false).slice(0,3));return '<section class="hs-complementary" aria-label="إضافات تكمل طلبك"><div class="hs-merch-heading"><div><span>أفكار تجمع صنفين متناسقين</span><h2>تضبط مع بعض</h2><p>مقبلات مع الأطباق، أو مشروب وحلا. الأسعار لكل صنف منفصلًا.</p></div></div><div class="hs-complementary-grid">'+ids.slice(0,6).map(p=>card(p,{quickView:true})).join('')+'</div></section>'}
 function homeBundles(){return '<section class="hs-bundle-panel" aria-label="كوّن وجبتك"><div><span>وجبتك على اختيارك</span><h2>كوّن وجبتك المتكاملة</h2><p>ابدأ بطبق رئيسي، ثم اختر مشروبك وإضافاتك من القائمة. لا توجد خصومات أو أسعار باقات معتمدة بعد.</p></div><div class="hs-bundle-actions"><button type="button" data-category="المشويات والأطباق الرئيسية">الأطباق الرئيسية ←</button><button type="button" data-category="المشروبات">اختر المشروب ←</button><button type="button" data-category="المقبلات">أضف المقبلات ←</button></div></section>'}
@@ -5113,37 +5159,51 @@ function homeFutureCapabilities(){return '<section class="hs-future-capabilities
 function homeOperationalInfo(){return '<section class="hs-operations" aria-label="معلومات الطلب والفروع"><div><strong>الفروع وساعات العمل</strong><p>البيانات المعتمدة للفرع وساعات العمل لم تُربط بعد. اسأل عبر التواصل الرسمي.</p><button data-contact-seating>استفسر عن الفرع ←</button></div><div><strong>توفر الأصناف والتجهيز</strong><p>الحالة الفعلية للمنتجات ومدة التجهيز تعتمد على بيانات الفرع عند تفعيل الطلبات.</p><button data-go="/menu">تصفح القائمة التجريبية ←</button></div><div><strong>طلباتي ومتابعتها</strong><p>واجهة الطلبات موجودة للمعاينة؛ لا توجد طلبات فعلية ولا تتبع مباشر حاليًا.</p><button data-go="/orders">معاينة تتبع الطلب ←</button></div></section>'}
 function homeFaq(){const rows=[['هل يمكنني طلب الطعام الآن؟','المتجر حاليًا معاينة تفاعلية فقط. الدفع وإرسال الطلب الحقيقي غير مفعّلين حتى اكتمال الربط.'],['كيف أعرف توفر الجلسات؟','تواصل مع الفرع عبر القنوات الرسمية لتأكيد المواعيد وتوفر الجلسات والمباريات والألعاب.'],['هل الأسعار والعروض معتمدة؟','بعض الأصناف والأسعار والعروض تجريبية؛ لا تعتمد عليها للشراء قبل نشر القائمة الرسمية.'],['كيف أعرف المكونات والحساسية؟','هذه المعلومات غير معتمدة لكل الأصناف بعد. عند وجود حساسية غذائية، يجب التأكد مباشرة من المطعم قبل الطلب.']];return '<section class="hs-faq" aria-label="أسئلة شائعة"><div class="hs-merch-heading"><div><span>قبل طلبك</span><h2>أسئلة شائعة</h2></div><button data-go="/help">المساعدة ←</button></div><div class="hs-faq-items">'+rows.map(([q,a])=>'<details><summary>'+q+'</summary><p>'+a+'</p></details>').join('')+'</div></section>'}
 function quickViewProduct(id){const p=productById(id);if(!p)return;const existing=document.getElementById('hsQuickView');if(existing)existing.remove();const overlay=document.createElement('div');overlay.className='hs-quick-overlay';overlay.id='hsQuickView';overlay.setAttribute('role','presentation');overlay.innerHTML='<section role="dialog" aria-modal="true" aria-labelledby="hsQuickTitle" class="hs-quick-dialog"><button type="button" class="hs-quick-close" data-close-quick aria-label="إغلاق">×</button><div class="hs-quick-image">'+imgTag(p,'',true)+'</div><div class="hs-quick-copy"><span>'+escapeHtml(p.category)+(p.demo?' · بيانات تجريبية':'')+'</span><h2 id="hsQuickTitle">'+escapeHtml(p.name)+'</h2><strong>'+money(p.price)+'</strong><p>معاينة الصنف. تفاصيل المكونات والحساسية تتطلب بيانات معتمدة من المطعم.</p><div class="hs-quick-actions"><button type="button" data-product="'+p.id+'">التفاصيل والتخصيص ←</button><button type="button" data-safe-add="'+p.id+'">أضف للسلة ＋</button></div></div></section>';overlay.addEventListener('click',e=>{if(e.target===overlay)overlay.remove()});document.body.append(overlay);overlay.querySelector('[data-close-quick]')?.focus()}
-function homeHighlights(){
- const available=PRODUCTS.filter(product=>product.available!==false);
- const featuredCategories=['الفطور والعشاء','العريكة والمعصوب','المشويات والأطباق الرئيسية','المشروبات'];
- const picks=featuredCategories.map(category=>available.find(product=>product.category===category)).filter(Boolean);
- const featured=[...new Map([...picks,...available].map(product=>[product.id,product])).values()].slice(0,4);
- if(!featured.length)return '';
- return '<section id="homeMealHighlights" class="majalis-home-section" aria-labelledby="homeMealHighlightsTitle">'+
-  '<div class="majalis-home-heading"><h2 id="homeMealHighlightsTitle">اختيارات من المنيو</h2><button type="button" data-go="/menu">القائمة كاملة ←</button></div>'+
-  '<div class="product-grid majalis-highlight-grid">'+featured.map(product=>card(product)).join('')+'</div></section>';
-}
-
-function homeDiwaniya(){
- return '<section id="home-experiences" class="majalis-diwaniya" aria-labelledby="homeDiwaniyaTitle">'+
-  '<div class="majalis-diwaniya-copy"><h2 id="homeDiwaniyaTitle">ديوانية مجالس العرب</h2>'+
-  '<p>جلسات خاصة لمتابعة المباريات أو اللعب بالبلايستيشن، مع خيارات القهوة والحلا.</p>'+
-  '<button class="majalis-home-primary" type="button" data-go="/seating">اختر جلستك <span aria-hidden="true">←</span></button></div>'+
-  '<img src="assets/experiences/sessions.png" alt="" width="360" height="240" loading="lazy" decoding="async">'+
- '</section>';
-}
-
 function renderHome(){
- const sharing=PRODUCTS.filter(product=>product.category==='الوجبات العائلية'&&product.available!==false).map(product=>product.id);
- const treats=PRODUCTS.filter(product=>['القهوة المختصة','الحلا'].includes(product.category)&&product.available!==false);
- const coffeeAndSweets=['القهوة المختصة','الحلا'].flatMap(category=>treats.filter(product=>product.category===category).slice(0,4)).map(product=>product.id);
- el('app').innerHTML=homeBanner()+featureCategories()+homeHighlights()+
-  (sharing.length?productShowcase('وجبات المشاركة','',sharing.slice(0,8),'/menu','family'):'')+
-  homeDiwaniya()+
-  (coffeeAndSweets.length?productShowcase('القهوة والحلا','',coffeeAndSweets,'/menu','coffee-and-sweets'):'')+
-  homePersonalized()+homeFaq()+homepageDisclosure();
+ const byCategory=(name,n=14)=>PRODUCTS.filter(p=>p.category===name&&p.available!==false).slice(0,n).map(p=>p.id);
+ const group=(name,title,desc,key,n=14)=>productShowcase(title,desc,byCategory(name,n),'/menu',key);
+ el('app').innerHTML=
+ homeBanner()+
+ featureCategories()+
+ /* One prominent lifestyle banner immediately below the categories. */
+ storyBanner('experiences')+
+ homeExperiences()+
+ homeServicePicker()+
+ homeMoodExplorer()+
+ homeCurated()+
+ /* Breakfast and southern dishes share one editorial campaign. */
+ storyBanner('breakfast')+
+ '<section id="home-breakfast" tabindex="-1" class="home-content-group home-discover-group">'+
+ group('الفطور والعشاء','فطور على الأصول','أصناف صباحية تناسب يومك','breakfast')+
+ group('العريكة والمعصوب','نكهات الجنوب','العريكة والمعصوب والفتة','south')+
+ '</section>'+
+ /* Main dishes + quick bites: one banner, multiple shoppable rails. */
+ storyBanner('grills')+
+ '<section class="home-content-group home-discover-group" aria-label="الأطباق الرئيسية والوجبات الخفيفة">'+
+ group('المشويات والأطباق الرئيسية','أطباق رئيسية ومشويات','أطباق للغداء والعشاء','grills')+
+ group('السندويتشات','سندويتشات ورولات','خيارات سهلة وسريعة','sandwiches')+
+ group('الإيدامات والسلطات','سلطات وإيدامات','أطباق خفيفة ومكملات للسفرة','salads')+
+ group('المقبلات','مقبلات تكمل الطلب','خيارات لبدء السفرة','appetizers')+
+ '</section>'+
+ homeBundles()+
+ /* Sharing gets a dedicated banner for its own product rail. */
+ storyBanner('family')+
+ '<section class="home-content-group home-offers-group" aria-label="وجبات المشاركة">'+
+ group('الوجبات العائلية','للجلسات واللمة','أطباق مشاركة وعائلية تجريبية','family')+
+ '</section>'+
+ homeComplementary()+
+ /* One closing coffee campaign for desserts and drinks, not a banner for each rail. */
+ storyBanner('coffee')+
+ '<section id="home-coffee" tabindex="-1" class="home-content-group home-taste-group">'+
+ group('الحلا','وقت الحلا','حلويات تكمل الوجبة','sweet')+
+ group('القهوة المختصة','قهوة ومزاج','اختيارات محبي القهوة','coffee')+
+ group('المشروبات','المشروبات','خيارات باردة وساخنة','drinks')+
+ '</section>'+
+ homePersonalized()+
+ homeFaq()+
+ '<section class="experience-panel service-bar"><div><h2>احجز جلسة وأضف ضيافتك</h2><p>حدّد الموعد وعدد الضيوف واختر ضيافتك.</p></div><button class="solid-action" data-go="/seating">حجز جلسة</button></section>'+
+ homeTrustStrip()+homeFinalActions()+homepageDisclosure();
 }
-
 function renderMenu(){
  el('app').innerHTML='<div class="hs-menu-page">'+
  '<nav class="hs-menu-browse" aria-label="فئات الطعام">'+quickNav()+'</nav>'+
@@ -5326,6 +5386,11 @@ function renderHelp(){const faq=[['هل أستطيع طلب الطعام الآ�
 
 
 
+let heroActive=0,heroTimer=null,heroPauseUntil=0;
+function setHeroSlide(index,manual=false){const track=el('heroTrack');if(!track)return;heroActive=(index+HERO_SLIDES.length)%HERO_SLIDES.length;if(manual)heroPauseUntil=Date.now()+9500;track.style.transform='translate3d('+(heroActive*100)+'%,0,0)';document.querySelectorAll('.hero-slide').forEach((slide,i)=>{slide.setAttribute('aria-hidden',String(i!==heroActive));slide.inert=i!==heroActive});document.querySelectorAll('[data-hero-index]').forEach((dot,i)=>{dot.classList.toggle('active',i===heroActive);dot.setAttribute('aria-current',String(i===heroActive))});const indexLabel=el('heroIndex');if(indexLabel)indexLabel.textContent=(heroActive+1)+' / '+HERO_SLIDES.length}
+function stopHeroSlider(){if(heroTimer!==null){clearInterval(heroTimer);heroTimer=null}}
+function startHeroSlider(){stopHeroSlider();heroActive=0;heroPauseUntil=0;const hero=el('heroSlider');if(!hero)return;setHeroSlide(0);if(window.matchMedia?.('(prefers-reduced-motion: reduce)').matches)return;hero.addEventListener('pointerenter',()=>hero.dataset.hovered='1');hero.addEventListener('pointerleave',()=>hero.dataset.hovered='0');hero.addEventListener('focusin',()=>hero.dataset.focused='1');hero.addEventListener('focusout',e=>{if(!hero.contains(e.relatedTarget))hero.dataset.focused='0'});hero.addEventListener('touchstart',()=>{heroPauseUntil=Date.now()+9500},{passive:true});heroTimer=setInterval(()=>{if(document.hidden||hero.dataset.hovered==='1'||hero.dataset.focused==='1'||Date.now()<heroPauseUntil)return;setHeroSlide(heroActive+1)},5000)}
+
 function slideHomeRail(id,delta){
  const rail=el(id);
  const first=rail?.querySelector('.product-card');
@@ -5342,7 +5407,7 @@ function slideHomeRail(id,delta){
  rail.scrollTo({left:-Math.min(maxScroll,next*step),behavior});
 }
 
-function render(){const path=currentPath();const m=path.match(/^\/product\/(\d+)$/);if(m)renderDetail(Number(m[1]));else if(path==='/cart')renderCart();else if(path==='/checkout')checkoutPage();else if(path==='/help')renderHelp();else if(path==='/menu')renderMenu();else if(path==='/offers')renderOffers();else if(path==='/favorites')renderFavorites();else if(path==='/orders')renderPreviewOrders();else if(path==='/seating')renderSeatingPreview();else if(path==='/account')renderAccount();else if(path==='/addresses')renderPreviewAddresses();else renderHome();updateCounts();el('globalSearch').value=state.query;document.querySelectorAll('.mobile-bottom button').forEach(b=>b.classList.toggle('active',b.dataset.route===path));window.scrollTo({top:0,behavior:'instant'})}
+function render(){stopHeroSlider();const path=currentPath();const m=path.match(/^\/product\/(\d+)$/);if(m)renderDetail(Number(m[1]));else if(path==='/cart')renderCart();else if(path==='/checkout')checkoutPage();else if(path==='/help')renderHelp();else if(path==='/menu')renderMenu();else if(path==='/offers')renderOffers();else if(path==='/favorites')renderFavorites();else if(path==='/orders')renderPreviewOrders();else if(path==='/seating')renderSeatingPreview();else if(path==='/account')renderAccount();else if(path==='/addresses')renderPreviewAddresses();else renderHome();if(path==='/')startHeroSlider();updateCounts();el('globalSearch').value=state.query;document.querySelectorAll('.mobile-bottom button').forEach(b=>b.classList.toggle('active',b.dataset.route===path));window.scrollTo({top:0,behavior:'instant'})}
 document.addEventListener('click',e=>{
  const globalContinue=e.target.closest('[data-mobile-continue]');
  if(globalContinue){
@@ -5360,7 +5425,7 @@ document.addEventListener('click',e=>{
  const safe=e.target.closest('[data-safe-add]');
  if(safe){const p=productById(Number(safe.dataset.safeAdd));if(!p)return;if(p.options?.length||sizeVariants(p).length){document.getElementById('hsQuickView')?.remove();route('/product/'+p.id)}else{addItem(p.id);document.getElementById('hsQuickView')?.remove()}return}
  if(e.target.closest('#hsQuickView [data-product]'))document.getElementById('hsQuickView')?.remove();
- const seat=e.target.closest('[data-contact-seating]');if(seat){const label=(seat.innerText||seat.textContent||'الجلسات').trim().replace(/\s+/g,' ').slice(0,100);window.open('https://wa.me/966549792477?text='+encodeURIComponent('مرحبًا، أود الاستفسار عن توفر الجلسات والترفيه في مجالس العرب: '+label),'_blank','noopener,noreferrer');return}const jump=e.target.closest('[data-home-jump]');if(jump){const destination=el(jump.dataset.homeJump);if(destination){const reduced=window.matchMedia('(prefers-reduced-motion: reduce)').matches;destination.scrollIntoView({behavior:reduced?'auto':'smooth',block:'start'});destination.focus({preventScroll:true})}return}if(e.target.closest('[data-clear-search]')){state.query='';const input=el('catalogSearch');if(input){input.value='';input.focus()}const results=el('catalogResults');if(results)results.innerHTML=catalogResults(filterProducts());const counter=el('catalogResultCount');if(counter)counter.textContent=filterProducts().length;const clear= document.querySelector('[data-clear-search]');if(clear)clear.hidden=true;return}const slideBtn=e.target.closest('[data-slide-dir]');if(slideBtn){slideHomeRail(slideBtn.dataset.slideTrack,Number(slideBtn.dataset.slideDir));return}if(e.target.closest('[data-search-all]')){el('searchSuggestions').hidden=true;route('/menu');return}
+ const seat=e.target.closest('[data-contact-seating]');if(seat){const label=(seat.innerText||seat.textContent||'الجلسات').trim().replace(/\s+/g,' ').slice(0,100);window.open('https://wa.me/966549792477?text='+encodeURIComponent('مرحبًا، أود الاستفسار عن توفر الجلسات والترفيه في مجالس العرب: '+label),'_blank','noopener,noreferrer');return}const jump=e.target.closest('[data-home-jump]');if(jump){const destination=el(jump.dataset.homeJump);if(destination){const reduced=window.matchMedia('(prefers-reduced-motion: reduce)').matches;destination.scrollIntoView({behavior:reduced?'auto':'smooth',block:'start'});destination.focus({preventScroll:true})}return}if(e.target.closest('[data-clear-search]')){state.query='';const input=el('catalogSearch');if(input){input.value='';input.focus()}const results=el('catalogResults');if(results)results.innerHTML=catalogResults(filterProducts());const counter=el('catalogResultCount');if(counter)counter.textContent=filterProducts().length;const clear= document.querySelector('[data-clear-search]');if(clear)clear.hidden=true;return}const heroMove=e.target.closest('[data-hero-move]');if(heroMove){setHeroSlide(heroActive+Number(heroMove.dataset.heroMove),true);return}const heroDot=e.target.closest('[data-hero-index]');if(heroDot){setHeroSlide(Number(heroDot.dataset.heroIndex),true);return}const slideBtn=e.target.closest('[data-slide-dir]');if(slideBtn){slideHomeRail(slideBtn.dataset.slideTrack,Number(slideBtn.dataset.slideDir));return}if(e.target.closest('[data-search-all]')){el('searchSuggestions').hidden=true;route('/menu');return}
 if(e.target.closest('#goCheckout,#goCheckoutMobile')){route('/checkout');return}
 const payMode=e.target.closest('[data-checkout-mode]');
 if(payMode){
@@ -5395,7 +5460,7 @@ if(cardAdd){
 }
 const product=e.target.closest('[data-product]');if(product){el('searchSuggestions').hidden=true;const nextId=Number(product.dataset.product);if(currentPath().startsWith('/product/')&&el('itemNote'))state.detailDraft={id:nextId,qty:state.quantity,note:el('itemNote').value.slice(0,250)};route('/product/'+nextId);return}
 const fav=e.target.closest('[data-fav]');if(fav){toggleFavorite(fav);return}
-const category=e.target.closest('[data-category]');if(category){if(el('majalisHomeHero')){state.query='';state.sort='default';state.priceFilter='all';state.demoFilter='all'}if(category.dataset.category==='المفضلة'){state.category='الكل';state.sort='fav'}else{state.category=category.dataset.category;if(state.sort==='fav')state.sort='default'}if(currentPath()!=='/menu'){route('/menu');return}render();return}
+const category=e.target.closest('[data-category]');if(category){if(category.dataset.category==='المفضلة'){state.category='الكل';state.sort='fav'}else{state.category=category.dataset.category;if(state.sort==='fav')state.sort='default'}if(currentPath()!=='/menu'){route('/menu');return}render();return}
 if(e.target.closest('[data-reset]')){state.category='الكل';state.sort='default';state.priceFilter='all';state.demoFilter='all';state.query='';render();return}
 const inc=e.target.closest('[data-inc]');if(inc){changeCart(Number(inc.dataset.inc),1);return}
 const dec=e.target.closest('[data-dec]');if(dec){changeCart(Number(dec.dataset.dec),-1);return}
@@ -5431,16 +5496,6 @@ document.addEventListener('input',e=>{if(e.target.id==='catalogSearch'){state.qu
  return;
 }if(e.target.id==='generalOrderNote'){state.generalNote=e.target.value.slice(0,500);save()}const key=e.target.dataset?.customer;if(key&&Object.hasOwn(state.customer,key)){state.customer[key]=e.target.value.slice(0,120);saveCustomerSession();const warning=el('basketValidation');if(warning)warning.hidden=true}});
 document.addEventListener('submit',event=>{
- if(event.target.id==='majalisHomeSearch'){
-  event.preventDefault();
-  state.query=event.target.elements.query.value.trim().slice(0,100);
-  state.category='الكل';
-  state.sort='default';
-  state.priceFilter='all';
-  state.demoFilter='all';
-  route('/menu');
-  return;
- }
  if(event.target.id!=='checkoutForm')return;
  event.preventDefault();
  checkoutPreview();
