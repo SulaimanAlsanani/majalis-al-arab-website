@@ -273,3 +273,37 @@
   background:#ffffff7a!important;
   line-height:1.45;
 }
+
+#app.page > .story-banner:not(.story-experiences) .story-floating {
+  object-fit:contain;
+  object-position:center bottom;
+  transform:none;
+}
+
+#app.page > .story-banner:not(.story-experiences) .story-floating-main {
+  left:4%;
+  bottom:7%;
+  width:49%;
+  height:66%;
+}
+
+#app.page > .story-banner:not(.story-experiences) .story-floating-second {
+  right:4%;
+  bottom:clamp(48px,5vw,64px);
+  width:40%;
+  height:43%;
+}
+
+#app.page > .story-banner:not(.story-experiences) .story-floating-third {
+  left:53%;
+  top:6%;
+  width:26%;
+  height:28%;
+}
+
+@media(max-width:720px) {
+  #app.page > .story-banner:not(.story-experiences) .story-floating-second {
+    bottom:7%;
+    height:50%;
+  }
+}
