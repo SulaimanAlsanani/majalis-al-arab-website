@@ -252,3 +252,17 @@
 @media(max-width:380px) {
   #app.page > .story-banner { --story-visual-width:37%; }
 }
+
+#home-experiences .home-experience-card {
+  justify-content:center;
+}
+
+#home-experiences .home-experience-card > b {
+  box-sizing:border-box;
+  margin-block-start:3px;
+  padding:4px 9px;
+  border:1px solid color-mix(in srgb,currentColor 45%,transparent)!important;
+  border-radius:8px;
+  background-color:#ffffff7a;
+  line-height:1.45;
+}
