@@ -255,3 +255,16 @@ test('meal rows increase to three columns only when the catalog has room', async
     expect(firstRowCount, 'meal columns at '+width+'px').toBe(columns);
   }
 });
+
+test('homepage ideas use real catalog entries with the common meal controls', async ({page}) => {
+  await page.goto('/');
+  const choices=page.locator('#home-carousel-mood .meal-row');
+  await expect(choices).toHaveCount(6);
+  const first=choices.first();
+  await expect(first.locator('.meal-details')).toHaveText('التفاصيل');
+  await expect(first.locator('.card-price')).toContainText('ر.س');
+  await expect(first.locator('.meal-actions svg')).toHaveCount(2);
+  const title=await first.locator('.card-title').textContent();
+  await first.locator('.meal-details').click();
+  await expect(page.locator('.detail-info h1')).toHaveText(title);
+});

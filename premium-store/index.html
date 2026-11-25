@@ -4996,7 +4996,7 @@ function menuQrBanner(){
  '</section>';
 }
 function promotionalBanners(){return '<div class="promo-two"><button class="promo-box promo-red" data-go="/offers"><span>لفترة تجريبية</span><h3>العروض تجمع<br>اللمة الحلوة</h3><p>باقات المشاركة وخيارات متنوعة للتجربة</p><b>استكشف العروض ←</b><i>✦</i></button><button class="promo-box promo-midnight" data-contact-seating><span>للمّة مذاق آخر</span><h3>جلسات وتفاصيل<br>على كيفك</h3><p>استفسر عن الجلسات والمباريات والبلايستيشن</p><b>اكتشف الجلسات ←</b><i>☕</i></button></div>'}
-function productShowcase(title,description,ids,more,key){const rows=ids.map(productById).filter(Boolean);const sid='home-carousel-'+key;const cat={breakfast:'الفطور والعشاء',south:'العريكة والمعصوب',grills:'المشويات والأطباق الرئيسية',sandwiches:'السندويتشات',salads:'الإيدامات والسلطات',appetizers:'المقبلات',family:'الوجبات العائلية',sweet:'الحلا',coffee:'القهوة المختصة',drinks:'المشروبات'}[key];const viewAll=cat?'data-category="'+cat+'"':'data-go="'+(more||'/menu')+'"';return '<section class="home-showcase horizontal-showcase" aria-label="'+title+'"><div class="home-section-head"><div><span>'+description+'</span><h2>'+title+'</h2></div><div class="showcase-head-actions"><div class="showcase-arrows" aria-label="التنقل بين منتجات '+title+'"><button type="button" data-slide-dir="-1" data-slide-track="'+sid+'" aria-label="المنتجات السابقة" title="السابق">→</button><button type="button" data-slide-dir="1" data-slide-track="'+sid+'" aria-label="المنتجات التالية" title="التالي">←</button></div><button type="button" '+viewAll+'>عرض الكل ←</button></div></div><div class="product-rail" id="'+sid+'" tabindex="0" aria-label="منتجات '+title+' — مرر أفقيًا">'+rows.map(p=>card(p)).join('')+'</div></section>'}
+function productShowcase(title,description,ids,more,key){const rows=ids.map(productById).filter(Boolean);const sid='home-carousel-'+key;const cat={breakfast:'الفطور والعشاء',south:'العريكة والمعصوب',grills:'المشويات والأطباق الرئيسية',sandwiches:'السندويتشات',salads:'الإيدامات والسلطات',appetizers:'المقبلات',family:'الوجبات العائلية',sweet:'الحلا',coffee:'القهوة المختصة',drinks:'المشروبات'}[key];const viewAll=cat?'data-category="'+cat+'"':'data-go="'+(more||'/menu')+'"';return '<section class="home-showcase horizontal-showcase" aria-label="'+title+'"><div class="home-section-head"><div>'+(description?'<span>'+description+'</span>':'')+'<h2>'+title+'</h2></div><div class="showcase-head-actions"><div class="showcase-arrows" aria-label="التنقل بين منتجات '+title+'"><button type="button" data-slide-dir="-1" data-slide-track="'+sid+'" aria-label="المنتجات السابقة" title="السابق">→</button><button type="button" data-slide-dir="1" data-slide-track="'+sid+'" aria-label="المنتجات التالية" title="التالي">←</button></div><button type="button" '+viewAll+'>عرض الكل ←</button></div></div><div class="product-rail" id="'+sid+'" tabindex="0" aria-label="منتجات '+title+' — مرر أفقيًا">'+rows.map(p=>card(p)).join('')+'</div></section>'}
 function homeTrustStrip(){return '<div class="home-trust-strip"><div><span>☕</span><strong>نكهة أصيلة</strong><small>من أطباق نعرفها ونحبها</small></div><div><span>🥗</span><strong>اختيارات كثيرة</strong><small>كتالوج تجريبي غني ومتنوّع</small></div><div><span>🛍️</span><strong>طلبك بطريقتك</strong><small>ملاحظات وكميات وسلة واضحة</small></div><div><span>💬</span><strong>نسمع لك</strong><small>استفسارات الجلسات مباشرة</small></div></div>'}
 
 /* Editorial campaign blocks use native CSS ornaments instead of misleading food photography */
@@ -5140,16 +5140,24 @@ function storyBanner(kind){
 }
 
 /* Homepage merchandising - each module has a unique purpose; no duplicated category rails. */
-const HOME_MOODS=[
- ['صباح على الأصول','الفطور والعشاء','breakfast.png'],
- ['شي يشبعك','المشويات والأطباق الرئيسية','grills.png'],
- ['خفيف ولذيذ','السندويتشات','sandwiches.png'],
- ['لَمّة الأحباب','الوجبات العائلية','family-meals.png'],
- ['وقت الحلا','الحلا','desserts.png'],
- ['قهوة ومزاج','القهوة المختصة','coffee.png']
+const HOME_MOOD_CATEGORIES=[
+ 'الفطور والعشاء',
+ 'المشويات والأطباق الرئيسية',
+ 'السندويتشات',
+ 'الوجبات العائلية',
+ 'الحلا',
+ 'القهوة المختصة'
 ];
-function homeServicePicker(){return '<section class="hs-service-panel" aria-label="خيارات الخدمة"><div class="hs-service-title"><strong>كيف تفضّل طلبك؟</strong><small>اختيارات للمعاينة فقط · لم تتفعّل الطلبات الحقيقية</small></div><div class="hs-service-options"><button type="button" data-home-mode="pickup" class="'+(state.fulfillment==='pickup'?'selected':'')+'" aria-pressed="'+(state.fulfillment==='pickup')+'">استلام من الفرع</button><button type="button" data-home-mode="delivery" class="'+(state.fulfillment==='delivery'?'selected':'')+'" aria-pressed="'+(state.fulfillment==='delivery')+'">توصيل</button></div><span class="hs-service-note">الفرع والتوفر وأوقات التجهيز تُحدّد بعد ربط Odoo</span></section>'}
-function homeMoodExplorer(){return '<section class="hs-moods" aria-label="اختيارات حسب المزاج"><div class="hs-merch-heading"><div><span>اختيارك صار أسهل</span><h2>وش يناسب مزاجك؟</h2></div><button type="button" data-go="/menu">القائمة كاملة ←</button></div><div class="hs-mood-grid">'+HOME_MOODS.map(([title,category,photo])=>'<button type="button" class="hs-mood-card" data-category="'+escapeHtml(category)+'" aria-label="تصفح '+escapeHtml(title)+'"><span class="hs-mood-card-media"><img src="assets/categories/'+photo+'" alt="" loading="lazy" decoding="async"></span><span class="hs-mood-card-body"><strong>'+escapeHtml(title)+'</strong><small>تصفح الأصناف ←</small></span></button>').join('')+'</div></section>'}
+function homeMoodExplorer(){
+ const available=PRODUCTS.filter(product=>product.available!==false);
+ const picks=HOME_MOOD_CATEGORIES.map(category=>{
+  return available.find(product=>product.category===category&&!product.demo)
+   ||available.find(product=>product.category===category);
+ }).filter(Boolean);
+ return picks.length
+  ?productShowcase('وش يناسب مزاجك؟','',picks.map(product=>product.id),'/menu','mood')
+  :'';
+}
 function homeCurated(){const real=PRODUCTS.filter(p=>p.available!==false&&!p.demo);const picks=[...real.filter(p=>p.category==='الفطور والعشاء').slice(0,3),...real.filter(p=>p.category==='العريكة والمعصوب').slice(0,2),...real.filter(p=>p.category==='الحلا').slice(0,1),...real.filter(p=>p.category==='المشروبات').slice(0,1)].slice(0,7);return '<section class="hs-curated" aria-label="ترشيحات مجالس العرب"><div class="hs-merch-heading"><div><span>منتقاة من القائمة المعروضة</span><h2>ترشيحات مجالس العرب</h2><p>ليست ترتيبًا للأكثر مبيعًا؛ اختيارات متنوعة لتبدأ منها.</p></div><button type="button" data-go="/menu">شاهد القائمة ←</button></div><div class="product-rail hs-curated-rail" id="home-curated-rail">'+picks.map(p=>card(p)).join('')+'</div></section>'}
 function homeComplementary(){const categories=['المقبلات','المشروبات','الحلا'];const ids=categories.flatMap(cat=>PRODUCTS.filter(p=>p.category===cat&&p.available!==false).slice(0,3));return '<section class="hs-complementary" aria-label="إضافات تكمل طلبك"><div class="hs-merch-heading"><div><span>أفكار تجمع صنفين متناسقين</span><h2>تضبط مع بعض</h2><p>مقبلات مع الأطباق، أو مشروب وحلا. الأسعار لكل صنف منفصلًا.</p></div></div><div class="hs-complementary-grid">'+ids.slice(0,6).map(p=>card(p,{quickView:true})).join('')+'</div></section>'}
 function homeBundles(){return '<section class="hs-bundle-panel" aria-label="كوّن وجبتك"><div><span>وجبتك على اختيارك</span><h2>كوّن وجبتك المتكاملة</h2><p>ابدأ بطبق رئيسي، ثم اختر مشروبك وإضافاتك من القائمة. لا توجد خصومات أو أسعار باقات معتمدة بعد.</p></div><div class="hs-bundle-actions"><button type="button" data-category="المشويات والأطباق الرئيسية">الأطباق الرئيسية ←</button><button type="button" data-category="المشروبات">اختر المشروب ←</button><button type="button" data-category="المقبلات">أضف المقبلات ←</button></div></section>'}
