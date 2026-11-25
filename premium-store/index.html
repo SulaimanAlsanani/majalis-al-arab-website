@@ -4781,7 +4781,7 @@ function updateGlobalMobileCheckout(){
  if(!visible){bar.replaceChildren();return}
  const checkout=currentPath()==='/checkout';
  bar.innerHTML='<span class="majalis-mobile-total-summary"><small>'+count()+' قطعة · إجمالي الأصناف التجريبي</small><strong>'+money(total()-previewDiscount())+'</strong></span>'+
-  '<button type="button" class="majalis-mobile-total-action" data-mobile-continue="true">'+(checkout?'استعراض المعاينة':'متابعة للدفع')+' ←</button>';
+  '<button type="button" class="majalis-mobile-total-action" data-mobile-continue="true">'+(checkout?'استعراض المعاينة':currentPath()==='/cart'?'متابعة الدفع':'متابعة للدفع')+' ←</button>';
  bar.dataset.isCheckout=String(checkout);
 }
 function updateCounts(){
@@ -4878,8 +4878,32 @@ function card(p,{quickView=false,recommendation=false}={}){
   '<button type="button" class="add-button" '+(available?addAction+'="'+p.id+'" aria-label="أضف '+name+' إلى السلة"':'disabled aria-label="'+name+' غير متوفر"')+'>'+CARD_ADD+'</button>'+
   '</div><span class="card-price">'+price+'</span></div></div></article>';
 }
-function cartContent(){if(!state.cart.length)return '<div class="cart-empty"><div class="cart-icon">🛍️</div><strong>سلتك تنتظر طلبك</strong><p>اختر وجباتك المفضلة، ثم راجع تفاصيل الطلب هنا.</p><button class="outlined" data-go="/menu">تصفح الأطباق</button></div>';return '<div class="cart-lines">'+cartDetails().map(l=>'<div class="cart-line">'+imgTag(productById(l.id))+'<div class="cart-line-info"><strong>'+escapeHtml(l.name)+'</strong><small>الكمية '+l.qty+' × '+money(l.unitPrice)+'</small><small>'+(l.note?'ملاحظة: '+escapeHtml(l.note):'لا توجد ملاحظات')+'</small><div class="cart-line-row"><strong>'+money(l.lineTotal)+'</strong><div class="stepper"><button data-dec="'+l.index+'" aria-label="تقليل '+escapeHtml(l.name)+'">−</button><span aria-label="الكمية '+l.qty+'">'+l.qty+'</span><button data-inc="'+l.index+'" aria-label="زيادة '+escapeHtml(l.name)+'">+</button></div></div></div></div>').join('')+'</div>'}
-function sideCart(){return '<aside class="side-cart" id="cartArea"><div class="cart-head"><h2>🛍️ سلة مشترياتك</h2>'+(count()?'<button data-clear>إفراغ السلة</button>':'')+'</div>'+cartContent()+'<div class="cart-footer"><div class="total-row"><span>الإجمالي التجريبي</span><span>'+money(total())+'</span></div><button class="solid-action full" data-go="/checkout" '+(!count()?'disabled':'')+' aria-label="متابعة الدفع — الانتقال إلى معاينة الطلب، الدفع الفعلي غير متاح">متابعة للدفع ←</button><p>الأسعار توضيحية؛ لا يشمل الإجمالي رسوم توصيل أو ضرائب إضافية غير معتمدة.</p></div></aside>'}
+function cartIcon(icon){
+ const paths={
+  bag:'<path d="M5 7h14l1.5 14h-17L5 7Z"/><path d="M9 10V6a3 3 0 0 1 6 0v4"/>',
+  trash:'<path d="M4 7h16M9 7V4h6v3m3 0-1 13H7L6 7m4 4v5m4-5v5"/>',
+  receipt:'<path d="M6 3h12v18l-3-2-3 2-3-2-3 2V3Zm3 5h6m-6 4h6"/>',
+  pickup:'<path d="M4 10v10h16V10M3 10l2-6h14l2 6H3Zm6 10v-6h6v6"/>',
+  delivery:'<path d="M3 5h12v12H3zM15 9h3l3 3v5h-6"/><circle cx="7" cy="18" r="2"/><circle cx="17" cy="18" r="2"/>'
+ };
+ return '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">'+paths[icon]+'</svg>';
+}
+function cartQuantity(line){
+ const name=escapeHtml(line.name);
+ return '<div class="stepper"><button type="button" data-inc="'+line.index+'" aria-label="زيادة '+name+'">+</button><span aria-label="الكمية '+line.qty+'">'+line.qty+'</span><button type="button" data-dec="'+line.index+'" aria-label="تقليل '+name+'">−</button></div>';
+}
+function cartDelete(line){
+ return '<button type="button" class="basket-delete" data-remove="'+line.index+'" aria-label="حذف '+escapeHtml(line.name)+'">'+cartIcon('trash')+'</button>';
+}
+function cartContent(){
+ const lines=cartDetails();
+ if(!lines.length)return '<div class="cart-empty"><div class="cart-symbol">'+cartIcon('bag')+'</div><strong>سلتك فارغة</strong><button class="outlined" data-go="/menu">تصفح القائمة</button></div>';
+ return '<div class="cart-lines">'+lines.map(line=>'<article class="cart-line">'+imgTag(productById(line.id),'',false)+'<div class="cart-line-info"><div class="basket-item-title"><strong>'+escapeHtml(line.name)+'</strong>'+cartDelete(line)+'</div>'+(line.note?'<small>'+escapeHtml(line.note)+'</small>':'')+'<div class="cart-line-row">'+cartQuantity(line)+'<strong>'+money(line.lineTotal)+'</strong></div></div></article>').join('')+'</div>';
+}
+function sideCart(){
+ const filled=count()>0;
+ return '<aside class="side-cart" id="cartArea"><div class="cart-head"><h2>'+cartIcon('bag')+' سلة مشترياتك</h2>'+(filled?'<button data-clear>إفراغ السلة</button>':'')+'</div>'+cartContent()+(filled?'<div class="cart-footer"><div class="total-row"><span>الإجمالي التجريبي</span><strong>'+money(total()-previewDiscount())+'</strong></div><button class="solid-action full" data-go="/checkout" aria-label="متابعة الدفع — الانتقال إلى معاينة الطلب، الدفع الفعلي غير متاح">متابعة الدفع ←</button></div>':'')+'</aside>';
+}
 function renderCartArea(){const box=el('cartArea');if(box)box.outerHTML=sideCart()}
 function normalizeSearch(s){return String(s||'').toLocaleLowerCase('ar').normalize('NFKD').replace(/[\u064b-\u065f\u0670]/g,'').replace(/[أإآ]/g,'ا').replace(/ة/g,'ه').replace(/ى/g,'ي').trim()}
 function filterProducts(){
@@ -5232,11 +5256,39 @@ function cartTotalsMarkup(){
   '<div class="order-review-final"><span>إجمالي الأصناف في المعاينة</span><strong>'+money(subtotal-discount)+'</strong></div>'+
   '<p>الدفع وإرسال الطلب يتطلبان ربط Odoo واعتماد بيانات الفرع.</p></div>';
 }
-function basketLine(l,i){const p=productById(l.id);return '<article class="basket-item"><button class="basket-image" data-product="'+p.id+'">'+imgTag(p)+'</button><div class="basket-body"><div class="basket-item-title"><div><span class="basket-category">'+escapeHtml(p.category)+(p.demo?' · تجريبي':'')+'</span><button data-product="'+p.id+'" class="basket-name">'+escapeHtml(p.name)+'</button></div><button class="basket-delete" data-remove="'+i+'" aria-label="حذف '+escapeHtml(p.name)+'">×</button></div><p class="basket-unit">سعر الوحدة '+money(p.price)+'</p><div class="basket-actions"><strong>'+money(p.price*l.qty)+'</strong><div class="stepper"><button data-dec="'+i+'" aria-label="تقليل '+escapeHtml(p.name)+'">−</button><span aria-label="الكمية '+l.qty+'">'+l.qty+'</span><button data-inc="'+i+'" aria-label="زيادة '+escapeHtml(p.name)+'">+</button></div></div><p class="basket-note-text">'+(l.note?'📝 '+escapeHtml(l.note):'لا توجد ملاحظات للمطبخ')+'</p><button class="basket-edit-note" data-note-edit="'+i+'">'+(l.note?'تعديل الملاحظة':'＋ إضافة ملاحظة')+'</button><div id="noteEditor-'+i+'" class="basket-note-editor" hidden><label for="lineNote-'+i+'">ملاحظة الصنف</label><textarea id="lineNote-'+i+'" maxlength="250">'+escapeHtml(l.note)+'</textarea><div class="basket-note-actions"><button data-note-save="'+i+'">حفظ</button><button data-note-cancel="'+i+'">إلغاء</button></div></div></div></article>'}
+function basketLine(line){
+ const product=productById(line.id);
+ const name=escapeHtml(line.name);
+ const i=line.index;
+ return '<article class="basket-item"><button type="button" class="basket-image" data-product="'+line.id+'" aria-label="تفاصيل '+name+'">'+imgTag(product,'',false)+'</button>'+
+  '<div class="basket-body"><div class="basket-item-title"><div><button type="button" data-product="'+line.id+'" class="basket-name">'+name+'</button><p class="basket-unit">'+money(line.unitPrice)+' للقطعة</p></div>'+cartDelete(line)+'</div>'+
+  '<div class="basket-actions">'+cartQuantity(line)+'<strong>'+money(line.lineTotal)+'</strong></div>'+
+  (line.note?'<p class="basket-note-text">'+escapeHtml(line.note)+'</p>':'')+
+  '<button type="button" class="basket-edit-note" data-note-edit="'+i+'">'+(line.note?'تعديل ملاحظة التحضير':'+ إضافة ملاحظة للمطبخ')+'</button>'+
+  '<div id="noteEditor-'+i+'" class="basket-note-editor" hidden><label for="lineNote-'+i+'">ملاحظة الصنف</label><textarea id="lineNote-'+i+'" maxlength="250">'+escapeHtml(line.note)+'</textarea><div class="basket-note-actions"><button data-note-save="'+i+'">حفظ</button><button data-note-cancel="'+i+'">إلغاء</button></div></div></div></article>';
+}
 function basketRelated(){if(!state.cart.length)return '';const included=new Set(state.cart.map(l=>l.id));const ids=[26,27,28,21,22,24,25,19,20,16,18,8,74,80,90];const picks=ids.map(productById).filter(Boolean).filter(p=>p.available!==false&&!included.has(p.id)).slice(0,4);return '<section class="basket-section basket-suggestions"><h2>كمّل سفرتك</h2><p>اقتراحات اختيارية من القائمة التجريبية.</p><div class="basket-suggestion-grid">'+picks.map(p=>card(p,{recommendation:true})).join('')+'</div></section>'}
-function basketEmpty(){return '<div class="basket-empty"><div class="basket-empty-icon">🛍️</div><h2>سلتك فاضية… وش تشتهي اليوم؟</h2><p>اختر الأصناف المناسبة وأضفها للسلة، وستظهر هنا بالصور والكميات والأسعار.</p><div class="basket-empty-buttons"><button class="solid-action" data-go="/menu">تصفح قائمة الطعام ←</button>'+(!approvedCatalog&&!catalogLoading?'<button class="outlined" data-demo-basket>عرض نموذج سلة تجريبية</button>':'')+'</div></div>'}
-function basketOverview(){return '<aside class="basket-overview"><div class="basket-overview-header"><span>▤</span><div><h2>ملخص السلة</h2><small>'+state.cart.length+' أصناف · '+count()+' قطعة</small></div></div>'+(state.cart.length?cartReviewMarkup():'')+cartTotalsMarkup()+'<button class="basket-cta" id="goCheckout" '+(!count()?'disabled':'')+'>متابعة للدفع ←</button><small class="basket-secure">🔒 لا تتم أي عملية دفع أو إرسال طلب</small></aside>'}
-function renderCart(){const filled=state.cart.length>0;el('app').innerHTML='<div class="crumbs"><button data-go="/">الرئيسية</button> › <button data-go="/menu">القائمة</button> › <span>السلة</span></div><div class="basket-banner"><div><small>تجربة متجر مجالس العرب</small><h1>سلة المشتريات <b>'+count()+'</b></h1><p>راجع الأصناف والكمية وملاحظات التحضير قبل معاينة طلبك.</p></div><div class="basket-steps"><span class="selected">① السلة</span><span>② مراجعة تجريبية</span><span>③ التشغيل بعد الربط</span></div></div><div class="basket-grid"><div class="basket-main"><section class="basket-section"><div class="basket-section-title"><div><h2>الأصناف المختارة</h2><small>'+state.cart.length+' أصناف · '+count()+' قطعة</small></div><div><button data-go="/menu" class="basket-more">＋ إضافة أصناف</button>'+(filled?'<button data-clear class="basket-clear">إفراغ السلة</button>':'')+'</div></div>'+(filled?'<div class="basket-items">'+state.cart.map(basketLine).join('')+'</div>':basketEmpty())+'</section>'+(filled?'<section class="basket-section"><h2>طريقة الحصول على الطلب</h2><p>الاختيار للمعاينة فقط، وليس حجزًا أو طلبًا.</p><div class="basket-methods"><button data-mode="pickup" class="'+(state.fulfillment==='pickup'?'selected':'')+'"><span>🏬</span><strong>استلام من الفرع</strong><small>الفرع والوقت غير محددين</small></button><button data-mode="delivery" class="'+(state.fulfillment==='delivery'?'selected':'')+'"><span>🛵</span><strong>توصيل</strong><small>رسوم ونطاق التوصيل غير معتمدين</small></button></div><div class="basket-info">'+modeText()+'</div><label for="generalOrderNote" class="basket-label">ملاحظات عامة للطلب (اختياري)</label><textarea id="generalOrderNote" maxlength="500" placeholder="ملاحظة تخص الطلب كاملًا — للمعاينة المحلية فقط">'+escapeHtml(state.generalNote||'')+'</textarea><small class="basket-disclaimer">تُحفظ هذه الملاحظة محليًا في المتصفح فقط.</small></section>'+basketRelated():'')+'</div>'+basketOverview()+'</div><section id="orderSummary" hidden class="basket-section basket-preview"></section>'+(filled?'<div class="basket-mobile-total"><span>مجموع الأصناف <b>'+money(total())+'</b></span><button id="goCheckoutMobile">متابعة للدفع ←</button></div>':'')}
+function basketEmpty(){
+ return '<section class="basket-section basket-empty"><div class="basket-empty-icon">'+cartIcon('bag')+'</div><h2>سلتك فارغة</h2><p>تصفح القائمة وأضف الأصناف التي ترغب بها.</p><div class="basket-empty-buttons"><button class="solid-action" data-go="/menu">تصفح قائمة الطعام ←</button>'+(!approvedCatalog&&!catalogLoading?'<button class="outlined" data-demo-basket>عرض نموذج سلة تجريبية</button>':'')+'</div></section>';
+}
+function basketOverview(){
+ return '<aside class="basket-overview"><div class="basket-overview-header"><span class="cart-symbol">'+cartIcon('receipt')+'</span><h2>ملخص السلة</h2></div>'+cartTotalsMarkup()+'<button class="basket-cta" id="goCheckout">متابعة الدفع ←</button></aside>';
+}
+function basketService(){
+ const methods=[['pickup','استلام من الفرع'],['delivery','توصيل']];
+ return '<section class="basket-section basket-service"><h2>طريقة الاستلام</h2><div class="basket-methods">'+methods.map(([key,label])=>{
+  const selected=state.fulfillment===key;
+  return '<button type="button" data-mode="'+key+'" class="'+(selected?'selected':'')+'" aria-pressed="'+selected+'">'+cartIcon(key)+'<strong>'+label+'</strong></button>';
+ }).join('')+'</div><p class="basket-info">'+modeText()+'</p><label for="generalOrderNote" class="basket-label">ملاحظات الطلب (اختياري)</label><textarea id="generalOrderNote" maxlength="500" placeholder="ملاحظة تخص الطلب كاملًا">'+escapeHtml(state.generalNote||'')+'</textarea></section>';
+}
+function renderCart(){
+ const lines=cartDetails();
+ const filled=lines.length>0;
+ const header='<header class="basket-banner"><div class="basket-heading"><span class="cart-symbol">'+cartIcon('bag')+'</span><div><h1>سلة المشتريات</h1>'+(filled?'<p>'+count()+' قطعة في السلة</p>':'')+'</div></div>'+(filled?'<button type="button" class="outlined basket-more" data-go="/menu">متابعة التسوق ←</button>':'')+'</header>';
+ const contents=filled?'<div class="basket-grid"><div class="basket-main"><section class="basket-section"><div class="basket-section-title"><h2>الأصناف المختارة</h2><button type="button" data-clear class="basket-clear">إفراغ السلة</button></div><div class="basket-items">'+lines.map(basketLine).join('')+'</div></section>'+basketService()+basketRelated()+'</div>'+basketOverview()+'</div>':basketEmpty();
+ const mobileTotal=filled?'<div class="basket-mobile-total"><span>إجمالي الأصناف <b>'+money(total()-previewDiscount())+'</b></span><button id="goCheckoutMobile">متابعة الدفع ←</button></div>':'';
+ el('app').innerHTML='<div class="cart-route"><div class="crumbs"><button data-go="/">الرئيسية</button> › <button data-go="/menu">القائمة</button> › <span>السلة</span></div>'+header+contents+'<section id="orderSummary" hidden class="basket-section basket-preview"></section>'+mobileTotal+'</div>';
+}
 function modeText(){return state.fulfillment==='pickup'?'الاستلام من فرع أبها. يظهر وقت التجهيز بعد ربط الفرع.':'رسوم التوصيل والتغطية والوقت تظهر بعد ربط خدمة التوصيل.'}
 function escapeHtml(v){return String(v).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
 function summary(){return 'معاينة سلة مجالس العرب — ليست طلبًا مؤكدًا\n\n'+cartDetails().map(l=>l.name+' | '+l.qty+' × '+money(l.unitPrice)+' = '+money(l.lineTotal)+(l.note?'\nملاحظة التحضير: '+l.note:'')).join('\n')+'\n\nمجموع الأصناف فقط: '+money(total())+'\nطريقة الخدمة المطلوبة: '+(state.fulfillment==='pickup'?'استلام من الفرع':'توصيل')+'\nاسم المستلم: '+(state.customer.name||'غير مدخل')+'\nالجوال: '+(state.customer.phone||'غير مدخل')+'\n'+(state.fulfillment==='delivery'?'عنوان التوصيل: '+[state.customer.city,state.customer.district,state.customer.street,state.customer.building,state.customer.unit,state.customer.landmark].filter(Boolean).join('، '):'الفرع المرغوب: '+(state.customer.pickupBranch||'غير محدد'))+'\nملاحظة عامة: '+(state.generalNote||'لا توجد')+'\nرسوم التوصيل والضرائب النهائية غير محددة أو معتمدة.\nلا يُرسل هذا الملخص للمطعم تلقائيًا.'}
