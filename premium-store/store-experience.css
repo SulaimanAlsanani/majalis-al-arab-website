@@ -57,7 +57,28 @@
   padding:clamp(5px,.6vw,7px) clamp(6px,.9vw,10px)!important;
   border:0!important;
   background:#fff!important;
-  box-shadow:none!important;
+  box-shadow:0 1px 5px #3022290b, inset 0 0 0 1px #30222909!important;
+  transition:box-shadow .18s ease, transform .18s ease!important;
+}
+
+#app.page .product-card.meal-row:focus-within {
+  box-shadow:0 3px 9px #30222912, inset 0 0 0 1px #b6325526!important;
+}
+
+@media (hover:hover) and (pointer:fine) {
+  #app.page .product-card.meal-row:hover {
+    box-shadow:0 4px 12px #30222916, inset 0 0 0 1px #30222910!important;
+    transform:translateY(-2px)!important;
+  }
+}
+
+@media (prefers-reduced-motion:reduce) {
+  #app.page .product-card.meal-row {
+    transition:none!important;
+  }
+  #app.page .product-card.meal-row:hover {
+    transform:none!important;
+  }
 }
 
 #app.page :is(.product-grid,.hs-complementary-grid,.basket-suggestion-grid) > .meal-row {
