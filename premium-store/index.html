@@ -4879,7 +4879,7 @@ function card(p,{quickView=false,recommendation=false}={}){
  const addAction=recommendation?'data-rec-add':'data-card-add';
  return '<article class="product-card meal-row"><div class="product-card-image-wrap">'+
   '<button type="button" class="card-photo" '+imageAction+'="'+p.id+'" aria-label="تفاصيل '+details+'" title="'+details+'">'+imgTag(p,'',false)+'</button></div>'+
-  '<div class="card-body"><span class="meal-category">'+escapeHtml(p.category)+'</span>'+
+  '<div class="card-body">'+
   '<h3 class="meal-name"><button type="button" class="card-title" data-product="'+p.id+'">'+name+'</button></h3>'+
   '<div class="meal-price"><span class="card-price">'+price+'</span>'+(available?'':'<span class="card-stock">غير متوفر</span>')+'</div>'+
   '<div class="meal-actions">'+
@@ -5205,7 +5205,7 @@ function renderHome(){
  homeTrustStrip()+homeFinalActions()+homepageDisclosure();
 }
 function renderMenu(){
- el('app').innerHTML='<div class="hs-menu-page">'+orderingServiceBar()+
+ el('app').innerHTML='<div class="hs-menu-page">'+
  '<nav class="hs-menu-browse" aria-label="فئات الطعام">'+quickNav()+'</nav>'+
  '<div class="shop-layout hs-menu-layout"><section class="catalog-panel" id="catalog">'+catalog()+'</section>'+sideCart()+'</div></div>';
 }

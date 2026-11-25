@@ -21,7 +21,7 @@ test('meal cards show a right-side photo with icon-only cart and favorite action
   await expect(photo).toHaveAccessibleName(/تفاصيل.*ر\.س/);
   expect(await cards.count()).toBeGreaterThan(20);
   await expect(photo.locator('img')).toHaveCSS('object-fit', 'contain');
-  await expect(first.locator('.meal-category')).not.toBeEmpty();
+  await expect(first.locator('.meal-category')).toHaveCount(0);
   await expect(first.locator('.card-price')).toContainText('ر.س');
   await expect(add).toHaveAccessibleName(/أضف .* إلى السلة/);
   await expect(add.locator('svg')).toBeVisible();
@@ -33,15 +33,14 @@ test('meal cards show a right-side photo with icon-only cart and favorite action
     const image=node.getBoundingClientRect();
     const artwork=node.querySelector('img').getBoundingClientRect();
     const card=node.closest('.product-card');
-    const category=card.querySelector('.meal-category').getBoundingClientRect();
     const name=card.querySelector('.meal-name').getBoundingClientRect();
     const price=card.querySelector('.meal-price').getBoundingClientRect();
     const actions=card.querySelector('.meal-actions').getBoundingClientRect();
     return {
       ratio:image.width/image.height,
       artworkInset:artwork.width<image.width&&artwork.height<image.height,
-      imageOnRight:[category,name,price,actions].every(rect=>rect.right<=image.left),
-      ordered:category.bottom<=name.top&&name.bottom<=price.top&&price.bottom<=actions.top
+      imageOnRight:[name,price,actions].every(rect=>rect.right<=image.left),
+      ordered:name.bottom<=price.top&&price.bottom<=actions.top
     };
   });
   expect(layout.ratio).toBeCloseTo(19/20,1);
@@ -192,12 +191,13 @@ test('demo order flow applies saved address and discount, tracks status and reor
   await page.locator('#previewAddressForm [type="submit"]').click();
   await expect(page.getByRole('heading', {name:'البيت'})).toBeVisible();
   await page.goto('/#/menu');
-  await page.locator('[data-service-mode="delivery"]').click();
-  await expect(page.locator('[data-service-mode="delivery"]')).toHaveAttribute('aria-pressed','true');
+  await expect(page.locator('[data-service-mode]')).toHaveCount(0);
   await page.goto('/#/product/1');
   await page.locator('#addSelected').click();
   await expect(page).toHaveURL(/#\/cart$/);
   await page.goto('/#/checkout');
+  await page.locator('[data-checkout-mode="delivery"]').click();
+  await expect(page.locator('[data-checkout-mode="delivery"]')).toHaveAttribute('aria-pressed','true');
   await page.locator('#previewSavedAddress').selectOption({label:'البيت'});
   await expect(page.locator('#checkoutAddress')).toHaveValue('أبها، عنوان للمعاينة');
   await page.locator('#checkoutPhone').fill('0500000000');

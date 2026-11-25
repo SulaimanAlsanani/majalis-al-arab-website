@@ -30,14 +30,6 @@ function previewEnabled() {
   return !approvedCatalog && !catalogLoading;
 }
 
-function orderingServiceBar() {
-  return '<section class="experience-panel service-bar" aria-label="الفرع وطريقة الطلب">'+
-    '<div><strong>'+PREVIEW_PICKUP_BRANCH+'</strong><p>'+escapeHtml(modeText())+'</p></div>'+
-    '<div class="experience-actions" role="group" aria-label="طريقة استلام الطلب">'+
-      ['pickup','delivery'].map(mode=>'<button type="button" class="outlined" data-service-mode="'+mode+'" aria-pressed="'+(state.fulfillment===mode)+'">'+(mode==='pickup'?'استلام من الفرع':'توصيل')+'</button>').join('')+
-    '</div></section>';
-}
-
 function previewDiscount(subtotal = total()) {
   return previewEnabled() && storedExperience.coupon ? Math.round(subtotal * 10) / 100 : 0;
 }
@@ -179,14 +171,6 @@ function renderSeatingPreview() {
 }
 
 document.addEventListener('click', event => {
-  const serviceMode = event.target.closest('[data-service-mode]');
-  if (serviceMode) {
-    state.fulfillment = serviceMode.dataset.serviceMode;
-    const panel = serviceMode.closest('.service-bar');
-    panel.outerHTML = orderingServiceBar();
-    document.querySelector('[data-service-mode][aria-pressed="true"]')?.focus({preventScroll:true});
-    return;
-  }
   const button = event.target.closest('[data-experience]');
   if (!button) return;
   const action = button.dataset.experience;

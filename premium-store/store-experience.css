@@ -97,13 +97,6 @@
   padding:0!important;
 }
 
-.meal-category {
-  color:#667582;
-  font-size:.8rem;
-  line-height:1.4;
-  overflow-wrap:anywhere;
-}
-
 .meal-name { margin:0; max-width:100%; }
 #app.page .meal-row .card-title {
   display:block!important;
@@ -143,7 +136,6 @@
   }
   #app.page .meal-row :is(.product-card-image-wrap,.card-photo) { border-radius:10px!important; }
   #app.page .meal-row .card-title { font-size:clamp(11px,3.2vw,15px)!important; }
-  .meal-category { font-size:.65rem; }
   .meal-actions { gap:2px; }
   #app.page .meal-actions :is(.add-button,.card-favorite-toggle) {
     flex:0 0 26px!important;
