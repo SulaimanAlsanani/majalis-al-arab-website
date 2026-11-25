@@ -3882,8 +3882,6 @@ body :not(#__borderless_reset_a):not(#__borderless_reset_b):not(#__borderless_re
 .story-banner.story-teal .story-spark-one,.story-banner.story-indigo .story-spark-one{right:10%;top:42%}
 .story-banner .story-mini-badge{display:inline-flex!important;align-items:center;gap:6px;letter-spacing:0!important;background:color-mix(in srgb,var(--bg1),white 25%)!important;backdrop-filter:blur(7px);-webkit-backdrop-filter:blur(7px);border:1px solid #FFFFFF80!important;box-shadow:0 4px 15px #241B1310!important}
 .story-banner .story-badge-mark{font-size:10px;color:var(--accent)}
-.story-banner .story-editorial-signature{display:flex;align-items:center;gap:9px;margin-top:3px;font-size:10px;font-weight:650;color:var(--accent);opacity:.64;pointer-events:none}
-.story-banner .story-editorial-signature i{display:block;width:29px;height:1px;background:currentColor;opacity:.7}
 .story-banner .story-copy button{display:inline-flex!important;align-items:center;justify-content:center;gap:11px;transition:background-color .22s ease,box-shadow .22s ease,transform .22s ease!important}
 .story-banner .story-cta-arrow{display:inline-block;transition:transform .22s ease}
 @media(hover:hover) and (prefers-reduced-motion:no-preference){
@@ -3893,8 +3891,8 @@ body :not(#__borderless_reset_a):not(#__borderless_reset_b):not(#__borderless_re
  .story-banner .story-copy button:hover{transform:translateY(-2px);box-shadow:0 10px 22px #1715171B!important}
  .story-banner .story-copy button:hover .story-cta-arrow{transform:translateX(-3px)}
 }
-@media(max-width:720px){.story-banner .story-mini-badge{max-width:96%;white-space:nowrap;font-size:9px!important}.story-banner .story-editorial-signature{font-size:9px;margin-top:0}.story-banner .story-editorial-signature i{width:20px}.story-banner .story-product-plate{left:0;width:95%;bottom:-16%}.story-banner .story-spark-two{display:none}}
-@media(max-width:420px){.story-banner .story-mini-badge{font-size:8px!important;gap:3px;padding:5px 7px!important}.story-banner .story-editorial-signature{display:none}}
+@media(max-width:720px){.story-banner .story-mini-badge{max-width:96%;white-space:nowrap;font-size:9px!important}.story-banner .story-product-plate{left:0;width:95%;bottom:-16%}.story-banner .story-spark-two{display:none}}
+@media(max-width:420px){.story-banner .story-mini-badge{font-size:8px!important;gap:3px;padding:5px 7px!important}}
 
 /* Visibility repair: the storefront globally resets borders using !important.
    These decorative shapes therefore use inset shadows and backgrounds, never borders. */
@@ -3911,8 +3909,6 @@ body :not(#__borderless_reset_a):not(#__borderless_reset_b):not(#__borderless_re
 .story-banner .story-kicker{display:inline-flex!important;align-items:center;gap:9px!important;padding-inline-start:11px!important;position:relative}
 .story-banner .story-kicker:before{content:"";position:absolute;inset-inline-start:0;top:2px;bottom:2px;width:3px;border-radius:9px;background:var(--accent)}
 .story-banner .story-product-plate{background:radial-gradient(ellipse at 50% 45%,#FFFFFFDC 0%,#FFFFFF75 31%,#FFFFFF00 70%)!important;opacity:.95!important}
-.story-banner .story-editorial-signature{opacity:.82!important;letter-spacing:.015em}
-.story-banner .story-editorial-signature i{height:2px!important;background:var(--accent)!important}
 .story-banner .story-copy button{background:#FFFFFFED!important;box-shadow:0 8px 20px #28201C22!important}
 @media(max-width:720px){.story-banner .story-section-number{font-size:16px;top:10px;inset-inline-end:12px}.story-banner .story-section-number small{font-size:9px}.story-banner .story-mini-badge{font-size:9px!important;padding:7px 9px!important}.story-banner .story-geometry-a{box-shadow:inset 0 0 0 2px var(--story-shape-color),0 0 0 6px color-mix(in srgb,var(--story-ring),transparent 75%)!important}}
 @media(max-width:420px){.story-banner .story-section-number{font-size:14px;top:8px}.story-banner .story-mini-badge{font-size:8px!important;padding:6px 7px!important}}
@@ -3935,7 +3931,6 @@ body :not(#__borderless_reset_a):not(#__borderless_reset_b):not(#__borderless_re
 .story-banner .story-mini-badge{background:#FFFFFFC9!important;box-shadow:0 5px 14px #30271E0D!important}
 .story-banner .story-floating-main{filter:drop-shadow(0 12px 15px #241E201C)!important}
 .story-banner .story-floating-second,.story-banner .story-floating-third{filter:drop-shadow(0 9px 12px #241E2017)!important}
-.story-banner .story-editorial-signature{opacity:.65!important}
 @media(max-width:720px){.story-banner .story-ambient-dots{background-size:13px 13px;width:25%;opacity:.3}.story-banner .story-ambient-arc{right:-33%;top:-32%;width:88%}.story-banner .story-product-plate{bottom:-16%!important}}
 @media(max-width:420px){.story-banner .story-ambient-dots{display:none}.story-banner .story-geometry-b{opacity:.16!important}}
 
@@ -5097,7 +5092,7 @@ function distributedPromo(kind){
 }
 function homeSectionLinks(){return '<nav class="home-section-links" aria-label="التنقل السريع بين أقسام الصفحة"><span class="home-section-links-label">اكتشف أكثر</span><button type="button" data-home-jump="home-breakfast">الفطور</button><button type="button" data-home-jump="home-coffee">القهوة</button><button type="button" data-home-jump="home-experiences">الجلسات والتجارب</button></nav>'}
 const HOME_STORY_BANNERS={
- breakfast:{kicker:'بداية اليوم',title:'صباحك يبدأ من هنا',desc:'فول وشكشوكة وكبدة وبيض… تنوّع في اختيارات الفطور.',cta:'تصفح الفطور',category:'الفطور والعشاء',image:'assets/categories/breakfast.png',tone:'gold',layout:'wide',alt:'طبق فطور من قائمة مجالس العرب'},
+ breakfast:{kicker:'بداية اليوم',title:'صباحك يبدأ من هنا',desc:'فول وشكشوكة وكبدة وبيض… تنوّع في اختيارات الفطور.',cta:'تصفح الفطور',category:'الفطور والعشاء',image:'assets/categories/breakfast.png',tone:'gold',layout:'wide',alt:'طبق فطور'},
  southern:{kicker:'من مطبخ الجنوب',title:'العريكة والمعصوب… حكاية طعم',desc:'نكهات القشطة والعسل والتمر لمحبي الأطباق الجنوبية.',cta:'اكتشف نكهات الجنوب',category:'العريكة والمعصوب',image:'assets/categories/areeka-masoob.png',tone:'cinnamon',layout:'split',alt:'طبق عريكة ومعصوب'},
  grills:{kicker:'وجبتك الرئيسية',title:'المشويات لها وقتها',desc:'خيارات المشويات والأطباق الرئيسية على ذوقك.',cta:'تصفح الأطباق',category:'المشويات والأطباق الرئيسية',image:'assets/categories/grills.png',tone:'terracotta',layout:'wide',alt:'طبق مشويات'},
  sandwiches:{kicker:'خفيفة ومشبعة',title:'لقمة سهلة… ومذاق كبير',desc:'ساندويتشات ورولات تناسب وجبتك السريعة.',cta:'شاهد الساندويتشات',category:'السندويتشات',image:'assets/categories/sandwiches.png',tone:'olive',layout:'compact',alt:'ساندويتشات متنوعة'},
@@ -5131,9 +5126,9 @@ function storyBanner(kind){
  const assets=STORY_ART_SETS[kind];
  const src=(name)=>kind==='experiences'?'assets/experiences/'+name+'.png':'assets/categories/'+name+'.png';
  return '<section class="story-banner story-'+kind+' story-'+x.tone+' story-'+x.layout+'" aria-label="'+escapeHtml(x.title)+'">'+
- '<div class="story-copy"><span class="story-kicker">'+escapeHtml(x.kicker)+'</span>'+'<h2>'+escapeHtml(x.title)+'</h2><p>'+escapeHtml(x.desc)+'</p><button type="button" '+action+'>'+escapeHtml(x.cta)+' <span class="story-cta-arrow" aria-hidden="true">←</span></button><span class="story-editorial-signature" aria-hidden="true"><i></i><span>مجالس العرب</span></span></div>'+
+ '<div class="story-copy"><span class="story-kicker">'+escapeHtml(x.kicker)+'</span>'+'<h2>'+escapeHtml(x.title)+'</h2><p>'+escapeHtml(x.desc)+'</p><button type="button" '+action+'>'+escapeHtml(x.cta)+' <span class="story-cta-arrow" aria-hidden="true">←</span></button></div>'+
  '<div class="story-visual" aria-hidden="true"><div class="story-hero-halo"></div><div class="story-hero-disc"></div>'+
- '<div class="story-soft-glow"></div><div class="story-atmosphere-band"></div><div class="story-contour story-contour-one"></div><div class="story-contour story-contour-two"></div><div class="story-ambient-arc"></div><div class="story-ambient-dots"></div><div class="story-visual-rail"></div><div class="story-geometry story-geometry-a"></div><div class="story-geometry story-geometry-b"></div><div class="story-geometry story-geometry-c"></div><div class="story-product-plate"></div><div class="story-spark story-spark-one"></div><div class="story-spark story-spark-two"></div><div class="story-mini-badge"><span class="story-badge-mark" aria-hidden="true">✦</span> '+(x.contact?'تجارب مجالس العرب':'من قائمة مجالس العرب')+'</div>'+
+ '<div class="story-soft-glow"></div><div class="story-atmosphere-band"></div><div class="story-contour story-contour-one"></div><div class="story-contour story-contour-two"></div><div class="story-ambient-arc"></div><div class="story-ambient-dots"></div><div class="story-visual-rail"></div><div class="story-geometry story-geometry-a"></div><div class="story-geometry story-geometry-b"></div><div class="story-geometry story-geometry-c"></div><div class="story-product-plate"></div><div class="story-spark story-spark-one"></div><div class="story-spark story-spark-two"></div><div class="story-mini-badge"><span class="story-badge-mark" aria-hidden="true">✦</span> '+(x.contact?'الجلسات والترفيه':'من قائمة الطعام')+'</div>'+
  '<img class="story-floating story-floating-main" src="'+src(assets[0])+'" alt="" loading="lazy" decoding="async">'+
  '<img class="story-floating story-floating-second" src="'+src(assets[1])+'" alt="" loading="lazy" decoding="async">'+
  '<img class="story-floating story-floating-third" src="'+src(assets[2])+'" alt="" loading="lazy" decoding="async">'+(kind==='experiences'?'':'<div class="story-bottom-caption">'+escapeHtml(detail)+'</div>')+'</div></section>';

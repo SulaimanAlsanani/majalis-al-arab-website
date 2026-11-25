@@ -221,6 +221,9 @@
   min-height:var(--story-min-height)!important;
 }
 #app.page > .story-banner .story-copy {
+  align-self:center;
+  min-width:0;
+  text-align:right;
   padding-block:clamp(12px,1.5vw,24px)!important;
   gap:7px!important;
 }
@@ -240,7 +243,6 @@
     min-width:0;
   }
   #app.page > .story-banner .story-copy {
-    min-width:0;
     padding:9px clamp(9px,2.8vw,18px)!important;
     gap:4px!important;
   }
