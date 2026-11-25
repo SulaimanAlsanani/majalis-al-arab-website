@@ -308,9 +308,25 @@
   }
 }
 
+#app.page > .story-banner.story-experiences .story-cta-footer {
+  grid-column:1 / -1;
+  justify-self:start;
+  padding-block:0 12px!important;
+  background:none;
+}
+
+#app.page > .story-banner.story-experiences .story-cta-footer button {
+  margin-block-start:0;
+}
+
+#app.page > .story-banner.story-experiences .story-visual {
+  min-height:calc(var(--story-min-height) - 55px)!important;
+  height:auto!important;
+}
+
 @media (max-width:1024px), (max-width:1366px) and (pointer:coarse) {
   #app.page > .story-banner.story-experiences {
-    grid-template-columns:minmax(0,1fr) minmax(0,49%)!important;
+    grid-template-columns:minmax(0,1fr)!important;
   }
   #app.page > .story-banner.story-experiences .story-visual {
     display:grid!important;
@@ -319,6 +335,8 @@
     align-content:center;
     justify-items:center;
     direction:ltr;
+    width:min(100%,560px);
+    justify-self:center;
     gap:clamp(9px,1.3vw,18px);
     padding:12px clamp(12px,2vw,24px);
     height:auto!important;
@@ -341,11 +359,11 @@
 }
 
 @media (max-width:600px) {
-  #app.page > .story-banner.story-experiences {
-    grid-template-columns:minmax(0,1fr)!important;
-  }
-  #app.page > .story-banner.story-experiences .story-copy {
+  #app.page > .story-banner.story-experiences .story-copy:not(.story-cta-footer) {
     padding:12px 14px 4px!important;
+  }
+  #app.page > .story-banner.story-experiences .story-cta-footer {
+    padding:0 14px 12px!important;
   }
   #app.page > .story-banner.story-experiences .story-visual {
     padding:3px 12px 13px;

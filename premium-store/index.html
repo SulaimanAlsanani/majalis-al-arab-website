@@ -5098,7 +5098,7 @@ const HOME_STORY_BANNERS={
  dessert:{kicker:'وقت الحلا',title:'خلّ نهاية الوجبة أحلى',desc:'كيك وبان كيك وكريب وخيارات حلوة.',cta:'تصفح الحلويات',category:'الحلا',image:'assets/categories/desserts.png',tone:'rose',layout:'split',alt:'حلويات متنوعة'},
  coffee:{kicker:'فنجان ومزاج',title:'للقهوة وقت يستاهل',desc:'من القهوة العربية إلى خيارات القهوة المختصة.',cta:'اكتشف القهوة',category:'القهوة المختصة',image:'assets/categories/coffee.png',tone:'mocha',layout:'compact',alt:'فنجان قهوة'},
  drinks:{kicker:'شي ينعش',title:'اختَر مشروبك على مزاجك',desc:'مشروبات باردة وساخنة تكمل جلستك.',cta:'تصفح المشروبات',category:'المشروبات',image:'assets/categories/drinks.png',tone:'teal',layout:'wide',alt:'مشروبات منعشة'},
- experiences:{kicker:'بعد الأكل يجي وقت اللمة',title:'أوقات تجمعنا وتكمل يومنا',desc:'جلسات خاصة ومشاهدة المباريات والبلايستيشن؛ التوفر يؤكد مع الفرع.',cta:'استفسر عن الجلسات',contact:true,image:'assets/experiences/sessions.png',tone:'indigo',layout:'split',alt:'جلسة عربية مع القهوة والضيافة'}
+ experiences:{kicker:'بعد الأكل يجي وقت اللمة',title:'أوقات تجمعنا وتكمل يومنا',desc:'جلسات خاصة ومشاهدة المباريات والبلايستيشن؛ التوفر يؤكد مع الفرع.',cta:'تصفح المزيد',contact:true,image:'assets/experiences/sessions.png',tone:'indigo',layout:'split',alt:'جلسة عربية مع القهوة والضيافة'}
 };
 /* Shared art direction with the main hero: circular halo, layered product images and a storefront phone.
    Each campaign uses its own image grouping, crop, palette and stacking order. */
@@ -5121,13 +5121,14 @@ function storyBanner(kind){
  const detail=({breakfast:'مذاق الصباح',southern:'أصالة الجنوب',grills:'من المشاوي',sandwiches:'اختيارات سريعة',salads:'لمسة طازجة',appetizers:'بداية شهية',family:'وقت اللمة',dessert:'لحظة حلا',coffee:'مزاج القهوة',drinks:'انتعاشك',experiences:'تجارب وجلسات'})[kind];
  const assets=STORY_ART_SETS[kind];
  const src=(name)=>kind==='experiences'?'assets/experiences/'+name+'.png':'assets/categories/'+name+'.png';
+ const button='<button type="button" '+action+'>'+escapeHtml(x.cta)+' <span class="story-cta-arrow" aria-hidden="true">←</span></button>';
  return '<section class="story-banner story-'+kind+' story-'+x.tone+' story-'+x.layout+'" aria-label="'+escapeHtml(x.title)+'">'+
- '<div class="story-copy"><span class="story-kicker">'+escapeHtml(x.kicker)+'</span>'+'<h2>'+escapeHtml(x.title)+'</h2><p>'+escapeHtml(x.desc)+'</p><button type="button" '+action+'>'+escapeHtml(x.cta)+' <span class="story-cta-arrow" aria-hidden="true">←</span></button></div>'+
+ '<div class="story-copy"><span class="story-kicker">'+escapeHtml(x.kicker)+'</span>'+'<h2>'+escapeHtml(x.title)+'</h2><p>'+escapeHtml(x.desc)+'</p>'+(kind==='experiences'?'':button)+'</div>'+
  '<div class="story-visual" aria-hidden="true"><div class="story-hero-halo"></div><div class="story-hero-disc"></div>'+
  '<div class="story-soft-glow"></div><div class="story-atmosphere-band"></div><div class="story-contour story-contour-one"></div><div class="story-contour story-contour-two"></div><div class="story-ambient-arc"></div><div class="story-ambient-dots"></div><div class="story-visual-rail"></div><div class="story-geometry story-geometry-a"></div><div class="story-geometry story-geometry-b"></div><div class="story-geometry story-geometry-c"></div><div class="story-product-plate"></div><div class="story-spark story-spark-one"></div><div class="story-spark story-spark-two"></div><div class="story-mini-badge"><span class="story-badge-mark" aria-hidden="true">✦</span> '+(x.contact?'الجلسات والترفيه':'من قائمة الطعام')+'</div>'+
  '<img class="story-floating story-floating-main" src="'+src(assets[0])+'" alt="" loading="lazy" decoding="async">'+
  '<img class="story-floating story-floating-second" src="'+src(assets[1])+'" alt="" loading="lazy" decoding="async">'+
- '<img class="story-floating story-floating-third" src="'+src(assets[2])+'" alt="" loading="lazy" decoding="async">'+(kind==='experiences'?'':'<div class="story-bottom-caption">'+escapeHtml(detail)+'</div>')+'</div></section>';
+ '<img class="story-floating story-floating-third" src="'+src(assets[2])+'" alt="" loading="lazy" decoding="async">'+(kind==='experiences'?'':'<div class="story-bottom-caption">'+escapeHtml(detail)+'</div>')+'</div>'+(kind==='experiences'?'<div class="story-copy story-cta-footer">'+button+'</div>':'')+'</section>';
 }
 
 /* Homepage merchandising - each module has a unique purpose; no duplicated category rails. */
