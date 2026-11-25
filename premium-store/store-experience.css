@@ -212,48 +212,41 @@
   padding-block:0!important;
 }
 
-/* Let the copy determine the final height when a banner wraps on a narrow screen. */
+/* Secondary banners use 80% of their original minimum height and can grow with the copy. */
 #app.page > .story-banner {
   --story-min-height:clamp(204px,20.8vw,292px);
-  --story-visual-width:45%;
   min-height:var(--story-min-height)!important;
-  grid-template-columns:minmax(0,1fr) minmax(0,var(--story-visual-width))!important;
 }
 #app.page > .story-banner .story-visual {
-  height:auto!important;
-  min-height:0!important;
-  min-width:0;
+  min-height:var(--story-min-height)!important;
 }
 #app.page > .story-banner .story-copy {
-  min-width:0;
   padding-block:clamp(12px,1.5vw,24px)!important;
   gap:7px!important;
 }
 #app.page > .story-banner .story-copy button { margin-top:3px; }
 
-@media(max-width:1024px) {
-  #app.page > .story-banner {
-    --story-min-height:clamp(174px,21vw,216px);
-    --story-visual-width:42%;
-  }
-  #app.page > .story-banner .story-copy {
-    padding:12px clamp(15px,3vw,28px)!important;
-    gap:5px!important;
-  }
-}
 @media(max-width:720px) {
   #app.page > .story-banner {
     --story-min-height:clamp(140px,34vw,168px);
     --story-visual-width:40%;
-    border-radius:clamp(12px,3vw,19px)!important;
+    grid-template-columns:minmax(0,1fr) minmax(0,var(--story-visual-width))!important;
+    border-radius:clamp(12px,3.5vw,19px)!important;
+  }
+  #app.page > .story-banner :is(.story-mini-badge,.story-bottom-caption) { display:none!important; }
+  #app.page > .story-banner .story-visual {
+    height:auto!important;
+    min-height:0!important;
+    min-width:0;
   }
   #app.page > .story-banner .story-copy {
-    padding:9px 11px!important;
+    min-width:0;
+    padding:9px clamp(9px,2.8vw,18px)!important;
     gap:4px!important;
   }
   #app.page > .story-banner .story-copy button { margin-top:0; }
 }
+
 @media(max-width:380px) {
   #app.page > .story-banner { --story-visual-width:37%; }
-  #app.page > .story-banner .story-copy { padding:8px 9px!important; }
 }

@@ -5127,15 +5127,16 @@ const STORY_ART_SETS={
 function storyBanner(kind){
  const x=HOME_STORY_BANNERS[kind];if(!x)return '';
  const action=x.contact?'data-contact-seating':'data-category="'+escapeHtml(x.category)+'"';
+ const detail=({breakfast:'مذاق الصباح',southern:'أصالة الجنوب',grills:'من المشاوي',sandwiches:'اختيارات سريعة',salads:'لمسة طازجة',appetizers:'بداية شهية',family:'وقت اللمة',dessert:'لحظة حلا',coffee:'مزاج القهوة',drinks:'انتعاشك',experiences:'تجارب وجلسات'})[kind];
  const assets=STORY_ART_SETS[kind];
  const src=(name)=>kind==='experiences'?'assets/experiences/'+name+'.png':'assets/categories/'+name+'.png';
  return '<section class="story-banner story-'+kind+' story-'+x.tone+' story-'+x.layout+'" aria-label="'+escapeHtml(x.title)+'">'+
  '<div class="story-copy"><span class="story-kicker">'+escapeHtml(x.kicker)+'</span>'+'<h2>'+escapeHtml(x.title)+'</h2><p>'+escapeHtml(x.desc)+'</p><button type="button" '+action+'>'+escapeHtml(x.cta)+' <span class="story-cta-arrow" aria-hidden="true">←</span></button><span class="story-editorial-signature" aria-hidden="true"><i></i><span>مجالس العرب</span></span></div>'+
  '<div class="story-visual" aria-hidden="true"><div class="story-hero-halo"></div><div class="story-hero-disc"></div>'+
- '<div class="story-soft-glow"></div><div class="story-atmosphere-band"></div><div class="story-contour story-contour-one"></div><div class="story-contour story-contour-two"></div><div class="story-ambient-arc"></div><div class="story-ambient-dots"></div><div class="story-visual-rail"></div><div class="story-geometry story-geometry-a"></div><div class="story-geometry story-geometry-b"></div><div class="story-geometry story-geometry-c"></div><div class="story-product-plate"></div><div class="story-spark story-spark-one"></div><div class="story-spark story-spark-two"></div>'+
+ '<div class="story-soft-glow"></div><div class="story-atmosphere-band"></div><div class="story-contour story-contour-one"></div><div class="story-contour story-contour-two"></div><div class="story-ambient-arc"></div><div class="story-ambient-dots"></div><div class="story-visual-rail"></div><div class="story-geometry story-geometry-a"></div><div class="story-geometry story-geometry-b"></div><div class="story-geometry story-geometry-c"></div><div class="story-product-plate"></div><div class="story-spark story-spark-one"></div><div class="story-spark story-spark-two"></div><div class="story-mini-badge"><span class="story-badge-mark" aria-hidden="true">✦</span> '+(x.contact?'تجارب مجالس العرب':'من قائمة مجالس العرب')+'</div>'+
  '<img class="story-floating story-floating-main" src="'+src(assets[0])+'" alt="" loading="lazy" decoding="async">'+
  '<img class="story-floating story-floating-second" src="'+src(assets[1])+'" alt="" loading="lazy" decoding="async">'+
- '<img class="story-floating story-floating-third" src="'+src(assets[2])+'" alt="" loading="lazy" decoding="async"></div></section>';
+ '<img class="story-floating story-floating-third" src="'+src(assets[2])+'" alt="" loading="lazy" decoding="async">'+(kind==='experiences'?'':'<div class="story-bottom-caption">'+escapeHtml(detail)+'</div>')+'</div></section>';
 }
 
 /* Homepage merchandising - each module has a unique purpose; no duplicated category rails. */

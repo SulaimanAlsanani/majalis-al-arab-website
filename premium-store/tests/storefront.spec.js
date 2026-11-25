@@ -269,21 +269,23 @@ test('homepage ideas use real catalog entries with the common meal controls', as
   await expect(page.locator('.detail-info h1')).toHaveText(title);
 });
 
-test('secondary banners retain their action and fit the copy without decorative badges', async ({page}) => {
+test('secondary banner labels are hidden on phones and retained on wider screens', async ({page}) => {
   await page.goto('/');
   const banners=page.locator('#app > .story-banner');
   await expect(banners).toHaveCount(5);
-  await expect(page.locator('.story-mini-badge,.story-bottom-caption')).toHaveCount(0);
-  for(const width of [1440,850,390,320]){
+  for(const width of [1366,850,430,390,320]){
     await page.setViewportSize({width,height:900});
-    const allFit=await banners.evaluateAll(sections=>sections.every(section=>{
+    const rendered=await banners.evaluateAll(sections=>sections.map(section=>{
       const box=section.getBoundingClientRect();
-      return [...section.querySelectorAll('.story-copy h2,.story-copy p,.story-copy button')].every(child=>{
+      const copyFits=[...section.querySelectorAll('.story-copy h2,.story-copy p,.story-copy button')].every(child=>{
         const rect=child.getBoundingClientRect();
-        return rect.width>0&&rect.height>0&&rect.top>=box.top&&rect.bottom<=box.bottom
+        return rect.height>0&&rect.top>=box.top&&rect.bottom<=box.bottom
           &&rect.left>=box.left&&rect.right<=box.right;
       });
+      const badges=[...section.querySelectorAll('.story-mini-badge,.story-bottom-caption')];
+      return {copyFits,visibleBadges:badges.filter(badge=>badge.getClientRects().length>0).length};
     }));
-    expect(allFit,'secondary banner content at '+width+'px').toBe(true);
+    expect(rendered.every(result=>result.copyFits),'text and button at '+width+'px').toBe(true);
+    expect(rendered.reduce((total,result)=>total+result.visibleBadges,0)).toBe(width>720?9:0);
   }
 });
