@@ -49,6 +49,16 @@
   #app.page .product-rail:has(> .meal-row) { --visible-meal-cards:3; }
 }
 
+@media(min-width:1200px) {
+  #app.page:has(#heroSlider) .product-rail:has(> .meal-row) {
+    --visible-meal-cards:4;
+    --meal-rail-gap:24px;
+  }
+  #app.page:has(#heroSlider) :is(.product-grid,.hs-complementary-grid):has(> .meal-row) {
+    grid-template-columns:repeat(4,minmax(0,1fr))!important;
+  }
+}
+
 #app.page .product-card.meal-row {
   display:grid!important;
   grid-template-columns:clamp(66px,8vw,90px) minmax(0,1fr)!important;
