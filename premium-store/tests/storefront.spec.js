@@ -11,7 +11,7 @@ test('homepage shows visible search, active banner, categories, and usable cart 
   await page.screenshot({path: 'test-results/home-' + test.info().project.name + '.png', fullPage: true});
 });
 
-test('meal cards show a right-side photo with icon-only cart and favorite actions', async ({page}) => {
+test('meal cards show an image above the title, details, icons, and price', async ({page}) => {
   await page.goto('/#/menu');
   const cards=page.locator('.product-grid .product-card');
   const first=cards.first();
@@ -23,6 +23,7 @@ test('meal cards show a right-side photo with icon-only cart and favorite action
   await expect(photo.locator('img')).toHaveCSS('object-fit', 'contain');
   await expect(first.locator('.meal-category')).toHaveCount(0);
   await expect(first.locator('.card-price')).toContainText('ر.س');
+  await expect(first.locator('.meal-details')).toHaveAccessibleName(/تفاصيل .+/);
   await expect(add).toHaveAccessibleName(/أضف .* إلى السلة/);
   await expect(add.locator('svg')).toBeVisible();
   await expect(favorite.locator('svg')).toBeVisible();
@@ -33,20 +34,27 @@ test('meal cards show a right-side photo with icon-only cart and favorite action
     const image=node.getBoundingClientRect();
     const artwork=node.querySelector('img').getBoundingClientRect();
     const card=node.closest('.product-card');
-    const name=card.querySelector('.meal-name').getBoundingClientRect();
-    const price=card.querySelector('.meal-price').getBoundingClientRect();
+    const titleRow=card.querySelector('.meal-title-row').getBoundingClientRect();
+    const title=card.querySelector('.meal-name').getBoundingClientRect();
+    const details=card.querySelector('.meal-details').getBoundingClientRect();
+    const purchaseRow=card.querySelector('.meal-purchase-row').getBoundingClientRect();
+    const price=card.querySelector('.card-price').getBoundingClientRect();
     const actions=card.querySelector('.meal-actions').getBoundingClientRect();
     return {
       ratio:image.width/image.height,
       artworkInset:artwork.width<image.width&&artwork.height<image.height,
-      imageOnRight:[name,price,actions].every(rect=>rect.right<=image.left),
-      ordered:name.bottom<=price.top&&price.bottom<=actions.top
+      imageAboveTitle:image.bottom<=titleRow.top,
+      detailsOnLeft:details.right<=title.left,
+      priceOnLeft:price.right<=actions.left,
+      purchaseBelowTitle:titleRow.bottom<=purchaseRow.top
     };
   });
-  expect(layout.ratio).toBeCloseTo(19/20,1);
+  expect(layout.ratio).toBeCloseTo(8/7,1);
   expect(layout.artworkInset).toBe(true);
-  expect(layout.imageOnRight).toBe(true);
-  expect(layout.ordered).toBe(true);
+  expect(layout.imageAboveTitle).toBe(true);
+  expect(layout.detailsOnLeft).toBe(true);
+  expect(layout.priceOnLeft).toBe(true);
+  expect(layout.purchaseBelowTitle).toBe(true);
   await favorite.click();
   await expect(favorite).toHaveAttribute('aria-pressed','true');
   await add.click();

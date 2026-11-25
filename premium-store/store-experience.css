@@ -29,7 +29,7 @@
   .experience-field-grid { grid-template-columns:1fr; }
 }
 
-/* Horizontal meal cards use the same layout in the menu, rails and suggestions. */
+/* Meal cards share the same image and information layout across the store. */
 #app.page :is(.product-grid,.hs-complementary-grid,.basket-suggestion-grid):has(> .meal-row) {
   --meal-list-gap:clamp(10px,2vw,26px);
   grid-template-columns:repeat(auto-fit,minmax(min(100%,max(264px,(100% - 2 * var(--meal-list-gap))/3)),1fr))!important;
@@ -60,16 +60,20 @@
 }
 
 #app.page .product-card.meal-row {
+  --meal-photo-bg:#f2efec;
   display:grid!important;
-  grid-template-columns:clamp(66px,8vw,90px) minmax(0,1fr)!important;
-  align-items:center;
-  gap:clamp(8px,1.1vw,14px);
-  padding:clamp(5px,.6vw,7px) clamp(6px,.9vw,10px)!important;
+  grid-template:auto 1fr / minmax(0,1fr)!important;
+  align-items:stretch;
+  padding:0!important;
   border:0!important;
+  border-radius:clamp(15px,1.7vw,26px)!important;
   background:#fff!important;
-  box-shadow:0 1px 5px #3022290b, inset 0 0 0 1px #30222909!important;
+  box-shadow:0 2px 10px #3022290d!important;
   transition:box-shadow .18s ease, transform .18s ease!important;
 }
+
+#app.page .meal-row:nth-child(3n+2) { --meal-photo-bg:#eef1ef; }
+#app.page .meal-row:nth-child(3n+3) { --meal-photo-bg:#f3eef2; }
 
 #app.page .product-card.meal-row:focus-within {
   box-shadow:0 3px 9px #30222912, inset 0 0 0 1px #b6325526!important;
@@ -91,54 +95,74 @@
   }
 }
 
-#app.page :is(.product-grid,.hs-complementary-grid,.basket-suggestion-grid) > .meal-row {
-  inline-size:calc(100% - 25px);
-  justify-self:start;
-}
-
 #app.page .meal-row .product-card-image-wrap {
   margin:0!important;
-  border-radius:16px!important;
-  background:#eef0f0!important;
+  border-radius:0!important;
+  background:var(--meal-photo-bg)!important;
 }
 
 #app.page .meal-row .card-photo {
   display:block!important;
   position:relative!important;
   height:auto!important;
-  aspect-ratio:19/20!important;
-  background:#eef0f0!important;
-  border-radius:16px!important;
+  aspect-ratio:8/7!important;
+  background:var(--meal-photo-bg)!important;
+  border-radius:0!important;
 }
 
 #app.page .meal-row .card-photo img {
   position:absolute!important;
-  inset:5%!important;
-  width:90%!important;
-  height:90%!important;
+  inset:10%!important;
+  width:80%!important;
+  height:80%!important;
   object-fit:contain!important;
 }
 
 #app.page .meal-row .card-body {
   display:flex!important;
   flex-direction:column!important;
-  align-items:flex-start!important;
-  gap:1px!important;
+  align-items:stretch!important;
+  gap:8px!important;
   min-width:0;
-  padding:0!important;
+  padding:clamp(9px,1.4vw,19px)!important;
 }
 
-.meal-name { margin:0; max-width:100%; }
+.meal-title-row,.meal-purchase-row {
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:6px;
+  min-width:0;
+}
+.meal-purchase-row { margin-top:auto; }
+.meal-name { margin:0; min-width:0; }
 #app.page .meal-row .card-title {
   display:block!important;
   font-size:clamp(14px,1.3vw,18px)!important;
-  font-weight:700!important;
-  color:#c71d39!important;
+  font-weight:750!important;
+  color:#2b2528!important;
   white-space:normal!important;
   overflow:visible!important;
   overflow-wrap:anywhere;
 }
-.meal-price { display:flex; flex-wrap:wrap; align-items:baseline; gap:6px; }
+.meal-details {
+  flex-shrink:0;
+  border:0;
+  background:transparent;
+  color:#76515b;
+  padding:3px 0;
+  min-height:26px;
+  font:inherit;
+  font-size:clamp(10px,.9vw,13px);
+  cursor:pointer;
+}
+.meal-details:hover { text-decoration:underline; }
+.meal-details:focus-visible { outline:2px solid #b63255; outline-offset:2px; }
+#app.page .meal-purchase-row .card-price {
+  white-space:nowrap!important;
+  color:#2b2528!important;
+  font-weight:800!important;
+}
 .meal-actions { display:flex; align-items:center; gap:6px; }
 #app.page .meal-actions :is(.add-button,.card-favorite-toggle) {
   display:grid!important;
@@ -156,17 +180,10 @@
     grid-template-columns:repeat(2,minmax(0,1fr))!important;
     --meal-list-gap:8px;
   }
-  #app.page :is(.product-grid,.hs-complementary-grid,.basket-suggestion-grid) > .meal-row {
-    inline-size:100%;
-  }
   #app.page .product-rail:has(> .meal-row) { --meal-rail-gap:8px; }
-  #app.page .product-card.meal-row {
-    grid-template-columns:clamp(36px,11vw,64px) minmax(0,1fr)!important;
-    gap:5px;
-    padding:5px!important;
-  }
-  #app.page .meal-row :is(.product-card-image-wrap,.card-photo) { border-radius:10px!important; }
+  #app.page .meal-row .card-body { padding:8px!important; gap:4px!important; }
   #app.page .meal-row .card-title { font-size:clamp(11px,3.2vw,15px)!important; }
+  .meal-title-row,.meal-purchase-row { gap:4px; }
   .meal-actions { gap:2px; }
   #app.page .meal-actions :is(.add-button,.card-favorite-toggle) {
     flex:0 0 26px!important;

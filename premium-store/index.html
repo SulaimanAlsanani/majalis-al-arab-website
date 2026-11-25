@@ -4879,13 +4879,13 @@ function card(p,{quickView=false,recommendation=false}={}){
  const addAction=recommendation?'data-rec-add':'data-card-add';
  return '<article class="product-card meal-row"><div class="product-card-image-wrap">'+
   '<button type="button" class="card-photo" '+imageAction+'="'+p.id+'" aria-label="تفاصيل '+details+'" title="'+details+'">'+imgTag(p,'',false)+'</button></div>'+
-  '<div class="card-body">'+
+  '<div class="card-body"><div class="meal-title-row">'+
   '<h3 class="meal-name"><button type="button" class="card-title" data-product="'+p.id+'">'+name+'</button></h3>'+
-  '<div class="meal-price"><span class="card-price">'+price+'</span>'+(available?'':'<span class="card-stock">غير متوفر</span>')+'</div>'+
-  '<div class="meal-actions">'+
-  '<button type="button" class="add-button" '+(available?addAction+'="'+p.id+'" aria-label="أضف '+name+' إلى السلة"':'disabled aria-label="'+name+' غير متوفر"')+'>'+CARD_ADD+'</button>'+
+  (available?'<button type="button" class="meal-details" data-product="'+p.id+'" aria-label="تفاصيل '+name+'">التفاصيل</button>':'<span class="card-stock">غير متوفر</span>')+
+  '</div><div class="meal-purchase-row"><div class="meal-actions">'+
   '<button type="button" class="card-favorite-toggle" data-fav="'+p.id+'" aria-pressed="'+saved+'" aria-label="'+(saved?'إزالة ':'إضافة ')+name+(saved?' من المفضلة':' إلى المفضلة')+'" title="'+(saved?'إزالة من المفضلة':'إضافة إلى المفضلة')+'">'+CARD_HEART+'</button>'+
-  '</div></div></article>';
+  '<button type="button" class="add-button" '+(available?addAction+'="'+p.id+'" aria-label="أضف '+name+' إلى السلة"':'disabled aria-label="'+name+' غير متوفر"')+'>'+CARD_ADD+'</button>'+
+  '</div><span class="card-price">'+price+'</span></div></div></article>';
 }
 function cartContent(){if(!state.cart.length)return '<div class="cart-empty"><div class="cart-icon">🛍️</div><strong>سلتك تنتظر طلبك</strong><p>اختر وجباتك المفضلة، ثم راجع تفاصيل الطلب هنا.</p><button class="outlined" data-go="/menu">تصفح الأطباق</button></div>';return '<div class="cart-lines">'+cartDetails().map(l=>'<div class="cart-line">'+imgTag(productById(l.id))+'<div class="cart-line-info"><strong>'+escapeHtml(l.name)+'</strong><small>الكمية '+l.qty+' × '+money(l.unitPrice)+'</small><small>'+(l.note?'ملاحظة: '+escapeHtml(l.note):'لا توجد ملاحظات')+'</small><div class="cart-line-row"><strong>'+money(l.lineTotal)+'</strong><div class="stepper"><button data-dec="'+l.index+'" aria-label="تقليل '+escapeHtml(l.name)+'">−</button><span aria-label="الكمية '+l.qty+'">'+l.qty+'</span><button data-inc="'+l.index+'" aria-label="زيادة '+escapeHtml(l.name)+'">+</button></div></div></div></div>').join('')+'</div>'}
 function sideCart(){return '<aside class="side-cart" id="cartArea"><div class="cart-head"><h2>🛍️ سلة مشترياتك</h2>'+(count()?'<button data-clear>إفراغ السلة</button>':'')+'</div>'+cartContent()+'<div class="cart-footer"><div class="total-row"><span>الإجمالي التجريبي</span><span>'+money(total())+'</span></div><button class="solid-action full" data-go="/checkout" '+(!count()?'disabled':'')+' aria-label="متابعة الدفع — الانتقال إلى معاينة الطلب، الدفع الفعلي غير متاح">متابعة للدفع ←</button><p>الأسعار توضيحية؛ لا يشمل الإجمالي رسوم توصيل أو ضرائب إضافية غير معتمدة.</p></div></aside>'}
