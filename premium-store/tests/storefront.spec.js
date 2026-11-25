@@ -268,3 +268,22 @@ test('homepage ideas use real catalog entries with the common meal controls', as
   await first.locator('.meal-details').click();
   await expect(page.locator('.detail-info h1')).toHaveText(title);
 });
+
+test('secondary banners retain their action and fit the copy without decorative badges', async ({page}) => {
+  await page.goto('/');
+  const banners=page.locator('#app > .story-banner');
+  await expect(banners).toHaveCount(5);
+  await expect(page.locator('.story-mini-badge,.story-bottom-caption')).toHaveCount(0);
+  for(const width of [1440,850,390,320]){
+    await page.setViewportSize({width,height:900});
+    const allFit=await banners.evaluateAll(sections=>sections.every(section=>{
+      const box=section.getBoundingClientRect();
+      return [...section.querySelectorAll('.story-copy h2,.story-copy p,.story-copy button')].every(child=>{
+        const rect=child.getBoundingClientRect();
+        return rect.width>0&&rect.height>0&&rect.top>=box.top&&rect.bottom<=box.bottom
+          &&rect.left>=box.left&&rect.right<=box.right;
+      });
+    }));
+    expect(allFit,'secondary banner content at '+width+'px').toBe(true);
+  }
+});
